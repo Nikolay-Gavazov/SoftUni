@@ -1,0 +1,20 @@
+input[type = 'submit']{
+    color: white;
+    background: darkgrey;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 1px 5px;
+    padding: 2px 5px;
+    border: solid 1px black;
+    cursor: pointer;
+    border-radius: 20px;
+}
+input[type = 'submit']:hover{
+    color: darkgray;
+    background: white;
+    border: solid 1px grey;
+}
+a:visited{
+    color: red;
+}
