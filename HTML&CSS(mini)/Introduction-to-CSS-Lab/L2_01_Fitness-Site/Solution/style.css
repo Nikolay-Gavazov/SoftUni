@@ -24,15 +24,15 @@ nav ul li a{
     text-decoration: none;
 }
 main section:nth-child(1){
-   
     background-size: cover;
     background-position: center;
-    padding: 11rem 15rem;
+    padding: 17rem 20rem;
     margin-top: 3rem;
     background-image: url(picture.jpg);
 }
 main section:nth-child(1) h1{
    color: white;
+   text-align: center;
 }
 main section:nth-child(1) span{
     color: #f9690E;
@@ -41,11 +41,19 @@ main section:nth-child(1) button{
     background: #f9690E;
     border: none;
     color: white;
-    font-size: 22px;
-    padding: 12px;
+    font-size: 20px;
+    padding: 5px 10px 5px 10px;
     font-weight: bold;
     text-align: center;
+    cursor: pointer;
+    position: absolute;
+    top: 65%;
+    right: 45.5%;
     
+    }
+main section:nth-child(1) button:hover{
+    background: white;
+    color:#f9690E;   
 }
 main section article{
     background: #f9690E;
@@ -57,11 +65,17 @@ main section article{
 main section article h3{
     text-align: center;
 }
+footer{
+    padding: 30px 0px 0px 0px;
+}
 footer article{
-    width: 47%;
+    width: 49.75%;
     display: inline-block;
+    
 }
 footer article i{
-    width: right;
+    float: right;
+    padding: 1px 8px;
+
 }
 
