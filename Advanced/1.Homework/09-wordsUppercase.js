@@ -1,8 +1,7 @@
 function wordsUppercase(input) {
     let text = input.toUpperCase();
 
-    const pattern = /(?<word>\w+)/g;
-    let matches = text.match(pattern)
+    let matches = text.match(/(?<word>\w+)/g)
     console.log(matches.join(', '));
 
 }
