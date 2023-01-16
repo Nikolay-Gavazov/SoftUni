@@ -1,24 +1,16 @@
 function cookingByNumbers(...input) {
     let num = Number(input.shift());
 
+    let comands = {
+        chop: x => x /= 2,
+        dice: x => Math.sqrt(x),
+        spice: x => x + 1,
+        bake: x => x *= 3,
+        fillet: x => x *= 0.8
+    }
+
     input.forEach(comand => {
-        switch (comand) {
-            case 'chop':
-                num /= 2;
-                break;
-            case 'dice':
-                num = Math.sqrt(num);
-                break;
-            case 'spice':
-                num++; 
-                break;
-            case 'bake':
-                num *= 3;
-                break;
-            case 'fillet':
-                num *= 0.8;
-                break;
-        }
+        num = comands[comand](num);
         console.log(num);
     });
 
