@@ -1,35 +1,23 @@
 function magicMatrices(arr) {
     let isMagic = true;
     let length = arr.length;
+    let row = 0;
+    let col = 0;
 
-        for (let i = 0; i < length - 1; i++) {
-            let currentRow = 0;
-            let nextRow = 0;
-            let currentCol = 0;
-            let nextCol = 0;
-            for (let j = 0; j < arr[i].length; j++) {
-                currentRow += arr[i][j];
-                nextRow += arr[i + 1][j];
-                currentCol += arr[j][i]
-                nextCol += arr[j][i + 1];
-            }
-            if (currentRow != nextRow) {
-                isMagic = false;
-                break;
-            } else if (currentCol != nextCol) {
-                isMagic = false;
-                break;
-            } else if (currentRow != currentCol) {
-                isMagic = false;
-                break;
-            }
+    for (let i = 0; i < length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            row += arr[i][j];
+            col += arr[0][i]
         }
-    
+    }
+
+    if (row != col) {
+        isMagic = false;
+    }
+
     console.log(isMagic);
 
 }
 magicMatrices([[4, 5, 6],
-
-    [6, 5, 4],
-    
-    [5, 5, 5]])
+[6, 5, 4],
+[5, 5, 5]])
