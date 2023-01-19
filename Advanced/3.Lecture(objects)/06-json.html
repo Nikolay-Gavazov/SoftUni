@@ -44,7 +44,21 @@ padding: 5px;
 
 function fromJSONToHTMLTable(input){
 
-//Write your code here
+    const result = [];
+    result.push('<table>')
+    const data = JSON.parse(input);
+
+    const keys = Object.keys(data[0]);
+
+    result.push(`  <tr>${keys.map(e => `<th>${e}</th>`).join('')}<tr>`)
+
+    for (let el of data) {
+        result.push(`  <tr>${keys.map(e => `<td>${el[e]}</td>`).join('')}<tr>`)
+    }
+
+    result.push('</table>')
+
+    return result.join('\n');
 
 }
 
@@ -54,7 +68,23 @@ let container = document.getElementById('wrapper');
 
 container.innerHTML =
 
-fromJSONToHTMLTable(['[{"Name":"Stamat","Price":5.5},{"Name":"Rumen","Price":6}]']);
+fromJSONToHTMLTable([`[{"Name":"Pesho",
+
+"Score":4,
+
+" Grade":8},
+
+{"Name":"Gosho",
+
+"Score":5,
+
+" Grade":8},
+
+{"Name":"Angel",
+
+"Score":5.50,
+
+" Grade":10}]`]);
 
 };
 
