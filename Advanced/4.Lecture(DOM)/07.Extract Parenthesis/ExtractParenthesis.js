@@ -1,8 +1,10 @@
 function extract(content) {
-    let text = document.getElementById('content').textContent;
-    let pattern = /\((?<match>[^)]+)\)/gm;
-    
+    const text = document.getElementById('content').textContent;
+    const pattern = /\(([^)]+)\)/gm;
+    let result = [];
     let match = text.matchAll(pattern);
-
-    console.log(match.match);
+    for(let el of match){
+        result.push(el[1]);
+    }
+    return result.join('; ')
 }
