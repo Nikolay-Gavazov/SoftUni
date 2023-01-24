@@ -1,12 +1,12 @@
 function toggle() {
     let button = document.getElementsByClassName('button')[0]
 
-    if (button.innerText == 'MORE') {
-        button.innerText = 'LESS';
+    if(button.textContent == 'More'){
+        button.textContent = 'Less';
         document.getElementById("extra").style.display = 'block';
-
-    } else {
-        button.innerText = 'MORE';
+        
+    }else{
+        button.textContent = 'More';
         document.getElementById("extra").style.display = 'none';
     }
 
