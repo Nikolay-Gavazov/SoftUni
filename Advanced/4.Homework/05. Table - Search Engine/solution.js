@@ -4,9 +4,12 @@ function solve() {
 
    function onClick() {
       Array.from(document.querySelectorAll('tbody tr')).forEach(el => {
-         if(el.textContent.includes(input.value)){
-            console.log(el.textContent);
+         if (el.textContent.toLocaleLowerCase().includes(input.value.toLocaleLowerCase().trim())) {
+            el.classList.add('select')
+         } else {
+            el.classList.remove('select');
          }
-      })
+      });
+      input.value = '';
    }
 }

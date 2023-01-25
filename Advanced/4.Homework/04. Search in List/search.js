@@ -4,7 +4,6 @@ function search() {
    const result = document.getElementById('result');
    let count = 0;
    el.forEach(el => {
-      console.log(el.textContent);
       if (el.textContent.includes(input)) {
          el.style.fontWeight = 'bold';
          el.style.textDecoration = 'underline';
