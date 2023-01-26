@@ -1,3 +1,4 @@
 function generateReport() {
-    //TODO
+    const result = document.getElementById('output');
+    
 }
