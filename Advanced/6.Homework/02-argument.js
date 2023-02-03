@@ -16,3 +16,4 @@ function argumentInfo() {
 
 }
 argumentInfo('cat',4, 42, function () { console.log('Hello world!'); })
+module.exports = argumentInfo;
