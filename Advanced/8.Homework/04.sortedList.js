@@ -10,18 +10,21 @@ class List{
         this.size = this.arr.length;
     }
     remove(index){
-        if(this.arr.indexOf(index)){
-            this.arr = this.arr.splice(index, 1);
+        if(index >= 0 && index < this.arr.length){
+            this.arr.splice(index, 1);
+            this.arr = this.arr.sort((a,b) => a-b);
+            this.size = this.arr.length;
+        }else{
+            throw new Error('Invalid Index!')
         }
-        this.size = this.arr.length;
+       
     }
     get(index){
-        if(this.arr.indexOf(index)){
+        if(index >= 0 && index < this.arr.length){
             return this.arr[index]
+        }else{
+            throw new Error('Invalid Index!')
         }
-    }
-    size(){
-        return this.size;
     }
 }
 
@@ -35,5 +38,5 @@ list.add(7);
 
 console.log(list.get(1));
 list.remove(1); 
+console.log(list.arr[1]);
 console.log(list.get(1));
-console.log(list.size);
