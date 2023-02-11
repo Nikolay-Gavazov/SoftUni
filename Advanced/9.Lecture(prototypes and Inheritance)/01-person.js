@@ -7,7 +7,10 @@ function createPerson(firstName, lastName){
     Object.defineProperty(result, 'fullName',{
         get(){return fullName = `${result.firstName} ${result.lastName}`},
         set(value){
-            return [firstName,lastName] = value.split(' ')
+            const valueArr = value.split(' ');
+            if(valueArr.length ==2){
+                [result.firstName,result.lastName] = value.split(' ')
+            }
         }
     });
     return result
