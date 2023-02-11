@@ -3,15 +3,21 @@ class Hex{
         this.value = value
     }
 
-    toString(){`0X${this.num.toString(16).toUpperCase()}`}
+    toString(){
+        return `0x${this.value.toString(16).toUpperCase()}`
+    }
+   
     valueOf(){
         return this.value
     }
     plus(number){
-        this.value += number;
+       return new Hex(this.value + number);
     }
     minus(number){
-        this.value += number;
+       return new Hex(this.value - number);
+    }
+    parse(str){
+        return parseInt(str, 16);
     }
 }
 
