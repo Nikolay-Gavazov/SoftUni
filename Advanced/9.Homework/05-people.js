@@ -13,7 +13,7 @@ function solution(){
         }
 
         collectSalary(){
-            console.log(`${this.name} recived ${this.getSalary()} this month`);
+            console.log(`${this.name} recived ${this.getSalary()} this month.`);
         }
         getSalary(){
          return this.salary;
@@ -23,7 +23,7 @@ function solution(){
     class Junior extends Employee{
         constructor(name, age){
             super(name, age)
-            this.tasks.push(` is working on simple task`)
+            this.tasks.push(` is working on simple task.`)
         }
     }
 

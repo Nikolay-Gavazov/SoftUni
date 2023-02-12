@@ -24,7 +24,7 @@ class Company{
             avgDep[key] = avg;
         });
         const sorted = Object.entries(avgDep).sort((a,b) => b[1]-a[1]);
-        let result = `Best Department is: ${sorted[0][0]}\nAverage salary: ${sorted[0][1]}`
+        let result = `Best Department is: ${sorted[0][0]}\nAverage salary: ${sorted[0][1].toFixed(2)}`
         this.departments[sorted[0][0]].sort((a,b)=> b.salary - a.salary || a.name.localeCompare(b.name))
         .forEach((el)=>{
             result += `\n${el.name} ${el.salary} ${el.position}`

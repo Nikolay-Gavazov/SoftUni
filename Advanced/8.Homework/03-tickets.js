@@ -20,7 +20,7 @@ const ticketsArr = [];
         sorted = ticketsArr.sort((a, b) => a.status.localeCompare(b.status))
     }
 
-    console.log(sorted);
+    return sorted;
 }
 tickets(['Philadelphia|94.20|available',
 
