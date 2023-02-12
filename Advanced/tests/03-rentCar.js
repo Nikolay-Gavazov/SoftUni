@@ -1,13 +1,29 @@
 const {expect} = require('chai');
-const rentCar = require('../ExamPrep/Exam-13March/03. Rent Car');
+const rentCar = require('../ExamPrep/rentCar');
 
 describe('rentCar', function(){
     describe('searchCar', function(){
-        it('throw error with invalid input', ()=>{
-            expect(rentCar.searchCar('5', 5)).to.throw();
+        it('find one car', ()=>{
+            const shop = ['a','b','c'];
+            const model = 'a';
+            const result = rentCar.searchCar(shop, model);
+            expect(rentCar.searchCar(shop, model)).to.equal('There is 1 car of model a in the catalog!');
         })
-        it('throw error with wrong car', () => {
-            expect(rentCar.searchCar([1,2,3], 5)).to.throw();
+        it('find two cars', ()=>{
+            const shop = ['a','b','a'];
+            const model = 'a';
+            const result = rentCar.searchCar(shop, model);
+            expect(rentCar.searchCar(shop, model)).to.equal('There is 2 car of model a in the catalog!');
+        })
+        it('invalid shop (str)', () => {
+            expect(() => {
+            rentCar.searchCar('asd', 'a');
+        }).to.throw();
+        });
+        it('invalid shop (num)', () => {
+            expect(() => {
+                rentCar.searchCar(1, 'a');
+            }).to.throw();
         })
         
     })
