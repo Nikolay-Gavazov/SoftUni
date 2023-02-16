@@ -13,7 +13,7 @@ describe('chooseYourCar', function() {
    
     })
     it('check brand name wrong input', () => {
-        assert.throw(chooseYourCar.brandName('Sedan', 1), 'Invalid Information!')
+        assert.(chooseYourCar.brandName('Sedan', 1), 'Invalid Information!')
         assert.throw(chooseYourCar.brandName(1, 1), 'Invalid Information!')
         assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], 1), 'Invalid Information!')
         assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], '1'), 'Invalid Information!')
