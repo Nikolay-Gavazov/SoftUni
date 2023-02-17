@@ -3,26 +3,29 @@ const chooseYourCar = require('../ExamPrep/Exam-22OCT2022/03-chooseCar/chooseYou
 
 
 describe('chooseYourCar', function() {
+    it('check for car invalid info', () => {
+        assert.equal(chooseYourCar.choosingType('Sedan','Color', 1899), 'Invalid Year!')
+        assert.equal(chooseYourCar.choosingType('Sedan','Color', 2023), 'Invalid Year!')
+        
+    })
     it('check for car', () => {
-        assert.throw(chooseYourCar.choosingType('Sedan','blue', 1899), 'Invalid Year!')
-        assert.throw(chooseYourCar.choosingType('Sedan','blue', 2023), 'Invalid Year!')
-        assert.equal(chooseYourCar.choosingType('coupe','blue', 2020), 'This type of car is not what you are looking for.')
-        assert.equal(chooseYourCar.choosingType('Sedan','Blue', 2010), 'This Blue Sedan meets the requirements, that you have.')
-        assert.equal(chooseYourCar.choosingType('Sedan','Blue', 2013), 'This Blue Sedan meets the requirements, that you have.')
-        assert.equal(chooseYourCar.choosingType('Sedan','blue', 2000), 'This Sedan is too old for you, especially with that Blue color.')
+        assert.equal(chooseYourCar.choosingType('coupe','Color', 2020), 'This type of car is not what you are looking for.')
+        assert.equal(chooseYourCar.choosingType('Sedan','Color', 2010), 'This Color Sedan meets the requirements, that you have.')
+        assert.equal(chooseYourCar.choosingType('Sedan','Color', 2013), 'This Color Sedan meets the requirements, that you have.')
+        assert.equal(chooseYourCar.choosingType('Sedan','Color', 2000), 'This Sedan is too old for you, especially with that Color color.')
    
     })
     it('check brand name wrong input', () => {
-        assert.(chooseYourCar.brandName('Sedan', 1), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(1, 1), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], 1), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], '1'), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(1), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c']), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], -1), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], 5), 'Invalid Information!')
-        assert.throw(chooseYourCar.brandName(['a', 'b', 'c'], 1.5), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName('Sedan', 1), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(1, 1), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c'], 1), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c'], '1'), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(1), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c']), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c'], -1), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c'], 5), 'Invalid Information!')
+        assert.equal(chooseYourCar.brandName(['a', 'b', 'c'], 1.5), 'Invalid Information!')
         
    
     })
@@ -43,14 +46,14 @@ describe('chooseYourCar', function() {
      })
 
      it('check consum wrong input', () => {
-        assert.throw(chooseYourCar.carFuelConsumption('a', 1), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(1, '1'), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(10, -1), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(-5, 10), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(5, 0), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(0, 10), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(), 'Invalid Information!')
-        assert.throw(chooseYourCar.carFuelConsumption(1), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption('a', 1), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(1, '1'), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(10, -1), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(-5, 10), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(5, 0), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(0, 10), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(), 'Invalid Information!')
+        assert.equal(chooseYourCar.carFuelConsumption(1), 'Invalid Information!')
        
      })
 
