@@ -7,11 +7,12 @@ async function getInfo() {
 
     try {
         const responce = await fetch(`http://localhost:3030/jsonstore/bus/businfo/${stopId}`);
+        if(!responce.ok == false) throw Error;
         const data = await responce.json();
-        console.log(responce);
+        console.log(data);
         stopName.textContent = data.name;
 
     } catch (error) {
-        
+        stopName.textContent = 'Error';
     }
 }
