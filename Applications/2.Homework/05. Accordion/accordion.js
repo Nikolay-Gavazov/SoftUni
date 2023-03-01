@@ -40,14 +40,14 @@ async function solution() {
                 console.log(error);
             }
             if (button.textContent == 'More') {
+                div.textContent = text;
                 button.textContent = 'Less';
                 div.style.display = 'block';
-                div.textContent = text;
+                
 
             } else {
                 button.textContent = 'More';
                 div.style.display = 'none';
-
             }
 
         }
