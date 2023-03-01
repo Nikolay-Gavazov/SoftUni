@@ -20,12 +20,12 @@ async function lockedProfile() {
 				<hr>
 				<label>Username</label>
 				<input type="text" name="user1Username" value="${data.username}" disabled readonly />
-				<div class="user1Username">
+				<div id="user1HiddenFields">
 					<hr>
 					<label>Email:</label>
 					<input type="email" name="user1Email" value="${data.email}" disabled readonly />
 					<label>Age:</label>
-					<input type="text" name="user1Age" value="${data.age}" disabled readonly />
+					<input type="email" name="user1Age" value="${data.age}" disabled readonly />
 				</div>
 				
 				<button>Show more</button>
@@ -46,19 +46,19 @@ async function lockedProfile() {
 				<hr>
 				<label>Username</label>
 				<input type="text" name="user${i+1}Username" value="${el[1].username}" disabled readonly />
-				<div class="user${i+1}Username">
+				<div id ="user${i+1}HiddenFields">
 					<hr>
 					<label>Email:</label>
 					<input type="email" name="user${i+1}Email" value="${el[1].email}" disabled readonly />
 					<label>Age:</label>
-					<input type="text" name="user${i+1}Age" value="${el[1].age}" disabled readonly />
+					<input type="email" name="user${i+1}Age" value="${el[1].age}" disabled readonly />
 				</div>
 				
 				<button>Show more</button>
             `
             
             main.appendChild(div);
-            document.querySelector(`.user${i+1}Username`).style.display = 'none';
+            document.getElementById(`user${i+1}HiddenFields`).style.display = 'none';
         });}
         
     } catch (error) {
@@ -70,7 +70,7 @@ async function lockedProfile() {
 
         button.addEventListener('click', func = () => {
             const lock = document.getElementsByName(`user${i+1}Locked`)[0].checked;
-            const hiddenInfo = document.querySelector(`.user${i+1}Username`)
+            const hiddenInfo = document.getElementById(`user${i+1}HiddenFields`)
             
             if (lock) {
 

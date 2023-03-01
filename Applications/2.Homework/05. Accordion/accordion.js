@@ -16,7 +16,7 @@ async function solution() {
             <button class="button" id="${el._id}">More</button>
             </div>
             <div class="extra">
-            <p>Scalable Vector Graphics .....</p>
+            <p></p>
             </div>
             `;
 
@@ -40,7 +40,7 @@ async function solution() {
                 console.log(error);
             }
             if (button.textContent == 'More') {
-                div.textContent = text;
+                div.children[0].textContent = text;
                 button.textContent = 'Less';
                 div.style.display = 'block';
                 
