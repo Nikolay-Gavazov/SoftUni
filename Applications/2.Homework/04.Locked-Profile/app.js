@@ -62,7 +62,7 @@ async function lockedProfile() {
         });}
         
     } catch (error) {
-        
+        console.log(error);
     }
     const buttons = Array.from(document.querySelectorAll('button'))
 
