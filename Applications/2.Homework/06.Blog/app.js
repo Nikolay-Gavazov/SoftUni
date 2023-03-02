@@ -7,30 +7,46 @@ function attachEvents() {
     const options = document.getElementById('posts');
     const p = document.getElementById('post-body');
     const ul = document.getElementById('post-comments');
+    const details = {}
+
 
     async function load(){
+        options.replaceChildren();
         try {
             const responce = await fetch(' http://localhost:3030/jsonstore/blog/posts');
             if(responce.ok == false) throw Error;
 
             const data = await responce.json();
             for(const el in data){
-                console.log(data[el].title);
+                
+                details[el] = data[el].body
                 const option = document.createElement('option');
-                option.value = el;
+                option.value = data[el].id;
                 option.textContent = data[el].title;
                 options.appendChild(option);
             }
         } catch (error) {
-            console.log(error);
+            alert(error.massege)
         }
     }
 
     async function view(){
         try {
-            const responce = await fetch(`http://localhost:3030/jsonstore/blog/comments`)
+            const responce = await fetch(`http://localhost:3030/jsonstore/blog/comments/`)
+            if(responce.ok == false) throw Error;
+        
+            const data = await responce.json();
+            p.textContent = details[options.value];
+            for(const el in data){
+                if(data[el].postId == options.value){
+                    const li = document.createElement('li');
+                    li.id = data[el].id;
+                    li.textContent = data[el].text;
+                    ul.appendChild(li);
+                }
+            }
         } catch (error) {
-            
+            alert(error.massege)
         }
     }
 
