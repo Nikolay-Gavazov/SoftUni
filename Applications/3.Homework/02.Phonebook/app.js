@@ -13,8 +13,9 @@ function attachEvents() {
             if(!res.ok) throw Error;
 
             const data = await res.json();
-
-            Object.entries(data).forEach(([key, value]) => {
+            const dataArr = Object.entries(data);
+            if(dataArr.length == 0) throw new Error('There is nothing in the phonebook');
+            dataArr.forEach(([key, value]) => {
                 const li = document.createElement('li');
                 li.textContent = `${value.person}: ${value.phone}`;
                 const btn = document.createElement('button');
