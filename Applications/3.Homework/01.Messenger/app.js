@@ -29,7 +29,7 @@ function attachEvents() {
     async function submit(){
         try {
             if(!nameInput.value || !messageInput.value){
-                throw new Error('all fields must be filled');
+                throw new Error('All fields must be filled!');
             }
             const data = {author: nameInput.value , content: messageInput.value};
 
