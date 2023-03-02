@@ -13,6 +13,9 @@ function attachEvents() {
     const title = {};
 
     async function load(){
+        h1.textContent = 'Post Details';
+        p.textContent = '';
+        ul.replaceChildren();
         options.replaceChildren();
         try {
             const responce = await fetch(' http://localhost:3030/jsonstore/blog/posts');
@@ -52,6 +55,7 @@ function attachEvents() {
                     ul.appendChild(li);
                 }
             }
+        options.innerHTML = '';
         } catch (error) {
             alert(error.massege)
         }
