@@ -45,7 +45,9 @@ async function load(){
             throw error;
         }
         const data = await res.json();
+        if(Object.entries(data).length == 0) throw Error('There is no Books more');
         tbody.replaceChildren();
+       
         Object.entries(data).forEach(el => {
             const tr = document.createElement('tr');
             const td1 = document.createElement('td')
