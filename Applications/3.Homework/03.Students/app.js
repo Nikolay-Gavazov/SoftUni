@@ -1,6 +1,7 @@
-document.getElementById('submit').addEventListener('click', submit);
+
 const table = document.getElementById('results');
 const inputForm = document.querySelector('form')
+inputForm.addEventListener('submit', submit)
 let firstName = inputForm[0].value;
 let lastName = inputForm[1].value;
 let facultyNum = inputForm[2].value;
@@ -24,12 +25,11 @@ async function submit(e){
                 body: JSON.stringify(data)
         })
         if(!res.ok) throw Error('responce error');
-         fillForm()
-    } catch (error) {
-        alert(error.messege)
-    }
-
-    async function fillForm(){
+        inputForm[0].value = '';
+        inputForm[1].value = '';
+        inputForm[2].value = '';
+        inputForm[3].value = '';
+        
         table.children[1].innerHTML = '';
 
         try {
@@ -51,6 +51,9 @@ async function submit(e){
         } catch (error) {
             alert(error.messege)
         }
+
+    } catch (error) {
+        alert(error.messege)
     }
 }
 
