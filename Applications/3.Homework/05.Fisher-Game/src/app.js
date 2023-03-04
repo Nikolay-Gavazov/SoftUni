@@ -11,7 +11,7 @@ if(userData){
     document.querySelector('#guest').style.display = 'none';
     addBtn.disabled = false;
 }else{
-    document.querySelector('#guest').style.display = 'block';
+    document.querySelector('#guest').style.display = 'inline';
     document.getElementById('user').style.display = 'none';
     addBtn.disabled = true;
 }
@@ -103,6 +103,7 @@ async function addNewCatch(e){
         alert(error.message)
     }
     addForm.reset()
+    load()
 }
 
 async function updateCatch(e){
@@ -127,6 +128,7 @@ async function updateCatch(e){
     } catch (error) {
         alert(error.message)
     }
+    load()
 }
 
 async function deleteCatch(e){
@@ -136,34 +138,19 @@ async function deleteCatch(e){
             'X-Authorization': userData.token
         }
     })
+    load()
 }
-// const res = await fetch('http://localhost:3030/users/articles', {
-//     method: 'get',
-//     headers: {'X-Authorization': authToken}
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 async function logout(e){
-    const res = await fetch('http://localhost:3030/users/logout');
+    const res = await fetch('http://localhost:3030/users/logout',{
+        headers:{
+            'X-Authorization': userData.token
+        }
+    });
     localStorage.clear();
+    document.querySelector('#guest').style.display = 'inline';
+    document.getElementById('user').style.display = 'none';
+    addBtn.disabled = true;
     window.location = ('./index.html');
 }
 
