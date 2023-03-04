@@ -1,4 +1,4 @@
-document.getElementById('logout').style.display = 'none';
+document.getElementById('user').style.display = 'none';
 const loginForm = document.querySelector('form');
 const nofitication = loginForm.querySelector('.notification');
 const loginBtn = loginForm.querySelector('button')
@@ -31,9 +31,13 @@ async function login(e){
             
         }
         const data = await res.json();
-        const authToken = data.accessToken;
-        localStorage.setItem('accessToken', authToken);
-        document.location.href = 'index.html';
+        const userData = {
+            email: data.email,
+            id: data._id,
+            token: data.accessToken
+        };
+        localStorage.setItem('userData', JSON.stringify(userData));
+        window.location = ('./index.html');
     
     } catch (error) {
         alert(error.message)
