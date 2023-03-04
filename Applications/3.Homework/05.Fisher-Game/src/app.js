@@ -15,10 +15,8 @@ if(userData){
     document.getElementById('user').style.display = 'none';
     addBtn.disabled = true;
 }
-document.querySelector('#main').style.border = 'none'
-document.querySelector('#main').innerHTML = 'Click to load caches';
-
 async function load(e){
+
     try {
         const res = await fetch('http://localhost:3030/data/catches');
     if(!res.ok){
@@ -26,6 +24,7 @@ async function load(e){
         throw error;
     }
     const data = await res.json();
+    document.querySelector('#main').style.display = ''
     catchesSection.replaceChildren();
     data.forEach(el => {
         console.log(el);
