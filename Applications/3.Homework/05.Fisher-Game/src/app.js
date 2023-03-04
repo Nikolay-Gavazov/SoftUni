@@ -24,7 +24,6 @@ async function load(e){
         throw error;
     }
     const data = await res.json();
-    document.querySelector('#main').style.display = ''
     catchesSection.replaceChildren();
     data.forEach(el => {
         console.log(el);
