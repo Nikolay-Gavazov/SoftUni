@@ -15,6 +15,8 @@ if(userData){
     document.getElementById('user').style.display = 'none';
     addBtn.disabled = true;
 }
+document.querySelector('#main').style.border = 'none'
+document.querySelector('#main').innerHTML = 'Click to load caches';
 
 async function load(e){
     try {
