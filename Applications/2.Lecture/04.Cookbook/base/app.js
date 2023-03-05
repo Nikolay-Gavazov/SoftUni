@@ -18,7 +18,6 @@ function start(e){
             const data = await response.json();
             main.replaceChildren();
             for(let el in data){
-                console.log(data[el]);
                 const article = document.createElement('article');
                 article.className = 'preview';
                 article.id = data[el]._id;
@@ -40,41 +39,49 @@ function start(e){
 
     async function recipeInfo(e){
         e.preventDefault();
-        console.log(e.target.id);
-    }
-    }
+        try {
+            const res = await fetch(`http://localhost:3030/jsonstore/cookbook/details/${e.target.id}`);
+            if(!res.ok) throw Error 
 
-    
-    lasagna.addEventListener('click', () =>{
-        const article = document.createElement('article');
-    article.innerHTML += `
-
-        <h2>Recipe 1</h2>
+            const data = await res.json();
+            const ingredients = data.ingredients;
+            const steps = data.steps;
+            const article = document.createElement('article');
+            article.innerHTML += `
+        <h2>${data.name}</h2>
         <div class="band">
             <div class="thumb">
-                <img src="assets/lasagna.jpg">
+                <img src="${data.img}">
             </div>
             <div class="ingredients">
                 <h3>Ingredients:</h3>
-                <ul>
-                    <li>Ingredient 1</li>
-                    <li>Ingredient 2</li>
-                    <li>Ingredient 3</li>
-                    <li>Ingredient 4</li>
-                </ul>
+                <ul></ul>
             </div>
         </div>
         <div class="description">
             <h3>Preparation:</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius, quaerat.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur officia ipsam nulla vitae nobis
-                reprehenderit pariatur aut dolor exercitationem impedit.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dolorem odit officiis numquam
-                corrupti? Quam.</p>
         </div>`;
+        for(const el in ingredients){
+            const li = document.createElement('li');
+            li.textContent = ingredients[el];
+            article.querySelector('ul').appendChild(li);
+        }
+        for(const el in steps){
+            const p = document.createElement('p');
+            p.textContent = steps[el];
+            article.querySelector('.description').appendChild(p);
+        }
+        main.replaceChildren();
         main.appendChild(article)
-    })
-    main.appendChild(lasagna)
-
-
+        } catch (error) {
+            alert(error.message);
+        }
+    }   
+    }
 }
+
+
+{/* <li>Ingredient 1</li>
+                    <li>Ingredient 2</li>
+                    <li>Ingredient 3</li>
+                    <li>Ingredient 4</li> */}
