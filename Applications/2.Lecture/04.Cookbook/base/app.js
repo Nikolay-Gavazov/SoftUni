@@ -79,9 +79,3 @@ function start(e){
     }   
     }
 }
-
-
-{/* <li>Ingredient 1</li>
-                    <li>Ingredient 2</li>
-                    <li>Ingredient 3</li>
-                    <li>Ingredient 4</li> */}
