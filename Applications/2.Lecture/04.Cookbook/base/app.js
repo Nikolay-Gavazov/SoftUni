@@ -8,38 +8,43 @@ function start(e){
 
 
     async function loadRepos() {
-        const url = `http://localhost:3030/jsonstore/cookbook/recipes/`;
-       
+        
         try{
-            const response = await fetch(url);
+            const response = await fetch('http://localhost:3030/jsonstore/cookbook/recipes');
             if(response.ok == false){
             throw `${response.status}: ${response.statusText}`;
             
             }
             const data = await response.json();
-            repos.replaceChildren();
-            for(let el of data){
-                const li = document.createElement('li');
-                li.innerHTML = `<a href='${el.name}'>${el.ingredients}</a>`;
-                main.appendChild(li);
+            main.replaceChildren();
+            for(let el in data){
+                console.log(data[el]);
+                const article = document.createElement('article');
+                article.className = 'preview';
+                article.id = data[el]._id;
+                article.innerHTML = `
+            <div class="title">
+            <h2>${data[el].name}</h2>
+            </div>
+            <div class="small">
+                <img src="${data[el].img}">
+            </div>
+                `;
+            article.addEventListener('click', recipeInfo);
+            main.appendChild(article);
             }
         }catch(error){
             main.innerHTML = `<p>${error}</p>`;
     }
+
+
+    async function recipeInfo(e){
+        e.preventDefault();
+        console.log(e.target.id);
+    }
     }
 
-
-
-    const lasagna = document.createElement('article');
-    lasagna.className = 'preview';
-    lasagna.innerHTML = `
-            <div class="title">
-                <h2>Recipe 1</h2>
-            </div>
-            <div class="small">
-                <img src="assets/lasagna.jpg">
-            </div>
-    `;
+    
     lasagna.addEventListener('click', () =>{
         const article = document.createElement('article');
     article.innerHTML += `
