@@ -27,7 +27,7 @@ async function register(e){
         if(!res.ok){
             const error = await res.json();
             nofitication.textContent = error.message;
-            throw error;
+            throw new Error(error);
             
         }
         const data = await res.json();
