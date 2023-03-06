@@ -146,24 +146,32 @@ async function buy(e) {
 }
 
 async function order(e){
+    let price = 0;
+    const furniture = [];
     e.preventDefault()
     try {
-        const res = await fetch(`http://localhost:3030/data/orders?where=_ownerId%3D{${userData.id}}`)
+        const res = await fetch(`http://localhost:3030/data/orders`)
         if(!res.ok){
             const error = await res.json();
             throw Error(error.message)
         }
         
         const data = await res.json()
-        console.log(data);
+        data.forEach(el => {
+            if(el._ownerId == userData.id){
+                furniture.push(el.boughtFurniture.join(', '));
+                price += el.totalPrice;
+                
+            };
+        });
     } catch (error) {
         alert(error.message)
     }
     boughtFurnitureP.innerHTML = `
-    <p>Bought furniture: <span></span></p>
+    <p>Bought furniture: <span>${furniture.join(', ')}</span></p>
     `;
     totalPriceP.innerHTML = `
-    <p>Total price: <span>$</span></p>
+    <p>Total price: <span>${price} $</span></p>
     `;
     
 }
