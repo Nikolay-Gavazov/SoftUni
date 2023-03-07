@@ -6,11 +6,12 @@ regBtn.addEventListener('click', register);
 
 
 async function register(e){
+    e.preventDefault();
     const data = new FormData(registerForm)
     const email = data.get('email');
     const pass = data.get('password');
     const repeat = data.get('rePass');
-    e.preventDefault();
+    
     try {
         if(!email || !pass || !repeat) throw Error('All fields are requared!')
         if(pass != repeat) throw Error('The password dont match!');
@@ -27,7 +28,7 @@ async function register(e){
         if(!res.ok){
             const error = await res.json();
             nofitication.textContent = error.message;
-            throw new Error(error);
+            throw new Error(error.message);
             
         }
         const data = await res.json();

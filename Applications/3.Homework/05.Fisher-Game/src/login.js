@@ -27,7 +27,7 @@ async function login(e){
         if(!res.ok){
             const error = await res.json();
             nofitication.textContent = error.message;
-            throw error;
+            throw Error(error.message);
             
         }
         const data = await res.json();

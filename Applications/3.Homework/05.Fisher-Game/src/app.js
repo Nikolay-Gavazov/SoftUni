@@ -21,12 +21,11 @@ async function load(e){
         const res = await fetch('http://localhost:3030/data/catches');
     if(!res.ok){
         const error = await res.json();
-        throw error;
+        throw Error(error.message);
     }
     const data = await res.json();
     catchesSection.replaceChildren();
     data.forEach(el => {
-        console.log(el);
         const div = document.createElement('div');
         div.className = 'catch';
         div.innerHTML = `
@@ -74,7 +73,8 @@ async function addNewCatch(e){
     const species = formData.get('species');
     const location = formData.get('location');
     const bait = formData.get('bait');
-    const captureTime = Number(formData.get('captureTime'));
+    let captureTime = formData.get('captureTime');
+    captureTime = Number(captureTime);
     console.log(angler, weight, species, location, bait, captureTime);
     try {
         if(!angler || !weight || !species || !location || !bait || !captureTime) throw Error('All fields are requared!')
