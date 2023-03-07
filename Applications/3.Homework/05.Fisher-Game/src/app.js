@@ -5,10 +5,18 @@ document.querySelector('.load').addEventListener('click', load);
 const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', addNewCatch);
 const catchesSection = document.getElementById('catches');
+const main = document.getElementById('main');
+main.style.display = 'none';
+
+const p = document.createElement('p');
+p.textContent = 'Click to load catches';
+
+document.getElementById('home-view').insertBefore(p, main);
+p.style.textAlign = 'center';
 
 if(userData){
     document.querySelector('.email > span').textContent = userData.email;
-    document.querySelector('#guest').style.display = 'none';
+    document.getElementById('guest').style.display = 'none';
     addBtn.disabled = false;
 }else{
     document.getElementById('guest').style.display = 'inline';
@@ -24,6 +32,8 @@ async function load(e){
         throw Error(error.message);
     }
     const data = await res.json();
+    p.style.display = 'none';
+    main.style.display = 'inline-table';
     catchesSection.replaceChildren();
     data.forEach(el => {
         const div = document.createElement('div');
