@@ -11,7 +11,7 @@ if(userData){
     document.querySelector('#guest').style.display = 'none';
     addBtn.disabled = false;
 }else{
-    document.querySelector('#guest').style.display = 'inline';
+    document.getElementById('guest').style.display = 'inline';
     document.getElementById('user').style.display = 'none';
     addBtn.disabled = true;
 }
