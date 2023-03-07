@@ -10,17 +10,17 @@ async function login(e){
 
     const data = new FormData(loginForm)
     const email = data.get('email');
-    const pass = data.get('password');
+    const password = data.get('password');
 
     try {
-        if(!email || !pass) throw Error('All fields are requared!')
+        if(!email || !password) throw Error('All fields are requared!')
     
         const res = await fetch('http://localhost:3030/users/login',{
             method: 'POST',
             headers: {'Content-Type': 'aplication/json'},
             body: JSON.stringify({
-                email: email,
-                password: pass
+                email,
+                password
             })
         });
 

@@ -1,5 +1,7 @@
 const userData = JSON.parse(localStorage.getItem('userData'));
-
+document.getElementById('home').addEventListener('click', (e)=>{
+    window.location = ('./index.html');
+})
 document.getElementById('logout').addEventListener('click', logout);
 
 const addForm = document.getElementById('addForm');
@@ -28,7 +30,7 @@ if(userData){
     addBtn.disabled = true;
 }
 async function load(e){
-
+    e.preventDefault();
     try {
         const res = await fetch('http://localhost:3030/data/catches');
     if(!res.ok){

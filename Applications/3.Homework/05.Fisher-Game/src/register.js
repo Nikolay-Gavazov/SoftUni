@@ -9,19 +9,19 @@ async function register(e){
     e.preventDefault();
     const data = new FormData(registerForm)
     const email = data.get('email');
-    const pass = data.get('password');
+    const password = data.get('password');
     const repeat = data.get('rePass');
     
     try {
-        if(!email || !pass || !repeat) throw Error('All fields are requared!')
-        if(pass != repeat) throw Error('The password dont match!');
+        if(!email || !password || !repeat) throw Error('All fields are requared!')
+        if(password != repeat) throw Error('The password dont match!');
         
         const res = await fetch('http://localhost:3030/users/register',{
             method: 'POST',
             headers: {'Content-Type': 'aplication/json'},
             body: JSON.stringify({
-                email: email,
-                password: pass
+                email,
+                password
             })
         });
 
