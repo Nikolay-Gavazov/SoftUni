@@ -1,24 +1,19 @@
-const main = document.querySelector('main');
+import { createPost, loadPost } from "./functions.js";
 
-const form = main.querySelector('form');
+window.addEventListener('load', loadPost);
+export const main = document.querySelector('main');
+
+export const form = main.querySelector('form');
 document.querySelector('.cancel').addEventListener('click', (e)=>{
     e.preventDefault();
     form.reset();
 })
 document.querySelector('.public').addEventListener('click', createPost);
 
+export const postContainer = document.querySelector('.topic-container');
 
-export async function createPost(){
-    const data = new FormData(form);
-    const title = data.get('topicName');
-    const userName = data.get('username');
-    const post = data.get('postText');
-    try {
-        if(!title || !userName || !post)throw Error('All fields are required!')
-    
-        const res = await fetch('http://localhost:3030/jsonstore/collections/myboard/posts')
-    } catch (error) {
-        alert(error.message)
-    }
-}
+
+
+
+
 
