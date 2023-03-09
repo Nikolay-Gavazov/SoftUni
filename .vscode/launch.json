@@ -11,7 +11,7 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${test}"
+                "${file}"
             ],
             "internalConsoleOptions": "openOnSessionStart",
             "name": "Mocha Tests",
