@@ -65,15 +65,16 @@ export async function loadComents(id){
                 const commentDiv = document.createElement('div')
                 commentDiv.className = 'user-comment';
                 commentDiv.innerHTML = `
+                <div class="topic-name-wrapper">
                 <div class='topic-name'>
                 <p><strong>${el.userName}</strong> commented on <time>${el.date}</time></p>
                 <div class = 'post-content'>
                 <p>${el.post}</p>
                 </div>
                 </div>
+                </div>
                 `;
-                const form = document.querySelector('comment');
-                document.querySelector('.theme-content').insertBefore(commentDiv, form);
+                document.querySelector('.comment').appendChild(commentDiv);
             }
         });
     } catch (error) {
@@ -133,7 +134,8 @@ export async function createPost(e){
             const error = await res.json();
             throw Error(error.message);
         }
-        e.target.reset();
+        form.reset();
+        loadPost()
     } catch (error) {
         alert(error.message)
     }
