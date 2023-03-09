@@ -1,5 +1,7 @@
-import { openPost, parentDiv } from "./comments.js";
+import { openPost} from "./comments.js";
 
+document.querySelector('#comment-section').style.display = 'none';
+const parentDiv = document.querySelector('.container');
 const main = document.querySelector('main');
 const form = document.querySelector('form');
 form.addEventListener('submit', createPost);
@@ -8,7 +10,7 @@ form.querySelector('.cancel').addEventListener('click', (e)=>{
     e.preventDefault();
     form.reset();
 })
-export const postUrl = 'http://localhost:3030/jsonstore/collections/myboard/posts'
+const postUrl = 'http://localhost:3030/jsonstore/collections/myboard/posts'
 
 async function createPost(e){
     e.preventDefault();

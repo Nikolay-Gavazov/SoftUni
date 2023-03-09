@@ -1,8 +1,6 @@
-import { postUrl } from "./posts.js";
-
-export const parentDiv = document.querySelector('.container');
+const parentDiv = document.querySelector('.container');
 const commentsUrl = 'http://localhost:3030/jsonstore/collections/myboard/comments';
-
+const postUrl = 'http://localhost:3030/jsonstore/collections/myboard/posts'
 
 export async function openPost(e) {
     e.preventDefault();
