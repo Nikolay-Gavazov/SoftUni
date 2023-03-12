@@ -2,6 +2,7 @@ const host = 'http://localhost:3030/';
 
 async function requester(method, url, data) {
     const user = JSON.parse(localStorage.getItem('user'));//
+    
     const options = {
         method,
         headers: {}
