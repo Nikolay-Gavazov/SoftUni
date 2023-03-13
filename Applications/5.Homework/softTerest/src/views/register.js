@@ -16,7 +16,15 @@ async function onSubmit(e){
     e.preventDefault();
     const data = new FormData(form);
     const {email, password, repeatPassword} = Object.fromEntries(data);
-
+        if(!email || !password || ! repeatPassword){
+            throw Error('All fields are required!')
+        }
+        if(email.length < 3){
+            throw Error('email is too short!')
+        }
+        if(password.length < 3){
+            throw Error('Password is too short!')
+        }
         if(password != repeatPassword){
             throw Error('Passwords do not match');
         }

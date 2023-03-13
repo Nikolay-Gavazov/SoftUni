@@ -18,6 +18,7 @@ export async function showCatalog(context){
 function createIdeaPreview(idea){
     
     const element = document.createElement('div');
+    element.className = 'card overflow-hidden current-card details';
     element.style.width = '20rem';
     element.style.height = '18rem';
     element.innerHTML = `
