@@ -1,22 +1,22 @@
-import * as api from './api.js';
+import {get, post} from './api.js';
 
 const nav = {
     'register': 'users/register',
-    'user': 'users/login',
+    'login': 'users/login',
     'logout': 'users/logout'
 }
 
 export async function register(email, password){
-    const user = await api.post(nav.register, {email, password});
+    const user = await post(nav.register, {email, password});
     localStorage.setItem('user', JSON.stringify(user));
 }
 
 export async function login(email, password){
-    const user = await api.post(nav.user, {email, password});
+    const user = await post(nav.login, {email, password});
     localStorage.setItem('user', JSON.stringify(user));
 }
 
 export async function logout(){
-    api.get(nav.logout);
-    localStorage.clear();
+    get(nav.logout);
+    localStorage.removeItem('user');
 }

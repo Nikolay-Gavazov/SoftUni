@@ -7,7 +7,7 @@ import { showDetails } from "./src/views/details.js";
 import { showHomeView } from "./src/views/home.js";
 import { showLogin } from "./src/views/login.js";
 import { showRegister } from "./src/views/register.js";
-debugger
+
 document.getElementById('defSection').remove()
 
 async function logoutFunction(){

@@ -1,14 +1,14 @@
 const host = 'http://localhost:3030/';
 
 async function requester(method, url, data) {
-    const user = JSON.parse(localStorage.getItem('user'));//
+    const user = JSON.parse(localStorage.getItem('user'));
     
     const options = {
         method,
         headers: {}
     }
 
-    if (data) {
+    if (data != undefined) {
         options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(data);
     }
@@ -28,7 +28,12 @@ async function requester(method, url, data) {
             const error = await res.json();
             throw Error(error.message)
         }
-        res.status == 204 ? res : res.json();
+        if(res.status == 204){
+            return res;
+        }else{
+            return res.json();
+        }
+    
 
     } catch (error) {
         alert(error.message);
