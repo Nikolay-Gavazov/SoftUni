@@ -3,7 +3,7 @@ import { login } from "../user.js";
 const section = document.getElementById('loginView');
 
 const form = section.querySelector('form');
-form.addEventListener('submit', submit);
+form.addEventListener('submit', onSubmit);
 
 let ctx = null;
 
@@ -13,10 +13,10 @@ export function showLogin(context){
 
 }
 
-async function submit(e){
+async function onSubmit(e){
     e.preventDefault();
 
-    const data = new FormData(e.target);
+    const data = new FormData(form);
     const email = data.get('email');
     const password = data.get('password');
 
