@@ -26,7 +26,7 @@ async function login(e){
 
         if(!res.ok){
             const error = await res.json();
-            nofitication.textContent = error.message;
+           // nofitication.textContent = error.message;
             throw Error(error.message);
             
         }
@@ -36,10 +36,12 @@ async function login(e){
             id: data._id,
             token: data.accessToken
         };
+        loginForm.reset();
         localStorage.setItem('userData', JSON.stringify(userData));
         window.location = ('./index.html');
     
     } catch (error) {
         alert(error.message)
+        throw error
     }
 }

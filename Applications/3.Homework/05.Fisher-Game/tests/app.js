@@ -1,16 +1,22 @@
 const userData = JSON.parse(localStorage.getItem('userData'));
+document.getElementById('home').addEventListener('click', (e)=>{
+    window.location = ('./index.html');
+})
 document.getElementById('logout').addEventListener('click', logout);
+
 const addForm = document.getElementById('addForm');
 document.querySelector('.load').addEventListener('click', load);
+
 const addBtn = document.querySelector('.add');
 addBtn.addEventListener('click', addNewCatch);
+
 const catchesSection = document.getElementById('catches');
+
 const main = document.getElementById('main');
 main.style.display = 'none';
 
 const p = document.createElement('p');
 p.textContent = 'Click to load catches';
-
 document.getElementById('home-view').insertBefore(p, main);
 p.style.textAlign = 'center';
 
@@ -18,14 +24,13 @@ if(userData){
     document.querySelector('.email > span').textContent = userData.email;
     document.getElementById('guest').style.display = 'none';
     addBtn.disabled = false;
-    load();
 }else{
     document.getElementById('guest').style.display = 'inline';
     document.getElementById('user').style.display = 'none';
     addBtn.disabled = true;
 }
 async function load(e){
-
+    e.preventDefault();
     try {
         const res = await fetch('http://localhost:3030/data/catches');
     if(!res.ok){
