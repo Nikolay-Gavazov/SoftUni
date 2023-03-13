@@ -3,15 +3,15 @@ export function initalizer(links){
     const main = document.getElementById('mainView')
     document.querySelector('nav').addEventListener('click', navigateClick);
 
-
     const context = {
         showSection,
-        goTo,
-        updateNav
+        updateNav,
+        goTo
     
     }
     return context
-   
+    
+    
     
     function showSection(section){
         main.replaceChildren(section);
@@ -23,7 +23,6 @@ export function initalizer(links){
         if(target.tagName == 'IMG'){
             target = target.parentElement;
         }
-    
         if(target.tagName == 'A'){
             const url = new URL(target.href);
             goTo(url.pathname)
@@ -35,7 +34,7 @@ export function initalizer(links){
         if(typeof(handler) == 'function'){
             handler(context, ...params);
         }
-    } 
+    }
 
     function updateNav(){
         const user = JSON.parse(localStorage.getItem('user'))

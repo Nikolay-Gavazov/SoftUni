@@ -1,7 +1,6 @@
 import { login } from "../user.js";
 
 const section = document.getElementById('loginView');
-
 const form = section.querySelector('form');
 form.addEventListener('submit', onSubmit);
 
@@ -21,6 +20,7 @@ async function onSubmit(e){
     const password = data.get('password');
 
     await login(email, password);
+    form.reset();
     ctx.updateNav();
-    ctx.goTo('/catalog');
+    ctx.goTo('/');
 }

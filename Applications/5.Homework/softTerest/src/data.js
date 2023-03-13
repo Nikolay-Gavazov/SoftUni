@@ -6,18 +6,18 @@ const endPoint = {
     'ideaById': 'data/ideas/'
 }
 
-export function getAllIdeas(){
+export async function getAllIdeas(){
     return api.get(endPoint.getAllIdeas);
 }
 
-export function createIdea(idea){
+export async function createIdea(idea){
     return api.post(endPoint.createIdea, idea);
 }
 
-export function ideaById(id){
-    return api.get(`${endPoint.ideaById}${id}`);
+export async function ideaById(id){
+    return api.get(endPoint.ideaById + id);
 }
 
-export function deleteById(id){
-    return api.delete_(`${endPoint.ideaById}${id}`);
+export async function deleteById(id){
+    return api.delete_(endPoint.ideaById + id);
 }

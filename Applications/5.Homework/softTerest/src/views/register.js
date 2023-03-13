@@ -22,7 +22,8 @@ async function onSubmit(e){
         }
         await register(email, password);
         alert('Regisration successful');
+        form.reset()
         ctx.updateNav();
-        ctx.goTo('/catalog');
+        ctx.goTo('/');
 }
 
