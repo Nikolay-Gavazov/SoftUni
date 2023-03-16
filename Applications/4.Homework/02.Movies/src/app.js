@@ -1,3 +1,4 @@
+import { deleteMovie, likeMovie } from "./api/data.js";
 import { initialize } from "./api/router.js";
 import { logout } from "./api/user.js";
 import { addMoviePage } from "./pages/addMovie.js";
@@ -13,9 +14,11 @@ document.getElementById('all').remove();
 
 const links = {
     '/': homePage,
-    '/edit': editMoviePage,
     '/add': addMoviePage,
     '/movieInfo': movieInfoPage,
+    '/editMovie': editMoviePage,
+    '/delMovie': deleteMovie,
+    '/likeMovie': likeMovie,
     '/login': loginPage,
     '/register': registerPage,
     '/logout': logoutFunc
@@ -24,6 +27,7 @@ const links = {
 async function logoutFunc(){
     await logout();
     router.updateNav();
+    router.goTo('/login');
 }
 
 const router = initialize(links);
