@@ -7,8 +7,9 @@ import { loginPage } from "./pages/login.js";
 import { movieInfoPage } from "./pages/movieInfo.js";
 import { registerPage } from "./pages/register.js";
 
-const div = document.getElementById('all')
-div.remove();
+document.getElementById('all').remove();
+
+
 
 const links = {
     '/': homePage,
@@ -28,3 +29,4 @@ async function logoutFunc(){
 const router = initialize(links);
 router.goTo('/')
 router.updateNav();
+
