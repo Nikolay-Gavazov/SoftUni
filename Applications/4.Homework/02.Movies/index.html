@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>Movies</title>
-    <link rel="icon" type="image/png" href="/static/favicon.ico" />
-    <link href="static/css/site.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/Applications/4.Homework/02.Movies/static/favicon.ico" />
+    <link href="/Applications/4.Homework/02.Movies/static/css/site.css" type="text/css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <script src="src/app.js" type="module"></script>
+    <script src="/Applications/4.Homework/02.Movies/src/app.js" type="module"></script>
   </head>
 
   <body>
@@ -23,17 +23,18 @@
             <a class="nav-link" id="welcome-msg">Welcome, email</a>
           </li>
           <li class="nav-item user">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="/logout">Logout</a>
           </li>
           <li class="nav-item guest">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item guest">
-            <a class="nav-link" href="#">Register</a>
+            <a class="nav-link" href="/register">Register</a>
           </li>
         </ul>
       </nav>
-
+      <main></main>
+      <div id="all">
       <section id="home-page" class="view-section">
         <div
           class="jumbotron jumbotron-fluid text-light"
@@ -258,7 +259,7 @@
           <button type="submit" class="btn btn-primary">Register</button>
         </form>
       </section>
-
+    </div>
       <footer class="page-footer font-small">
         <div class="footer-copyright text-center py-3">
           &copy; 2020
