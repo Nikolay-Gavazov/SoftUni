@@ -1,7 +1,7 @@
 import { login } from "../api/user.js";
 
 const section = document.getElementById('form-login');
-const form = document.getElementById('login-form');
+const form = section.querySelector('form');
 form.addEventListener('submit', onLogin);
 
 let ctx;

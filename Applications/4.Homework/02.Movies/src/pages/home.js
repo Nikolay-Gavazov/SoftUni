@@ -4,7 +4,7 @@ import { movieInfoPage } from './movieInfo.js';
 
 const section = document.getElementById('home-page');
 
-const template = (movies) => html `
+const template = (movies, context) => html `
 
     ${movies.map(movie => html`
     <div class="card mb-4">
@@ -14,7 +14,7 @@ const template = (movies) => html `
         </div>
         <div class="card-footer">
             <a href="/movieInfo">
-                <button type="button" id = ${movie._id} @click = ${movieInfoPage} class="btn btn-info">Details</button>
+                <button type="button" id = ${movie._id} @click = ${movieInfoPage(movie._id)} class="btn btn-info">Details</button>
             </a>
         </div>
     </div>
@@ -28,7 +28,7 @@ export async function homePage(context){
         context.goTo('/add')
     })
     
-    const movieSection = document.getElementById('movies-list');
+    const movieSection = document.querySelector('#movies-list');
    
 
     const movies = await getAllMovies();
@@ -36,7 +36,7 @@ export async function homePage(context){
     if(movies.length == 0){
         return
     }
-    render(template(movies), movieSection)
+    render(template(movies, context), movieSection)
 }
 
 

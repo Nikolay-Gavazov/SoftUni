@@ -1,17 +1,12 @@
 import {html, render} from '../../../../../node_modules/lit-html/lit-html.js';
+import { getMovie } from '../api/data.js';
+import { ctx } from '../api/router.js';
+
 const section = document.getElementById('movie-example');
 
-
-
-export function movieInfoPage(context){
-    context.showSection(section);
-    context.updateNav();
-}
-
 const template = (movie) => html `
-<ul>
     ${movie.map(el => html`
-    <section id="movie-example" class="view-section">
+    
         <div class="container">
           <div class="row bg-light text-dark">
             <h1>Movie title: ${el.title}</h1>
@@ -35,7 +30,15 @@ const template = (movie) => html `
             </div>
           </div>
         </div>
-      </section>
     `)}
-</ul>
 `;
+
+
+export async function movieInfoPage(id){
+  ctx.showSection(section);
+  ctx.updateNav();
+ 
+  const movie = await getMovie(id);
+  render(template(movie), section);
+}
+

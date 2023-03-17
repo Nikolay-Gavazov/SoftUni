@@ -1,7 +1,7 @@
 import { register } from "../api/user.js";
 
 const section = document.getElementById('form-sign-up');
-const form = document.getElementById('register-form');
+const form = section.querySelector('form');
 form.addEventListener('submit', onRegister);
 
 let ctx;

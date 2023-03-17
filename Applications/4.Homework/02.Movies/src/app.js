@@ -10,8 +10,6 @@ import { registerPage } from "./pages/register.js";
 
 document.getElementById('all').remove();
 
-
-
 const links = {
     '/': homePage,
     '/add': addMoviePage,

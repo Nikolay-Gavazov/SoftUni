@@ -1,3 +1,4 @@
+let ctx;
 export function initialize(links){
 
     const main = document.querySelector('main');
@@ -8,6 +9,7 @@ export function initialize(links){
         updateNav,
         goTo
     }
+    ctx = context;
     return context;
 
     function showSection(section){
@@ -40,4 +42,9 @@ export function initialize(links){
             document.querySelectorAll('.guest').forEach(el => el.style.display = 'block');
         }
     }
+
+
+}
+export {
+    ctx
 }
