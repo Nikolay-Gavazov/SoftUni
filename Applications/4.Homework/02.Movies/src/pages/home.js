@@ -7,7 +7,7 @@ const section = document.getElementById('home-page');
 const template = (movies, context) => html `
 
     ${movies.map(movie => html`
-    <div class="card mb-4">
+    <li class="card mb-4">
         <img class="card-img-top" src="${movie.img}" alt="Card image cap" width="400">
         <div class="card-body">
             <h4 class="card-title">${movie.title}</h4>
@@ -17,7 +17,7 @@ const template = (movies, context) => html `
                 <button type="button" id = ${movie._id} @click = ${movieInfoPage} class="btn btn-info">Details</button>
             </a>
         </div>
-    </div>
+</li>
     `)}
 `;
 

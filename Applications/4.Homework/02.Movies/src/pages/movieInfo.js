@@ -25,9 +25,10 @@ const template = (movie, likes, userLike) => html `
               <p>
                 ${movie.description}
               </p>
-              ${movie._ownerId == userData._id ? html `<a id=${movie._id} class="btn btn-danger" @click = ${del} href="/delMovie">Delete</a>` : null}
+              ${!userData ? null : html `${movie._ownerId == userData._id ? html `<a id=${movie._id} class="btn btn-danger" @click = ${del} href="/delMovie">Delete</a>` : null}
               ${movie._ownerId == userData._id ? html `<a id=${movie._id} class="btn btn-warning" @click = ${editMoviePage} href="/editMovie">Edit</a>` : null}
-              ${(movie._ownerId != userData._id && userLike.length == 0) ? html `<a id=${movie._id} class="btn btn-primary" @click = ${like} href="/likeMovie">Like</a>` : null}
+              ${(movie._ownerId != userData._id && userLike.length == 0) ? html `<a id=${movie._id} class="btn btn-primary" @click = ${like} href="/likeMovie">Like</a>` : null}`}
+              
               ${likes > 0 ? html `<span class="enrolled-span">Liked ${likes}</span>` : null}
               
             </div>
@@ -42,9 +43,12 @@ export async function movieInfoPage(event){
   const id = event.target.id;
   const movie = await getMovie(id);
   const likes = await getLikes(id);
-  const userLike = await getUserLike(id, userData._id)
-  
-  render(template(movie, likes, userLike), section);
+  if(userData){
+    const userLike = await getUserLike(id, userData._id);
+    render(template(movie, likes, userLike), section);
+  }else{
+    render(template(movie, likes), section);
+  }  
   ctx.showSection(section);
   ctx.updateNav();
   
