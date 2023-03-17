@@ -14,7 +14,7 @@ const template = (movies, context) => html `
         </div>
         <div class="card-footer">
             <a href="/movieInfo">
-                <button type="button" id = ${movie._id} @click = ${movieInfoPage(movie._id)} class="btn btn-info">Details</button>
+                <button type="button" id = ${movie._id} @click = ${movieInfoPage} class="btn btn-info">Details</button>
             </a>
         </div>
     </div>
@@ -36,7 +36,7 @@ export async function homePage(context){
     if(movies.length == 0){
         return
     }
-    render(template(movies, context), movieSection)
+    render(template(movies), movieSection)
 }
 
 
