@@ -26,4 +26,5 @@ async function onLogin(e){
     form.reset();
     ctx.updateNav();
     ctx.goTo('/');
+    
 }

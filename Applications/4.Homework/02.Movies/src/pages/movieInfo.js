@@ -6,9 +6,9 @@ import { editMoviePage } from './editMovie.js';
 
 const section = document.querySelector('#movie-example');
 section.innerHTML = '';
-const userData = JSON.parse(localStorage.getItem('userData'));
 
-const template = (movie, likes, userLike) => html `
+
+const template = (movie, likes, userLike, userData) => html `
         <div class="container">
           <div class="row bg-light text-dark">
             <h1>Movie title: ${movie.title}</h1>
@@ -39,18 +39,18 @@ const template = (movie, likes, userLike) => html `
 
 export async function movieInfoPage(event){
   event.preventDefault();
-  
+  const userData = JSON.parse(localStorage.getItem('userData'));
   const id = event.target.id;
   const movie = await getMovie(id);
   const likes = await getLikes(id);
-  if(userData){
-    const userLike = await getUserLike(id, userData._id);
-    render(template(movie, likes, userLike), section);
-  }else{
-    render(template(movie, likes), section);
-  }  
   ctx.showSection(section);
   ctx.updateNav();
+  if(userData){
+    const userLike = await getUserLike(id, userData._id);
+    render(template(movie, likes, userLike, userData), section);
+  }else{
+    render(template(movie, likes, userData), section);
+  }  
   
 }
 
@@ -67,9 +67,9 @@ async function like(e){
 async function del(e){
   e.preventDefault();
   const id = e.target.id;
-  const confirmation = confirm('Are you sure?');
-  if(confirmation){
+  //const confirmation = confirm('Are you sure?');
+  // if(!confirmation){
     await deleteMovie(id)
     ctx.goTo('/');
-  }
+  // }
 }

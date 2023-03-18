@@ -29,6 +29,7 @@ async function logoutFunc(){
 }
 
 const router = initialize(links);
+
 router.goTo('/')
 router.updateNav();
 
