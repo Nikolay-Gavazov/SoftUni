@@ -37,6 +37,6 @@ function search() {
       const result = searchTown(towns, text)
       text.value = '';
       const resultHTML = document.getElementById('result');
-      resultHTML.textContent = `${result.length} matches found`;
+      resultHTML.innerText = `${result.length} matches found`;
    }
 }

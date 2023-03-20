@@ -27,10 +27,8 @@ const template = (movie, likes, userLike, userData) => html `
               </p>
               ${!userData ? null : html `${movie._ownerId == userData._id ? html `<a id=${movie._id} class="btn btn-danger" @click = ${del} href="/delMovie">Delete</a>` : null}
               ${movie._ownerId == userData._id ? html `<a id=${movie._id} class="btn btn-warning" @click = ${editMoviePage} href="/editMovie">Edit</a>` : null}
-              ${(movie._ownerId != userData._id && userLike.length == 0) ? html `<a id=${movie._id} class="btn btn-primary" @click = ${like} href="/likeMovie">Like</a>` : null}`}
-              
-              ${likes > 0 ? html `<span class="enrolled-span">Liked ${likes}</span>` : null}
-              
+              ${(movie._ownerId != userData._id ) ? html `<a id=${movie._id} class="btn btn-primary" @click = ${like} href="/likeMovie">Like</a>` : null}
+              ${likes > 0 ? html `<span class="enrolled-span">Liked ${likes}</span>` : null}`}
             </div>
           </div>
         </div>
@@ -69,6 +67,7 @@ async function del(e){
   const id = e.target.id;
   //const confirmation = confirm('Are you sure?');
   // if(!confirmation){
+    
     await deleteMovie(id)
     ctx.goTo('/');
   // }

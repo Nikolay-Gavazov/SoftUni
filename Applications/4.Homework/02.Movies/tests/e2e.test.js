@@ -392,8 +392,8 @@ describe('E2E tests', function () {
         t.map((i) => i.value)
       );
 
-      expect(inputs[1]).to.equal(data.title);
-      expect(inputs[2]).to.equal(data.description);
+      expect(inputs[0]).to.equal(data.title);
+      expect(inputs[1]).to.equal(data.description);
     });
 
     it('delete makes correct API call for logged in user', async () => {

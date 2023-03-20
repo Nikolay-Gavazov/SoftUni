@@ -3,24 +3,24 @@ import { cats } from './catSeeder.js';
 
 const section = document.getElementById('allCats');
 
-const cardTemplate = (data) => html`
+const cardTemplate = (data)=> html`
     <li>
         <img src="./images/${data.imageLocation}.jpg" width="250" height="250" alt="Card image cap">
         <div class="info">
             <button class="showBtn" @click=${onclick}>Show status code</button>
             <div class="status" style="display: none" id="${data.id}">
-                <h4>Status Code: ${data.statusCode}</h4>
+                <h4>Status Code: 100</h4>
                 <p>${data.statusMessage}</p>
             </div>
         </div>
     </li>`
+
 
 const ultemplate = (data) => html`
 <ul>
     ${data.map(cat => cardTemplate(cat))}
 </ul>
 `
-
 const renderCats = (data) => {
     render(ultemplate(data), section)
 }
