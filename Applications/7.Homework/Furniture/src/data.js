@@ -10,17 +10,17 @@ const nav = {
 
 export async function register(email, password){
     const user = await post(nav.register, {email, password});
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('userData', JSON.stringify(user));
 }
 
 export async function login(email, password){
     const user = await post(nav.login, {email, password});
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('userData', JSON.stringify(user));
 }
 
 export async function logout(){
     get(nav.logout);
-    localStorage.removeItem('user');
+    localStorage.removeItem('userData');
 }
 
 export async function createFurniture(data){

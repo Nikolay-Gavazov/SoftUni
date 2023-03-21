@@ -1,5 +1,5 @@
-import { html } from "../../../node_modules/lit-html/lit-html.js";
-import { register } from "../Furniture/src/data.js";
+import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { register } from "../src/data.js";
 
 const registerTemplate = (onSubmit, error) => html`
     <div class="row space-top">
@@ -47,8 +47,11 @@ export async function registerPage(ctx){
 
         try {
             await register(email.value, password.value, rePass.value)
+            event.target.reset();
+            ctx.updateNav();
+            ctx.page.redirect('/');
         } catch (error) {
-            
+            ctx.render(registerTemplate(onSubmit, error.message))
         }
     }
 }
