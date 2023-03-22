@@ -3,6 +3,9 @@ import {render} from '../../../node_modules/lit-html/lit-html.js';
 import { layoutTemplate } from '../pages/layout.js';
 import { getUserData } from './util.js';
 import { homePage } from '../pages/home.js';
+import { loginPage } from '../pages/login.js';
+import { registerPage } from '../pages/register.js';
+import { logout } from './data/user.js';
 
 //TODO change root selector
 const root = document.querySelector('body');
@@ -10,6 +13,9 @@ const root = document.querySelector('body');
 page(decorateContext);
 page('/Applications/Template/index.html', homePage);
 page('/', homePage);
+page('/login', loginPage);
+page('/register', registerPage);
+page('/logout', logoutFunction);
 
 page.start();
 
@@ -23,4 +29,10 @@ function decorateContext(ctx, next){
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)
+}
+
+
+function logoutFunction(ctx){
+    logout();
+    ctx.page.redirect('/');
 }
