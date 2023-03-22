@@ -1,4 +1,4 @@
-import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { html } from "../node_modules/lit-html/lit-html.js";
 import { createFurniture } from "../src/data.js";
 const createTemplate = (onSubmit) => html`
     <div class="row space-top">

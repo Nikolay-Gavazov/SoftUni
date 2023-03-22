@@ -1,4 +1,4 @@
-import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { html } from "../node_modules/lit-html/lit-html.js";
 import { login } from "../src/data.js";
 
 const loginTemplate = (onSubmit, error) => html `

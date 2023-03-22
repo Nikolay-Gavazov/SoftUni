@@ -1,4 +1,4 @@
-import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { html } from "../node_modules/lit-html/lit-html.js";
 import { getFurnitureDetails, updateFurniture } from "../src/data.js";
 
 const editTemplate = (furniture, onSubmit) => html `

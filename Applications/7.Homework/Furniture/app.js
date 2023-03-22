@@ -1,6 +1,6 @@
-import { render } from "../../../node_modules/lit-html/lit-html.js"
+import { render } from "./node_modules/lit-html/lit-html.js"
 import { registerPage } from "./pages/register.js";
-import page from "../../../node_modules/page/page.mjs"
+import page from "./node_modules/page/page.mjs"
 import { createPage } from "./pages/create.js";
 import { myFurniturePage } from "./pages/myFurniture.js";
 import { homePage } from "./pages/home.js";
@@ -13,7 +13,7 @@ const div = document.querySelector('.container');
 document.getElementById('logoutBtn').addEventListener('click', logoutFunc);
 
 
-page('/Applications/7.Homework/Furniture/index.html', decorate, homePage)
+page('/index.html', decorate, homePage)
 page('/', decorate, homePage)
 page('/create', decorate, createPage)
 page('/my-furniture', decorate, myFurniturePage)
