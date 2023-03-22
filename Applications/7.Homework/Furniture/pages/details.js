@@ -23,7 +23,7 @@ const detailsTemplate = (furniture, onDelete) => html`
                 <p>Price: <span>${furniture.price}</span></p>
                 <p>Material: <span>${furniture.material}</span></p>
                 <div>
-                    ${furniture.isOwner && html`<a href='/edit/:id' class="btn btn-info">Edit</a>
+                    ${furniture.isOwner && html`<a href='/edit/${furniture._id}' class="btn btn-info">Edit</a>
                     <a @click = ${onDelete} href='javascript:void(0)' class="btn btn-red">Delete</a>`}
                 </div>
             </div>
