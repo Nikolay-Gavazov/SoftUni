@@ -100,7 +100,6 @@ export async function createPage(ctx){
         }else{
             image.className = 'form-control is-valid';
         }
-        console.log(year.value);
         const data = {
             make: make.value,
             model: model.value, 
