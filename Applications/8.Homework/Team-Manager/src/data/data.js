@@ -1,7 +1,8 @@
-import { delete_, get, post, put } from "./api";
+import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
-    allTeams: 'data/teams'
+    allTeams: 'data/teams',
+    getById: 'data/teams/'
 };
 
 
@@ -11,12 +12,12 @@ export async function getAll(){
 
 //TODO make the endpoints
 export async function getById(id){
-    return get(endpoints + id)
+    return get(endpoints.getById + id)
 }
 
 //TODO make the endpoints
 export async function create(data){
-    return post(endpoints , data)
+    return post(endpoints.allTeams, data)
 }
 
 //TODO make the endpoints

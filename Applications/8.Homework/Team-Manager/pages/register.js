@@ -2,7 +2,6 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { register } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
-//TODO Replace with actual view
 
 const registerTemplate = (onSubmit, error) => html`
 <section id="register">
@@ -26,7 +25,7 @@ const registerTemplate = (onSubmit, error) => html`
 
 export function registerPage(ctx){
     ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
+
     async function onSubmit({email, username, password, repass}, form){
         if(email == '' || password == '' || username == ''){
             ctx.render(registerTemplate(createSubmitHandler(onSubmit), 'All fields are required'));
@@ -47,6 +46,6 @@ export function registerPage(ctx){
         await register(email, username, password);
         form.reset();
         //TODO use redirect from requirements
-        ctx.page.redirect('/')
+        ctx.page.redirect('/myTeamsPage')
     }
 }

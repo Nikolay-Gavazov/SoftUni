@@ -23,9 +23,8 @@ const loginTemplate = (onSubmit, error) => html`
 
 export function loginPage(ctx){
     ctx.render(loginTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
     async function onSubmit({email, password}, form){
-        console.log('submit');
+
         if(email == '' || password == ''){
         ctx.render(loginTemplate(createSubmitHandler(onSubmit), 'All fields are required'));
         return

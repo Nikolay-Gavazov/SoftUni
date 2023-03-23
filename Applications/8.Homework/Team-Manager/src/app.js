@@ -6,6 +6,9 @@ import { homePage } from '../pages/home.js';
 import { loginPage } from '../pages/login.js';
 import { registerPage } from '../pages/register.js';
 import { logout } from './data/user.js';
+import { myTeamsPage } from '../pages/myTeams.js';
+import { createPage } from '../pages/create.js';
+import { detailsPage } from '../pages/details.js';
 
 //TODO change root selector
 const root = document.querySelector('#content');
@@ -16,6 +19,9 @@ page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);
+page('/myTeamsPage', myTeamsPage);
+page('/create', createPage);
+page('/details/:id', detailsPage);
 
 page.start();
 
@@ -25,7 +31,6 @@ function decorateContext(ctx, next){
     next();
 }
 
-//TODO Inject dependencies
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)
