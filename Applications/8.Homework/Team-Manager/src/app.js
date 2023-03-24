@@ -10,6 +10,7 @@ import { myTeamsPage } from '../pages/myTeams.js';
 import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { browsePage } from '../pages/browseTeams.js';
+import { editPage } from '../pages/edit.js';
 
 //TODO change root selector
 const root = document.querySelector('#content');
@@ -23,6 +24,7 @@ page('/logout', logoutFunction);
 page('/myTeamsPage', myTeamsPage);
 page('/create', createPage);
 page('/details/:id', detailsPage);
+page('/edit/:id', editPage);
 page('/browsePage', browsePage);
 
 page.start();

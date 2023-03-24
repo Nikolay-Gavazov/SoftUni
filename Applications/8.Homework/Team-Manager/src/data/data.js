@@ -24,7 +24,7 @@ export async function create(data){
 
 //TODO make the endpoints
 export async function update(id, data){
-    return put(endpoints + id, data)
+    return put(endpoints.getById + id, data)
 }
 
 //TODO make the endpoints

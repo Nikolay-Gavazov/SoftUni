@@ -29,7 +29,7 @@ const detailsTemplate = (team, approvedMembers,memberOfCurrentTeam,unApprovedMem
                             ${approvedMembers.length > 0 ? html`
                             ${approvedMembers.map(member => html`
                             <li>${member.user.username}${team._ownerId != member._ownerId ? html `
-                            ${user && team._ownerId == user._id ? html `<a href="javascript:void(0)" class="tm-control action">Remove from team</a>` : null}`
+                            ${user && team._ownerId == user._id ? html `<a href="javascript:void(0)" class="tm-control action" id=${member._id} @click = ${cancelRequest}>Remove from team</a>` : null}`
                              : null}</li>`)}`: null}
                         </ul>
                     </div>
