@@ -1,16 +1,17 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { getAll, getMembersByTeam } from "../src/data/data.js";
+import { getUserData } from "../src/util.js";
 
-const browseTemplate = (teams) => html`
+const browseTemplate = (teams, user) => html`
     <section id="browse">
 
 <article class="pad-med">
     <h1>Team Browser</h1>
 </article>
 
-<article class="layout narrow">
+${user ? html `<article class="layout narrow">
     <div class="pad-small"><a href="/create" class="action cta">Create Team</a></div>
-</article>
+</article>` : null}
 
 ${teams.map(team => html`
 <article class="layout">
@@ -29,11 +30,12 @@ ${teams.map(team => html`
 
 export async function browsePage(ctx){
     const teams = await getAll();
-
+    const user = getUserData()
     for(const el of teams){
-        const members = await getMembersByTeam(el._id);
-        el.members = members.length;
+        let member = await getMembersByTeam(el._id);
+        member = member.filter(el => el.status == 'member');
+        el.members = member.length;
     };
 
-    ctx.render(browseTemplate(teams))
+    ctx.render(browseTemplate(teams, user))
 }

@@ -51,3 +51,7 @@ export async function sendRequest(data){
 export async function removeRequest(id){
     return delete_(endpoints.getMemberById + id)
 }
+
+export async function approvingMember(id, data){
+    return put(endpoints.getMemberById + id, data)
+}

@@ -1,5 +1,5 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { create } from "../src/data/data.js";
+import { approvingMember, create, sendRequest } from "../src/data/data.js";
 import { createSubmitHandler } from "../src/util.js";
 
 const createTemplate = (onSubmit, error) => html`
@@ -40,7 +40,8 @@ export function createPage(ctx){
             description
         }
         const team = await create(data);
-        console.log(team);
+        const responce = await sendRequest({'teamId': team._id, 'status': 'member'});
+        approvingMember(responce._id, {'status': 'member'})
         form.reset();
         ctx.page.redirect(`/details/${team._id}`)
     }

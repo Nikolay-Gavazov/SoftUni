@@ -43,8 +43,9 @@ export async function myTeamsPage(ctx){
     const myTeam = teams.filter(el => el._ownerId == user._id);
 
     for(const el of myTeam){
-        const members = await getMembersByTeam(el._id);
-        el.members = members.length;
+        let member = await getMembersByTeam(el._id);
+        member = member.filter(el => el.status == 'member');
+        el.members = member.length;
     };
 
     ctx.render(myTeamsTemplate(myTeam))
