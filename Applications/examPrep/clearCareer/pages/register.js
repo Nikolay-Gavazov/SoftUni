@@ -1,32 +1,36 @@
-import { html } from "../../../node_modules/lit-html/lit-html.js";
+import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { register } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
-//TODO Replace with actual view
 
 const registerTemplate = (onSubmit) => html`
-<h1>Register Page</h1>
-<form @submit = ${onSubmit}>
-    <label>Email: <input type="text" name="email"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <label>Repeat Password: <input type="text" name="rePass"></label>
-    <button>Register</button>
-    </form>
+<section id="register">
+    <div class="form">
+        <h2>Register</h2>
+        <form class="login-form" @submit=${onSubmit}>
+            <input type="text" name="email" id="register-email" placeholder="email" />
+            <input type="password" name="password" id="register-password" placeholder="password" />
+            <input type="password" name="re-password" id="repeat-password" placeholder="repeat password" />
+            <button type="submit">register</button>
+            <p class="message">Already registered? <a href="/login">Login</a></p>
+        </form>
+    </div>
+</section>
 `;
 
-export function registerPage(ctx){
+export function registerPage(ctx) {
     ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
-    async function onSubmit({email, password, rePass}, form){
-        if(email == '' || password == ''){
+    
+    async function onSubmit({ email, password, "re-password": rePass }, form) {
+        if (email == '' || password == '') {
             return alert('All fields are required')
         }
-        if(password != rePass){
+        if (password != rePass) {
             return alert('Password don\'t match')
         }
         await register(email, password);
         form.reset();
-        //TODO use redirect from requirements
-        ctx.page.redirect('/')
+
+        ctx.page.redirect('/catalog')
     }
 }

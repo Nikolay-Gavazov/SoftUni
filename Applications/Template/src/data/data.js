@@ -1,4 +1,4 @@
-import { delete_, get, post, put } from "./api";
+import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
     //TODO....

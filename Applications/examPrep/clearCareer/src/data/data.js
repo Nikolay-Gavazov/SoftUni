@@ -1,22 +1,24 @@
-import { delete_, get, post, put } from "./api";
+import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
-    //TODO....
+    allOffers: 'data/offers?sortBy=_createdOn%20desc',
+    allOffersCreate: 'data/offers',
+    offerById: 'data/offers/'
 };
 
-//TODO make the endpoints
+
 export async function getAll(){
-    return get(endpoints)
+    return get(endpoints.allOffers)
 }
 
 //TODO make the endpoints
 export async function getById(id){
-    return get(endpoints + id)
+    return get(endpoints.offerById + id)
 }
 
-//TODO make the endpoints
+
 export async function create(data){
-    return post(endpoints , data)
+    return post(endpoints.allOffersCreate, data)
 }
 
 //TODO make the endpoints
