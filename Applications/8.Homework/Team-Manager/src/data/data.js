@@ -41,5 +41,13 @@ export async function getMembersByTeam(teamId){
 }
 
 export async function getCurrentMember(userId){
-    return get(`data/members?where=_ownerId%3D%22${userId}%22%20AND%20status%3D%22member%22&load=team%3DteamId%3Ateams `)
+    return get(`data/members?where=_ownerId%3D%22${userId}%22`)
+}
+
+export async function sendRequest(data){
+    return post(endpoints.getMembers, data)
+}
+
+export async function removeRequest(id){
+    return delete_(endpoints.getMemberById + id)
 }

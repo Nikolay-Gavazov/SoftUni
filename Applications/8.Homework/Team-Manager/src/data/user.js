@@ -14,8 +14,8 @@ export async function login(email, password){
     const result = await post(endpoints.login, {email, password});
     setUserData(result);
 }
-export async function register(email, password){
-    const result = await post(endpoints.register, {email, password});
+export async function register(email, username, password){
+    const result = await post(endpoints.register, {email, username, password});
     setUserData(result);
 }
 

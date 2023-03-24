@@ -1,6 +1,6 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { register } from "../src/data/user.js";
-import { createSubmitHandler } from "../src/util.js";
+import { createSubmitHandler, setUserData } from "../src/util.js";
 
 
 const registerTemplate = (onSubmit, error) => html`
@@ -43,7 +43,8 @@ export function registerPage(ctx){
             ctx.render(registerTemplate(createSubmitHandler(onSubmit), 'Password don\'t match'));
             return
         }
-        await register(email, username, password);
+       await register(email, username, password)
+
         form.reset();
         //TODO use redirect from requirements
         ctx.page.redirect('/myTeamsPage')

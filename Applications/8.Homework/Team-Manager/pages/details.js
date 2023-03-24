@@ -1,5 +1,5 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { getById, getCurrentMember, getMembersByTeam } from "../src/data/data.js";
+import { getById, getCurrentMember, getMembersByTeam, removeRequest, sendRequest } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
 
@@ -12,12 +12,14 @@ const detailsTemplate = (team, members, user, memberOfCurrentTeam, leaveTeam, ca
                         <p>${team.description}</p>
                         <span class="details">${members.length}</span>
                         <div>
-                            ${team.isOwner ? html`<a href="/edit/${team._id}" class="action">Edit team</a>` : 
-                            html` ${memberOfCurrentTeam.length > 0 ? html`
-                            ${memberOfCurrentTeam.status == 'member' ? html `
-                            <a href="javascript:void(0)" class="action invert" id = ${memberOfCurrentTeam._ownerId} @click = ${leaveTeam}>Leave team</a>` :
-                            html`Membership pending. <a href="javascript:void(0)" id = ${memberOfCurrentTeam._ownerId} @click = ${cancelRequest}>Cancel request</a>`}` : 
-                            html`<a href="javascript:void(0)" class="action" @click = ${joinTeam}>Join team</a>`}`}
+                           ${user ? html`
+                           ${team.isOwner ? html`<a href="/edit/${team._id}" class="action">Edit team</a>` : 
+                            html`${memberOfCurrentTeam.length == 0 ? html`
+                            <a href="javascript:void(0)" class="action" @click = ${joinTeam}>Join team</a>` :
+                            html`${memberOfCurrentTeam[0].status == 'member' ? html `
+                            <a href="javascript:void(0)" class="action invert" id = ${memberOfCurrentTeam[0]._id} @click = ${leaveTeam}>Leave team</a>` :
+                            html`Membership pending. <a href="javascript:void(0)" id = ${memberOfCurrentTeam[0]._id} @click = ${cancelRequest}>Cancel request</a>`}`}`}
+                           ` : null}
                             
                         </div>
                     </div>
@@ -27,8 +29,9 @@ const detailsTemplate = (team, members, user, memberOfCurrentTeam, leaveTeam, ca
                             ${members.length > 0 ? html`
                             ${members.map(member => html`
                             <li>${member.user.username}${team._ownerId != member._ownerId ? html `
-                            <a href="javascript:void(0)" class="tm-control action">Remove from team</a>` : null}</li>`)}
-                            ` : null}
+                            ${user && team._ownerId == user._id ? html `
+                            <a href="javascript:void(0)" class="tm-control action">Remove from team</a>` : null}`
+                             : null}</li>`)}`: null}
                         </ul>
                     </div>
                     <div class="pad-large">
@@ -45,6 +48,7 @@ const detailsTemplate = (team, members, user, memberOfCurrentTeam, leaveTeam, ca
 `;
 
 export async function detailsPage(ctx){
+
     const id = ctx.params.id;
     const team = await getById(id);
     const members = await getMembersByTeam(id);
@@ -52,7 +56,7 @@ export async function detailsPage(ctx){
     const userMembership = await getCurrentMember(user._id)
     const memberOfCurrentTeam = userMembership.filter(el=>el.teamId == team._id);
     team.isOwner = team._ownerId == user._id;
-
+    console.log(Object.values(memberOfCurrentTeam));
     ctx.render(detailsTemplate(team, members, user, memberOfCurrentTeam, leaveTeam, cancelRequest, joinTeam))
 
     async function leaveTeam(e){
@@ -64,12 +68,14 @@ export async function detailsPage(ctx){
     async function cancelRequest(e){
         e.preventDefault()
         const id = e.target.id;
-        console.log(id);
+        removeRequest(id);
+        ctx.page.redirect(`/details/${team._id}`)
     }
 
     async function joinTeam(e){
         e.preventDefault();
-        console.log('join');
+        sendRequest({'teamId': team._id});
+        ctx.page.redirect(`/details/${team._id}`)
     }
 }
 
