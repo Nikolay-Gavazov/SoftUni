@@ -1,0 +1,32 @@
+import { html } from "../../../node_modules/lit-html/lit-html.js";
+import { register } from "../src/data/user.js";
+import { createSubmitHandler } from "../src/util.js";
+
+//TODO Replace with actual view
+
+const registerTemplate = (onSubmit) => html`
+<h1>Register Page</h1>
+<form @submit = ${onSubmit}>
+    <label>Email: <input type="text" name="email"></label>
+    <label>Password: <input type="text" name="password"></label>
+    <label>Repeat Password: <input type="text" name="rePass"></label>
+    <button>Register</button>
+    </form>
+`;
+
+export function registerPage(ctx){
+    ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
+    //TODO change user object
+    async function onSubmit({email, password, rePass}, form){
+        if(email == '' || password == ''){
+            return alert('All fields are required')
+        }
+        if(password != rePass){
+            return alert('Password don\'t match')
+        }
+        await register(email, password);
+        form.reset();
+        //TODO use redirect from requirements
+        ctx.page.redirect('/')
+    }
+}
