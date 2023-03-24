@@ -1,5 +1,5 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { getAll } from "../src/data/data.js";
+import { getAll, getMembers, getMembersByTeam } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
 //TODO Replace with actual view
@@ -27,7 +27,7 @@ ${myTeam.map(team => html`
     <div class="tm-preview">
         <h2>${team.name}</h2>
         <p>${team.description}</p>
-        <span class="details">3 Members</span>
+        <span class="details">${team.members}</span>
         <div><a href="/details/${team._id}" class="action">See details</a></div>
     </div>
 </article>
@@ -41,8 +41,11 @@ export async function myTeamsPage(ctx){
     const teams = await getAll();
     const user = getUserData();
     const myTeam = teams.filter(el => el._ownerId == user._id);
-//TODO membersCount
-    console.log(myTeam);
-    ctx.teamDetails = myTeam;
+
+    for(const el of myTeam){
+        const members = await getMembersByTeam(el._id);
+        el.members = members.length;
+    };
+
     ctx.render(myTeamsTemplate(myTeam))
 }

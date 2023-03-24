@@ -2,7 +2,9 @@ import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
     allTeams: 'data/teams',
-    getById: 'data/teams/'
+    getById: 'data/teams/',
+    getMembers: 'data/members',
+    getMemberById: 'data/members/'
 };
 
 
@@ -28,4 +30,16 @@ export async function update(id, data){
 //TODO make the endpoints
 export async function del(id){
     delete_(endpoints + id)
+}
+
+export async function getMembers(){
+    return get(endpoints.getMembers);
+}
+
+export async function getMembersByTeam(teamId){
+    return get(`data/members?where=teamId%3D%22${teamId}%22&load=user%3D_ownerId%3Ausers`)
+}
+
+export async function getCurrentMember(userId){
+    return get(`data/members?where=_ownerId%3D%22${userId}%22%20AND%20status%3D%22member%22&load=team%3DteamId%3Ateams `)
 }

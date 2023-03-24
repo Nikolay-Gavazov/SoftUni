@@ -6,7 +6,7 @@ export const layoutTemplate = (userData, content) => html`
 <header id="titlebar" class="layout">
     <a href="/" class="site-logo">Team Manager</a>
 <nav>
-    <a href="/teamsPage" class="action">Browse Teams</a>
+    <a href="/browsePage" class="action">Browse Teams</a>
     ${userData ? html`
     <a href="/myTeamsPage" class="action">My Teams</a>
     <a href="/logout" class="action">Logout</a>` : html`
