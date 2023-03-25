@@ -21,9 +21,9 @@ export async function create(data){
     return post(endpoints.allOffersCreate, data)
 }
 
-//TODO make the endpoints
+
 export async function update(id, data){
-    return put(endpoints + id, data)
+    return put(endpoints.offerById + id, data)
 }
 
 //TODO make the endpoints

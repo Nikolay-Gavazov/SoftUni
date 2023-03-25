@@ -3,47 +3,37 @@ import { getById } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
 
-//TODO Replace with actual view
-
-const detailsTemplate = (offer, userData) => html`
+const detailsTemplate = (offer, userData, deleteOffer, apply) => html`
 <section id="details">
     <div id="details-wrapper">
-        <img id="details-img" src="./images/example2.png" alt="example1" />
-        <p id="details-title">Senior Frontend Software Engineer</p>
+        <img id="details-img" src="${offer.imageUrl}" alt="example1" />
+        <p id="details-title">${offer.title}</p>
         <p id="details-category">
-            Category: <span id="categories">IT, Developer, WEB</span>
+            Category: <span id="categories">${offer.category}</span>
         </p>
         <p id="details-salary">
-            Salary: <span id="salary-number">7000</span>
+            Salary: <span id="salary-number">${offer.salary}</span>
         </p>
         <div id="info-wrapper">
             <div id="details-description">
                 <h4>Description</h4>
-                <span>We are looking for programmers with a keen eye for design for
-                    the position of front end developer. Front end developers are
-                    responsible for ensuring the alignment of web design and user
-                    experience requirements, optimizing web pages for maximum
-                    efficiency, and maintaining brand consistency across all web
-                    pages, among other duties.</span>
+                <span>${offer.description}</span>
             </div>
             <div id="details-requirements">
                 <h4>Requirements</h4>
-                <span>Degree in computer science or related field. Understanding of
-                    key design principles. Proficiency in HTML, CSS, JavaScript.
-                    Experience with responsive and adaptive design. Good
-                    problem-solving skills. Excellent verbal communication skills.
-                    Good interpersonal skills.</span>
+                <span>${offer.requirements}</span>
             </div>
         </div>
         <p>Applications: <strong id="applications">1</strong></p>
 
-        <!--Edit and Delete are only for creator-->
         <div id="action-buttons">
-            <a href="" id="edit-btn">Edit</a>
-            <a href="" id="delete-btn">Delete</a>
+           ${offer.isOwner ? html `
+            <a href="/edit/${offer._id}" id="edit-btn">Edit</a>
+            <a href="javascript:void(0)" id="delete-btn" @click = ${deleteOffer}>Delete</a>` : null}
 
-            <!--Bonus - Only for logged-in users ( not authors )-->
-            <a href="" id="apply-btn">Apply</a>
+            ${!offer.isOwner && userData != null ? html`
+            <a href="javascript:void(0)" id="apply-btn" @click = ${apply}>Apply</a>` : null}
+            
         </div>
     </div>
 </section>
@@ -51,8 +41,20 @@ const detailsTemplate = (offer, userData) => html`
 
 export async function detailsPage(ctx) {
     const id = ctx.params.id;
-    console.log(id);
+
     const offer = await getById(id);
     const userData = getUserData()
-    ctx.render(detailsTemplate(offer, userData))
+    offer.isOwner = offer._ownerId == userData._id;
+
+    ctx.render(detailsTemplate(offer, userData, deleteOffer, apply))
+
+
+
+    async function deleteOffer(e){
+        e.preventDefault()
+    }
+
+    async function apply(e){
+        e.preventDefault()
+    }
 }
