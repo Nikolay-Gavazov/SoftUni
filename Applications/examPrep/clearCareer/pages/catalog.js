@@ -7,7 +7,7 @@ import { getUserData } from "../src/util.js";
 const catalogTemplate = (offers) => html`
 <section id="dashboard">
           <h2>Job Offers</h2>
-            ${offers ? html`
+            ${offers.length > 0 ? html`
             ${offers.map(offer => html `
             <div class="offer">
             <img src="${offer.imageUrl}" alt="example1" />

@@ -1,7 +1,7 @@
 const { chromium } = require("playwright-chromium");
 const { expect } = require("chai");
 
-const host = "http://127.0.0.1:5500/Applications/examPrep/clearCareer/index.html"; // Application host (NOT service host - that can be anything)
+const host = "http://127.0.0.1:5501/Applications/examPrep/clearCareer/index.html"; // Application host (NOT service host - that can be anything)
 const interval = 600;
 const DEBUG = true;
 const slowMo = 500;

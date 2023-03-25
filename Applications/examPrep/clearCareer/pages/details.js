@@ -31,7 +31,7 @@ const detailsTemplate = (offer, userData, deleteOffer, apply, applications, user
             <a href="/edit/${offer._id}" id="edit-btn">Edit</a>
             <a href="javascript:void(0)" id="delete-btn" @click = ${deleteOffer}>Delete</a>` : null}
 
-            ${!offer.isOwner && !userData && userApply == 0 ? html`
+            ${!offer.isOwner && userData && userApply == 0 ? html`
             <a href="javascript:void(0)" id="apply-btn" @click = ${apply}>Apply</a>` : null}
         </div>
     </div>
@@ -51,8 +51,11 @@ export async function detailsPage(ctx) {
 
     async function deleteOffer(e){
         e.preventDefault()
-        del(id);
-        ctx.page.redirect('/catalog')
+        const confirmation = confirm('Are you sure?')
+        if(confirmation){
+            del(id);
+            ctx.page.redirect('/catalog')
+        }
     }
 
     async function apply(e){
