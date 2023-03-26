@@ -1,5 +1,6 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { getById } from "../src/data/data.js";
+import { getById, update } from "../src/data/data.js";
+import { createSubmitHandler } from "../src/util.js";
 
 
 
@@ -48,10 +49,20 @@ const editTemplate = (book, onSubmit) => html`
 export async function editPage(ctx) {
     const id = ctx.params.id;
     const book = await getById(id);
-    ctx.render(editTemplate(book ,onSubmit))
+    ctx.render(editTemplate(book ,createSubmitHandler(onSubmit)))
 
 
-    async function onSubmit(e){
-        e.preventDefault();
+    async function onSubmit({title, description, imageUrl, type}, form){
+        if(!title || !description || !imageUrl || !type){
+            return alert('All fields are required!');
+
+        }
+        await update(id, {title, description, imageUrl, type})
+
+            form.reset();
+
+            ctx.page.redirect(`/details/${book._id}`)
+        
+        
     }
 }

@@ -11,7 +11,7 @@ export const layoutTemplate = (userData, content) => html`
                 <a class="button" href="/login">Login</a>
                 <a class="button" href="/register">Register</a>
             </div>
-            ` : html`,
+            ` : html`
             <div id="user">
                 <span>Welcome, ${userData.email}</span>
                 <a class="button" href="/myBooks">My Books</a>
