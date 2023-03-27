@@ -3,11 +3,11 @@ import { checkLike, del, getById, getLike, likeBook } from "../src/data/data.js"
 import { getUserData } from "../src/util.js";
 
 
-const detailsTemplate = (book, userData, likes, userLike, deleteBook, like) => html`
+const detailsTemplate = (book, likes, deleteBook, like, userData, userLike) => html`
 <section id="details-page" class="details">
     <div class="book-information">
         <h3>${book.title}</h3>
-        <p class="type">${book.type}</p>
+        <p class="type">Type: ${book.type}</p>
         <p class="img"><img src="${book.imageUrl}"></p>
         <div class="actions">
             ${book.isOwner ? html `
@@ -37,11 +37,14 @@ export async function detailsPage(ctx) {
     const userData = getUserData();
     const book = await getById(id);
     const likes = await getLike(book._id);
+   if(userData){
     const userLike = await checkLike(book._id, userData._id)
     book.isOwner = book._ownerId == userData._id;
+    ctx.render(detailsTemplate(book, likes, deleteBook, like, userData, userLike))
+    }else{  
+       ctx.render(detailsTemplate(book, likes, deleteBook, like,))
 
-    ctx.render(detailsTemplate(book, userData, likes, userLike, deleteBook, like))
-
+   }
 
 
     async function deleteBook(e){

@@ -9,6 +9,7 @@ import { logout } from './data/user.js';
 import { addBookPage } from '../pages/addBook.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
+import { myBooksPage } from '../pages/myBooks.js';
 
 const root = document.getElementById('container');
 
@@ -21,6 +22,7 @@ page('/logout', logoutFunction);
 page('/addBook', addBookPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
+page('/myBooks', myBooksPage);
 
 page.start();
 
