@@ -30,7 +30,7 @@ export function registerPage(ctx) {
         }
         await register(email, password);
         form.reset();
-        //TODO use redirect from requirements
-        ctx.page.redirect('/')
+
+        ctx.page.redirect('/catalog')
     }
 }

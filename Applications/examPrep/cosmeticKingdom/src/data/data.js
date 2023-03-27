@@ -1,12 +1,12 @@
 import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
-    //TODO....
+    sorted: 'data/products?sortBy=_createdOn%20desc'
 };
 
-//TODO make the endpoints
+
 export async function getAll(){
-    return get(endpoints)
+    return get(endpoints.sorted)
 }
 
 //TODO make the endpoints

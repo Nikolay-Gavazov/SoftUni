@@ -6,6 +6,7 @@ import { homePage } from '../pages/home.js';
 import { loginPage } from '../pages/login.js';
 import { registerPage } from '../pages/register.js';
 import { logout } from './data/user.js';
+import { catalogPage } from '../pages/catalog.js';
 
 //TODO change root selector
 const root = document.getElementById('wrapper');
@@ -16,7 +17,7 @@ page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);
-
+page('/catalog', catalogPage);
 page.start();
 
 function decorateContext(ctx, next){
