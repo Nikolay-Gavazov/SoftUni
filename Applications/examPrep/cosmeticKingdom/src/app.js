@@ -7,6 +7,9 @@ import { loginPage } from '../pages/login.js';
 import { registerPage } from '../pages/register.js';
 import { logout } from './data/user.js';
 import { catalogPage } from '../pages/catalog.js';
+import { createPage } from '../pages/create.js';
+import { detailsPage } from '../pages/details.js';
+import { editPage } from '../pages/edit.js';
 
 //TODO change root selector
 const root = document.getElementById('wrapper');
@@ -18,6 +21,9 @@ page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);
 page('/catalog', catalogPage);
+page('/create', createPage);
+page('/details/:id', detailsPage);
+page('/edit/:id', editPage);
 page.start();
 
 function decorateContext(ctx, next){

@@ -1,9 +1,9 @@
 const { chromium } = require("playwright-chromium");
 const { expect } = require("chai");
 
-const host = "http://localhost:3000"; // Application host (NOT service host - that can be anything)
+const host = "http://127.0.0.1:5501/Applications/examPrep/cosmeticKingdom/index.html"; // Application host (NOT service host - that can be anything)
 const interval = 600;
-const DEBUG = false;
+const DEBUG = true;
 const slowMo = 500;
 
 const mockData = require("./mock-data.json");
@@ -689,7 +689,7 @@ describe("E2E tests", function () {
       expect(await page.isVisible("#buy-btn")).to.be.false;
     });
 
-    it("Buy button should be hidden(not visible) after a click on it [ 2.5 Points ]", async () => {
+    it.only("Buy button should be hidden(not visible) after a click on it [ 2.5 Points ]", async () => {
       // Login user
       const user = mockData.users[0];
       const data = mockData.catalog[2];
