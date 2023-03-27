@@ -1,4 +1,4 @@
-import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { html } from "../node_modules/lit-html/lit-html.js";
 import { create } from "../src/data/data.js";
 import { createSubmitHandler } from "../src/util.js";
 

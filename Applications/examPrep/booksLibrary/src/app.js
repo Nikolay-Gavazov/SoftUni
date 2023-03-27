@@ -1,5 +1,5 @@
-import page from '../../../../node_modules/page/page.mjs';
-import {render} from '../../../../node_modules/lit-html/lit-html.js';
+import page from '../node_modules/page/page.mjs';
+import {render} from '../node_modules/lit-html/lit-html.js';
 import { layoutTemplate } from '../pages/layout.js';
 import { getUserData } from './util.js';
 import { homePage } from '../pages/home.js';
@@ -32,7 +32,6 @@ function decorateContext(ctx, next){
     next();
 }
 
-//TODO Inject dependencies
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)

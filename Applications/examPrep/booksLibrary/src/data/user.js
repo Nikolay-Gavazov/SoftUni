@@ -1,4 +1,3 @@
-//TODO Change user Object
 
 import { clearUserData, setUserData } from "../util.js";
 import { get, post } from "./api.js";

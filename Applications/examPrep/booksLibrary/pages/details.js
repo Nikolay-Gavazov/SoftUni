@@ -1,9 +1,9 @@
-import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { html } from "../node_modules/lit-html/lit-html.js";
 import { checkLike, del, getById, getLike, likeBook } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
 
-const detailsTemplate = (book, likes, deleteBook, like, userData, userLike) => html`
+const detailsTemplate = (book, likes, deleteBook, like, userLike) => html`
 <section id="details-page" class="details">
     <div class="book-information">
         <h3>${book.title}</h3>
@@ -13,15 +13,14 @@ const detailsTemplate = (book, likes, deleteBook, like, userData, userLike) => h
             ${book.isOwner ? html `
             <a class="button" href="/edit/${book._id}">Edit</a>
             <a class="button" href="javascript:void(0)" @click = ${deleteBook}>Delete</a>
-            ` : null}
-
-            ${!book.isOwner && userData && userLike == 0 ? html `
+            ` : html `
+            ${userLike == 0 ? html `
             <a class="button" href="javascript:void(0)" @click = ${like}>Like</a>
             ` : null}
-
+            `}
             <div class="likes">
                 <img class="hearts" src="/images/heart.png">
-                <span id="total-likes">${likes}</span>
+                <span id="total-likes">Likes: ${likes}</span>
             </div>
         </div>
     </div>
@@ -40,10 +39,10 @@ export async function detailsPage(ctx) {
    if(userData){
     const userLike = await checkLike(book._id, userData._id)
     book.isOwner = book._ownerId == userData._id;
-    ctx.render(detailsTemplate(book, likes, deleteBook, like, userData, userLike))
+    
+    ctx.render(detailsTemplate(book, likes, deleteBook, like, userLike))
     }else{  
        ctx.render(detailsTemplate(book, likes, deleteBook, like,))
-
    }
 
 
@@ -59,6 +58,6 @@ export async function detailsPage(ctx) {
     async function like(e){
         e.preventDefault()
         likeBook(book._id);
-        ctx.page.redirect(`/details/${book._id}`)
+        ctx.page.redirect(`/details/${id}`)
     }
 }
