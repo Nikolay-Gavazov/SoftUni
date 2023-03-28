@@ -19,8 +19,8 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
             <p><strong>Sales:</strong><span id="details-sales">${album.sales}</span></p>
           </div>
           <div id="likes">Likes: <span id="likes-count">${likes}</span></div>
-
-          <div id="action-buttons">
+        ${album.hasUser ? html `
+        <div id="action-buttons">
             ${album.isOwner ? html `
             <a href="/edit/${album._id}" id="edit-btn">Edit</a>
             <a href="javascript:void(0)" id="delete-btn" @click = ${deleteAlbum}>Delete</a>
@@ -29,6 +29,8 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
             <a href="javascript:void(0)" id="like-btn" @click = ${likeAlbum}>Like</a>
             ` : null}
           </div>
+        ` : null}
+          
         </div>
       </section>
 `;
@@ -36,10 +38,12 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
 export async function detailsPage(ctx) {
     const id = ctx.params.id;
     const album = await getById(id);
+    album.hasUser = false;
     const likes = await getLikes(album._id);
     const userData = getUserData();
 
     if(userData){
+        album.hasUser = true;
         album.isOwner = album._ownerId == userData._id;
         const userLike = await getUserLike(album._id, userData._id);
         ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum, userLike))
