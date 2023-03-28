@@ -60,7 +60,7 @@ export async function detailsPage(ctx) {
 
     async function likeAlbum(e){
         e.preventDefault();
-        like({albumId: id});
+        like(album._id);
         ctx.page.redirect(`/details/${id}`)
     }
 }

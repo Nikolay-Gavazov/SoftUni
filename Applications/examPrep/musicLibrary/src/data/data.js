@@ -36,7 +36,7 @@ export async function getLikes(albumId){
 }
 
 export async function like(albumId){
-    return post(endpoints.likes, albumId)
+    return post(endpoints.likes, {albumId})
 }
 
 export async function getUserLike(albumId, userId){
