@@ -15,7 +15,7 @@ import { editPage } from '../pages/edit.js';
 const root = document.querySelector('body');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
+page('/Applications/examPrep/petCare/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);

@@ -13,7 +13,7 @@ export async function detailsPage(ctx) {
     const userData = getUserData();
     //TODO
     if(userData){
-        album.isOwner = album._ownerId == userData._id;
+        element.isOwner = element._ownerId == userData._id;
         const userLike = await getUserLike(id, userData._id);
         ctx.render(detailsTemplate(element, likes, deleteItem, likeItem, userLike))
     }else{

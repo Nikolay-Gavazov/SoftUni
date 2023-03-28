@@ -25,4 +25,5 @@ export const layoutTemplate = (userData, content) => html`
 <main id="content">
     ${content}
 </main>
+<footer>Pet Care 2022©</footer>
 `;
