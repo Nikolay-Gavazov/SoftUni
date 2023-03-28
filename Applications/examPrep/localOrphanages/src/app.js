@@ -2,7 +2,6 @@ import page from '../../../../node_modules/page/page.mjs';
 import {render} from '../../../../node_modules/lit-html/lit-html.js';
 import { layoutTemplate } from '../pages/layout.js';
 import { getUserData } from './util.js';
-import { homePage } from '../pages/home.js';
 import { loginPage } from '../pages/login.js';
 import { registerPage } from '../pages/register.js';
 import { logout } from './data/user.js';
@@ -15,7 +14,7 @@ import { myPostsPage } from '../pages/myPosts.js';
 const root = document.getElementById('box');
 
 page(decorateContext);
-page('/Applications/Template/index.html', catalogPage);
+page('/Applications/examPrep/localOrphanages/index.html', catalogPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);

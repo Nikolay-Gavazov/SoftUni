@@ -46,9 +46,9 @@ export async function detailsPage(ctx) {
     if(userData){
         element.isOwner = element._ownerId == userData._id;
         const userDonation = await getUserDonation(id, userData._id);
-        ctx.render(detailsTemplate(album, donations, deleteItem, donate, userDonation))
+        ctx.render(detailsTemplate(element, donations, deleteItem, donate, userDonation))
     }else{
-        ctx.render(detailsTemplate(album, donations, deleteItem, donate))
+        ctx.render(detailsTemplate(element, donations, deleteItem, donate))
     }
 
     async function deleteItem(e){
