@@ -4,11 +4,11 @@ import { createSubmitHandler } from "../src/util.js";
 
 
 const editTemplate = (album, onSubmit) => html`
-<section id="edit">
+ <section id="edit">
         <div class="form">
           <h2>Edit Album</h2>
           <form class="edit-form" @submit = ${onSubmit}>
-            <input type="text" name="singer" .value = ${album.singer} id="album-singer" placeholder="Singer/Band" />
+            <input type="text" name="singer".value = ${album.singer} id="album-singer" placeholder="Singer/Band" />
             <input type="text" name="album" .value = ${album.album} id="album-album" placeholder="Album" />
             <input type="text" name="imageUrl" .value = ${album.imageUrl} id="album-img" placeholder="Image url" />
             <input type="text" name="release" .value = ${album.release} id="album-release" placeholder="Release date" />

@@ -20,7 +20,6 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
           </div>
           <div id="likes">Likes: <span id="likes-count">${likes}</span></div>
 
-          
           <div id="action-buttons">
             ${album.isOwner ? html `
             <a href="/edit/${album._id}" id="edit-btn">Edit</a>
@@ -36,13 +35,13 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
 
 export async function detailsPage(ctx) {
     const id = ctx.params.id;
-    const likes = await getLikes(id);
     const album = await getById(id);
+    const likes = await getLikes(album._id);
     const userData = getUserData();
 
     if(userData){
         album.isOwner = album._ownerId == userData._id;
-        const userLike = await getUserLike(id, userData._id);
+        const userLike = await getUserLike(album._id, userData._id);
         ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum, userLike))
     }else{
         ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum))
