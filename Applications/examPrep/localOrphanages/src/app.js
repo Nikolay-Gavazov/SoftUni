@@ -10,13 +10,12 @@ import { catalogPage } from '../pages/catalog.js';
 import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
+import { myPostsPage } from '../pages/myPosts.js';
 
-//TODO change root selector
 const root = document.getElementById('box');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
-page('/', homePage);
+page('/Applications/Template/index.html', catalogPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);
@@ -24,6 +23,7 @@ page('/catalog', catalogPage);
 page('/create', createPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
+page('/myPosts', myPostsPage);
 
 page.start();
 
@@ -33,7 +33,6 @@ function decorateContext(ctx, next){
     next();
 }
 
-//TODO Inject dependencies
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)
@@ -42,5 +41,5 @@ function renderView(content){
 //TODO redirect
 function logoutFunction(ctx){
     logout();
-    ctx.page.redirect('/');
+    ctx.page.redirect('/catalog');
 }

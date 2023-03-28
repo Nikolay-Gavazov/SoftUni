@@ -40,15 +40,13 @@ const createTemplate = (onSubmit) => html`
 export function createPage(ctx) {
     ctx.render(createTemplate(createSubmitHandler(onSubmit)));
 
-
-    //TODO
     async function onSubmit({ title, description, imageUrl, address, phone,}, form) {
         if (title == '' || description == '' || imageUrl == '' || address == '' || phone == '') {
             return alert('All fields are required')
         }
         await create({ title, description, imageUrl, address, phone});
         form.reset();
-        //TODO
+
         ctx.page.redirect('/catalog')
     }
 }

@@ -3,7 +3,7 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 export const layoutTemplate = (userData, content) => html`
 <header>
 
-            <h1><a href="/">Orphelp</a></h1>
+            <h1><a href="/catalog">Orphelp</a></h1>
 
             <nav>
                 <a href="/catalog">Dashboard</a>
