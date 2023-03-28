@@ -5,7 +5,6 @@ import { getUserData } from "../src/util.js";
 const detailsTemplate = (element, donations, deleteItem, donate, userDonation) => html`
 <section id="details-page">
             <h1 class="title">Post Details</h1>
-
             <div id="container">
                 <div id="details">
                     <div class="image-wrapper">
@@ -13,7 +12,7 @@ const detailsTemplate = (element, donations, deleteItem, donate, userDonation) =
                     </div>
                     <div class="info">
                         <h2 class="title post-title">${element.title}</h2>
-                        <p class="post-description">${element.description}</p>
+                        <p class="post-description">Description: ${element.description}</p>
                         <p class="post-address">Address: ${element.address}</p>
                         <p class="post-number">Phone number: ${element.phone}</p>
                         <p class="donate-Item">Donate Materials: ${donations}</p>
