@@ -15,9 +15,9 @@ export async function detailsPage(ctx) {
     if(userData){
         album.isOwner = album._ownerId == userData._id;
         const userLike = await getUserLike(id, userData._id);
-        ctx.render(detailsTemplate(album, likes, deleteItem, likeItem, userLike))
+        ctx.render(detailsTemplate(element, likes, deleteItem, likeItem, userLike))
     }else{
-        ctx.render(detailsTemplate(album, likes, deleteItem, likeItem))
+        ctx.render(detailsTemplate(element, likes, deleteItem, likeItem))
     }
 
     async function deleteItem(e){
@@ -31,7 +31,7 @@ export async function detailsPage(ctx) {
     //TODO
     // async function likeItem(e){
     //     e.preventDefault();
-    //     like(album._id);
+    //     like(element._id);
     //     ctx.page.redirect(`/details/${id}`)
     // }
 }

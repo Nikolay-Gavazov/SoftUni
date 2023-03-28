@@ -9,5 +9,5 @@ const catalogTemplate = (elements) => html`
 
 export async function catalogPage(ctx) {
     const elements = await getAll();
-    ctx.render(catalogTemplate(albums))
+    ctx.render(catalogTemplate(elements))
 }

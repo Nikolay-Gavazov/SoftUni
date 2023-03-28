@@ -33,7 +33,7 @@ export function loginPage(ctx) {
         }
         await login(email, password);
         form.reset();
-        //TODO use redirect from requirements
+
         ctx.page.redirect('/')
     }
 }
