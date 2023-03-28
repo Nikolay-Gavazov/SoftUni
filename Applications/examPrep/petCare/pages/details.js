@@ -23,7 +23,7 @@ const detailsTemplate = (element, donates, deleteItem, donate) => html`
                 <a href="javascript:void(0)" class="remove" @click = ${deleteItem}>Delete</a>
                 ` : html `
                 ${element.userDonation == 0 ? html `
-                <a href="javascript:void(0)" class="donate"@click = ${donate}>Donate</a>
+                <a href="javascript:void(0)" class="donate" @click = ${donate}>Donate</a>
                 ` : null}
                 `}
             </div>
