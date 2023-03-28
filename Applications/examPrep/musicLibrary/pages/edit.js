@@ -4,10 +4,10 @@ import { createSubmitHandler } from "../src/util.js";
 
 
 const editTemplate = (album, onSubmit) => html`
-<section id="create">
+<section id="edit">
         <div class="form">
-          <h2>Add Album</h2>
-          <form class="create-form" @submit = ${onSubmit}>
+          <h2>Edit Album</h2>
+          <form class="edit-form" @submit = ${onSubmit}>
             <input type="text" name="singer" .value = ${album.singer} id="album-singer" placeholder="Singer/Band" />
             <input type="text" name="album" .value = ${album.album} id="album-album" placeholder="Album" />
             <input type="text" name="imageUrl" .value = ${album.imageUrl} id="album-img" placeholder="Image url" />
@@ -31,7 +31,7 @@ export async function editPage(ctx){
         if(singer == '' || album == '' || imageUrl == '' || release == '' || label == '' || sales == ''){
             return alert('All fields are required')
         }
-        
+
         await update(id, {singer, album, imageUrl, release, label, sales});
         form.reset();
 
