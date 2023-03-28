@@ -5,8 +5,8 @@ import { getAll } from "../src/data/data.js";
 const catalogTemplate = (shoes) => html`
 <section id="dashboard">
     <h2>Collectibles</h2>
-    ${shoes.length > 0 ? html `
     <ul class="card-wrapper">
+    ${shoes.length > 0 ? html `
         ${shoes.map(shoe => html `
         <li class="card">
             <img src="${shoe.imageUrl}" alt="travis" />
@@ -20,10 +20,10 @@ const catalogTemplate = (shoes) => html`
             <a class="details-btn" href="/details/${shoe._id}">Details</a>
         </li>
         `)}
+        ` : html `
+        <h2>There are no items added yet.</h2>
+        `}    
     </ul>
-    ` : html `
-    <h2>There are no items added yet.</h2>
-    `}    
 </section>
 `;
 

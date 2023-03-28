@@ -15,6 +15,7 @@ const root = document.getElementById('box');
 
 page(decorateContext);
 page('/Applications/examPrep/localOrphanages/index.html', catalogPage);
+page('/', catalogPage);
 page('/login', loginPage);
 page('/register', registerPage);
 page('/logout', logoutFunction);

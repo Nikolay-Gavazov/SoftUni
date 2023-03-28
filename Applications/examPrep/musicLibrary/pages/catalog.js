@@ -4,8 +4,8 @@ import { getAll } from "../src/data/data.js";
 const catalogTemplate = (albums) => html`
 <section id="dashboard">
     <h2>Albums</h2>
-    ${albums.length > 0 ? html `
     <ul class="card-wrapper">
+    ${albums.length > 0 ? html `
         ${albums.map(album => html `
         <li class="card">
             <img src="${album.imageUrl}" alt="travis"/>
@@ -19,10 +19,10 @@ const catalogTemplate = (albums) => html`
             <a class="details-btn" href="/details/${album._id}">Details</a>
         </li>
         `)}
+        ` : html`
+        <h2>There are no albums added yet.</h2>
+        `}
     </ul>
-    ` : html`
-    <h2>There are no albums added yet.</h2>
-    `}
 </section>
 `;
 
