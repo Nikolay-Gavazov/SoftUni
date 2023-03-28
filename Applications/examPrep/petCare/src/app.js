@@ -11,7 +11,7 @@ import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
 
-//TODO change root selector
+
 const root = document.querySelector('body');
 
 page(decorateContext);

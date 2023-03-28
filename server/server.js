@@ -1333,36 +1333,45 @@
         }
     };
     var seedData = {
-        posts: {
+        pets: {
             "ff436770-76c5-40e2-b231-77409eda7a61": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Clothes",
-                "description": "We need warm winter clothes. The sizes are for children from 2 to 14 years old. If possible, made from cotton materials, no superficial ones.",
-                "address": "ul. Hristo Smirnenski 18, Sofia",
-                "phone": "0888222345",
-                "imageUrl": "/images/clothes.jpeg",
-                "_createdOn": 1617194128618,
+                "name": "Max",
+                "breed": "Shiba Inu",
+                "age": "2 years",
+                "weight": "5kg",
+                "image": "../images/Shiba-Inu.png",
+                "_createdOn": 1617194128618
             },
             "1840a313-225c-416a-817a-9954d4609f7c": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Toys",
-                "description": "We need toys for babies under 1.5 years old, as well as some children books and puzzles for kids under 6 years old",
-                "address": "ul. Tsanko Tsankov 5",
-                "phone": "0878787878",
-                "imageUrl": "/images/toys.jpeg",
-                "_createdOn": 1617194210928,
+                "name": "Athena",
+                "breed": "American Curl",
+                "age": "1 year",
+                "weight": "3kg",
+                "image": "../images/cat2.jpg",
+                "_createdOn": 1617194210928
             },
             "126777f5-3277-42ad-b874-76d043b069cb": {
                 "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "title": "School Supplies",
-                "description": "We need 20 striped notebooks and 10 squared notebooks, 5 backpacks, and other school supplies, such as pens, pencils, rulers, erasers, etc.",
-                "address": "ul. Manioka Tapioka 25",
-                "phone": "0888264871",
-                "imageUrl": "/images/school-supplies.jpeg",
-                "_createdOn": 1617194295474,
+                "name": "Apollo",
+                "breed": "Pug",
+                "age": "3 years",
+                "weight": "4kg",
+                "image": "../images/dog2.jpg",
+                "_createdOn": 1617194295474
+            },
+            "136777f5-3277-42ad-b874-76d043b069cb": {
+                "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
+                "name": "Chibi",
+                "breed": "Teddy guinea pig",
+                "age": "1 years",
+                "weight": "1kg",
+                "image": "../images/guinea-pig.jpg",
+                "_createdOn": 1617194295480
             }
         },
-        donations: {}
+        donation: {}
     };
     var rules$1 = {
         users: {
