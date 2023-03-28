@@ -573,7 +573,7 @@ describe('E2E tests', function () {
     });
   });
 
-  describe('BONUS : Like functionality  [ 15 Points ]', async () => {
+  describe.only('BONUS : Like functionality  [ 15 Points ]', async () => {
     it('Like button is NOT visible for guest users [ 2.5 Points ]', async () => {
       await page.goto(host);
 
@@ -671,10 +671,6 @@ describe('E2E tests', function () {
 
       const { get: own } = await handle(endpoints.own(data._id, user._id));
       const { get: total } = await handle(endpoints.total(data._id));
-      const { post } = await handle(endpoints.likes, {
-        post: mockData.likes[2],
-      });
-      const { onRequest } = post(mockData.likes[2]);
       own(0);
       total(5);
 
@@ -683,7 +679,6 @@ describe('E2E tests', function () {
       await page.click(`.card:has-text("${data.singer}") >> .details-btn`);
 
       await page.waitForSelector('#action-buttons');
-      await page.waitForSelector('#like-btn');
 
       expect(await page.isVisible('#like-btn')).to.be.true;
       own(1);

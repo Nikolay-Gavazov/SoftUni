@@ -2,7 +2,7 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { del, getById, getLikes, getUserLike, like } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
-const detailsTemplate = (album, likes, deleteAlbum, likeAlbum) => html`
+const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html`
 <section id="details">
         <div id="details-wrapper">
           <p id="details-title">Album Details</p>
@@ -26,7 +26,7 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum) => html`
             <a href="/edit/${album._id}" id="edit-btn">Edit</a>
             <a href="javascript:void(0)" id="delete-btn" @click = ${deleteAlbum}>Delete</a>
             ` : html `
-            ${album.userLike == 0 ? html `
+            ${userLike == 0 ? html `
             <a href="javascript:void(0)" id="like-btn" @click = ${likeAlbum}>Like</a>
             ` : null}
             `}
@@ -43,9 +43,11 @@ export async function detailsPage(ctx) {
 
     if(userData){
         album.isOwner = album._ownerId == userData._id;
-        album.userLike = await getUserLike(id, userData._id);
+        const userLike = await getUserLike(id, userData._id);
+        ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum, userLike))
+    }else{
+        ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum))
     }
-    ctx.render(detailsTemplate(album, likes, deleteAlbum, likeAlbum))
 
     async function deleteAlbum(e){
         e.preventDefault();
