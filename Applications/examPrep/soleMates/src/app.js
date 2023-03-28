@@ -10,6 +10,7 @@ import { catalogPage } from '../pages/catalog.js';
 import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
+import { searchPage } from '../pages/search.js';
 
 const root = document.getElementById('wrapper');
 
@@ -23,6 +24,7 @@ page('/catalog', catalogPage);
 page('/create', createPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
+page('/search', searchPage);
 
 page.start();
 

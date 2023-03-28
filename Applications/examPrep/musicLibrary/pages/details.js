@@ -25,11 +25,10 @@ const detailsTemplate = (album, likes, deleteAlbum, likeAlbum, userLike) => html
             ${album.isOwner ? html `
             <a href="/edit/${album._id}" id="edit-btn">Edit</a>
             <a href="javascript:void(0)" id="delete-btn" @click = ${deleteAlbum}>Delete</a>
-            ` : html `
-            ${userLike == 0 ? html `
+            ` : null}
+            ${!album.isOwner && userLike == 0 ? html `
             <a href="javascript:void(0)" id="like-btn" @click = ${likeAlbum}>Like</a>
             ` : null}
-            `}
           </div>
         </div>
       </section>

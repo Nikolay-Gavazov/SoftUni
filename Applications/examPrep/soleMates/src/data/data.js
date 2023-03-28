@@ -30,3 +30,7 @@ export async function update(id, data){
 export async function del(id){
     delete_(endpoints.getById + id)
 }
+
+export async function searchItem(query){
+   return get(`data/shoes?where=brand%20LIKE%20%22${query}%22`)
+}

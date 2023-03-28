@@ -1,39 +1,71 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
+import { searchItem } from "../src/data/data.js";
+import { createSubmitHandler, getUserData } from "../src/util.js";
 
 
-const searchTemplate = () => html`
+const searchTemplate = (onSubmit,) => html`
 <section id="search">
     <h2>Search by Brand</h2>
 
-    <form class="search-wrapper cf">
+    <form class="search-wrapper cf" @submit = ${onSubmit}>
         <input id="#search-input" type="text" name="search" placeholder="Search here..." required />
         <button type="submit">Search</button>
     </form>
 
     <h3>Results:</h3>
+</section>
+`;
+const resultTemplate = (results, onSubmit, userData) => html `
+<section id="search">
+    <h2>Search by Brand</h2>
 
+    <form class="search-wrapper cf" @submit = ${onSubmit}>
+        <input id="#search-input" type="text" name="search" placeholder="Search here..." required />
+        <button type="submit">Search</button>
+    </form>
+
+    <h3>Results:</h3>
     <div id="search-container">
+        ${results.length > 0 ? html `
         <ul class="card-wrapper">
-            <!-- Display a li with information about every post (if any)-->
+            ${results.map(el => html `
             <li class="card">
-                <img src="./images/travis.jpg" alt="travis" />
+                <img src="${el.imageUrl}" alt="travis" />
                 <p>
-                    <strong>Brand: </strong><span class="brand">Air Jordan</span>
+                    <strong>Brand: </strong><span class="brand">${el.brand}</span>
                 </p>
                 <p>
-                    <strong>Model: </strong><span class="model">1 Retro High TRAVIS SCOTT</span>
+                    <strong>Model: </strong><span class="model">${el.model}</span>
                 </p>
-                <p><strong>Value:</strong><span class="value">2000</span>$</p>
-                <a class="details-btn" href="">Details</a>
+                <p><strong>Value:</strong><span class="value">${el.value}</span>$</p>
+                ${userData ? html `
+                <a class="details-btn" href="/details/${el._id}">Details</a>
+                ` : null}
+                
             </li>
+            `)}
         </ul>
-
-        <!-- Display an h2 if there are no posts -->
-        <!-- <h2>There are no results found.</h2> -->
+        ` : html `
+        <h2>There are no results found.</h2>
+        `}
     </div>
 </section>
+    
 `;
 
 export function searchPage(ctx) {
-    ctx.render(searchTemplate())
+    const userData = getUserData();
+    ctx.render(searchTemplate((createSubmitHandler(onSubmit))));
+    
+
+    async function onSubmit({search}, form){
+        
+        if(search == ''){
+            return alert('Search field is required!')
+        }
+        const results = await searchItem(search);
+
+        ctx.render(resultTemplate(results, (createSubmitHandler(onSubmit)), userData));
+        
+    }
 }
