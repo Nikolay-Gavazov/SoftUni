@@ -573,7 +573,7 @@ describe('E2E tests', function () {
     });
   });
 
-  describe.only('BONUS : Like functionality  [ 15 Points ]', async () => {
+  describe('BONUS : Like functionality  [ 15 Points ]', async () => {
     it('Like button is NOT visible for guest users [ 2.5 Points ]', async () => {
       await page.goto(host);
 
@@ -652,7 +652,7 @@ describe('E2E tests', function () {
       expect(await page.isVisible('#like-btn')).to.be.false;
     });
 
-    it('Like button should be hidden(not visible) after a click on it [ 5 Points ]', async () => {
+    it.only('Like button should be hidden(not visible) after a click on it [ 5 Points ]', async () => {
       // Login user
       const data = mockData.catalog[2];
       const user = mockData.users[0];
@@ -684,7 +684,7 @@ describe('E2E tests', function () {
       own(1);
       total(6);
 
-      const [request] = await Promise.all([onRequest, page.click('#like-btn')]);
+      const [request] = await Promise.all([onRequest(), page.click('#like-btn')]);
 
       await page.waitForTimeout(interval);
 
