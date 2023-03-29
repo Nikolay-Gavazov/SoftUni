@@ -1,8 +1,9 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { getAll } from "../src/data/data.js";
+import { getUserData } from "../src/util.js";
 
 
-const catalogTemplate = (albums) => html`
+const catalogTemplate = (albums, userData) => html`
  <section id="catalogPage">
             <h1>All Albums</h1>
             ${albums.length > 0 ? html `
@@ -17,9 +18,11 @@ const catalogTemplate = (albums) => html`
                         <p class="price">Price: $${album.price}</p>
                         <p class="date">Release Date: ${album.releaseDate}</p>
                     </div>
+                    ${userData ? html `
                     <div class="btn-group">
                         <a href="/details/${album._id}" id="details">Details</a>
                     </div>
+                    ` : null}
                 </div>
             </div>
             `)}
@@ -30,6 +33,7 @@ const catalogTemplate = (albums) => html`
 `;
 
 export async function catalogPage(ctx) {
+    const userData = getUserData()
     const albums = await getAll();
-    ctx.render(catalogTemplate(albums))
+    ctx.render(catalogTemplate(albums, userData))
 }

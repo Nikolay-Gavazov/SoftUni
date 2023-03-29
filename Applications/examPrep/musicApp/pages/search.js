@@ -1,5 +1,6 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { search } from "../src/data/data.js";
+import { getUserData } from "../src/util.js";
 
 const searchTemplate = (searchAlbum) => html`
 <section id="searchPage">
@@ -14,7 +15,7 @@ const searchTemplate = (searchAlbum) => html`
         </section>
 `;
 
-const resultTemplate = (searchAlbum, result) => html`
+const resultTemplate = (searchAlbum, result, userData) => html`
 <section id="searchPage">
             <h1>Search by Name</h1>
 
@@ -38,9 +39,12 @@ const resultTemplate = (searchAlbum, result) => html`
                             <p class="price">Price: $${el.price}</p>
                             <p class="date">Release Date: ${el.releaseDate}</p>
                         </div>
+                        ${userData ? html `
                         <div class="btn-group">
                             <a href="/details/${el._id}" id="details">Details</a>
                         </div>
+                        ` : null}
+                        
                     </div>
                 </div>
                 `)}
@@ -52,6 +56,7 @@ const resultTemplate = (searchAlbum, result) => html`
         </section>
 `;
 export function searchPage(ctx) {
+    const userData = getUserData()
     ctx.render(searchTemplate(searchAlbum))
 
 
@@ -59,6 +64,6 @@ export function searchPage(ctx) {
         e.preventDefault();
         const input = document.getElementById('search-input')
         const result = await search(input.value);
-        ctx.render(resultTemplate(searchAlbum, result))
+        ctx.render(resultTemplate(searchAlbum, result, userData))
     }
 }
