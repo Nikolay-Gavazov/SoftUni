@@ -1333,36 +1333,41 @@
         }
     };
     var seedData = {
-        theaters: {
+        albums: {
             "ff436770-76c5-40e2-b231-77409eda7a61": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Pretty Woman - The Musical",
-                "date": "March 13, 2018",
-                "author": "J. F. Lawton, Garry Marshall",
-                "imageUrl": "/images/Pretty-Woman.jpg",
-                "description": "Pretty Woman: The Musical is a musical with music and lyrics by Bryan Adams and Jim Vallance, and a book by Garry Marshall and J. F. Lawton. The musical is based on the 1990 film of the same name written by Lawton and directed by Marshall.",
+                "name": "In These Silent Days",
+                "artist": "Brandi Carlile",
+                "genre": "Low Country Sound Music",
+                "imgUrl": "/images/BrandiCarlile.png",
+                "price": "12.80",
+                "releaseDate": "October 1, 2021",
+                "description": "Upon release, In These Silent Days received positive reviews from critics. At Metacritic, which assigns a normalized rating out of 100 to reviews from mainstream critics, the album has an average score of 87 out of 100, which indicates 'universal acclaim'.",
                 "_createdOn": 1617194128618,
             },
             "1840a313-225c-416a-817a-9954d4609f7c": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
-                "title": "Moulin Rouge! - The Musical",
-                "date": "July 10, 2018",
-                "author": "Baz Luhrmann, Craig Pearce",
-                "imageUrl": "/images/Moulin-Rouge!-The-Musical.jpg",
-                "description": "The Musical is a jukebox musical with a book by John Logan. The musical is based on the 2001 film Moulin Rouge! directed by Baz Luhrmann and written by Luhrmann and Craig Pearce. The musical premiered on July 10, 2018, at the Emerson Colonial Theatre in Boston.",
+                "name": "Melodrama",
+                "artist": "Lorde",
+                "genre": "Pop Music",
+                "imgUrl": "/images/Lorde.jpg",
+                "price": "7.33",
+                "releaseDate": "June 16, 2017",
+                "description": "Melodrama is the second studio album by New Zealand singer-songwriter Lorde. It was released on 16 June 2017 by Lava and Republic Records and distributed through Universal.",
                 "_createdOn": 1617194210928,
             },
             "126777f5-3277-42ad-b874-76d043b069cb": {
                 "_ownerId": "847ec027-f659-4086-8032-5173e2f9c93a",
-                "title": "To Kill A Mockingbird",
-                "date": "December 13, 2018",
-                "author": "Aaron Sorkin, Fred Fordham",
-                "imageUrl": "/images/To-kill-a-mockingbird.jpg",
-                "description": "To Kill a Mockingbird is a 2018 play based on the 1960 novel of the same name by Harper Lee, adapted for the stage by Aaron Sorkin. It opened on Broadway at the Shubert Theatre on December 13, 2018. The play is set to transfer to London's West End at the Gielgud Theatre in March 2022.",
+                "name": "The Dark Side of the Moon",
+                "artist": "Pink Floyd",
+                "genre": "Rock Music",
+                "imgUrl": "/images/pinkFloyd.jpg",
+                "price": "28.75",
+                "releaseDate": "March 1, 1973",
+                "description": "The Dark Side of the Moon is the eighth studio album by the English rock band Pink Floyd, released on 1 March 1973 by Harvest Records.",
                 "_createdOn": 1617194295474,
             }
-        },
-        likes: {}
+        }
     };
     var rules$1 = {
         users: {
