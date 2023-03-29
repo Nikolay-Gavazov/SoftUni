@@ -10,10 +10,7 @@ const searchTemplate = (searching) => html`
             <button class="button-list" @click = ${searching}>Search</button>
         </div>
     
-        <h2>Results:</h2>
-        <div class="listings">
-    
-           
+        <h2>Results:</h2>   
     </section>
 `;
 
@@ -48,7 +45,7 @@ const resultTemplate = (data, searching) => html`
         </div>
         `)}
             ` : html `
-            <p class="no-cars"> No results.</p>
+            <p class="no-cars">No matching listings</p>
             `}
         </div>
     </section>
