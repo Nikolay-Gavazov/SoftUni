@@ -6,7 +6,6 @@ const myPageTemplate = (data) => html`
 <section id="my-listings">
     <h1>My car listings</h1>
     <div class="listings">
-
         ${data.length > 0 ? html `
         ${data.map(car => html `
         <div class="listing">

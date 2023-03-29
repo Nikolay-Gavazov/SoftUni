@@ -42,6 +42,12 @@ export function createPage(ctx) {
         if (brand == '' || model == '' || description == '' || year == '' || imageUrl == '' || price == '') {
             return alert('All fields are required')
         }
+        if(price < 1){
+            return alert('Price must be a positive Number!')
+        }
+        if(year < 1){
+            return alert('Year must be a positive Number!')
+        }
         await create({ brand, model, description, year, imageUrl, price });
         form.reset();
 
