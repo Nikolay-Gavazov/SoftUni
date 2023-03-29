@@ -1,8 +1,8 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { getAll, userEvents } from "../src/data/data.js";
+import { userEvents } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
-const profileTemplate = (events) => html`
+const profileTemplate = (events, userData) => html`
 
 <section id="profilePage">
     <div class="userInfo">

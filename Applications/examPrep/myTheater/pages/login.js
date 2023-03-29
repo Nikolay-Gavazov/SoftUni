@@ -4,7 +4,7 @@ import { createSubmitHandler } from "../src/util.js";
 
 const loginTemplate = (onSubmit) => html`
 <section id="loginaPage">
-    <form class="loginForm" >
+    <form class="loginForm" @submit=${onSubmit}>
         <h2>Login</h2>
         <div>
             <label for="email">Email:</label>

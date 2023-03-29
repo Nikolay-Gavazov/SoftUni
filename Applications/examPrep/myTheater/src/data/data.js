@@ -31,14 +31,14 @@ export async function del(id){
 }
 
 export async function like(theaterId){
-    return post(endpoints.like, theaterId)
+    return post(endpoints.like, {theaterId})
 }
 
 export async function getLikes(theaterId){
     return get(`data/likes?where=theaterId%3D%22${theaterId}%22&distinct=_ownerId&count`)
 }
 
-export async function userLike(userId, theaterId){
+export async function getUserLike(theaterId, userId){
     return get(`data/likes?where=theaterId%3D%22${theaterId}%22%20and%20_ownerId%3D%22${userId}%22&count`)
 }
 export async function userEvents(userId){

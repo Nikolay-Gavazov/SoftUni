@@ -1,8 +1,8 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { del, getById, getLikes, like, userLike } from "../src/data/data.js";
+import { del, getById, getLikes, like, getUserLike } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
-const detailsTemplate = (element, likes, deleteItem, likeItem) => html`
+const detailsTemplate = (element, likes, deleteItem, likeItem, userLike) => html`
 <section id="detailsPage">
             <div id="detailsBox">
                 <div class="detailsInfo">
@@ -18,14 +18,12 @@ const detailsTemplate = (element, likes, deleteItem, likeItem) => html`
                     <h4>Date: ${element.date}</h4>
                     <h4>Author: ${element.author}</h4>
                     <div class="buttons">
+                    ${userLike == 0 && !element.isOwner ? html `
+                    <a class="btn-like" href="javascript:void(0)" @click = ${likeItem}>Like</a>
+                        ` : null}
                         ${element.isOwner ? html `
                         <a class="btn-delete" href="javascript:void(0)" @click = ${deleteItem}>Delete</a>
-                        <a class="btn-edit" href="/edit/${element._id}">Edit</a>
-                        ` : html `
-                        ${element.userLike == 0 ? html `
-                        <a class="btn-like" href="javascript:void(0)" @click = ${likeItem}>Like</a>
-                        ` : null}
-                        `}
+                        <a class="btn-edit" href="/edit/${element._id}">Edit</a>` : null}
                     </div>
                     <p class="likes">Likes: ${likes}</p>
                 </div>
@@ -41,9 +39,12 @@ export async function detailsPage(ctx) {
 
     if(userData){
         element.isOwner = element._ownerId == userData._id;
-        element.userLike = await userLike(id, userData._id);
+        const userLike = await getUserLike(id, userData._id);
+        ctx.render(detailsTemplate(element, likes, deleteItem, likeItem, userLike))
+    }else{
+        ctx.render(detailsTemplate(element, likes, deleteItem, likeItem))
     }
-    ctx.render(detailsTemplate(element, likes, deleteItem, likeItem))
+    
 
     async function deleteItem(e){
         e.preventDefault();
