@@ -10,12 +10,13 @@ import { catalogPage } from '../pages/catalog.js';
 import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
+import { myPage } from '../pages/mypage.js';
+import { searchPage } from '../pages/search.js';
 
-//TODO change root selector
-const root = document.querySelector('body');
+const root = document.getElementById('container');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
+page('/Applications/examPrep/carsTube/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
@@ -24,6 +25,8 @@ page('/catalog', catalogPage);
 page('/create', createPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
+page('/mypage', myPage);
+page('/search', searchPage);
 
 page.start();
 

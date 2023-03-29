@@ -1,10 +1,16 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
 
-//TODO Replace with actual view
-
 const homeTemplate = () => html`
-<h1>Home Page</h1>
-<p>Welcome to our site</p>
+<section id="main">
+            <div id="welcome-container">
+                <h1>Welcome To Car Tube</h1>
+                <img class="hero" src="/images/car-png.webp" alt="carIntro">
+                <h2>To see all the listings click the link below:</h2>
+                <div>
+                    <a href="/catalog" class="button">Listings</a>
+                </div>
+            </div>
+        </section>
 `;
 
 export function homePage(ctx){
