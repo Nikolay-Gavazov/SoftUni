@@ -2,27 +2,38 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { login } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
-//TODO Replace with actual view
 
 const loginTemplate = (onSubmit) => html`
-<h1>Login Page</h1>
-<form @submit = ${onSubmit}>
-    <label>Email: <input type="text" name="email"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <button>Login</button>
-    </form>
+<section id="login-page" class="auth">
+            <form id="login" @submit = ${onSubmit}>
+
+                <div class="container">
+                    <div class="brand-logo"></div>
+                    <h1>Login</h1>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Sokka@gmail.com">
+
+                    <label for="login-pass">Password:</label>
+                    <input type="password" id="login-password" name="password">
+                    <input type="submit" class="btn submit" value="Login">
+                    <p class="field">
+                        <span>If you don't have profile click <a href="/register">here</a></span>
+                    </p>
+                </div>
+            </form>
+        </section>
 `;
 
 export function loginPage(ctx){
     ctx.render(loginTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
+
     async function onSubmit({email, password}, form){
         if(email == '' || password == ''){
             return alert('All fields are required')
         }
         await login(email, password);
         form.reset();
-        //TODO use redirect from requirements
+
         ctx.page.redirect('/')
     }
 }

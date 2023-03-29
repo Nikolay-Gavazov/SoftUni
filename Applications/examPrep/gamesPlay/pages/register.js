@@ -2,22 +2,37 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { register } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
-//TODO Replace with actual view
 
 const registerTemplate = (onSubmit) => html`
-<h1>Register Page</h1>
-<form @submit = ${onSubmit}>
-    <label>Email: <input type="text" name="email"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <label>Repeat Password: <input type="text" name="rePass"></label>
-    <button>Register</button>
-    </form>
+<section id="register-page" class="content auth">
+            <form id="register" @submit = ${onSubmit}>
+                <div class="container">
+                    <div class="brand-logo"></div>
+                    <h1>Register</h1>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="maria@email.com">
+
+                    <label for="pass">Password:</label>
+                    <input type="password" name="password" id="register-password">
+
+                    <label for="con-pass">Confirm Password:</label>
+                    <input type="password" name="confirm-password" id="confirm-password">
+
+                    <input class="btn submit" type="submit" value="Register">
+
+                    <p class="field">
+                        <span>If you already have profile click <a href="/login">here</a></span>
+                    </p>
+                </div>
+            </form>
+        </section>
 `;
 
 export function registerPage(ctx){
     ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
-    async function onSubmit({email, password, rePass}, form){
+
+    async function onSubmit({email, password, 'confirm-password': rePass}, form){
         if(email == '' || password == ''){
             return alert('All fields are required')
         }
@@ -26,7 +41,7 @@ export function registerPage(ctx){
         }
         await register(email, password);
         form.reset();
-        //TODO use redirect from requirements
+
         ctx.page.redirect('/')
     }
 }

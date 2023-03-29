@@ -1,30 +1,41 @@
 import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
-    //TODO....
+    sortByCategory: 'data/games?sortBy=_createdOn%20desc&distinct=category',
+    sortByDate: 'data/games?sortBy=_createdOn%20desc',
+    allGames: 'data/games',
+    gameById: 'data/games/',
+    comments: 'data/comments'
 };
 
-//TODO make the endpoints
 export async function getAll(){
-    return get(endpoints)
+    return get(endpoints.sortByDate)
 }
 
-//TODO make the endpoints
+export async function getAllHome(){
+    return get(endpoints.sortByCategory);
+}
+
 export async function getById(id){
-    return get(endpoints + id)
+    return get(endpoints.gameById + id)
 }
 
-//TODO make the endpoints
+
 export async function create(data){
-    return post(endpoints , data)
+    return post(endpoints.allGames , data)
 }
 
-//TODO make the endpoints
+
 export async function update(id, data){
-    return put(endpoints + id, data)
+    return put(endpoints.gameById + id, data)
 }
 
-//TODO make the endpoints
 export async function del(id){
-    delete_(endpoints + id)
+    delete_(endpoints.gameById + id)
 }
+
+export async function getComments(gameId){
+    return get(`data/comments?where=gameId%3D%22${gameId}%22`)
+}
+
+export async function makeComment(gameId, comment)
