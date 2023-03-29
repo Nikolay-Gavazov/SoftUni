@@ -34,10 +34,13 @@ export async function like(theaterId){
     return post(endpoints.like, theaterId)
 }
 
-export async function likes(theaterId){
+export async function getLikes(theaterId){
     return get(`data/likes?where=theaterId%3D%22${theaterId}%22&distinct=_ownerId&count`)
 }
 
 export async function userLike(userId, theaterId){
     return get(`data/likes?where=theaterId%3D%22${theaterId}%22%20and%20_ownerId%3D%22${userId}%22&count`)
 }
+export async function userEvents(userId){
+    return get(`data/theaters?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`)
+} 

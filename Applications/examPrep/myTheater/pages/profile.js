@@ -1,37 +1,39 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { getAll } from "../src/data/data.js";
+import { getAll, userEvents } from "../src/data/data.js";
+import { getUserData } from "../src/util.js";
 
-//TODO
+const profileTemplate = (events) => html`
 
-const profileTemplate = (elements) => html`
-<!--Profile Page-->
 <section id="profilePage">
-            <div class="userInfo">
-                <div class="avatar">
-                    <img src="./images/profilePic.png">
-                </div>
-                <h2>steven@abv.bg</h2>
+    <div class="userInfo">
+        <div class="avatar">
+            <img src="./images/profilePic.png">
+        </div>
+        <h2>${userData.email}</h2>
+    </div>
+    <div class="board">
+        ${events.length > 0 ? html`
+        ${events.map(event => html`
+        <div class="eventBoard">
+            <div class="event-info">
+                <img src="./images/Moulin-Rouge!-The-Musical.jpg">
+                <h2>${event.title}</h2>
+                <h6>${event.date}</h6>
+                <a href="/detailt/${event._id}" class="details-button">Details</a>
             </div>
-            <div class="board">
-                <!--If there are event-->
-                <div class="eventBoard">
-                    <div class="event-info">
-                        <img src="./images/Moulin-Rouge!-The-Musical.jpg">
-                        <h2>Moulin Rouge! - The Musical</h2>
-                        <h6>July 10, 2018</h6>
-                        <a href="#" class="details-button">Details</a>
-                    </div>
-                </div>
-
-                <!--If there are no event-->
-                <div class="no-events">
-                    <p>This user has no events yet!</p>
-                </div>
-            </div>
-        </section>
+        </div>
+        `)}
+        ` : html`
+        <div class="no-events">
+            <p>This user has no events yet!</p>
+        </div>
+        `}
+    </div>
+</section>
 `;
 
 export async function profilePage(ctx) {
-    const elements = await getAll();
-    ctx.render(profileTemplate(elements))
+    const userData = getUserData()
+    const events = await userEvents(userData._id);
+    ctx.render(profileTemplate(events, userData))
 }

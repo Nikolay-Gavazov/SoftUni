@@ -15,7 +15,7 @@ import { profilePage } from '../pages/profile.js';
 const root = document.getElementById('container');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
+page('/Applications/examPrep/myTheater/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);

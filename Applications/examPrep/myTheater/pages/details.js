@@ -1,5 +1,5 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { del, getById, getLikes, getUserLike, like } from "../src/data/data.js";
+import { del, getById, getLikes, like, userLike } from "../src/data/data.js";
 import { getUserData } from "../src/util.js";
 
 const detailsTemplate = (element, likes, deleteItem, likeItem) => html`
@@ -41,7 +41,7 @@ export async function detailsPage(ctx) {
 
     if(userData){
         element.isOwner = element._ownerId == userData._id;
-        element.userLike = await getUserLike(id, userData._id);
+        element.userLike = await userLike(id, userData._id);
     }
     ctx.render(detailsTemplate(element, likes, deleteItem, likeItem))
 

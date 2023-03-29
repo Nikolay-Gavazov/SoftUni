@@ -42,7 +42,7 @@ const homeTemplate = (events) => html`
 </section>
 `;
 
-export function homePage(ctx) {
-    const events = getAll()
+export async function homePage(ctx) {
+    const events = await getAll()
     ctx.render(homeTemplate(events))
 }
