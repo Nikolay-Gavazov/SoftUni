@@ -25,7 +25,7 @@ const registerTemplate = (onSubmit) => html`
                     </div>
                     <input type="submit" class="registerbtn button" value="Register">
                     <div class="container signin">
-                        <p>Already have an account?<a href="#">Sign in</a>.</p>
+                        <p>Already have an account?<a href="/login">Sign in</a>.</p>
                     </div>
                 </div>
             </form>
@@ -35,8 +35,8 @@ const registerTemplate = (onSubmit) => html`
 export function registerPage(ctx){
     ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
 
-    async function onSubmit({email, password, repeatPass}, form){
-        if(email == '' || password == ''){
+    async function onSubmit({email, password, repeatPass, username, gender}, form){
+        if(email == '' || password == '' || username == '' || !gender){
             return alert('All fields are required')
         }
         if(password != repeatPass){

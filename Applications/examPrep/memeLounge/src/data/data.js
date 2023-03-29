@@ -26,7 +26,10 @@ export async function update(id, data){
     return put(endpoints.memeById + id, data)
 }
 
-
 export async function del(id){
     delete_(endpoints.memeById + id)
+}
+
+export async function getMyMemes(userId){
+    return get(`data/memes?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`)
 }
