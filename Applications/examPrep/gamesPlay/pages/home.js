@@ -36,7 +36,8 @@ const homeTemplate = (games) => html`
 </section>
 `;
 
-export function homePage(ctx) {
-    const games = getAllHome();
+export async function homePage(ctx) {
+    const games = await getAllHome();
+ 
     ctx.render(homeTemplate(games))
 }

@@ -2,7 +2,7 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { del, getById, getComments, makeComment} from "../src/data/data.js";
 import { createSubmitHandler, getUserData } from "../src/util.js";
 
-const detailsTemplate = (element,deleteItem,comments, onSubmit) => html`
+const detailsTemplate = (element,deleteItem,comments,userData, onSubmit) => html`
 <section id="game-details">
             <h1>Game Details</h1>
             <div class="info-section">
@@ -24,7 +24,7 @@ const detailsTemplate = (element,deleteItem,comments, onSubmit) => html`
                     <ul>
                         ${comments.map(comment => html `
                         <li class="comment">
-                            <p>${comment}</p>
+                            <p>Content: ${comment.comment}</p>
                         </li>
                         `)}  
                     </ul>
@@ -56,13 +56,14 @@ const detailsTemplate = (element,deleteItem,comments, onSubmit) => html`
 export async function detailsPage(ctx) {
     const id = ctx.params.id;
     const comments = await getComments(id);
+    console.log(comments);
     const element = await getById(id);
     const userData = getUserData();
  
     if(userData){
         element.isOwner = element._ownerId == userData._id;
     }
-        ctx.render(detailsTemplate(element, deleteItem,comments, createSubmitHandler(onSubmit)))
+        ctx.render(detailsTemplate(element, deleteItem,comments,userData, createSubmitHandler(onSubmit)))
 
 
     async function deleteItem(e){
