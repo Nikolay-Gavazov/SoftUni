@@ -1,30 +1,32 @@
 import { delete_, get, post, put } from "./api.js";
 
 const endpoints = {
-    //TODO....
+    allMemes: 'data/memes',
+    memeById: 'data/memes/',
+    sorted: 'data/memes?sortBy=_createdOn%20desc',
 };
 
-//TODO make the endpoints
+
 export async function getAll(){
-    return get(endpoints)
+    return get(endpoints.sorted)
 }
 
-//TODO make the endpoints
+
 export async function getById(id){
-    return get(endpoints + id)
+    return get(endpoints.memeById + id)
 }
 
-//TODO make the endpoints
+
 export async function create(data){
-    return post(endpoints , data)
+    return post(endpoints.allMemes , data)
 }
 
-//TODO make the endpoints
+
 export async function update(id, data){
-    return put(endpoints + id, data)
+    return put(endpoints.memeById + id, data)
 }
 
-//TODO make the endpoints
+
 export async function del(id){
-    delete_(endpoints + id)
+    delete_(endpoints.memeById + id)
 }

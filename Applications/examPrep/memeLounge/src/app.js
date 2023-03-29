@@ -11,11 +11,10 @@ import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
 
-//TODO change root selector
-const root = document.querySelector('body');
+const root = document.getElementById('container');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
+page('/Applications/examPrep/memeLounge/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
@@ -33,7 +32,6 @@ function decorateContext(ctx, next){
     next();
 }
 
-//TODO Inject dependencies
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)

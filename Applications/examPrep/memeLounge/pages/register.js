@@ -5,28 +5,46 @@ import { createSubmitHandler } from "../src/util.js";
 //TODO Replace with actual view
 
 const registerTemplate = (onSubmit) => html`
-<h1>Register Page</h1>
-<form @submit = ${onSubmit}>
-    <label>Email: <input type="text" name="email"></label>
-    <label>Password: <input type="text" name="password"></label>
-    <label>Repeat Password: <input type="text" name="rePass"></label>
-    <button>Register</button>
-    </form>
+<section id="register">
+            <form id="register-form" @submit = ${onSubmit}a>
+                <div class="container">
+                    <h1>Register</h1>
+                    <label for="username">Username</label>
+                    <input id="username" type="text" placeholder="Enter Username" name="username">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" placeholder="Enter Email" name="email">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" placeholder="Enter Password" name="password">
+                    <label for="repeatPass">Repeat Password</label>
+                    <input id="repeatPass" type="password" placeholder="Repeat Password" name="repeatPass">
+                    <div class="gender">
+                        <input type="radio" name="gender" id="female" value="female">
+                        <label for="female">Female</label>
+                        <input type="radio" name="gender" id="male" value="male" checked>
+                        <label for="male">Male</label>
+                    </div>
+                    <input type="submit" class="registerbtn button" value="Register">
+                    <div class="container signin">
+                        <p>Already have an account?<a href="#">Sign in</a>.</p>
+                    </div>
+                </div>
+            </form>
+        </section>
 `;
 
 export function registerPage(ctx){
     ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
-    //TODO change user object
-    async function onSubmit({email, password, rePass}, form){
+
+    async function onSubmit({email, password, repeatPass}, form){
         if(email == '' || password == ''){
             return alert('All fields are required')
         }
-        if(password != rePass){
+        if(password != repeatPass){
             return alert('Password don\'t match')
         }
         await register(email, password);
         form.reset();
-        //TODO use redirect from requirements
-        ctx.page.redirect('/')
+
+        ctx.page.redirect('/catalog')
     }
 }
