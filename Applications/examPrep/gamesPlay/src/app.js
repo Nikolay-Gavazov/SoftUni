@@ -14,7 +14,7 @@ import { editPage } from '../pages/edit.js';
 const root = document.getElementById('box');
 
 page(decorateContext);
-page('/Applications/Template/index.html', homePage);
+page('/Applications/examPrep/gamesPlay/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);
@@ -32,7 +32,6 @@ function decorateContext(ctx, next){
     next();
 }
 
-//TODO Inject dependencies
 function renderView(content){
     const userData = getUserData()
     render(layoutTemplate(userData, content), root)

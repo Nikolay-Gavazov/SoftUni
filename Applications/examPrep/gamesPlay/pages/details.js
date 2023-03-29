@@ -1,8 +1,8 @@
 import { html } from "../../../../node_modules/lit-html/lit-html.js";
-import { del, getById} from "../src/data/data.js";
+import { del, getById, getComments, makeComment} from "../src/data/data.js";
 import { createSubmitHandler, getUserData } from "../src/util.js";
 
-const detailsTemplate = (element,deleteItem, onSubmit) => html`
+const detailsTemplate = (element,deleteItem,comments, onSubmit) => html`
 <section id="game-details">
             <h1>Game Details</h1>
             <div class="info-section">
@@ -18,20 +18,19 @@ const detailsTemplate = (element,deleteItem, onSubmit) => html`
                 ${element.summary}
                 </p>
 
-                <!-- Bonus ( for Guests and Users ) -->
                 <div class="details-comments">
                     <h2>Comments:</h2>
+                    ${comments.length > 0 ? html `
                     <ul>
-                        <!-- list all comments for current game (If any) -->
+                        ${comments.map(comment => html `
                         <li class="comment">
-                            <p>Content: I rate this one quite highly.</p>
+                            <p>${comment}</p>
                         </li>
-                        <li class="comment">
-                            <p>Content: The best game.</p>
-                        </li>
+                        `)}  
                     </ul>
-                    <!-- Display paragraph: If there are no games in the database -->
+                    ` : html `
                     <p class="no-comment">No comments.</p>
+                    `}
                 </div>
 
                 ${element.isOwner ? html `
@@ -56,14 +55,14 @@ const detailsTemplate = (element,deleteItem, onSubmit) => html`
 
 export async function detailsPage(ctx) {
     const id = ctx.params.id;
-
+    const comments = await getComments(id);
     const element = await getById(id);
     const userData = getUserData();
  
     if(userData){
         element.isOwner = element._ownerId == userData._id;
     }
-        ctx.render(detailsTemplate(element, deleteItem, createSubmitHandler(onSubmit)))
+        ctx.render(detailsTemplate(element, deleteItem,comments, createSubmitHandler(onSubmit)))
 
 
     async function deleteItem(e){
@@ -79,7 +78,7 @@ export async function detailsPage(ctx) {
         if(comment == ''){
             return alert('All fields are required')
         }
-        await create({title, category, maxLevel, imageUrl, summary});
+        await makeComment(id, comment);
         form.reset();
 
         ctx.page.redirect(`/details/${id}`)

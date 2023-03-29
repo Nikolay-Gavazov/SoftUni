@@ -38,4 +38,6 @@ export async function getComments(gameId){
     return get(`data/comments?where=gameId%3D%22${gameId}%22`)
 }
 
-export async function makeComment(gameId, comment)
+export async function makeComment(gameId, comment){
+    return post(endpoints.comments, {gameId, comment})
+}
