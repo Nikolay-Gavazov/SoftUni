@@ -1,4 +1,4 @@
-//TODO Change user Object
+
 
 import { clearUserData, setUserData } from "../util.js";
 import { get, post } from "./api.js";
@@ -14,7 +14,7 @@ export async function login(email, password){
     const result = await post(endpoints.login, {email, password});
     setUserData(result);
 }
-export async function register(email, password, username){
+export async function register(email, password, username, gender){
     const result = await post(endpoints.register, {email, password, username, gender});
     setUserData(result);
 }

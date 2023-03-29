@@ -2,11 +2,16 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { register } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
-//TODO Replace with actual view
-
-const registerTemplate = (onSubmit) => html`
+const registerTemplate = (error ,onSubmit) => html`
+${error.length > 0 ? html `
+ <section id="notifications">
+            <div id="errorBox" class="notification">
+                <span>${error}</span>
+            </div>
+        </section>
+` : null}
 <section id="register">
-            <form id="register-form" @submit = ${onSubmit}a>
+            <form id="register-form" @submit = ${onSubmit}>
                 <div class="container">
                     <h1>Register</h1>
                     <label for="username">Username</label>
@@ -33,16 +38,22 @@ const registerTemplate = (onSubmit) => html`
 `;
 
 export function registerPage(ctx){
-    ctx.render(registerTemplate(createSubmitHandler(onSubmit)));
+    let error = '';
+    ctx.render(registerTemplate(error, createSubmitHandler(onSubmit)));
 
     async function onSubmit({email, password, repeatPass, username, gender}, form){
-        if(email == '' || password == '' || username == '' || !gender){
-            return alert('All fields are required')
+        console.log(email, password, repeatPass, username, gender);
+        if(email == '' || password == '' || username == ''){
+            error = 'All fields are required';
+            ctx.render(registerTemplate(error, createSubmitHandler(onSubmit)));
+            return
         }
         if(password != repeatPass){
-            return alert('Password don\'t match')
+            error = 'Password don\'t match';
+            ctx.render(registerTemplate(error, createSubmitHandler(onSubmit)));
+            return
         }
-        await register(email, password);
+        await register(email, password, username, gender);
         form.reset();
 
         ctx.page.redirect('/catalog')

@@ -2,7 +2,14 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { getById, update } from "../src/data/data.js";
 import { createSubmitHandler } from "../src/util.js";
 
-const editTemplate = (element, onSubmit) => html`
+const editTemplate = (error, element, onSubmit) => html`
+${error.length > 0 ? html `
+ <section id="notifications">
+            <div id="errorBox" class="notification">
+                <span>${error}</span>
+            </div>
+        </section>
+` : null}
 <section id="edit-meme">
             <form id="edit-form" @submit = ${onSubmit}>
                 <h1>Edit Meme</h1>
@@ -21,14 +28,17 @@ const editTemplate = (element, onSubmit) => html`
 `;
 
 export async function editPage(ctx){
+    let error = '';
     const id = ctx.params.id;
     const element = await getById(id);
 
-    ctx.render(editTemplate(element, createSubmitHandler(onSubmit)));
+    ctx.render(editTemplate(error, element, createSubmitHandler(onSubmit)));
 
     async function onSubmit({title, description, imageUrl}, form){
         if(title == '' || description == '' || imageUrl == ''){
-            return alert('All fields are required')
+            error = 'All fields are required';
+            ctx.render(editTemplate(error, createSubmitHandler(onSubmit)));
+            return
         }
 
         await update(id, {title, description, imageUrl});

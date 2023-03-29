@@ -34,7 +34,7 @@ const myPageTemplate = (elements, userData) => html`
 
 export async function myPage(ctx) {
     const userData = getUserData()
-    const elements = await getMyMemes();
+    const elements = await getMyMemes(userData._id);
     ctx.render(myPageTemplate(elements, userData))
 }
 

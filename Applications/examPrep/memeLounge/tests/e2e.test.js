@@ -2,8 +2,8 @@
 const { chromium } = require('playwright-chromium');
 const { expect } = require('chai');
 
-const host = 'http://localhost:3000'; // Application host (NOT service host - that can be anything)
-const DEBUG = false;
+const host = 'http://127.0.0.1:5501/Applications/examPrep/memeLounge/index.html'; // Application host (NOT service host - that can be anything)
+const DEBUG = true;
 
 const mockData = require('./mock-data.json');
 const endpoints = {

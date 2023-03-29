@@ -3,7 +3,14 @@ import { login } from "../src/data/user.js";
 import { createSubmitHandler } from "../src/util.js";
 
 
-const loginTemplate = (onSubmit) => html`
+const loginTemplate = (error, onSubmit) => html`
+${error.length > 0 ? html `
+ <section id="notifications">
+            <div id="errorBox" class="notification">
+                <span>${error}</span>
+            </div>
+        </section>
+` : null}
 <section id="login">
             <form id="login-form" @submit = ${onSubmit}>
                 <div class="container">
@@ -22,11 +29,14 @@ const loginTemplate = (onSubmit) => html`
 `;
 
 export function loginPage(ctx){
-    ctx.render(loginTemplate(createSubmitHandler(onSubmit)));
+    let error = '';
+    ctx.render(loginTemplate(error, createSubmitHandler(onSubmit)));
 
     async function onSubmit({email, password}, form){
         if(email == '' || password == ''){
-            return alert('All fields are required')
+            error = 'All fields are required';
+            ctx.render(loginTemplate(error, createSubmitHandler(onSubmit)));
+            return
         }
         await login(email, password);
         form.reset();

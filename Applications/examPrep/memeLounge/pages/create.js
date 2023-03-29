@@ -2,7 +2,14 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 import { create } from "../src/data/data.js";
 import { createSubmitHandler } from "../src/util.js";
 
-const createTemplate = (onSubmit) => html`
+const createTemplate = (error, onSubmit) => html`
+${error.length > 0 ? html `
+ <section id="notifications">
+            <div id="errorBox" class="notification">
+                <span>${error}</span>
+            </div>
+        </section>
+` : null}
 <section id="create-meme">
             <form id="create-form" @submit = ${onSubmit}>
                 <div class="container">
@@ -20,11 +27,14 @@ const createTemplate = (onSubmit) => html`
 `;
 
 export function createPage(ctx){
-    ctx.render(createTemplate(createSubmitHandler(onSubmit)));
+    let error = '';
+    ctx.render(createTemplate(error,createSubmitHandler(onSubmit)));
 
     async function onSubmit({title, description, imageUrl}, form){
         if(title == '' || description == '' || imageUrl == ''){
-            return alert('All fields are required')
+            error = 'All fields are required';
+            ctx.render(createTemplate(error, createSubmitHandler(onSubmit)));
+            return
         }
         await create({title, description, imageUrl});
         form.reset();

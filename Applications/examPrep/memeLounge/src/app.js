@@ -10,6 +10,7 @@ import { catalogPage } from '../pages/catalog.js';
 import { createPage } from '../pages/create.js';
 import { detailsPage } from '../pages/details.js';
 import { editPage } from '../pages/edit.js';
+import { myPage } from '../pages/myPage.js';
 
 const root = document.getElementById('container');
 
@@ -23,6 +24,7 @@ page('/catalog', catalogPage);
 page('/create', createPage);
 page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
+page('/mypage', myPage);
 
 page.start();
 
@@ -37,7 +39,6 @@ function renderView(content){
     render(layoutTemplate(userData, content), root)
 }
 
-//TODO redirect
 function logoutFunction(ctx){
     logout();
     ctx.page.redirect('/');

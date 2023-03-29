@@ -2,12 +2,6 @@ import { html } from "../../../../node_modules/lit-html/lit-html.js";
 
 
 export const layoutTemplate = (userData, content) => html`
- <section id="notifications">
-            <div id="errorBox" class="notification">
-                <span>MESSAGE</span>
-            </div>
-        </section>
-
         <nav>
             <a href="/catalog">All Memes</a>
             ${userData ? html `
@@ -15,7 +9,7 @@ export const layoutTemplate = (userData, content) => html`
                 <a href="/create">Create Meme</a>
                 <div class="profile">
                     <span>Welcome, ${userData.email}</span>
-                    <a href="/myPage">My Profile</a>
+                    <a href="/mypage">My Profile</a>
                     <a href="/logout">Logout</a>
                 </div>
             </div>
