@@ -11,7 +11,7 @@ import { catalogPage } from '../pages/catalog.js';
 const root = document.querySelector('body');
 
 page(decorateContext);
-page('/Applications/3.Homework/05.Fisher-Game/index1.html', homePage);
+page('/Applications/3.Homework/05.Fisher-Game/index.html', homePage);
 page('/', homePage);
 page('/login', loginPage);
 page('/register', registerPage);

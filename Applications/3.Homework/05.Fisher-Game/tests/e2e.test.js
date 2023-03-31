@@ -1,7 +1,7 @@
 const { chromium } = require('playwright-chromium');
 const { expect } = require('chai');
 
-const host = 'http://127.0.0.1:5501/Applications/3.Homework/05.Fisher-Game/index1.html'; // Application host (NOT service host - that can be anything)
+const host = 'http://127.0.0.1:5501/Applications/3.Homework/05.Fisher-Game/index.html'; // Application host (NOT service host - that can be anything)
 
 const interval = 300;
 const DEBUG = true;
