@@ -25,7 +25,7 @@ const myPageTemplate = (data) => html`
         </div>
         `)}
         ` : html `
-        <p class="no-cars">You haven't listed any cars yet.</p>
+        <p class="no-cars">You haven't listed any cars yet</p>
         `}
     </div>
 </section>

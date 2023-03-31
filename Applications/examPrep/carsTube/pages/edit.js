@@ -43,6 +43,8 @@ export async function editPage(ctx) {
     ctx.render(editTemplate(element, createSubmitHandler(onSubmit)));
 
     async function onSubmit({ brand, model, description, year, imageUrl, price }, form) {
+        year = Number(year);
+        price = Number(price);
         if (brand == '' || model == '' || description == '' || year == '' || imageUrl == '' || price == '') {
             return alert('All fields are required')
         }
