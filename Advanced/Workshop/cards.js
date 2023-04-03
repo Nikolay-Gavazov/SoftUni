@@ -1,4 +1,4 @@
-const faces = {
+export const faces = {
     Ace: 1,
     Two: 2,
     Three: 3,
@@ -13,14 +13,21 @@ const faces = {
     Queen: 12,
     King: 13
 };
-const suits = {
+export const suits = {
     Clubs: 'clubs',
     Diamonds: 'diamonds',
-    Hearts: 'hears',
+    Hearts: 'hearts',
     Spades: 'spades'
 }
 
-class Card{
+export const colors = {
+    clubs: 'black',
+    spades: 'black',
+    hearts: 'red',
+    diamonds: 'red'
+}; 
+
+export class Card{
     /** @type {keyof suits} */
     /** @type {keyof faces} */
     /** @type {boolean} */
@@ -35,7 +42,7 @@ class Card{
 
 }
 
-class Deck {
+export class Deck {
     /** @type {Card[]} */
     cards = [];
     /** @param {Card[]?} cards */
@@ -53,7 +60,7 @@ class Deck {
     }
     canFlip(){
         return this.size > 0 && this.top.faceUp == false;
-        throw TypeError ('Cannot invoke abstract method');
+        
     }
     canTake(index){
         throw TypeError ('Cannot invoke abstract method');
@@ -86,7 +93,7 @@ class Deck {
     }
 }
 
-class Stock extends Deck{
+export class Stock extends Deck{
     canTake(index){
         return false;
     }
@@ -97,7 +104,7 @@ class Stock extends Deck{
 
 }
 
-class Waste extends Deck{
+export class Waste extends Deck{
     canTake(index){
         return this.size > 0 && index == this.topIndex;
     }
@@ -108,9 +115,14 @@ class Waste extends Deck{
 
 }
 
-class Foundation extends Deck{
-
+export class Foundation extends Deck{
+/** @type {keyof suits} */
     suit = null;
+
+    /** 
+     * @param {Card[]?} cards
+     * @param {keyof suits} suit
+     */
     constructor(cards = [], suit){
         super(cards);
         this.suit = suit;
@@ -125,6 +137,26 @@ class Foundation extends Deck{
         }
         return(cards.suit == this.suit &&
         ((cards.face == faces.Ace && this.size == 0 )
-        || (this.size > 0 ((cards.face - 1) == this.top.face))));
+        || (this.size > 0 && ((cards.face - 1) == this.top.face))));
     }
 }
+
+
+export class Pile extends Deck{
+   
+        canTake(index){
+            return this.size > 0 && this.cards[index].faceUp;
+        }
+
+        /** @param {Card | Card[]} cards */
+
+        canPlace(cards){
+            if(Array.isArray(cards) == false){
+                cards = [cards];
+            }
+            /** @type {Card} */
+            const bottomCard = cards[0]
+            return ((bottomCard.face == faces.King && this.size == 0 )
+            || (this.size > 0 && ((bottomCard.face + 1) == this.top.face && colors[bottomCard.suit] != colors[this.top.suit])));
+        }
+    }
