@@ -46,7 +46,7 @@ export function createDeckElement(deck){
  * @param {boolean} top 
  */
 
-function createCard(card){ 
+function createCard(card){
     const element = document.createElement('div');
     element.classList.add('card');
 
