@@ -1,4 +1,4 @@
-
+import { Foundation, Pile, Stock, Waste, suits } from "./cards.js";
 import { createDeckElement } from "./dom.js";
 import { createDeck, dealDeck, shuffleDeck } from "./util.js";
 
@@ -36,6 +36,6 @@ function start(){
 function stateToBoard(state){
     zones.stock.replaceChildren(
         createDeckElement(state.stock),
-        createDeckElement(state.stock),
+        createDeckElement(state.waste)
     )
 }

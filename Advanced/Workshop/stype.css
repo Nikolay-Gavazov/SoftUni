@@ -53,8 +53,12 @@ width:587px;
 .red{
     color: red;
 }
-.top{
+.card .top{
     height: 75px;
     border-radius: 5px;
     border: 1px solid black;
+}
+
+#stock .card:not(.top){
+    height: 2px;
 }
