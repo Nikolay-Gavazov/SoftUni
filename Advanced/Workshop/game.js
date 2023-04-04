@@ -37,5 +37,9 @@ function stateToBoard(state){
     zones.stock.replaceChildren(
         createDeckElement(state.stock),
         createDeckElement(state.waste)
-    )
+    );
+
+    zones.foundations.replaceChildren(...Object.values(state.foundations).map(createDeckElement));
+    zones.piles.replaceChildren(...state.piles.map(createDeckElement))
 }
+

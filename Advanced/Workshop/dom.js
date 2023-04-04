@@ -25,7 +25,7 @@ const faces = {
 
 /**
  * 
- * @param {import('./cards').Deck} card 
+ * @param {import('./cards.js').Deck} deck 
  */
 
 export function createDeckElement(deck){
@@ -41,21 +41,21 @@ export function createDeckElement(deck){
 }
 
 /**
- * @param {import('./cards').Card} card
+ * @param {import('./cards.js').Card} card
  * @param {boolean} top 
  */
 
-function createCard(card){
+function createCard(card, top){
     const element = document.createElement('div');
     element.classList.add('card');
 
     let content = '';
 
-    if(card.faceUp){
-        element.classList.add(colors)
+    if(card.faceUp == true){
+        element.classList.add(colors[card.suit])
         content = `${suits[card.suit]}${faces[card.face]}`
     }else{
-        content = '<span class = "back"></span>';
+        content = `<span class="back${top ? ' top' : ''}"></span>`;
     }
 
     if(top){

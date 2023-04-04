@@ -45,7 +45,23 @@ width:587px;
     padding-left: 5px;
 }
 .back{
-    background-color: aquamarine;
+
+    background-size: 5px 5px;
+    display: block;
+    position: absolute;
+    top: 2px;
+    bottom: 0px;
+    left: 2px;
+    right: 2px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 1px solid black;
+    border-bottom: none;
+}
+.back.top{
+    border-radius: 3px;
+    border: 1px solid black;
+    bottom: 2px;
 }
 .black{
     color: black;
@@ -60,5 +76,5 @@ width:587px;
 }
 
 #stock .card:not(.top){
-    height: 2px;
+    height: 4px;
 }
