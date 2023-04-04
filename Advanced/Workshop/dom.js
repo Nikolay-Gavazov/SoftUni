@@ -41,7 +41,6 @@ export function createDeckElement(deck){
 }
 
 /**
- * 
  * @param {import('./cards').Card} card
  * @param {boolean} top 
  */
