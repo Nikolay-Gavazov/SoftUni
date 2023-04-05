@@ -13,7 +13,7 @@ let state = null;
  
 /** @type {import('./cards.js').Deck[]} */
 let deckIndex = [];
-
+let currentMove = null;
 
 
 document.getElementById('board').addEventListener('click', onClick);

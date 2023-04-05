@@ -35,9 +35,15 @@ export function createDeckElement(deck, index){
     let activeCards = false;
 
     if(deck.moves.flip || deck.moves.place || deck.moves.take.length > 0){
+
         if(deck.size == 0 || deck.moves.place){ 
             element.classList.add('active');
-        }else {
+            element.dataset.action = 'place';
+        }else if(deck.moves.flip){
+            element.dataset.action = 'flip';
+            activeCards = true;
+        }else if(deck.moves.take.length > 0){
+            element.dataset.action = 'take';
             activeCards = true;
         }
     }
