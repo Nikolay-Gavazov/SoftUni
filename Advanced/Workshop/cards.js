@@ -59,7 +59,7 @@ export class Deck {
         return this.cards.length;
     }
     canFlip(){
-        return this.size > 0 && this.top.faceUp == false;
+        return this.size > 0 && this.top.faceUp != true;
         
     }
     canTake(index){
@@ -94,6 +94,11 @@ export class Deck {
 }
 
 export class Stock extends Deck{
+
+    canFlip(){
+        return true;
+    }
+
     canTake(index){
         return false;
     }

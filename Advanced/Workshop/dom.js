@@ -1,5 +1,5 @@
 
-import { Foundation, Stock, Waste, colors } from './cards.js';
+import { Deck, Foundation, Pile, Stock, Waste, colors } from './cards.js';
 
 const suits = {
     clubs: '&clubs;',
@@ -26,12 +26,34 @@ const faces = {
 
 /**
  * 
- * @param {import('./cards.js').Deck} deck 
+ * @param {GameDeck} deck 
  */
 
-export function createDeckElement(deck){
+export function createDeckElement(deck, index){
     const element = document.createElement('article');
     element.className = 'deck';
+    let activeCards = false;
+
+    if(deck.moves.flip || deck.moves.place || deck.moves.take.length > 0){
+        if(deck.size == 0 || deck.moves.place){ 
+            element.classList.add('active');
+        }else {
+            activeCards = true;
+        }
+    }
+
+
+    if(deck instanceof Stock){
+        element.dataset.type = 'stock';
+    } else if(deck instanceof Waste){
+        element.dataset.type = 'waste';
+    } else if(deck instanceof Foundation){
+        element.dataset.type = 'foundation';
+        element.dataset.suit = deck.suit;
+    } else if(deck instanceof Pile){
+        element.dataset.type = 'pile';
+        element.dataset.index = index;
+    }
 
     let cards = deck.cards;
 
@@ -45,9 +67,10 @@ export function createDeckElement(deck){
     for(let i = 0; i < cards.length; i++){
         const card = cards[i];
         const top = i == cards.length - 1;
-        element.appendChild(createCard(card, top))
+        let active = activeCards && ((top && deck.canFlip()) || deck.canTake(i)); 
+        element.appendChild(createCard(card, top, i, active))
     }
-    return element
+    return element;
 }
 
 /**
@@ -55,9 +78,13 @@ export function createDeckElement(deck){
  * @param {boolean} top 
  */
 
-function createCard(card, top){
+function createCard(card, top, index, active){
     const element = document.createElement('div');
     element.classList.add('card');
+    if(active){
+        element.classList.add('active');
+    }
+    element.dataset.index = index;
 
     let content = '';
 
@@ -76,3 +103,5 @@ function createCard(card, top){
 
     return element;
 }
+
+/** @typedef {import('./cards.js').Deck & {moves: {flip: boolean, take: number[], place: boolean}}} GameDeck */
