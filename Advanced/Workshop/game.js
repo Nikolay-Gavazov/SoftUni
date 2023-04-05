@@ -25,6 +25,10 @@ function start(){
 
     const {index, state} = dealDeck(deck);
 
+    index.forEach(deck => {
+        deck.moves = getMoves(deck);
+    });
+
     stateToBoard(state)
 }
 

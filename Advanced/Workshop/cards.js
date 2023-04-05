@@ -151,6 +151,9 @@ export class Pile extends Deck{
         /** @param {Card | Card[]} cards */
 
         canPlace(cards){
+            if(!cards){
+                return false;
+            }
             if(Array.isArray(cards) == false){
                 cards = [cards];
             }
