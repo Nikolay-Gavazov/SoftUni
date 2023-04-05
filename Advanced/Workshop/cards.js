@@ -132,7 +132,7 @@ export class Foundation extends Deck{
     }
     /** @param {Card | Card[]} cards */
     canPlace(cards){
-        if(Array.isArray(cards)){
+        if(!cards || Array.isArray(cards)){
             return false;
         }
         return(cards.suit == this.suit &&

@@ -8,11 +8,11 @@ const zones = {
     piles: document.getElementById('pile')
 }
 
+document.getElementById('board').addEventListener('click', onClick);
+
 start()
 
-function start(){
-   
-    
+function start(){ 
     const deck = createDeck()
     shuffleDeck(deck);
     shuffleDeck(deck);
@@ -26,6 +26,20 @@ function start(){
     const {index, state} = dealDeck(deck);
 
     stateToBoard(state)
+}
+
+/**
+ * 
+ * @param {import('./cards.js').Deck} deck 
+ * @param {import ('./cards.js').Card | import('./cards.js').Card[] | null} cards
+ */
+
+function getMoves(deck, cards){
+    return {
+        flip: deck.canFlip(),
+        take: deck.cards.map((_, i) => deck.canTake(i)).map((v, i) => v && i).filter(v => v !== false),
+        place: deck.canPlace(cards)
+    }
 }
 
 /**
