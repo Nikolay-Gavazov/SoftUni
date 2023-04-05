@@ -43,3 +43,28 @@ function stateToBoard(state){
     zones.piles.replaceChildren(...state.piles.map(createDeckElement))
 }
 
+
+function onClick(e){
+    let deck = null;
+    if(e.target.classList.contains('deck')){
+        deck = e.target;
+    }else if(e.target.classList.contains('card')){
+        deck = e.target.parentElement;
+    }else if(e.target.classList.contains('back')){
+        deck = e.target.parentElement.parentElement;
+    }
+
+    if(deck != null){
+        const type = deck.dataset.type;
+        let suit = '';
+        let index = -1;
+
+        if(type == 'foundation'){
+        suit = deck.dataset.suit;
+        }else if(type == 'pile'){
+            index = Number(deck.dataset.index);
+        }
+    }
+
+
+}
