@@ -45,20 +45,19 @@ width:587px;
     padding-left: 5px;
 }
 .back{
-
+    background-color: aquamarine;
     background-size: 5px 5px;
     display: block;
     position: absolute;
-    top: 2px;
     bottom: 0px;
-    left: 2px;
     right: 2px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border: 1px solid black;
     border-bottom: none;
 }
-.back.top{
+.back .top{
+    background-color: aquamarine;
     border-radius: 3px;
     border: 1px solid black;
     bottom: 2px;
@@ -69,7 +68,7 @@ width:587px;
 .red{
     color: red;
 }
-.card .top{
+.top{
     height: 75px;
     border-radius: 5px;
     border: 1px solid black;
