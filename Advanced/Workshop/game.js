@@ -4,8 +4,8 @@ import { createDeck, dealDeck, shuffleDeck } from "./util.js";
 
 const zones = {
     stock: document.getElementById('stock'),
-    foundations: document.getElementById('foundation'),
-    piles: document.getElementById('pile')
+    foundations: document.getElementById('foundations'),
+    piles: document.getElementById('piles')
 }
 
 /** @type {import('./util.js').GameState} */
@@ -108,22 +108,29 @@ function onClick(e){
                 }else if(type == 'piles'){
                 flipPile(index);
                 }
+                currentMove = null;
             break;
             case 'take':
-                currentMove = {
-                    type,
-                    index,
-                    cardIndex
-                }
-            let deck = null;    
-            if(type == 'piles'){
-                deck = state[type][index]
-            }else if(type == 'foundations'){
-                deck = state[type][suit]
-            }else{
-                deck = state[type]
+                
+            const deck = findDeck(type, index, suit);    
+            
+            cards = deck.cards.slice(cardIndex);
+            
+            currentMove = {
+                source: deck,
+                type,
+                index,
+                cardIndex
             }
+
             break;
+
+        case 'place':
+            const target = findDeck(type, index, suit)
+            const selectedCards = currentMove.source.take(currentMove.cardIndex);
+            target.place(selectedCards);
+            currentMove = null;
+        break;
     }
         console.log(action, type, index, cardIndex);
 
@@ -135,6 +142,19 @@ function onClick(e){
     }
 
 
+}
+
+function findDeck(type, index, suit){
+    let deck = null;    
+    if(type == 'piles'){
+        deck = state[type][index]
+    }else if(type == 'foundations'){
+        deck = state[type][suit]
+    }else{
+        deck = state[type]
+    }
+
+    return deck
 }
 
 function flipStock(){
