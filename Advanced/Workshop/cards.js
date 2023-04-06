@@ -25,16 +25,16 @@ export const colors = {
     spades: 'black',
     hearts: 'red',
     diamonds: 'red'
-}; 
+};
 
-export class Card{
+export class Card {
     /** @type {keyof suits} */
     /** @type {keyof faces} */
     /** @type {boolean} */
     suit = null;
     face = null;
     faceUp = false;
-    constructor(suit, face, faceUp){
+    constructor(suit, face, faceUp) {
         this.suit = suit;
         this.face = face;
         this.faceUp = faceUp;
@@ -46,125 +46,128 @@ export class Deck {
     /** @type {Card[]} */
     cards = [];
     /** @param {Card[]?} cards */
-    constructor(cards = []){
+    constructor(cards = []) {
         this.cards = cards;
     }
-    get top(){
+    get top() {
         return this.cards[this.topIndex];
     }
-    get topIndex(){
+    get topIndex() {
         return this.size - 1;
     }
-    get size(){
+    get size() {
         return this.cards.length;
     }
-    canFlip(){
+    canFlip() {
         return this.size > 0 && this.top.faceUp != true;
-        
+
     }
-    canTake(index){
-        throw TypeError ('Cannot invoke abstract method');
+    canTake(index) {
+        throw TypeError('Cannot invoke abstract method');
     }
     /** @param {Card | Card[]} cards */
-    canPlace(cards){
-        throw TypeError ('Cannot invoke abstract method');
+    canPlace(cards) {
+        throw TypeError('Cannot invoke abstract method');
     }
-    flip(){
-        if(this.canFlip() == false){
+    flip() {
+        if (this.canFlip() == false) {
             throw Error('Cannot flip card');
         }
 
         this.top.faceUp = true;
     }
-    take(index){
-        if(this.canTake(index) == false){
-            throw TypeError ('Cannot take card');
+    take(index) {
+        if (this.canTake(index) == false) {
+            throw TypeError('Cannot take card');
         }
-       this.cards.splice(index, this.size - index);
+        return this.cards.splice(index, this.size - index);
     }
-    place(cards){
-        if(this.canPlace(cards) == false){
-            throw TypeError ('Cannot place card');
+    place(cards) {
+        if (this.canPlace(cards) == false) {
+            throw TypeError('Cannot place card');
         }
-        if(Array.isArray(cards) == false){
+        if (Array.isArray(cards) == false) {
             cards = [cards];
         }
         this.cards.push(...cards);
     }
 }
 
-export class Stock extends Deck{
+export class Stock extends Deck {
 
-    canFlip(){
+    canFlip() {
         return true;
     }
 
-    canTake(index){
+    canTake(index) {
         return false;
     }
     /** @param {Card | Card[]} cards */
-    canPlace(cards){
+    canPlace(cards) {
         return false;
     }
 
 }
 
-export class Waste extends Deck{
-    canTake(index){
+export class Waste extends Deck {
+    canTake(index) {
         return this.size > 0 && index == this.topIndex;
     }
     /** @param {Card | Card[]} cards */
-    canPlace(cards){
+    canPlace(cards) {
         return false;
     }
 
 }
 
-export class Foundation extends Deck{
-/** @type {keyof suits} */
+export class Foundation extends Deck {
+    /** @type {keyof suits} */
     suit = null;
 
     /** 
      * @param {Card[]?} cards
      * @param {keyof suits} suit
      */
-    constructor(cards = [], suit){
+    constructor(cards = [], suit) {
         super(cards);
         this.suit = suit;
     }
-    canTake(index){
+    canTake(index) {
         return this.size > 0 && index == this.topIndex;
     }
     /** @param {Card | Card[]} cards */
-    canPlace(cards){
-        if(!cards || Array.isArray(cards)){
+    canPlace(cards) {
+        if (!cards || (Array.isArray(cards) && cards.length > 1)) {
             return false;
         }
-        return(cards.suit == this.suit &&
-        ((cards.face == faces.Ace && this.size == 0 )
-        || (this.size > 0 && ((cards.face - 1) == this.top.face))));
+
+        const card = Array.isArray(cards) ? cards[0] : cards;
+
+        return (card.suit == this.suit &&
+            ((card.face == faces.Ace && this.size == 0)
+                || (this.size > 0 && ((card.face - 1) == this.top.face))));
     }
 }
 
 
-export class Pile extends Deck{
-   
-        canTake(index){
-            return this.size > 0 && this.cards[index].faceUp;
-        }
+export class Pile extends Deck {
 
-        /** @param {Card | Card[]} cards */
-
-        canPlace(cards){
-            if(!cards){
-                return false;
-            }
-            if(Array.isArray(cards) == false){
-                cards = [cards];
-            }
-            /** @type {Card} */
-            const bottomCard = cards[0]
-            return ((bottomCard.face == faces.King && this.size == 0 )
-            || (this.size > 0 && ((bottomCard.face + 1) == this.top.face && colors[bottomCard.suit] != colors[this.top.suit])));
-        }
+    canTake(index) {
+        return this.size > 0 && this.cards[index].faceUp;
     }
+
+    /** @param {Card | Card[]} cards */
+
+    canPlace(cards) {
+        if (!cards) {
+            return false;
+        }
+        if (Array.isArray(cards) == false) {
+            cards = [cards];
+        }
+        /** @type {Card} */
+        const bottomCard = cards[0]
+        return ((bottomCard.face == faces.King && this.size == 0)
+            || (this.size > 0 && ((bottomCard.face + 1) == this.top.face && colors[bottomCard.suit] != colors[this.top.suit])));
+    }
+}

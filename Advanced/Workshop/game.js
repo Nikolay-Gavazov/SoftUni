@@ -10,7 +10,7 @@ const zones = {
 
 /** @type {import('./util.js').GameState} */
 let state = null;
- 
+
 /** @type {import('./cards.js').Deck[]} */
 let deckIndex = [];
 let currentMove = null;
@@ -20,7 +20,7 @@ document.getElementById('board').addEventListener('click', onClick);
 
 start()
 
-function start(){ 
+function start() {
     const deck = createDeck()
     shuffleDeck(deck);
     shuffleDeck(deck);
@@ -46,7 +46,10 @@ function start(){
  * @param {import ('./cards.js').Card | import('./cards.js').Card[] | null} cards
  */
 
-function getMoves(deck, cards){
+function getMoves(deck, cards) {
+    if (cards && deck instanceof Foundation) {
+
+    }
     return {
         flip: !cards && deck.canFlip(),
         take: !cards && deck.cards.map((_, i) => deck.canTake(i)).map((v, i) => v && i).filter(v => v !== false),
@@ -59,7 +62,7 @@ function getMoves(deck, cards){
  * @param {import('./util.js').GameState} state 
  */
 
-function stateToBoard(state){
+function stateToBoard(state) {
     zones.stock.replaceChildren(
         createDeckElement(state.stock),
         createDeckElement(state.waste)
@@ -70,20 +73,20 @@ function stateToBoard(state){
 }
 
 
-function onClick(e){
+function onClick(e) {
     let deck = null;
     let card = null;
-    if(e.target.classList.contains('deck')){
+    if (e.target.classList.contains('deck')) {
         deck = e.target;
-    }else if(e.target.classList.contains('card')){
+    } else if (e.target.classList.contains('card')) {
         card = e.target;
         deck = card.parentElement;
-        
-    }else if(e.target.classList.contains('back')){
+
+    } else if (e.target.classList.contains('back')) {
         deck = e.target.parentElement.parentElement;
     }
 
-    if(deck != null){
+    if (deck != null) {
         const action = deck.dataset.action;
         const type = deck.dataset.type;
         let suit = '';
@@ -91,74 +94,72 @@ function onClick(e){
         let cardIndex = -1;
         let cards = undefined
 
-        if(type == 'foundations'){
-        suit = deck.dataset.suit;
-        }else if(type == 'piles'){
+        if (type == 'foundations') {
+            suit = deck.dataset.suit;
+        } else if (type == 'piles') {
             index = Number(deck.dataset.index);
         }
 
-        if(card != null){
+        if (card != null) {
             cardIndex = Number(card.dataset.index);
         }
 
-        switch(action){
+        switch (action) {
             case 'flip':
-                if(type == 'stock'){
-                flipStock();
-                }else if(type == 'piles'){
-                flipPile(index);
+                if (type == 'stock') {
+                    flipStock();
+                } else if (type == 'piles') {
+                    flipPile(index);
                 }
                 currentMove = null;
-            break;
+                break;
             case 'take':
-                
-            const deck = findDeck(type, index, suit);    
-            
-            cards = deck.cards.slice(cardIndex);
-            
-            currentMove = {
-                source: deck,
-                type,
-                index,
-                cardIndex
-            }
 
-            break;
+                const deck = findDeck(type, index, suit);
 
-        case 'place':
-            const target = findDeck(type, index, suit)
-            const selectedCards = currentMove.source.take(currentMove.cardIndex);
-            target.place(selectedCards);
-            currentMove = null;
-        break;
-    }
-        console.log(action, type, index, cardIndex);
+                cards = deck.cards.slice(cardIndex);
 
+                currentMove = {
+                    source: deck,
+                    type,
+                    index,
+                    cardIndex
+                }
+
+                break;
+
+            case 'place':
+                const target = findDeck(type, index, suit)
+                const selectedCards = currentMove.source.take(currentMove.cardIndex);
+                target.place(selectedCards);
+                currentMove = null;
+                break;
+        }
         deckIndex.forEach(deck => {
             deck.moves = getMoves(deck, cards);
         });
-        stateToBoard(state );
-        
+        stateToBoard(state);
+
     }
 
 
 }
 
-function findDeck(type, index, suit){
-    let deck = null;    
-    if(type == 'piles'){
+function findDeck(type, index, suit) {
+    let deck = null;
+    if (type == 'piles') {
         deck = state[type][index]
-    }else if(type == 'foundations'){
+    } else if (type == 'foundations') {
         deck = state[type][suit]
-    }else{
+    } else {
         deck = state[type]
     }
 
     return deck
 }
 
-function flipStock(){
-    if(state.stock.size == 0){
+function flipStock() {
+    if (state.stock.size == 0) {
         const cards = [...state.waste.cards];
         state.waste.cards.length = 0;
         cards.reverse();
@@ -166,13 +167,13 @@ function flipStock(){
             el.faceUp = false;
         });
         state.stock.cards.push(...cards);
-    }else{
+    } else {
         state.stock.flip();
         const card = state.stock.cards.pop();
         state.waste.cards.push(card)
     }
 }
 
-function flipPile(index){
+function flipPile(index) {
     state.piles[index].flip()
 }

@@ -29,34 +29,37 @@ const faces = {
  * @param {GameDeck} deck 
  */
 
-export function createDeckElement(deck, index){
+export function createDeckElement(deck, index) {
     const element = document.createElement('article');
     element.className = 'deck';
     let activeCards = false;
 
-    if(deck.moves.flip || deck.moves.place || deck.moves.take.length > 0){
+    if (deck.moves.flip || deck.moves.place || deck.moves.take.length > 0) {
 
-        if(deck.size == 0 || deck.moves.place){ 
+        if (deck.size == 0 || deck.moves.place) {
             element.classList.add('active');
+        }
+
+        if (deck.moves.place) {
             element.dataset.action = 'place';
-        }else if(deck.moves.flip){
+        } else if (deck.moves.flip) {
             element.dataset.action = 'flip';
             activeCards = true;
-        }else if(deck.moves.take.length > 0){
+        } else if (deck.moves.take.length > 0) {
             element.dataset.action = 'take';
             activeCards = true;
         }
     }
 
 
-    if(deck instanceof Stock){
+    if (deck instanceof Stock) {
         element.dataset.type = 'stock';
-    } else if(deck instanceof Waste){
+    } else if (deck instanceof Waste) {
         element.dataset.type = 'waste';
-    } else if(deck instanceof Foundation){
+    } else if (deck instanceof Foundation) {
         element.dataset.type = 'foundations';
         element.dataset.suit = deck.suit;
-    } else if(deck instanceof Pile){
+    } else if (deck instanceof Pile) {
         element.dataset.type = 'piles';
         element.dataset.index = index;
     }
@@ -70,10 +73,10 @@ export function createDeckElement(deck, index){
     //     cards.push(deck.top);
     // }
 
-    for(let i = 0; i < cards.length; i++){
+    for (let i = 0; i < cards.length; i++) {
         const card = cards[i];
         const top = i == cards.length - 1;
-        let active = activeCards && ((top && deck.canFlip()) || deck.canTake(i)); 
+        let active = activeCards && ((top && deck.canFlip()) || deck.canTake(i));
         element.appendChild(createCard(card, top, i, active))
     }
     return element;
@@ -84,24 +87,24 @@ export function createDeckElement(deck, index){
  * @param {boolean} top 
  */
 
-function createCard(card, top, index, active){
+function createCard(card, top, index, active) {
     const element = document.createElement('div');
     element.classList.add('card');
-    if(active){
+    if (active) {
         element.classList.add('active');
     }
     element.dataset.index = index;
 
     let content = '';
 
-    if(card.faceUp){
+    if (card.faceUp) {
         element.classList.add(colors[card.suit])
         content = `${suits[card.suit]}${faces[card.face]}`
-    }else{
+    } else {
         content = `<span class="back${top ? ' top' : ''}"></span>`;
     }
 
-    if(top){
+    if (top) {
         element.classList.add('top');
     }
 
