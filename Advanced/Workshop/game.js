@@ -89,11 +89,11 @@ function onClick(e){
         let suit = '';
         let index = -1;
         let cardIndex = -1;
+        let cards = undefined
 
-
-        if(type == 'foundation'){
+        if(type == 'foundations'){
         suit = deck.dataset.suit;
-        }else if(type == 'pile'){
+        }else if(type == 'piles'){
             index = Number(deck.dataset.index);
         }
 
@@ -105,18 +105,30 @@ function onClick(e){
             case 'flip':
                 if(type == 'stock'){
                 flipStock();
-                }else if(type == 'pile'){
+                }else if(type == 'piles'){
                 flipPile(index);
                 }
             break;
             case 'take':
-
+                currentMove = {
+                    type,
+                    index,
+                    cardIndex
+                }
+            let deck = null;    
+            if(type == 'piles'){
+                deck = state[type][index]
+            }else if(type == 'foundations'){
+                deck = state[type][suit]
+            }else{
+                deck = state[type]
+            }
             break;
     }
         console.log(action, type, index, cardIndex);
 
         deckIndex.forEach(deck => {
-            deck.moves = getMoves(deck);
+            deck.moves = getMoves(deck, cards);
         });
         stateToBoard(state );
         

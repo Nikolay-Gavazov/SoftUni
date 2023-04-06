@@ -54,21 +54,21 @@ export function createDeckElement(deck, index){
     } else if(deck instanceof Waste){
         element.dataset.type = 'waste';
     } else if(deck instanceof Foundation){
-        element.dataset.type = 'foundation';
+        element.dataset.type = 'foundations';
         element.dataset.suit = deck.suit;
     } else if(deck instanceof Pile){
-        element.dataset.type = 'pile';
+        element.dataset.type = 'piles';
         element.dataset.index = index;
     }
 
     let cards = deck.cards;
 
-    if(deck.size > 1 && (deck instanceof Stock || deck instanceof Waste || deck instanceof Foundation)){
-        const visibleCount = Math.ceil((deck.size - 1) / 5);
-        cards = new Array(visibleCount);
-        cards.fill ({faceUp: false});
-        cards.push(deck.top);
-    }
+    // if(deck.size > 1 && (deck instanceof Stock || deck instanceof Waste || deck instanceof Foundation)){
+    //     const visibleCount = Math.ceil((deck.size - 1) / 5);
+    //     cards = new Array(visibleCount);
+    //     cards.fill ({faceUp: false});
+    //     cards.push(deck.top);
+    // }
 
     for(let i = 0; i < cards.length; i++){
         const card = cards[i];

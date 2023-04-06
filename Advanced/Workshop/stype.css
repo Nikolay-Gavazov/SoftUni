@@ -25,11 +25,11 @@ width:587px;
 #stock{
     float: left;
 }
-#foundation{
+#foundations{
     float: right;
 }
 
-#pile{
+#piles{
     margin-top: 100px;
     display:inline-block;
 
@@ -40,7 +40,7 @@ width:587px;
     display: block;
     border: 1px solid black;
     border-bottom: none;
-    background-color: white;
+    background-color: whitesmoke;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding-left: 5px;
@@ -48,7 +48,7 @@ width:587px;
     user-select: none;
 }
 .back{
-    background-color: aquamarine;
+    background-color: skyblue;
     background-size: 5px 5px;
     display: block;
     position: absolute;
@@ -60,6 +60,7 @@ width:587px;
     border-bottom: none;
 }
 .back .top{
+    background-color: skyblue;
     border-radius: 3px;
     border: 1px solid black;
     bottom: 2px;
