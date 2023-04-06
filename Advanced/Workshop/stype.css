@@ -40,9 +40,12 @@ width:587px;
     display: block;
     border: 1px solid black;
     border-bottom: none;
+    background-color: white;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     padding-left: 5px;
+    position: relative;
+    user-select: none;
 }
 .back{
     background-color: aquamarine;
