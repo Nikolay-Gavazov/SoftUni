@@ -2,6 +2,8 @@ import { Foundation, Pile, Stock, Waste, suits } from "./cards.js";
 import { createDeckElement } from "./dom.js";
 import { createDeck, dealDeck, shuffleDeck } from "./util.js";
 
+document.getElementById('new-game').addEventListener('click', start)
+
 const zones = {
     stock: document.getElementById('stock'),
     foundations: document.getElementById('foundations'),
@@ -21,6 +23,7 @@ document.getElementById('board').addEventListener('click', onClick);
 start()
 
 function start() {
+    currentMove = null;
     const deck = createDeck()
     shuffleDeck(deck);
     shuffleDeck(deck);
@@ -70,7 +73,13 @@ function stateToBoard(state) {
 
     zones.foundations.replaceChildren(...Object.values(state.foundations).map(createDeckElement));
     zones.piles.replaceChildren(...state.piles.map(createDeckElement))
+
+    if(Object.values(state.foundations).every(f => f.size == 13)){
+        setTimeout(() => alert('You Win!'), 0)
+    }
+
 }
+
 
 
 function onClick(e) {
