@@ -1,11 +1,18 @@
 import page from "./lib/page.mjs";
-import {html} from './lib/lit-html.js'
+
 import { addRender } from "./middlewares/render.js";
 import { settingsView } from "./views/settings.js";
+import { loginView } from "./views/login.js";
+import { islandsView } from "./views/islands.js";
+import { addSession } from "./middlewares/session.js";
 
 
+page(addSession)
 page(addRender)
-page('/Applications/workShop/index.html', (ctx) => ctx.render (html `<h1>asdfsdsfb</h1>`))
+page('/', '/Applications/workShop/index.html')
+page('/Applications/workShop/index.html', islandsView)
 page('/settings', settingsView)
+page('/login', loginView)
+
 
 page.start();

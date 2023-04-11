@@ -1,0 +1,641 @@
+{
+    "spices": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 4
+        },
+        "name": "Spices",
+        "inputs": []
+    },
+    "cider": {
+        "output": 40,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 4
+        },
+        "name": "Cider",
+        "inputs": []
+    },
+    "hemp": {
+        "output": 60,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 4
+        },
+        "name": null,
+        "inputs": []
+    },
+    "almonds": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "4x4",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "wheat": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "4x4",
+            "count": 3
+        },
+        "name": null,
+        "inputs": []
+    },
+    "herbs": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "3x2",
+            "count": 8
+        },
+        "name": null,
+        "inputs": []
+    },
+    "grapes": {
+        "output": 90,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "wax": {
+        "output": 90,
+        "size": "3x3",
+        "fields": {
+            "size": "3x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "coffee_beans": {
+        "output": 60,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "roses": {
+        "output": 120,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 6
+        },
+        "name": null,
+        "inputs": []
+    },
+    "sugar_cane": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "indigo": {
+        "output": 40,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "silk": {
+        "output": 40,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "dates": {
+        "output": 20,
+        "size": "3x3",
+        "fields": {
+            "size": "4x3",
+            "count": 5
+        },
+        "name": "Dates",
+        "inputs": []
+    },
+    "milk": {
+        "output": 40,
+        "size": "3x3",
+        "fields": {
+            "size": "4x4",
+            "count": 3
+        },
+        "name": "Milk",
+        "inputs": []
+    },
+    "cattle": {
+        "output": 48,
+        "size": "3x3",
+        "fields": {
+            "size": "4x4",
+            "count": 5
+        },
+        "name": null,
+        "inputs": []
+    },
+    "hides": {
+        "output": 30,
+        "size": "3x3",
+        "fields": {
+            "size": "4x4",
+            "count": 4
+        },
+        "name": null,
+        "inputs": []
+    },
+    "clay": {
+        "output": 50,
+        "name": null,
+        "inputs": []
+    },
+    "wood": {
+        "output": 40,
+        "name": null,
+        "inputs": []
+    },
+    "potash": {
+        "output": 30,
+        "name": null,
+        "inputs": []
+    },
+    "coal": {
+        "output": 30,
+        "name": null,
+        "inputs": []
+    },
+    "fish": {
+        "output": 30,
+        "name": "Fish",
+        "inputs": []
+    },
+    "quartz": {
+        "output": 45,
+        "name": null,
+        "inputs": []
+    },
+    "stone": {
+        "output": 30,
+        "name": null,
+        "inputs": []
+    },
+    "iron_ore": {
+        "output": 30,
+        "name": null,
+        "inputs": []
+    },
+    "brine": {
+        "output": 15,
+        "name": null,
+        "inputs": []
+    },
+    "copper": {
+        "output": 45,
+        "name": null,
+        "inputs": []
+    },
+    "gold_ore": {
+        "output": 40,
+        "name": null,
+        "inputs": []
+    },
+    "furs": {
+        "output": 24,
+        "name": null,
+        "inputs": []
+    },
+    "pearls": {
+        "output": 60,
+        "name": null,
+        "inputs": []
+    },
+    "leather": {
+        "output": 15,
+        "name": "Leather jerkins",
+        "inputs": [
+            {
+                "type": "hides",
+                "rate": 1
+            },
+            {
+                "type": "salt",
+                "rate": 0.5
+            }
+        ]
+    },
+    "sugar": {
+        "output": 15,
+        "name": null,
+        "inputs": [
+            {
+                "type": "sugar_cane",
+                "rate": 1
+            }
+        ]
+    },
+    "paper": {
+        "output": 20,
+        "name": null,
+        "inputs": [
+            {
+                "type": "wood",
+                "rate": 1
+            }
+        ]
+    },
+    "furcoats": {
+        "output": 24,
+        "name": "Fur coats",
+        "inputs": [
+            {
+                "type": "furs",
+                "rate": 1
+            },
+            {
+                "type": "salt",
+                "rate": 0.53
+            }
+        ]
+    },
+    "linen": {
+        "output": 30,
+        "name": "Linen garments",
+        "inputs": [
+            {
+                "type": "hemp",
+                "rate": 1
+            }
+        ]
+    },
+    "tools": {
+        "output": 30,
+        "name": null,
+        "inputs": [
+            {
+                "type": "iron",
+                "rate": 0.5
+            }
+        ]
+    },
+    "mosaic": {
+        "output": 25,
+        "name": null,
+        "inputs": [
+            {
+                "type": "clay",
+                "rate": 1
+            },
+            {
+                "type": "quartz",
+                "rate": 0.5
+            }
+        ]
+    },
+    "flour": {
+        "output": 15,
+        "name": null,
+        "inputs": [
+            {
+                "type": "wheat",
+                "rate": 1
+            }
+        ]
+    },
+    "bread": {
+        "output": 15,
+        "name": "Bread",
+        "inputs": [
+            {
+                "type": "flour",
+                "rate": 1
+            }
+        ]
+    },
+    "beer": {
+        "output": 40,
+        "name": "Beer",
+        "inputs": [
+            {
+                "type": "herbs",
+                "rate": 1.333
+            },
+            {
+                "type": "wheat",
+                "rate": 1.333
+            }
+        ]
+    },
+    "iron": {
+        "output": 30,
+        "name": null,
+        "inputs": [
+            {
+                "type": "iron_ore",
+                "rate": 1
+            },
+            {
+                "type": "coal",
+                "rate": 1
+            }
+        ]
+    },
+    "rope": {
+        "output": 30,
+        "name": null,
+        "inputs": [
+            {
+                "type": "hemp",
+                "rate": 0.5
+            }
+        ]
+    },
+    "weapons": {
+        "output": 30,
+        "name": null,
+        "inputs": [
+            {
+                "type": "iron",
+                "rate": 1
+            }
+        ]
+    },
+    "salt": {
+        "output": 15,
+        "name": null,
+        "inputs": [
+            {
+                "type": "brine",
+                "rate": 1
+            },
+            {
+                "type": "coal",
+                "rate": 0.5
+            }
+        ]
+    },
+    "meat": {
+        "output": 24,
+        "name": "Meat",
+        "inputs": [
+            {
+                "type": "cattle",
+                "rate": 1
+            },
+            {
+                "type": "salt",
+                "rate": 0.8
+            }
+        ]
+    },
+    "barrels": {
+        "output": 30,
+        "name": null,
+        "inputs": [
+            {
+                "type": "wood",
+                "rate": 0.5
+            },
+            {
+                "type": "iron",
+                "rate": 0.5
+            }
+        ]
+    },
+    "wine": {
+        "output": 30,
+        "name": "Wine",
+        "inputs": [
+            {
+                "type": "grapes",
+                "rate": 1
+            },
+            {
+                "type": "barrels",
+                "rate": 1
+            }
+        ]
+    },
+    "coffee": {
+        "output": 60,
+        "name": "Coffee",
+        "inputs": [
+            {
+                "type": "coffee_beans",
+                "rate": 2
+            }
+        ]
+    },
+    "war_machines": {
+        "output": 40,
+        "name": null,
+        "inputs": [
+            {
+                "type": "wood",
+                "rate": 2
+            },
+            {
+                "type": "rope",
+                "rate": 2
+            }
+        ]
+    },
+    "brass": {
+        "output": 45,
+        "name": null,
+        "inputs": [
+            {
+                "type": "copper",
+                "rate": 1
+            },
+            {
+                "type": "coal",
+                "rate": 1
+            }
+        ]
+    },
+    "glasses": {
+        "output": 30,
+        "name": "Glasses",
+        "inputs": [
+            {
+                "type": "brass",
+                "rate": 0.5
+            },
+            {
+                "type": "quartz",
+                "rate": 0.5
+            }
+        ]
+    },
+    "candles": {
+        "output": 45,
+        "name": null,
+        "inputs": [
+            {
+                "type": "wax",
+                "rate": 1
+            },
+            {
+                "type": "hemp",
+                "rate": 0.75
+            }
+        ]
+    },
+    "candlestick": {
+        "output": 30,
+        "name": "Candlestick",
+        "inputs": [
+            {
+                "type": "brass",
+                "rate": 0.5
+            },
+            {
+                "type": "candles",
+                "rate": 1
+            }
+        ]
+    },
+    "perfume": {
+        "output": 60,
+        "name": "Perfume",
+        "inputs": [
+            {
+                "type": "roses",
+                "rate": 1.5
+            }
+        ]
+    },
+    "marzipan": {
+        "output": 15,
+        "name": "Marzipan",
+        "inputs": [
+            {
+                "type": "almonds",
+                "rate": 1
+            },
+            {
+                "type": "sugar",
+                "rate": 1
+            }
+        ]
+    },
+    "brocade": {
+        "output": 20,
+        "name": "Brocade robes",
+        "inputs": [
+            {
+                "type": "silk",
+                "rate": 1
+            },
+            {
+                "type": "gold",
+                "rate": 0.5
+            }
+        ]
+    },
+    "carpets": {
+        "output": 40,
+        "name": "Carpets",
+        "inputs": [
+            {
+                "type": "silk",
+                "rate": 1
+            },
+            {
+                "type": "indigo",
+                "rate": 1
+            }
+        ]
+    },
+    "gold": {
+        "output": 40,
+        "name": null,
+        "inputs": [
+            {
+                "type": "gold_ore",
+                "rate": 1
+            },
+            {
+                "type": "coal",
+                "rate": 1
+            }
+        ]
+    },
+    "necklaces": {
+        "output": 60,
+        "name": "Pearl necklaces",
+        "inputs": [
+            {
+                "type": "pearls",
+                "rate": 1
+            }
+        ]
+    },
+    "cannons": {
+        "output": 60,
+        "name": null,
+        "inputs": [
+            {
+                "type": "iron",
+                "rate": 1.5
+            },
+            {
+                "type": "wood",
+                "rate": 3
+            }
+        ]
+    },
+    "books": {
+        "output": 20,
+        "name": "Books",
+        "inputs": [
+            {
+                "type": "paper",
+                "rate": 0.5
+            },
+            {
+                "type": "indigo",
+                "rate": 1
+            }
+        ]
+    },
+    "glass": {
+        "output": 60,
+        "name": null,
+        "inputs": [
+            {
+                "type": "potash",
+                "rate": 1
+            },
+            {
+                "type": "quartz",
+                "rate": 0.5
+            }
+        ]
+    }
+}
