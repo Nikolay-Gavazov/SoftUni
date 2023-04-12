@@ -1,4 +1,5 @@
 import { create, deleteGame, getGames } from '../data/games.js';
+import { getIslands } from '../data/islands.js';
 import {html} from '../lib/lit-html.js'
 import { createSubmitHandler } from '../util.js';
 import { icon } from './partials.js';
@@ -111,6 +112,8 @@ export async function settingsView(ctx){
 
         ctx.setGame(game);
         
+        const islands = await getIslands(game.objectId);
+        ctx.setIslands(islands)
 
         update();
     }

@@ -21,5 +21,5 @@ async function resolveIcon(name, classList){
     return iconTemplate(data[0], data[1], classList);
 }
 
-const iconTemplate = (x, y) => html `
+const iconTemplate = (x, y, classList) => html `
 <span class="icon" ${classList.join(' ')} style="background-position: -${x * 46}px -${y * 46}px"></span>`

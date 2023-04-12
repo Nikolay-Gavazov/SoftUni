@@ -1,10 +1,21 @@
+import { getIslands } from '../data/islands.js';
 import {html} from '../lib/lit-html.js'
 
 
-const islandsTemplate = () => html `
+const islandsTemplate = (islands) => html `
 <h1>Islands Page</h1>
+<ul>
+    ${islands.map(i => html `<li>${i.name}</li>`)}
+</ul>
 `;
 
-export function islandsView(ctx){
-    ctx.render(islandsTemplate());
+export async function islandsView(ctx){
+    const game = ctx.game;
+
+    if(!game){
+        ctx.page.redirect('/settings');
+    }
+    const islands = await getIslands(game.objectId);
+    
+    ctx.render(islandsTemplate(islands));
 }

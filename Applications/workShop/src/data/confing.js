@@ -1,6 +1,6 @@
 export async function loadConfig(name){
     try {
-        const request = await fetch(`/src/data${name}.json`);
+        const request = await fetch(`Applications/workShop/src/config/${name}.json`);
         const data = await request.json();
 
         return data;
@@ -8,4 +8,4 @@ export async function loadConfig(name){
         alert('Could not load config file: ' + name);
         throw new Error('Could not load config file: ' + name);
     }
-}
+} 
