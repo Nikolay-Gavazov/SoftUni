@@ -3,7 +3,7 @@ import {html} from '../lib/lit-html.js'
 import { createSubmitHandler } from '../util.js';
 
 
-const settingsTemplate = (games, user, onCreate, onDelete, error) => html `
+const settingsTemplate = (games, user, onCreate, onDelete, onLoad, error) => html `
 <h1>Settings Page</h1>
 <section class = 'main'>
     ${!user ? html `
@@ -24,7 +24,7 @@ const settingsTemplate = (games, user, onCreate, onDelete, error) => html `
             <tr>
                 <td colspan = '2'>No games are recorded</td>
             </tr>
-            ` : games.map((g, i) => gameRow(g, onDelete.bind(null, i)))}
+            ` : games.map((g, i) => gameRow(g, onDelete.bind(null, i), onLoad.bind(null, i)))}
         </tbody>
         <tfoot>
             <tr>
@@ -41,11 +41,11 @@ const settingsTemplate = (games, user, onCreate, onDelete, error) => html `
 </section>
 `;
 
-const gameRow = (game, index, onDelete) => html `
+const gameRow = (game, onDelete, onLoad) => html `
 <tr>
-    <td>${game.name}</td>
+    <td>${game.active ? icon('arrow', 'left') : null}${game.name}</td>
     <td>
-        <button class = 'btn'><i class = 'fa-solid fa-download'></i>Load</button>
+        <button @click = ${onLoad} class = 'btn'><i class = 'fa-solid fa-download'></i>Load</button>
         <button @click = ${onDelete} class = 'btn'><i class = 'fa-solid fa-trash-can'></i>Delete</button>
     </td>
 </tr>
@@ -53,11 +53,17 @@ const gameRow = (game, index, onDelete) => html `
 export async function settingsView(ctx){
 
     const games = ctx.user ? await getGames() : [];
-    
+
     update()
 
     function update(error){
-        ctx.render(settingsTemplate(games, ctx.user, createSubmitHandler(onCreate), onDelete, error));
+         if(ctx.game){
+            const current = games.find(g => g.objectId == ctx.game.objectId);
+            if(current){
+                current.active = true;
+            } 
+        }
+        ctx.render(settingsTemplate(games, ctx.user, createSubmitHandler(onCreate), onDelete, onLoad, error));
     }
 
 
@@ -90,5 +96,14 @@ export async function settingsView(ctx){
             update()
         }
         
+    }
+
+    async function onLoad(index){
+        const game = games[index];
+
+        ctx.setGame(game);
+        
+
+        update();
     }
 }

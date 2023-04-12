@@ -1,5 +1,5 @@
 import { clearUserData, getUserData } from '../util.js';
-//import { mask, unmask } from '../views/partials.js';
+// import { mask, unmask } from '../views/partials.js';
 
 
 const host = 'https://parseapi.back4app.com';
@@ -29,10 +29,10 @@ async function request(method, url, data, dontMask) {
     }
 
     try {
-        if (!dontMask) {
-            inFlight++;
-            mask();
-        }
+        // if (!dontMask) {
+        //     inFlight++;
+        //     mask();
+        // }
         const response = await fetch(host + url, options);
 
         let result;
@@ -57,13 +57,13 @@ async function request(method, url, data, dontMask) {
         handleError(err);
         throw err;
     } finally {
-        if (!dontMask) {
-            inFlight--;
-            if (inFlight <= 0) {
-                inFlight = 0;
-                unmask();
-            }
-        }
+        // if (!dontMask) {
+        //     inFlight--;
+        //     if (inFlight <= 0) {
+        //         inFlight = 0;
+        //         unmask();
+        //     }
+        // }
     }
 }
 
