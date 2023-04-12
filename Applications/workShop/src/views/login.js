@@ -6,13 +6,19 @@ import { login } from '../data/auth.js';
 const loginTemplate = (onLogin, formData = {}, error) => html `
 <h1>Login</h1>
 <section class = 'main'>
-        <form>
-            ${error ? html`<p class = 'error'>${error}</p>` : null}
-            <label>Username <input type = 'text' name = 'username' .value = ${formData.username || ''}></label>        
-            <label>Password <input type = 'password' name = 'password'></label>
-            <button class ='btn'>Sign in</button>
+        <form @submit = ${onLogin}>
+            <div class = 'layout'>
+                ${error ? html`<p class = 'error'>${error}</p>` : null}
+                <label for = 'username'>Username</label>
+                <input id = 'username' type = 'text' name = 'username' .value = ${formData.username || ''}>        
+                <label for = 'password'>Password</label>
+                <input id = 'password' type = 'password' name = 'password'>
+            </div>
+            <button class ='btn form-row action'>Sign in</button>
         </form>
-        <p>don't have an account? <a href = '/register' class = 'link'>Sign up here</a></p>
+        <div>
+            Don't have an account? <a href = '/register' class = 'link'>Sign up here</a>
+        </div>
 </section>
 `;
 
