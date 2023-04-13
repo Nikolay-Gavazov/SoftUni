@@ -1,4 +1,4 @@
-import { createIsland, deleteIsland, updateIsland } from '../data/islands.js';
+import { createIsland, deleteIsland, getIslands, updateIsland } from '../data/islands.js';
 import { html } from '../lib/lit-html.js'
 import { createSubmitHandler, createUrl } from '../util.js';
 
@@ -17,7 +17,7 @@ const islandsTemplate = (islands, onCreate, onDelete, onRename, onMove) => html`
                         </tr>
                     </thead>
                     <tbody>
-                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId), onRename.bind(null, i.objectId), onMove.bind(null, i.objectId)))}
+                        ${islands ? islands.map(i => islandRow(i, onDelete.bind(null, i.objectId), onRename.bind(null, i.objectId), onMove.bind(null, i.objectId))) : null}
                     </tbody>
 </table>
 <tfoot>
