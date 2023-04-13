@@ -3,7 +3,7 @@ import { html } from '../lib/lit-html.js'
 import { createSubmitHandler, createUrl } from '../util.js';
 
 
-const islandsTemplate = (islands, onCreate, onDelete) => html`
+const islandsTemplate = (islands, onCreate, onDelete, onRename) => html`
 <h1>Islands Overview</h1>
 <section class="main">
 <table>
@@ -17,7 +17,7 @@ const islandsTemplate = (islands, onCreate, onDelete) => html`
                         </tr>
                     </thead>
                     <tbody>
-                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId)))}
+                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId), onRename.bind(null, i.objectId)))}
                     </tbody>
 </table>
 <tfoot>
@@ -32,7 +32,7 @@ const islandsTemplate = (islands, onCreate, onDelete) => html`
 </tfoot>
 `;
 
-const islandRow = (island, onDelete) => html`
+const islandRow = (island, onDelete, onRename) => html`
     <tr>
                             <td class="wide">
                                 <div class="btn-grid">
@@ -45,7 +45,7 @@ const islandRow = (island, onDelete) => html`
                                 <span class="label sub narrow">Population:&nbsp;12061</span>
                                 <div class="grid narrow">
                                     <button class="btn"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-pencil"></i></button>
+                                    <button class="btn" @click = ${onRename}><i class="fa-solid fa-pencil"></i></button>
                                     <button class="btn" @click = ${onDelete}><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </td>
@@ -60,7 +60,7 @@ const islandRow = (island, onDelete) => html`
                             </td>
                             <td class="wide">
                                 <div class="btn-grid">
-                                    <button class="btn">Rename</button>
+                                    <button class="btn" @click = ${onRename}>Rename</button>
                                     <button class="btn" @click = ${onDelete}>Delete</button>
                                 </div>
                             </td>
@@ -79,10 +79,13 @@ export async function islandsView(ctx) {
     update()
     
     function update(){
-        ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate), onDelete));
+        ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate), onDelete, onRename));
     }
 
     async function onCreate({name}, form){
+        if(!name){
+            return;
+        }
         const island = {
             name,
             game: ctx.game.objectId,
@@ -113,4 +116,15 @@ export async function islandsView(ctx) {
         }
          
     }
+
+    async function onRename(id){
+        const index = islands.findIndex(i => id == i.objectId);
+        const island = islands[index];
+
+        const newName = prompt(`Enter new name for ${island.name}`, island.name);
+        if(newName){
+
+        }
+    }
+
 }
