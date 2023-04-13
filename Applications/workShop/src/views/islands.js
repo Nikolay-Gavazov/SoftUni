@@ -1,4 +1,4 @@
-import { createIsland, deleteIsland, getIslands } from '../data/islands.js';
+import { createIsland, deleteIsland, getIslands, updateIsland } from '../data/islands.js';
 import { html } from '../lib/lit-html.js'
 import { createSubmitHandler, createUrl } from '../util.js';
 
@@ -123,7 +123,25 @@ export async function islandsView(ctx) {
 
         const newName = prompt(`Enter new name for ${island.name}`, island.name);
         if(newName){
+            island.name = newName;
+            island.url = createUrl(newName);
+            const result = await updateIsland(id, island);
+            Object.assign(island, result);
+            ctx.setIslands(islands);
 
+            update();
+        }
+    }
+
+    async function onMove(id, order){
+        const oldIndex = islands.findIndex(i => id == i.objectId);
+        const island = islands[oldIndex];
+
+        if(order == undefined){
+           order = prompt('Enter new order', oldIndex);
+           if(order == null){
+
+           }
         }
     }
 
