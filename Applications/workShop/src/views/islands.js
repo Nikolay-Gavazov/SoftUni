@@ -1,9 +1,9 @@
-import { createIsland, deleteIsland, getIslands, updateIsland } from '../data/islands.js';
+import { createIsland, deleteIsland, updateIsland } from '../data/islands.js';
 import { html } from '../lib/lit-html.js'
 import { createSubmitHandler, createUrl } from '../util.js';
 
 
-const islandsTemplate = (islands, onCreate, onDelete, onRename) => html`
+const islandsTemplate = (islands, onCreate, onDelete, onRename, onMove) => html`
 <h1>Islands Overview</h1>
 <section class="main">
 <table>
@@ -17,7 +17,7 @@ const islandsTemplate = (islands, onCreate, onDelete, onRename) => html`
                         </tr>
                     </thead>
                     <tbody>
-                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId), onRename.bind(null, i.objectId)))}
+                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId), onRename.bind(null, i.objectId), onMove.bind(null, i.objectId)))}
                     </tbody>
 </table>
 <tfoot>
@@ -32,19 +32,19 @@ const islandsTemplate = (islands, onCreate, onDelete, onRename) => html`
 </tfoot>
 `;
 
-const islandRow = (island, onDelete, onRename) => html`
+const islandRow = (island, onDelete, onRename, onMove) => html`
     <tr>
                             <td class="wide">
                                 <div class="btn-grid">
-                                    <button class="btn"><i class="fa-solid fa-up-long"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-down-long"></i></button>
+                                <button class="btn" @click = ${onMove}><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
+                                <span class = 'label'>${island.order}</span>
                                 </div>
                             </td>
                             <td>
                                 <span class="label prim">${island.name}</span>
                                 <span class="label sub narrow">Population:&nbsp;12061</span>
                                 <div class="grid narrow">
-                                    <button class="btn"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
+                                    <button class="btn" @click = ${onMove}><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
                                     <button class="btn" @click = ${onRename}><i class="fa-solid fa-pencil"></i></button>
                                     <button class="btn" @click = ${onDelete}><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
@@ -79,7 +79,7 @@ export async function islandsView(ctx) {
     update()
     
     function update(){
-        ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate), onDelete, onRename));
+        ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate), onDelete, onRename, onMove));
     }
 
     async function onCreate({name}, form){
@@ -133,16 +133,24 @@ export async function islandsView(ctx) {
         }
     }
 
-    async function onMove(id, order){
+    async function onMove(id){
         const oldIndex = islands.findIndex(i => id == i.objectId);
         const island = islands[oldIndex];
 
-        if(order == undefined){
-           order = prompt('Enter new order', oldIndex);
-           if(order == null){
+        const input = prompt('Enter new order', island.order);
+        const order = Number(input);
 
-           }
+        if(input == null || input == '' || Number.isInteger(order) == false){
+            return;
         }
+        
+        island.order = order;
+        const result = await updateIsland(id, island);
+        Object.assign(island, result);
+        islands.sort((a, b) => a.order - b.order);
+        ctx.setIslands(islands)
+
+        update();
     }
 
 }
