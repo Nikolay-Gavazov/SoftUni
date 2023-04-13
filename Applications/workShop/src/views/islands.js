@@ -1,9 +1,9 @@
-import { createIsland, getIslands } from '../data/islands.js';
+import { createIsland, deleteIsland, getIslands } from '../data/islands.js';
 import { html } from '../lib/lit-html.js'
-import { createSubmitHandler } from '../util.js';
+import { createSubmitHandler, createUrl } from '../util.js';
 
 
-const islandsTemplate = (islands, onCreate) => html`
+const islandsTemplate = (islands, onCreate, onDelete) => html`
 <h1>Islands Overview</h1>
 <section class="main">
 <table>
@@ -17,7 +17,7 @@ const islandsTemplate = (islands, onCreate) => html`
                         </tr>
                     </thead>
                     <tbody>
-                        ${islands.map(islandRow)}
+                        ${islands.map(i => islandRow(i, onDelete.bind(null, i.objectId)))}
                     </tbody>
 </table>
 <tfoot>
@@ -32,7 +32,7 @@ const islandsTemplate = (islands, onCreate) => html`
 </tfoot>
 `;
 
-const islandRow = (island) => html`
+const islandRow = (island, onDelete) => html`
     <tr>
                             <td class="wide">
                                 <div class="btn-grid">
@@ -46,7 +46,7 @@ const islandRow = (island) => html`
                                 <div class="grid narrow">
                                     <button class="btn"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
                                     <button class="btn"><i class="fa-solid fa-pencil"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
+                                    <button class="btn" @click = ${onDelete}><i class="fa-solid fa-trash-can"></i></button>
                                 </div>
                             </td>
                             <td class="wide"><span class="label prim">12061</span></td>
@@ -61,74 +61,11 @@ const islandRow = (island) => html`
                             <td class="wide">
                                 <div class="btn-grid">
                                     <button class="btn">Rename</button>
-                                    <button class="btn">Delete</button>
+                                    <button class="btn" @click = ${onDelete}>Delete</button>
                                 </div>
                             </td>
                         </tr><!----><!---->
-                        <tr>
-                            <td class="wide">
-                                <div class="btn-grid">
-                                    <button class="btn"><i class="fa-solid fa-up-long"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-down-long"></i></button>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="label prim"><!--?lit$398638298$-->Ku'Raast</span>
-                                <span class="label sub narrow">Population:&nbsp;<!--?lit$398638298$-->3145</span>
-                                <div class="grid narrow">
-                                    <button class="btn"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-pencil"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </td>
-                            <td class="wide"><span class="label prim"><!--?lit$398638298$-->3145</span></td>
-                            <td>
-                                <div class="btn-grid">
-                                    <a class="btn" href="/Ku-Raast/ascension">Ascension</a>
-                                    <a class="btn" href="/Ku-Raast/population">Population</a>
-                                    <a class="btn" href="/Ku-Raast/needs">Needs</a>
-                                    <!-- <a href="/lit$398638298$/industry">Industry</a> -->
-                                </div>
-                            </td>
-                            <td class="wide">
-                                <div class="btn-grid">
-                                    <button class="btn">Rename</button>
-                                    <button class="btn">Delete</button>
-                                </div>
-                            </td>
-                        </tr><!----><!---->
-                        <tr>
-                            <td class="wide">
-                                <div class="btn-grid">
-                                    <button class="btn"><i class="fa-solid fa-up-long"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-down-long"></i></button>
-                                </div>
-                            </td>
-                            <td>
-                                <span class="label prim"><!--?lit$398638298$-->Blackrock</span>
-                                <span class="label sub narrow">Population:&nbsp;<!--?lit$398638298$-->1260</span>
-                                <div class="grid narrow">
-                                    <button class="btn"><i class="fa-solid fa-arrow-down-up-across-line"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-pencil"></i></button>
-                                    <button class="btn"><i class="fa-solid fa-trash-can"></i></button>
-                                </div>
-                            </td>
-                            <td class="wide"><span class="label prim"><!--?lit$398638298$-->1260</span></td>
-                            <td>
-                                <div class="btn-grid">
-                                    <a class="btn" href="/Blackrock/ascension">Ascension</a>
-                                    <a class="btn" href="/Blackrock/population">Population</a>
-                                    <a class="btn" href="/Blackrock/needs">Needs</a>
-                                    <!-- <a href="/lit$398638298$/industry">Industry</a> -->
-                                </div>
-                            </td>
-                            <td class="wide">
-                                <div class="btn-grid">
-                                    <button class="btn">Rename</button>
-                                    <button class="btn">Delete</button>
-                                </div>
-                            </td>
-                        </tr>
+                        
 `;
 
 export async function islandsView(ctx) {
@@ -138,16 +75,42 @@ export async function islandsView(ctx) {
         ctx.page.redirect('/settings');
     }
     const islands = ctx.islands;
-
-    ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate)));
-
-
+    
+    update()
+    
+    function update(){
+        ctx.render(islandsTemplate(islands, createSubmitHandler(onCreate), onDelete));
+    }
 
     async function onCreate({name}, form){
         const island = {
             name,
-            game: ctx.game.objectId
+            game: ctx.game.objectId,
+            url: createUrl(name)
         }
-       const result = await createIsland(island)
+       const result = await createIsland(island);
+
+       Object.assign(island, result);
+       islands.push(island);
+       ctx.setIslands(islands);
+        
+       form.reset();
+       update();
+    }
+
+    async function onDelete(id){
+        const index = islands.findIndex(i => id == i.objectId);
+        if(index == -1){
+            return alert('Island not found, please reload game.')
+        }
+        const choice = confirm('Are you sure?');
+        if(choice){
+            await deleteIsland(id);
+            islands.splice(index, 1);
+            ctx.setIslands(islands);
+
+            update();
+        }
+         
     }
 }

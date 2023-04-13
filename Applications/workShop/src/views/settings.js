@@ -76,7 +76,7 @@ export async function settingsView(ctx){
     }
 
 
-    async function onCreate({name}){
+    async function onCreate({name}, form){
         try {
             if(name == ''){
                 throw {message: 'Name is required'}
@@ -87,6 +87,8 @@ export async function settingsView(ctx){
 
             Object.assign(gameData, result);
             games.push(gameData)
+            
+            form.reset()
 
             update();
         } catch (err) {
