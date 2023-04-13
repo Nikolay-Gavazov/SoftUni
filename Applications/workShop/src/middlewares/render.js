@@ -12,5 +12,15 @@ export function addRender(ctx, next){
 
 function renderView(content){
     const tab = this.pathname;
-    render(layoutTemplate(tab, content), root);
+    const islands = this?.islands || [];
+    const current = this.selection?.island;
+    const mode = this.selection?.mode;
+
+
+    render(layoutTemplate(tab, islands, current, mode, onChange.bind(this), content), root);
+
+    function onChange(event){
+        const url = event.target.value;
+        this.page.redirect(`/${url}/${mode || 'population'}`)
+    }
 }
