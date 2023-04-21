@@ -41,7 +41,13 @@
                 background-color: rgb(244, 67, 54);
             }
         </style>
-        <button class="btn"></button>
+        <button class="btn"><slot></slot></button>
     </template>
+
+    <main>
+        <app-button type = 'primary'></app-button>
+        <app-button type = 'accent'></app-button>
+        <app-button type = 'warn'></app-button>
+    </main>
 </body>
 </html>
