@@ -12,4 +12,4 @@ class InfoPopup extends HTMLElement {
 
 }
 
-customElements('info-popup', InfoPopup);
+customElements.define('info-popup', InfoPopup);
