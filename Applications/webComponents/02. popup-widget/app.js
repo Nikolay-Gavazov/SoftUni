@@ -8,7 +8,10 @@ class InfoPopup extends HTMLElement {
 
     connectedCallback(){
         this.shadowRoot.appendChild(template.content.cloneNode(true));
-        
+        const imgSrc = this.getAttribute('img');
+        if(imgSrc){
+            this.shadowRoot.querySelector('img').src = imgSrc;
+        }
     }
 
 }
