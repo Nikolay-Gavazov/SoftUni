@@ -7,7 +7,8 @@ class InfoPopup extends HTMLElement {
     }
 
     connectedCallback(){
-        this.shadowRoot.appendChild(template.contentEditable.cloneNode(true));
+        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        
     }
 
 }
