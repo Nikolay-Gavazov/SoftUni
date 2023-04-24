@@ -1,6 +1,6 @@
-import { html, render as litrender } from "../../../node_modules/lit-html/lit-html.js";
+import { html, nothing, render as litrender } from "../../../node_modules/lit-html/lit-html.js";
 
-const template = (avatar) => html`
+const template = (avatar, info, onToggle) => html`
 <style>
 .user-card {
                 display: flex;
@@ -62,12 +62,14 @@ const template = (avatar) => html`
             </figure>
             <div class="info">
                 <h3><slot></slot></h3>
+                ${info ? html `
                 <div>
                     <p><slot name="email" /></p>
                     <p><slot name="phone" /></p>
                 </div>
+                ` : nothing}
 
-                <button class="toggle-info-btn">${info ? Show info : </button>
+                <button @click = ${onToggle} class="toggle-info-btn">${info ? 'Hide info' : 'Show info'}</button>
             </div>
         </div>
 `;
@@ -85,8 +87,13 @@ class UserCard extends HTMLElement {
         this.render();
     }
 
+    toggle(){
+        this._info = !this._info;
+        this.render();
+    }
+
     render(){
-        litrender(template(), this.shadowRoot,{host: this});
+        litrender(template(this._avatar, this._info, this.toggle), this.shadowRoot,{host: this});
     }
 }
 
