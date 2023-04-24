@@ -1,8 +1,8 @@
-import { html, render } from "../../../node_modules/lit-html/lit-html.js";
+import { html, render as litrender } from "../../../node_modules/lit-html/lit-html.js";
 
-const template = () => html`
+const template = (avatar) => html`
 <style>
-            .user-card {
+.user-card {
                 display: flex;
                 font-family: 'Arial', sans-serif;
                 background-color: #EEE;
@@ -10,24 +10,24 @@ const template = () => html`
                 width: 100%;
             }
 
-            .user-card img {
+.user-card img {
                 width: 200px;
                 height: 200px;
                 border: 1px solid darkorchid;
             }
 
-            .info {
+.info {
                 display: flex;
                 flex-direction: column;
             }
 
-            .info h3 {
+.info h3 {
                 font-weight: bold;
                 margin-top: 1em;
                 text-align: center;
             }
 
-            .info button {
+.info button {
                 outline: none;
                 border: none;
                 cursor: pointer;
@@ -36,7 +36,7 @@ const template = () => html`
                 padding: 0.5em 1em;
             }
 
-            @media only screen and (max-width: 500px) {
+@media only screen and (max-width: 500px) {
                 .user-card {
                     flex-direction: column;
                     margin-bottom: 1em;
@@ -55,23 +55,39 @@ const template = () => html`
                     padding-left: 1em;
                 }
             }
-        </style>
+</style>
         <div class="user-card">
             <figure>
-                <img src="AVATAR IMAGE" />
+                <img src=${avatar} />
             </figure>
             <div class="info">
-                <h3>USER NAMES</h3>
+                <h3><slot></slot></h3>
                 <div>
-                    <p>
-                        <slot name="email" />
-                    </p>
-                    <p>
-                        <slot name="phone" />
-                    </p>
+                    <p><slot name="email" /></p>
+                    <p><slot name="phone" /></p>
                 </div>
 
-                <button class="toggle-info-btn">Toggle Info</button>
+                <button class="toggle-info-btn">${info ? Show info : </button>
             </div>
         </div>
 `;
+
+
+class UserCard extends HTMLElement {
+    constructor(){
+        super();
+        this._avatar = this.getAttribute('avatar');
+        this._info = 
+        this.attachShadow({mode:'open'});
+    }
+
+    connectedCallback(){
+        this.render();
+    }
+
+    render(){
+        litrender(template(), this.shadowRoot,{host: this});
+    }
+}
+
+customElements.define('user-card', UserCard)
