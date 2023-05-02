@@ -1,12 +1,12 @@
-function vacation (people, group, day){
+function vacation(people, group, day) {
 
     let price = 0;
 
     let totalPrice = 0;
 
-    switch(group){
+    switch (group) {
         case 'Students':
-            switch(day){
+            switch (day) {
                 case 'Friday':
                     price = 8.45;
                     break;
@@ -17,15 +17,15 @@ function vacation (people, group, day){
                     price = 10.46;
                     break;
             }
-            if(people >= 30){
+            if (people >= 30) {
                 totalPrice = (price * people) * 0.85;
-            }else{
+            } else {
                 totalPrice = price * people;
             }
             break;
-        
+
         case 'Business':
-            switch(day){
+            switch (day) {
                 case 'Friday':
                     price = 10.9;
                     break;
@@ -36,16 +36,16 @@ function vacation (people, group, day){
                     price = 16;
                     break;
             }
-            if(people >= 100){
+            if (people >= 100) {
                 people -= 10;
                 totalPrice = price * people
-            }else{
+            } else {
                 totalPrice = price * people;
             }
             break;
 
         case 'Regular':
-            switch(day){
+            switch (day) {
                 case 'Friday':
                     price = 15;
                     break;
@@ -56,9 +56,9 @@ function vacation (people, group, day){
                     price = 22.5;
                     break;
             }
-            if(people >= 10 && people <= 20){
+            if (people >= 10 && people <= 20) {
                 totalPrice = (price * people) * 0.95;
-            }else{
+            } else {
                 totalPrice = price * people;
             }
             break;
@@ -70,5 +70,5 @@ function vacation (people, group, day){
 vacation(30,
 
     "Students",
-    
+
     "Sunday")
