@@ -1,9 +1,9 @@
-function printAndSum (firstNum, lastNum){
+function printAndSum(firstNum, lastNum) {
 
     let sum = 0;
     let result = '';
 
-    for(let i = firstNum; i <= lastNum; i++){
+    for (let i = firstNum; i <= lastNum; i++) {
         result += i + ' ';
         sum += i;
     }
