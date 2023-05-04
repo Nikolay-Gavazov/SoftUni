@@ -25,7 +25,7 @@ function pyramid(base, increment) {
         }
 
     }
-    
+
     console.log(`Stone required: ${Math.ceil(stone)}`);
     console.log(`Marble required: ${Math.ceil(marble)}`);
     console.log(`Lapis Lazuli required: ${Math.ceil(lapis)}`);
