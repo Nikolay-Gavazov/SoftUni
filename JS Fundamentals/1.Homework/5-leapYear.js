@@ -1,10 +1,10 @@
-function leapYear(year){
+function leapYear(year) {
 
     let isLeapYear = year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
 
-    if(isLeapYear){
+    if (isLeapYear) {
         console.log('yes');
-    }else{
+    } else {
         console.log('no');
     }
 
