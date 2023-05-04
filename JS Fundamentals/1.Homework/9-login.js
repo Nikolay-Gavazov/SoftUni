@@ -24,9 +24,9 @@ function login(input) {
         } else {
             console.log('Incorrect password. Try again.');
         }
-        
+
 
     }
 
 }
-login(['Acer','login','go','let me in','recA'])
+login(['Acer', 'login', 'go', 'let me in', 'recA'])
