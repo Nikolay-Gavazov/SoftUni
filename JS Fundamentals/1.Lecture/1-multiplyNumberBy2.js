@@ -1,3 +1,3 @@
-function solve (num){
+function solve(num) {
     console.log(num * 2);
-}solve(25)
+} solve(25)
