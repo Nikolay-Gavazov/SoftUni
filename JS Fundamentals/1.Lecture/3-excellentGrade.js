@@ -1,7 +1,7 @@
-function solve(grade){
-    if(grade >= 5.50){
+function solve(grade) {
+    if (grade >= 5.50) {
         console.log('Excellent');
-    }else {
+    } else {
         console.log('Not excellent');
     }
-}solve(5.5)
+} solve(5.5)
