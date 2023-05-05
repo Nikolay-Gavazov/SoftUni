@@ -12,4 +12,4 @@ function solve(country) {
         default:
             console.log('unknown');
     }
-}solve('Mexico')
+} solve('Mexico')
