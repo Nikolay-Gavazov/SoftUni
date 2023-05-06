@@ -1,38 +1,38 @@
-function theatrePromotions(day, age){
+function theatrePromotions(day, age) {
 
     let result = 0;
 
-    switch(day){
+    switch (day) {
         case 'Weekday':
-            if(0 <= age && age <=18){
+            if (0 <= age && age <= 18) {
                 result = '12$';
-            }else if(18 < age && age <= 64){
+            } else if (18 < age && age <= 64) {
                 result = '18$';
-            }else if(64 < age && age <= 122){
+            } else if (64 < age && age <= 122) {
                 result = '12$';
-            }else{
+            } else {
                 result = 'Error!'
             }
             break;
         case 'Weekend':
-            if(0 <= age && age <=18){
+            if (0 <= age && age <= 18) {
                 result = '15$';
-            }else if(18 < age && age <= 64){
+            } else if (18 < age && age <= 64) {
                 result = '20$';
-            }else if(64 < age && age <= 122){
+            } else if (64 < age && age <= 122) {
                 result = '15$';
-            }else{
+            } else {
                 result = 'Error!'
             }
             break;
         case 'Holiday':
-            if(0 <= age && age <=18){
+            if (0 <= age && age <= 18) {
                 result = '5$';
-            }else if(18 < age && age <= 64){
+            } else if (18 < age && age <= 64) {
                 result = '12$';
-            }else if(64 < age && age <= 122){
+            } else if (64 < age && age <= 122) {
                 result = '10$';
-            }else{
+            } else {
                 result = 'Error!'
             }
             break;
@@ -41,4 +41,4 @@ function theatrePromotions(day, age){
     console.log(result);
 
 }
-theatrePromotions('Weekday',42)
+theatrePromotions('Weekday', 42)
