@@ -1,8 +1,8 @@
-function solve(input){
+function solve(input) {
 
     let month = Number(input);
 
-    switch(month){
+    switch (month) {
         case 1:
             console.log('January');
             break;
