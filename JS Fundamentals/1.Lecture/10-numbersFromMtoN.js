@@ -1,6 +1,6 @@
-function numbersFromMtoN(m, n){
+function numbersFromMtoN(m, n) {
 
-    for(let i = m; i >= n; i--){
+    for (let i = m; i >= n; i--) {
         console.log(i);
     }
 
