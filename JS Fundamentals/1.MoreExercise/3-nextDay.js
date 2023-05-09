@@ -16,7 +16,7 @@ function nextDay(year, mount, day) {
                     nextDay = 1;
                     mount = 3;
                 }
-            }else{
+            } else {
                 nextDay = 1;
                 mount = 3;
             }
@@ -84,11 +84,11 @@ function nextDay(year, mount, day) {
             break;
 
     }
-    if(year < 1900){
+    if (year < 1900) {
         year = 1900 + year
     }
 
     console.log(`${year}-${mount}-${nextDay}`);
 
 }
-nextDay(1,1,1)
+nextDay(1, 1, 1)

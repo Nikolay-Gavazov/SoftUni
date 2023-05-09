@@ -19,10 +19,10 @@ function englishNameOfTheLastDigit(num) {
             break;
         case 3:
             console.log('three');
-            break; 
+            break;
         case 4:
             console.log('four');
-            break; 
+            break;
         case 5:
             console.log('five');
             break;
@@ -31,10 +31,10 @@ function englishNameOfTheLastDigit(num) {
             break;
         case 7:
             console.log('seven');
-            break; 
+            break;
         case 8:
             console.log('eight');
-            break; 
+            break;
         case 9:
             console.log('nine');
             break;
