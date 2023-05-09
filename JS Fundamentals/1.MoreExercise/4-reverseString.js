@@ -1,4 +1,4 @@
-function reverseString(input){
+function reverseString(input) {
 
     let string = input;
 
