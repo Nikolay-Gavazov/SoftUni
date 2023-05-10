@@ -1,4 +1,4 @@
-function poundsToDollars(pounds){
+function poundsToDollars(pounds) {
 
     const poundToDollars = 1.31;
     let output = poundToDollars * pounds;
