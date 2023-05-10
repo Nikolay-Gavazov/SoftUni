@@ -1,9 +1,9 @@
-function charsToString(first, second, third){
+function charsToString(first, second, third) {
 
     console.log(first + second + third);
 
-}charsToString('a',
+} charsToString('a',
 
-'b',
+    'b',
 
-'c')
+    'c')
