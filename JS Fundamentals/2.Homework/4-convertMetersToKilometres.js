@@ -1,4 +1,4 @@
-function convertMetersToKilometers(meters){
+function convertMetersToKilometers(meters) {
 
     let kilometers = meters / 1000;
 
