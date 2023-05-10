@@ -1,9 +1,9 @@
-function townInfo(town, population, area){
+function townInfo(town, population, area) {
 
     console.log(`Town ${town} has population of ${population} and area ${area} square km.`);
 
-}townInfo('Sofia',
+} townInfo('Sofia',
 
-1286383,
+    1286383,
 
-492)
+    492)
