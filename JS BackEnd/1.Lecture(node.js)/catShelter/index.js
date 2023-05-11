@@ -1,10 +1,10 @@
 const http = require('http');
-const fs = require('fs/promises');
+const homePage = require('./views/home/index')
 
 
 const server = http.createServer(async (req, res) => {
-    res.write('<h1>Welcome to Home Page</h1>');
-    const homePage = await fs.readFile('./views/home/index.html')
+    res.write(homePage);
+
     res.end();
 });
 
