@@ -11,7 +11,7 @@ const server = http.createServer(router.main);
 
 router.routes['/'] = homeController;
 router.routes['/styles/site.css'] = styleController;
-router.routes['/cats/add-breed'] = addBreedController;
+router.routes['/add-breed'] = addBreedController;
 
 function homeController(req, res){
         res.write(homePage);

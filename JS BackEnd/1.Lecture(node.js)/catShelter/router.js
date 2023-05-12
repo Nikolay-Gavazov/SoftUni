@@ -4,7 +4,7 @@ function main(req, res){
 
     const url = new URL(req.url, `http://${req.headers.host}`);
 
-    const handler = match(url);
+    const handler = routes[url.pathname];
 
     if(typeof handler == 'function'){
         handler(req, res);
@@ -13,10 +13,6 @@ function main(req, res){
     }
 }
 
-function match(url){
-    const handler = routes[url.pathname];
-    return handler;
-}
 
 function defaultController(req, res){
     res.statusCode = 404;
