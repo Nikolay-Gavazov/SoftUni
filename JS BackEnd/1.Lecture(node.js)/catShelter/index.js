@@ -11,13 +11,18 @@ const server = http.createServer(async (req, res) => {
             'Content-Type': 'text/html'
         });
         res.write(homePage);
+        res.end();
     }else if(url == '/styles/site.css'){
         res.write(style);
+        res.end();
     }else if(url == '/cats/add-breed'){
 
+    }else{
+        res.statusCode = 404;
+        res.write('<h2>Not found</h2>');
+        res.end();
     }
 
-    res.end();
 });
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
