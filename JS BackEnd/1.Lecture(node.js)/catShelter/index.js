@@ -1,10 +1,7 @@
 const http = require('http');
-const homePage = require('./views/home/index');
-const addBreedPage = require('./views/addBreed')
-const style = require('./content/styles/site');
-
-
 const router = require('./router');
+const { homeController, styleController } = require('./controllers/homeController');
+const { addBreedController, addCatController } = require('./controllers/addController');
 
 
 const server = http.createServer(router.main);
@@ -12,26 +9,6 @@ const server = http.createServer(router.main);
 router.routes['/'] = homeController;
 router.routes['/styles/site.css'] = styleController;
 router.routes['/add-breed'] = addBreedController;
-
-function homeController(req, res){
-        res.write(homePage);
-        res.end();
-}
-
-function addBreedController(req, res){
-    res.write(addBreedPage);
-    res.end();
-}
-
-function styleController(req, res){
-        res.write(style);
-        res.end();
-}
-
-function addCatController(req, res){
-    
-}
-
-
+router.routes['/add-cat'] = addCatController;
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
