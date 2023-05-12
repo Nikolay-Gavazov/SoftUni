@@ -2,6 +2,7 @@ const addBreedPage = require('../views/addBreed');
 const addCatPage = require('../views/addCat');
 
 function addBreedController(req, res){
+    console.log(req);
     res.write(addBreedPage);
     res.end();
 }

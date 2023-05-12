@@ -13,6 +13,10 @@ function main(req, res){
     }
 }
 
+function register(method, pathname, handler){
+    routes[pathname] = handler;
+}
+
 
 function defaultController(req, res){
     res.statusCode = 404;
@@ -22,5 +26,6 @@ function defaultController(req, res){
 
 module.exports = {
     main,
-    routes
+    routes,
+    register
 }

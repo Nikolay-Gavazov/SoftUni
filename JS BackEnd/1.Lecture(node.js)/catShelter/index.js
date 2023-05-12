@@ -7,10 +7,11 @@ const { editController } = require('./controllers/editController');
 
 const server = http.createServer(router.main);
 
-router.routes['/'] = homeController;
-router.routes['/styles/site.css'] = styleController;
-router.routes['/add-breed'] = addBreedController;
-router.routes['/add-cat'] = addCatController;
-router.routes['/edit/:id'] = editController;
+router.register('/', homeController);
+router.register('/styles/site.css', styleController);
+router.register('/add-breed', addBreedController);
+router.register('/add-cat', addCatController);
+router.register('/edit/:id', editController);
+
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
