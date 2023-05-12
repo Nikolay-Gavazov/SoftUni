@@ -1,28 +1,17 @@
 const http = require('http');
 const homePage = require('./views/home/index');
+const addBreedPage = require('./views/addBreed')
 const style = require('./content/styles/site');
 
-const routes = {
-    '/': homeController,
-    '/cats/add-breed': addBreedController,
 
-}
+const router = require('./router');
 
-const server = http.createServer(async (req, res) => {
-    const url = new URL(req.url, `http://${req.headers.host}`);
 
-    const handler = routes[url.pathname];
+const server = http.createServer(router.main);
 
-    if(typeof handler == 'function'){
-        handler(req, res)
-    }else if(url.pathname == '/styles/site.css'){
-        res.write(style);
-        res.end();
-    }else{
-        defaultController(req, res)
-    }
-
-});
+router.routes['/'] = homeController;
+router.routes['/styles/site.css'] = styleController;
+router.routes['/cats/add-breed'] = addBreedController;
 
 function homeController(req, res){
         res.write(homePage);
@@ -30,17 +19,19 @@ function homeController(req, res){
 }
 
 function addBreedController(req, res){
-    
+    res.write(addBreedPage);
+    res.end();
+}
+
+function styleController(req, res){
+        res.write(style);
+        res.end();
 }
 
 function addCatController(req, res){
     
 }
 
-function defaultController(req, res){
-    res.statusCode = 404;
-        res.write('<h2>Not found</h2>');
-        res.end();
-}
+
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
