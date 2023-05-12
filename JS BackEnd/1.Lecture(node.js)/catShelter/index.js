@@ -1,18 +1,23 @@
 const http = require('http');
 const homePage = require('./views/home/index');
-const style = require('./content/styles/site')
+const style = require('./content/styles/site');
 
+const routes = {
+    '/': homeController,
+    '/cats/add-breed': addBreedController,
+
+}
 
 const server = http.createServer(async (req, res) => {
-    const url = req.url;
+    const url = new URL(req.url, `http://${req.headers.host}`);
 
-    if(url == '/'){
-        homeController(req, res)
-    }else if(url == '/styles/site.css'){
+    const handler = routes[url.pathname];
+
+    if(typeof handler == 'function'){
+        handler(req, res)
+    }else if(url.pathname == '/styles/site.css'){
         res.write(style);
         res.end();
-    }else if(url == '/cats/add-breed'){
-        addBreedController(req, res)
     }else{
         defaultController(req, res)
     }
