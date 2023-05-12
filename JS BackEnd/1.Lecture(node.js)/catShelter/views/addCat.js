@@ -23,7 +23,7 @@ module.exports = `
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="#" method="" class="cat-form" enctype="multipart/form-data">
+        <form action="/create-cat" method="POST" class="cat-form" enctype="multipart/form-data">
             <h2>Add Cat</h2>
             <label for="name">Name</label>
             <input name="name" type="text" id="name">
