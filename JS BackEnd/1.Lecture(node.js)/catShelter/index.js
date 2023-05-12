@@ -7,22 +7,35 @@ const server = http.createServer(async (req, res) => {
     const url = req.url;
 
     if(url == '/'){
-        res.writeHead(200, {
-            'Content-Type': 'text/html'
-        });
-        res.write(homePage);
-        res.end();
+        homeController(req, res)
     }else if(url == '/styles/site.css'){
         res.write(style);
         res.end();
     }else if(url == '/cats/add-breed'){
-
+        addBreedController(req, res)
     }else{
-        res.statusCode = 404;
-        res.write('<h2>Not found</h2>');
-        res.end();
+        defaultController(req, res)
     }
 
 });
+
+function homeController(req, res){
+        res.write(homePage);
+        res.end();
+}
+
+function addBreedController(req, res){
+    
+}
+
+function addCatController(req, res){
+    
+}
+
+function defaultController(req, res){
+    res.statusCode = 404;
+        res.write('<h2>Not found</h2>');
+        res.end();
+}
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
