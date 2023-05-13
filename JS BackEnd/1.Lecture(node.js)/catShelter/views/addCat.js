@@ -30,8 +30,8 @@ module.exports = (data) =>`
             <input name="name" type="text" id="name">
             <label for="description">Description</label>
             <textarea name="description" id="description"></textarea>
-            <label for="image">Image</label>
-            <input name="upload" type="file" id="image">
+            <label for="image">ImageuUrl</label>
+            <input name="img" type="text" id="image">
             <label for="group">Breed</label>
             <select name="breed" id="group">
                 ${data.map(el => `<option value="${el.breed}">${el.breed}</option>`).join('\n')}
