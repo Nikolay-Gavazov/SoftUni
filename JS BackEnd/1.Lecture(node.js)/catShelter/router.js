@@ -35,6 +35,7 @@ function post(pathname, handler){
 
 
 function defaultController(req, res){
+    
     res.statusCode = 404;
         res.write('<h2>Not found</h2>');
         res.end();

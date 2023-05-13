@@ -6,7 +6,7 @@ function addBreedController(req, res){
 }
 
 function createBreed(req, res){
-    console.log(req.body);
+    
     res.write('Creating');
     res.end();
     
