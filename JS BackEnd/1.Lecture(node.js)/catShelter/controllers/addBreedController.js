@@ -7,7 +7,9 @@ function addBreedController(req, res){
 
 function createBreed(req, res){
     
-    res.write('Creating');
+    res.writeHead(301, {
+        'Location': '/add-breed'
+    });
     res.end();
     
 }
