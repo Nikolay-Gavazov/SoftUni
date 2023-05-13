@@ -1,6 +1,6 @@
 const data = require('../../data/cats')
 
-module.exports = `
+module.exports = (data) => `
 <!DOCTYPE html>
 <html lang="en">
 

@@ -1,8 +1,9 @@
 const homePage = require('../views/home/index');
 const style = require('../content/styles/site');
+const data = require('../data/cats')
 
 function homeController(req, res){
-    res.write(homePage);
+    res.write(homePage(data));
     res.end();
 }
 
