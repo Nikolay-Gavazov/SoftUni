@@ -1,5 +1,5 @@
 
-module.exports = (data) =>`
+module.exports = (data) => `
 <!DOCTYPE html>
 <html lang="en">
 
