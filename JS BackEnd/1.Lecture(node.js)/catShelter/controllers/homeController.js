@@ -10,8 +10,6 @@ function homeController(req, res) {
 
 function searchCat(req, res) {
     const query = req.url.split('=')[1].replaceAll('+', ' ');
-    console.log(req.url);
-    console.log(query);
     const result = [];
     cats.forEach(cat => {
         for (let el in cat) {
