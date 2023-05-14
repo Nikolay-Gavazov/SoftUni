@@ -17,7 +17,7 @@ function createCat(req, res){
             name: fields.name,
             description: fields.description,
             img: fields.img,
-            breed: fields.breed
+            breed: fields
         });
     });
 

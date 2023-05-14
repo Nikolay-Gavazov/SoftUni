@@ -12,7 +12,7 @@ router.get('/', homeController);
 router.get('/styles/site.css', styleController);
 router.get('/add-breed', addBreedController);
 router.get('/add-cat', addCatController);
-router.get('/edit/:id', editController);
+router.get('/edit', editController);
 router.post('/create-breed', createBreed);
 router.post('/create-cat', createCat)
 

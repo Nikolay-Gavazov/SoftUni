@@ -1,4 +1,5 @@
-module.exports = `
+
+module.exports = (cat, breeds) => `
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,17 +24,17 @@ module.exports = `
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="/edit" method="POST" class="cat-form" enctype="multipart/form-data">
+        <form action="/edit-cat" method="POST" class="cat-form" enctype="multipart/form-data">
             <h2>Edit Cat</h2>
             <label for="name">Name</label>
-            <input type="text" id="name" value="Pretty Cat">
+            <input type="text" id="name" value=${cat.name}>
             <label for="description">Description</label>
-            <textarea id="description">Dominant and aggressive to other cats. Will probably eat you in your sleep. Very cute tho.</textarea>
+            <textarea id="description">${cat.description}</textarea>
             <label for="image">Image</label>
-            <input type="file" id="image">
+            <input type="text" value = ${cat.img} id="image">
             <label for="group">Breed</label>
             <select id="group">
-                <option value="Fluffy Cat">Fluffy Cat</option>
+            ${breeds.map(el => `<option value="${el.breed}">${el.breed}</option>`).join('\n')}
             </select>
             <button>Edit Cat</button>
         </form>
