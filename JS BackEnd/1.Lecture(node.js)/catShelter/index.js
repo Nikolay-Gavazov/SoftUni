@@ -1,12 +1,10 @@
 const http = require('http');
 const router = require('./router');
 const { homeController, styleController, searchCat } = require('./controllers/homeController');
-const { addBreedController, createBreed} = require('./controllers/addBreedController');
-const { editController , editCat} = require('./controllers/editController');
+const { addBreedController, createBreed } = require('./controllers/addBreedController');
+const { editController, editCat } = require('./controllers/editController');
 const { addCatController, createCat } = require('./controllers/addCatController');
 const { deleteCat, catShelterController, } = require('./controllers/deleteCat');
-
-
 
 const server = http.createServer(router.main);
 
