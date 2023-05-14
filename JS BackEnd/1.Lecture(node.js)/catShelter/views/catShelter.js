@@ -1,5 +1,3 @@
-
-
 module.exports = (cat) => `
 <!DOCTYPE html>
 <html lang="en">
