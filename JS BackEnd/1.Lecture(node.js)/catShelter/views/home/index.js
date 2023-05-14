@@ -40,7 +40,7 @@ module.exports = (data) => `
                 <p><span>Description: </span>${cat.description}</p>
                 <ul class="buttons">
                     <li class="btn edit"><a href="/edit?${cat.id}">Change Info</a></li>
-                    <li class="btn delete"><a href="/delete">New Home</a></li>
+                    <li class="btn delete"><a href="/delete?${cat.id}">New Home</a></li>
                 </ul>
             </li>`).join('\n')}
             </ul>
