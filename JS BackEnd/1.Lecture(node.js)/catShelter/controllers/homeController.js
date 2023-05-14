@@ -12,6 +12,8 @@ function styleController(req, res){
     res.end();
 }
 
+
+
 module.exports = {
     homeController,
     styleController

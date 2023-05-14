@@ -35,7 +35,7 @@ module.exports = (data) => `
             <ul>
                 ${data.map(cat => `<li>
                 <img src="${cat.img}" alt="Black Cat">
-                <h3></h3>
+                <h3>${cat.name}</h3>
                 <p><span>Breed: </span>${cat.breed}</p>
                 <p><span>Description: </span>${cat.description}</p>
                 <ul class="buttons">
