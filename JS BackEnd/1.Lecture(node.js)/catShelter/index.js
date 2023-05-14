@@ -1,9 +1,10 @@
 const http = require('http');
 const router = require('./router');
-const { homeController, styleController } = require('./controllers/homeController');
+const { homeController, styleController, searchCat } = require('./controllers/homeController');
 const { addBreedController, createBreed} = require('./controllers/addBreedController');
-const { editController , editCat, deleteCat} = require('./controllers/editController');
+const { editController , editCat} = require('./controllers/editController');
 const { addCatController, createCat } = require('./controllers/addCatController');
+const { deleteCat, catShelterController, } = require('./controllers/deleteCat');
 
 
 
@@ -18,6 +19,7 @@ router.get('/edit', editController);
 router.post('/create-breed', createBreed);
 router.post('/create-cat', createCat)
 router.get('/delete', deleteCat)
-
+router.get('/shelter', catShelterController)
+router.get('/search', searchCat)
 
 server.listen(3000, () => console.log('Server is running on port 3000'));

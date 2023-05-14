@@ -25,8 +25,8 @@ module.exports = (data) => `
         </nav>
         <h1>Cat Shelter</h1>
         <form action="/search">
-            <input type="text">
-            <button type="button">Search</button>
+            <input type="text" name="query">
+            <button type="submit">Search</button>
         </form>
     </header>
 
@@ -40,7 +40,7 @@ module.exports = (data) => `
                 <p><span>Description: </span>${cat.description}</p>
                 <ul class="buttons">
                     <li class="btn edit"><a href="/edit?${cat.id}">Change Info</a></li>
-                    <li class="btn delete"><a href="/delete?${cat.id}">New Home</a></li>
+                    <li class="btn delete"><a href="/shelter?${cat.id}">New Home</a></li>
                 </ul>
             </li>`).join('\n')}
             </ul>

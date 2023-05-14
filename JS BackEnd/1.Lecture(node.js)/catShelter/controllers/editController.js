@@ -30,17 +30,6 @@ function editCat(req, res) {
     res.end();
 }
 
-function deleteCat(req, res) {
-    const id = getId(req);
-    const index = cats.indexOf(getCat(id));
-    cats.splice(index, 1);
-
-    res.writeHead(301, {
-        'Location': '/'
-    });
-    res.end();
-}
-
 function getCat(id) {
     let cat = '';
     cats.forEach(el => {
@@ -58,5 +47,6 @@ function getId(req) {
 module.exports = {
     editController,
     editCat,
-    deleteCat
+    getCat,
+    getId
 }

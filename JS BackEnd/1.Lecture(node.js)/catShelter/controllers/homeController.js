@@ -1,13 +1,31 @@
 const homePage = require('../views/home/index');
 const style = require('../content/styles/site');
-const data = require('../data/cats')
+const cats = require('../data/cats');
 
-function homeController(req, res){
-    res.write(homePage(data));
+
+function homeController(req, res) {
+    res.write(homePage(cats));
     res.end();
 }
 
-function styleController(req, res){
+function searchCat(req, res) {
+    const query = req.url.split('=')[1].replaceAll('+', ' ');
+    console.log(req.url);
+    console.log(query);
+    const result = [];
+    cats.forEach(cat => {
+        for (let el in cat) {
+            
+            if (cat[el] == query) {
+                result.push(cat);
+            }
+        }
+    });
+    res.write(homePage(result));
+    res.end();
+}
+
+function styleController(req, res) {
     res.write(style);
     res.end();
 }
@@ -16,5 +34,6 @@ function styleController(req, res){
 
 module.exports = {
     homeController,
-    styleController
+    styleController,
+    searchCat
 }
