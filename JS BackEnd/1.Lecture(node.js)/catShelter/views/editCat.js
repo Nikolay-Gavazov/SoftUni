@@ -24,19 +24,19 @@ module.exports = (cat, breeds) => `
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="/edit-cat" method="POST" class="cat-form" enctype="multipart/form-data">
+        <form action="/edited?${cat.id}" method="POST" class="cat-form" enctype="multipart/form-data">
             <h2>Edit Cat</h2>
             <label for="name">Name</label>
-            <input type="text" id="name" value=${cat.name}>
+            <input type="text" name="name" id="name" value=${cat.name}>
             <label for="description">Description</label>
-            <textarea id="description">${cat.description}</textarea>
+            <textarea name="description" id="description">${cat.description}</textarea>
             <label for="image">Image</label>
-            <input type="text" value = ${cat.img} id="image">
+            <input type="text" name="img" value = ${cat.img} id="image">
             <label for="group">Breed</label>
-            <select id="group">
+            <select name="breed" id="group">
             ${breeds.map(el => `<option value="${el.breed}">${el.breed}</option>`).join('\n')}
             </select>
-            <button>Edit Cat</button>
+            <button type="submit">Edit Cat</button>
         </form>
     </main>
 </body>

@@ -17,12 +17,12 @@ function createCat(req, res){
             name: fields.name,
             description: fields.description,
             img: fields.img,
-            breed: fields
+            breed: fields.breed
         });
     });
 
     res.writeHead(301, {
-        'Location': '/add-cat'
+        'Location': '/'
     });
 
     res.end();
