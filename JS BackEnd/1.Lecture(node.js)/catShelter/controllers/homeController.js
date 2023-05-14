@@ -15,7 +15,7 @@ function searchCat(req, res) {
     const result = [];
     cats.forEach(cat => {
         for (let el in cat) {
-            
+
             if (cat[el] == query) {
                 result.push(cat);
             }

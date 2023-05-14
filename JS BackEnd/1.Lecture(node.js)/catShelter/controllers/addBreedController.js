@@ -1,15 +1,15 @@
 const addBreedPage = require('../views/addBreed');
-const {IncomingForm} = require('formidable');
+const { IncomingForm } = require('formidable');
 const breeds = require('../data/breeds');
 
-function addBreedController(req, res){
+function addBreedController(req, res) {
     res.write(addBreedPage);
     res.end();
 }
 
-function createBreed(req, res){
+function createBreed(req, res) {
     const form = new IncomingForm();
-    form.parse(req, (err, fields) =>{
+    form.parse(req, (err, fields) => {
         breeds.push(fields);
     });
 
@@ -18,7 +18,7 @@ function createBreed(req, res){
     });
 
     res.end();
-    
+
 }
 module.exports = {
     addBreedController,
