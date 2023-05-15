@@ -9,7 +9,6 @@ function addCatController(req, res) {
 
 function createCat(req, res) {
     createItem(req);
-
     res.writeHead(301, {
         'Location': '/'
     });

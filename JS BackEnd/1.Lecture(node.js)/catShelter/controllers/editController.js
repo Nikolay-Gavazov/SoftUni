@@ -3,8 +3,7 @@ const breeds = require('../data/breeds');
 const { getItem, editItem, getParams } = require('../util');
 
 function editController(req, res) {
-    const id = getParams(req, 'id');;
-    const cat = getItem(id);
+    const cat = getItem(getParams(req, 'id'));
     res.write(editPage(cat, breeds));
     res.end();
 }
@@ -16,7 +15,6 @@ function editCat(req, res) {
     });
     res.end();
 }
-
 
 module.exports = {
     editController,
