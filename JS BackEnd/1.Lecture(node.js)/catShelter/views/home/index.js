@@ -39,8 +39,8 @@ module.exports = (data) => `
                 <p><span>Breed: </span>${cat.breed}</p>
                 <p><span>Description: </span>${cat.description}</p>
                 <ul class="buttons">
-                    <li class="btn edit"><a href="/edit?${cat.id}">Change Info</a></li>
-                    <li class="btn delete"><a href="/shelter?${cat.id}">New Home</a></li>
+                    <li class="btn edit"><a href="/edit?id=${cat.id}">Change Info</a></li>
+                    <li class="btn delete"><a href="/shelter?id=${cat.id}">New Home</a></li>
                 </ul>
             </li>`).join('\n')}
             </ul>

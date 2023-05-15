@@ -3,7 +3,7 @@ const routes = {};
 function main(req, res) {
 
     const url = new URL(req.url, `http://${req.headers.host}`);
-
+    req.url = url;
     let handler;
     const actions = routes[url.pathname];
 

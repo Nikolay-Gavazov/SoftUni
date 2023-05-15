@@ -1,16 +1,16 @@
 const cats = require('../data/cats');
 const catShelter = require('../views/catShelter');
-const { getCat, getId } = require('./editController');
+const { getCat } = require('./editController');
 
 function catShelterController(req, res){
-    const id = getId(req);
+    const id = req.url.searchParams.get('id');
     const cat = getCat(id);
     res.write(catShelter(cat));
     res.end();
 }
 
 function deleteCat(req, res) {
-    const id = getId(req);
+    const id = req.url.searchParams.get('id');
     const index = cats.indexOf(getCat(id));
     cats.splice(index, 1);
 

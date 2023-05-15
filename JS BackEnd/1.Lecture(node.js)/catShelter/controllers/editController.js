@@ -4,14 +4,14 @@ const breeds = require('../data/breeds');
 const { IncomingForm } = require('formidable');
 
 function editController(req, res) {
-    const id = getId(req);
+    const id = req.url.searchParams.get('id');
     const cat = getCat(id);
     res.write(editPage(cat, breeds));
     res.end();
 }
 
 function editCat(req, res) {
-    const id = getId(req);
+    const id = req.url.searchParams.get('id');
     const index = cats.indexOf(getCat(id));
 
     const form = new IncomingForm();
@@ -40,13 +40,8 @@ function getCat(id) {
     return cat;
 }
 
-function getId(req) {
-    return req.url.split('?')[1];
-}
-
 module.exports = {
     editController,
     editCat,
     getCat,
-    getId
 }

@@ -23,7 +23,7 @@ module.exports = (cat, breeds) => `
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="/edited?${cat.id}" method="POST" class="cat-form" enctype="multipart/form-data">
+        <form action="/edited?id=${cat.id}" method="POST" class="cat-form" enctype="multipart/form-data">
             <h2>Edit Cat</h2>
             <label for="name">Name</label>
             <input type="text" name="name" id="name" value=${cat.name}>

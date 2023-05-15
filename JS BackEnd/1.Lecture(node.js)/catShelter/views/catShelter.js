@@ -23,7 +23,7 @@ module.exports = (cat) => `
         <h1>Cat Shelter</h1>
     </header>
     <main>
-        <form action="/delete?${cat.id}" method="GET" class="cat-form">
+        <form action="/delete?id=${cat.id}" method="POST" class="cat-form">
             <h2>Shelter the cat</h2>
             <img src=${cat.img} alt="">
             <label for="name">Name</label>
@@ -34,7 +34,7 @@ module.exports = (cat) => `
             <select id="group" disabled>
                 <option value=${cat.breed}>${cat.breed}</option>
             </select>
-            <button>SHELTER THE CAT</button>
+            <button type="submit">SHELTER THE CAT</button>
         </form>
     </main>
 </body>

@@ -12,12 +12,12 @@ router.get('/', homeController);
 router.get('/styles/site.css', styleController);
 router.get('/add-breed', addBreedController);
 router.get('/add-cat', addCatController);
-router.post('/edited', editCat);
 router.get('/edit', editController);
+router.get('/search', searchCat)
+router.get('/shelter', catShelterController)
 router.post('/create-breed', createBreed);
 router.post('/create-cat', createCat)
-router.get('/delete', deleteCat)
-router.get('/shelter', catShelterController)
-router.get('/search', searchCat)
+router.post('/delete', deleteCat)
+router.post('/edited', editCat);
 
 server.listen(3000, () => console.log('Server is running on port 3000'));
