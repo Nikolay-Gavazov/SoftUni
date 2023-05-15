@@ -26,11 +26,11 @@ module.exports = (cat, breeds) => `
         <form action="/edited?id=${cat.id}" method="POST" class="cat-form" enctype="multipart/form-data">
             <h2>Edit Cat</h2>
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" value=${cat.name}>
+            <input type="text" name="name" id="name" value="${cat.name}">
             <label for="description">Description</label>
             <textarea name="description" id="description">${cat.description}</textarea>
             <label for="image">Image</label>
-            <input type="text" name="img" value = ${cat.img} id="image">
+            <input type="text" name="img" value ="${cat.img}" id="image">
             <label for="group">Breed</label>
             <select name="breed" id="group">
             ${breeds.map(el => `<option value="${el.breed}">${el.breed}</option>`).join('\n')}

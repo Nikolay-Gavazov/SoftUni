@@ -1,19 +1,16 @@
-const cats = require('../data/cats');
 const catShelter = require('../views/catShelter');
-const { getCat } = require('./editController');
+const { getItem, deteleItem, getParams } = require('../util');
 
 function catShelterController(req, res){
-    const id = req.url.searchParams.get('id');
-    const cat = getCat(id);
+    const id = getParams(req, 'id');;
+    const cat = getItem(id);
     res.write(catShelter(cat));
     res.end();
 }
 
 function deleteCat(req, res) {
-    const id = req.url.searchParams.get('id');
-    const index = cats.indexOf(getCat(id));
-    cats.splice(index, 1);
-
+    const id = getParams(req, 'id');;
+    deteleItem(id);
     res.writeHead(301, {
         'Location': '/'
     });

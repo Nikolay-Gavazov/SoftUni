@@ -1,7 +1,7 @@
 module.exports = [
     {
         id: 1,
-        name: 'Sharo',
+        name: 'Sharo Kotkov',
         description: 'Dominant and aggressive to other cats.',
         img: 'https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg',
         breed: 'Street Cat'

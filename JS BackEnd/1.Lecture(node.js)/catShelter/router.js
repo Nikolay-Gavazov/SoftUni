@@ -45,5 +45,5 @@ module.exports = {
     main,
     register,
     get,
-    post
+    post,
 }

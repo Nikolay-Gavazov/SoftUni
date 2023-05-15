@@ -1,6 +1,7 @@
 const homePage = require('../views/home/index');
 const style = require('../content/styles/site');
 const cats = require('../data/cats');
+const { searchItem } = require('../util');
 
 
 function homeController(req, res) {
@@ -9,15 +10,7 @@ function homeController(req, res) {
 }
 
 function searchCat(req, res) {
-    const query = req.url.searchParams.get('query');
-    const result = [];
-    cats.forEach(cat => {
-        for (let el in cat) {
-            if (cat[el] == query) {
-                result.push(cat);
-            }
-        }
-    });
+    const result = searchItem(req);
     res.write(homePage(result));
     res.end();
 }
