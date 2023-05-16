@@ -4,8 +4,7 @@ const { loadFragment, render } = require('../view');
 
 function addBreedController(req, res) {
     loadFragment('addBreed', fragment => {
-        const html = render(fragment);
-        res.html(render(html));  
+        res.html(render(fragment));  
     })
 
 }

@@ -1,4 +1,3 @@
-const style = require('../content/styles/site');
 const { loadFragment, render } = require('../view');
 const { getData, searchItem } = require('../util');
 
@@ -44,13 +43,7 @@ async function searchCat(req, res) {
     });
 }
 
-function styleController(req, res) {
-    res.write(style);
-    res.end();
-}
-
 module.exports = {
     homeController,
-    styleController,
     searchCat
 }

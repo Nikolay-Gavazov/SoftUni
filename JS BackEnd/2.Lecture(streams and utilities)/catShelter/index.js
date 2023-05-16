@@ -1,15 +1,22 @@
 const http = require('http');
 const router = require('./router');
-const { homeController, styleController, searchCat } = require('./controllers/homeController');
+const { homeController, searchCat } = require('./controllers/homeController');
 const { addBreedController, createBreed } = require('./controllers/addBreedController');
 const { editController, editCat } = require('./controllers/editController');
 const { addCatController, createCat } = require('./controllers/addCatController');
 const { deleteCat, catShelterController, } = require('./controllers/deleteCat');
+const fs = require('fs')
+const server = http.createServer((req, res) => {
+    
+    if(req.url.startsWith('/views/')){
+        fs.createReadStream(`.${req.url}`).pipe(res);
+    }else{
+        router.main(req, res);
+    }
+});
 
-const server = http.createServer(router.main);
 
 router.get('/', homeController);
-router.get('/styles/site.css', styleController);
 router.get('/add-breed', addBreedController);
 router.get('/add-cat', addCatController);
 router.get('/edit', editController);
