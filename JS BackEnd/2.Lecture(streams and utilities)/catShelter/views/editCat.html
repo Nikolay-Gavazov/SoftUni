@@ -1,16 +1,16 @@
 </header>
 <main>
-    <form action="/edited?id=${cat.id}" method="POST" class="cat-form" enctype="multipart/form-data">
+    <form action="/edited?id={{{id}}}" method="POST" class="cat-form">
         <h2>Edit Cat</h2>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" value="${cat.name}">
+        <input type="text" name="name" id="name" value="{{{name}}}">
         <label for="description">Description</label>
-        <textarea name="description" id="description">${cat.description}</textarea>
+        <textarea name="description" id="description">{{{description}}}</textarea>
         <label for="image">Image</label>
-        <input type="text" name="img" value ="${cat.img}" id="image">
+        <input type="text" name="img" value ="{{{img}}}" id="image">
         <label for="group">Breed</label>
         <select name="breed" id="group">
-        ${breeds.map(el => `<option value="${el.breed}">${el.breed}</option>`).join('\n')}
+        {{{breeds}}}
         </select>
         <button type="submit">Edit Cat</button>
     </form>

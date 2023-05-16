@@ -25,8 +25,14 @@
   },
   "62d3902": {
     "name": "Goshko",
-    "description": "afsdvfdb",
+    "description": "1234",
     "img": "https://www.ikea.com/us/en/images/products/stefan-chair-brown-black__0727320_pe735593_s5.jpg?f=s",
-    "breed": "Shiba Inu"
+    "breed": "Street Cat"
+  },
+  "054c0279": {
+    "name": "Pisi",
+    "description": "The cutest",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg",
+    "breed": "Street Cat"
   }
 }

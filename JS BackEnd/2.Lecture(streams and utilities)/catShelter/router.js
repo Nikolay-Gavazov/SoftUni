@@ -1,3 +1,4 @@
+
 const routes = {};
 
 function main(req, res) {
@@ -12,6 +13,19 @@ function main(req, res) {
     }
 
     if (typeof handler == 'function') {
+        res.html = page => {
+            res.writeHead(200, {
+                'Content-Type': 'text/html; charset=utf-8'
+            });
+            res.write(page);
+            res.end();
+        };
+        res.redirect = location => {
+            res.writeHead(301, {
+                Location: location
+            });
+            res.end;
+        }
         handler(req, res);
     } else {
         defaultController(req, res)

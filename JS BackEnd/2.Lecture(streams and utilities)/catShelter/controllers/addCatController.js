@@ -1,4 +1,4 @@
-const { getData, createData } = require('../data');
+const { getData, createData, getFormData } = require('../util');
 const { loadFragment, render } = require('../view');
 
 async function addCatController(req, res) {
@@ -20,16 +20,11 @@ function createCat(req, res) {
         body += chunk.toString();
     })
     req.on('end', () => {
-        const formdata = body
-            .split('&')
-            .map(prop => prop.split('='))
-            .reduce((r, [k, v]) => Object.assign(r, { [k]: decodeURIComponent(v.split('+').join(' ')) }), {});
-
         res.writeHead(301, {
             'Location': '/'
         });
         res.end();
-        createData(formdata, 'cats')
+        createData(getFormData(body), 'cats')
     })
 }
 

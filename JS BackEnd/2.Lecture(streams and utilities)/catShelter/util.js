@@ -1,69 +1,66 @@
-const breeds = require("./data/breeds");
-const cats = require("./data/cats");
-const { IncomingForm } = require("formidable");
+const fs = require('fs/promises');
 
-function nextId() {
-    return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
-};
-
-function getParams(req, param) {
-    return req.url.searchParams.get(param);
+async function readFile(location){
+    const data = JSON.parse((await fs.readFile(`./data/${location}.json`)).toString());
+    return data;
 }
 
-function getItem(id) {
-    let cat = '';
-    cats.forEach(el => {
-        if (el.id == id) {
-            cat = el;
+async function getData(location) {
+    const data = await readFile(location);
+
+    return Object
+    .entries(data)
+    .map(([_id, item]) => Object.assign({}, item, {_id}));
+}
+
+async function getItem(id, location){
+    const data = await getData(location);
+    let result ='';
+    data.forEach(el => {
+        if(el._id == id){
+            result = el;
         }
     });
-    return cat;
-};
-
-function deteleItem(id) {
-    const index = cats.indexOf(getItem(id));
-    cats.splice(index, 1);
-};
-
-function addBreed(req) {
-    const form = new IncomingForm();
-    form.parse(req, (err, fields) => {
-        breeds.push(fields);
-    });
+    return result;
 }
 
-function createItem(req) {
-    const form = new IncomingForm();
-    const id = nextId();
-    form.parse(req, (err, fields) => {
-        cats.push({
-            id,
-            name: fields.name,
-            description: fields.description,
-            img: fields.img,
-            breed: fields.breed
-        });
-    });
-};
 
-function editItem(req) {
-    const id = getParams(req, 'id');
-    const index = cats.indexOf(getItem(id));
+async function createData(data, location){
+    const dataBase = await readFile(location);
+    const _id = nextId();
+    dataBase[_id] = data;
 
-    const form = new IncomingForm();
-    form.parse(req, (err, fields) => {
-        cats[index] = {
-            id,
-            name: fields.name,
-            description: fields.description,
-            img: fields.img,
-            breed: fields.breed
-        };
-    });
-};
+    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+}
 
-function searchItem(req) {
+async function editData(data, _id, location){
+    const dataBase = await readFile(location);
+
+    dataBase[_id] = data;
+
+    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+}
+
+async function deleteData(_id, location){
+    const dataBase = await readFile(location);
+
+    delete dataBase[_id];
+
+    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+}
+
+function getFormData(body){
+    const formdata = body
+            .split('&')
+            .map(prop => prop.split('='))
+            .reduce((r, [k, v]) => Object.assign(r, { [k]: decodeURIComponent(v.split('+').join(' ')) }), {});
+
+    return formdata;
+}
+
+async function searchItem(req) {
     const query = getParams(req, 'query');
+    const cats = await getData('cats');
     const result = [];
     cats.forEach(cat => {
         for (let el in cat) {
@@ -73,14 +70,24 @@ function searchItem(req) {
         }
     });
     return result;
+
+}
+
+function nextId() {
+    return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
+};
+
+function getParams(req, param) {
+    return req.url.searchParams.get(param);
 }
 
 module.exports = {
-    getParams,
+    getData,
+    createData,
     getItem,
-    deteleItem,
-    createItem,
-    editItem,
-    searchItem,
-    addBreed
+    getParams,
+    editData,
+    getFormData,
+    deleteData,
+    searchItem
 }
