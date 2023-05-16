@@ -1,10 +1,14 @@
 const { addBreed } = require('../util');
-const addBreedPage = require('../views/addBreed');
+const { loadFragment, render } = require('../view');
 
 
 function addBreedController(req, res) {
-    res.write(addBreedPage);
-    res.end();
+    loadFragment('addBreed', fragment => {
+        const html = render(fragment);
+        res.write(html);
+        res.end();
+    })
+
 }
 
 function createBreed(req, res) {

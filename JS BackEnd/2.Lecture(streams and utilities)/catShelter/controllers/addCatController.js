@@ -1,11 +1,21 @@
-const addCatPage = require('../views/addCat');
-const breed = require('../data/breeds');
 const { createItem } = require('../util');
+const { getBreeds } = require('../data');
+const { loadFragment, render } = require('../view');
 
-function addCatController(req, res) {
-    res.write(addCatPage(breed));
-    res.end();
+async function addCatController(req, res) {
+    const breeds = await getBreeds();
+
+    loadFragment('addCat', fragment => {
+        const html = fragment.replace(
+            '{{{breeds}}}',
+            breeds.map(el => `
+            <option value="${el.breed}">${el.breed}</option>`).join('\n'))
+        res.write(render(html));
+        res.end();
+});
 }
+
+
 
 function createCat(req, res) {
     createItem(req);
