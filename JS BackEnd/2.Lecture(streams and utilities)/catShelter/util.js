@@ -3,7 +3,7 @@ const cats = require("./data/cats");
 const { IncomingForm } = require("formidable");
 
 function nextId() {
-    return 'xxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
+    return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
 
 function getParams(req, param) {

@@ -13,6 +13,14 @@ async function getData(location) {
     .map(([_id, item]) => Object.assign({}, item, {_id}));
 }
 
+async function getById(id, location){
+    const data = await getData(location);
+    let result ='';
+    data.forEach(el => {
+        if
+    });
+}
+
 
 async function createData(data, location){
     const dataBase = await readFile(location);
@@ -23,8 +31,12 @@ async function createData(data, location){
 }
 
 function nextId() {
-    return 'xxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
+    return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
+
+function getParams(req, param) {
+    return req.url.searchParams.get(param);
+}
 
 module.exports = {
     getData,

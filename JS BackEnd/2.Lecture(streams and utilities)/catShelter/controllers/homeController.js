@@ -1,6 +1,6 @@
 const homePage = require('../views/home/index');
 const style = require('../content/styles/site');
-const cats = require('../data/cats');
+
 const { searchItem } = require('../util');
 const { loadFragment, render } = require('../view');
 const { getData } = require('../data');
@@ -25,8 +25,6 @@ async function homeController(req, res) {
         res.write(render(html));
         res.end();   
     });
-
-
 }
 
 
