@@ -11,7 +11,7 @@ async function addCatController(req, res) {
             <option value="${el.breed}">${el.breed}</option>`).join('\n'))
         res.write(render(html));
         res.end();
-});
+    });
 }
 
 function createCat(req, res) {
@@ -20,10 +20,10 @@ function createCat(req, res) {
         body += chunk.toString();
     })
     req.on('end', () => {
-       const formdata = body
-        .split('&')
-        .map(prop => prop.split('='))
-        .reduce((r, [k,v]) => Object.assign(r, {[k]: decodeURIComponent(v.split('+').join(' ')) }), {} );
+        const formdata = body
+            .split('&')
+            .map(prop => prop.split('='))
+            .reduce((r, [k, v]) => Object.assign(r, { [k]: decodeURIComponent(v.split('+').join(' ')) }), {});
 
         res.writeHead(301, {
             'Location': '/'

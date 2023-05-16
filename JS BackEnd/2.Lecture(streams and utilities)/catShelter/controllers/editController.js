@@ -1,11 +1,12 @@
 const editPage = require('../views/editCat');
-const breeds = require('../data/breeds');
-const { getItem, editItem, getParams } = require('../util');
+const { editItem } = require('../util');
+const { getItem, getParams, getData } = require('../data');
 
-function editController(req, res) {
-    const cat = getItem(getParams(req, 'id'));
-    res.write(editPage(cat, breeds));
-    res.end();
+async function editController(req, res) {
+    const cat = await getItem(getParams(req, 'id'), 'cats');
+    const breeds = await getData('breeds');
+    
+    
 }
 
 function editCat(req, res) {

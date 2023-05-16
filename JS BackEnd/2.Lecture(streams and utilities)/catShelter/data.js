@@ -13,12 +13,15 @@ async function getData(location) {
     .map(([_id, item]) => Object.assign({}, item, {_id}));
 }
 
-async function getById(id, location){
+async function getItem(id, location){
     const data = await getData(location);
     let result ='';
     data.forEach(el => {
-        if
+        if(el._id == id){
+            result = el;
+        }
     });
+    return result;
 }
 
 
@@ -40,5 +43,7 @@ function getParams(req, param) {
 
 module.exports = {
     getData,
-    createData
+    createData,
+    getItem,
+    getParams
 }
