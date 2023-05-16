@@ -3,10 +3,10 @@ const style = require('../content/styles/site');
 const cats = require('../data/cats');
 const { searchItem } = require('../util');
 const { loadFragment, render } = require('../view');
-const { getCats } = require('../data');
+const { getData } = require('../data');
 
 async function homeController(req, res) {
-    const catsData = await getCats();
+    const catsData = await getData('cats');
 
     loadFragment('home', fragment => {
         const html = fragment.replace(
@@ -26,8 +26,6 @@ async function homeController(req, res) {
         res.end();   
     });
 
-    // res.write(homePage(cats));
-    // res.end();
 
 }
 

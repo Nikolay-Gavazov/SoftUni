@@ -1,4 +1,4 @@
-const { addBreed } = require('../util');
+const { createData } = require('../data');
 const { loadFragment, render } = require('../view');
 
 
@@ -12,13 +12,22 @@ function addBreedController(req, res) {
 }
 
 function createBreed(req, res) {
-    addBreed(req);
-    res.writeHead(301, {
-        'Location': '/add-breed'
-    });
+    let body = '';
+    req.on('data', chunk => {
+        body += chunk.toString();
+    })
+    req.on('end', () => {
+       const formdata = body
+        .split('&')
+        .map(prop => prop.split('='))
+        .reduce((r, [k,v]) => Object.assign(r, {[k]: decodeURIComponent(v.split('+').join(' ')) }), {} );
 
-    res.end();
-
+        res.writeHead(301, {
+            'Location': '/'
+        });
+        res.end();
+        createData(formdata, 'breeds')
+    })
 }
 module.exports = {
     addBreedController,
