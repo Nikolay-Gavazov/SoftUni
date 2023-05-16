@@ -12,8 +12,7 @@ async function catShelterController(req, res){
         .replace('{{{description}}}', cat.description)
         .replace('{{{img}}}', cat.img)
         .replace('{{{breed}}}', cat.breed)
-        res.write(render(html));
-        res.end();
+        res.html(render(html)); 
     });
 }
 
