@@ -1,4 +1,4 @@
-const { createData } = require('../data');
+const { createData } = require('../util');
 const { loadFragment, render } = require('../view');
 
 
@@ -22,10 +22,7 @@ function createBreed(req, res) {
         .map(prop => prop.split('='))
         .reduce((r, [k,v]) => Object.assign(r, {[k]: decodeURIComponent(v.split('+').join(' ')) }), {} );
 
-        res.writeHead(301, {
-            'Location': '/'
-        });
-        res.end();
+        res.redirect('/')
         createData(formdata, 'breeds')
     })
 }

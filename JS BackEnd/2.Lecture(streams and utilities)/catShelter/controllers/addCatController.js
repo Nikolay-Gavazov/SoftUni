@@ -20,10 +20,7 @@ function createCat(req, res) {
         body += chunk.toString();
     })
     req.on('end', () => {
-        res.writeHead(301, {
-            'Location': '/'
-        });
-        res.end();
+        res.redirect('/')
         createData(getFormData(body), 'cats')
     })
 }

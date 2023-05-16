@@ -20,10 +20,7 @@ async function catShelterController(req, res){
 function deleteCat(req, res) {
     deleteData(getParams(req, 'id'), 'cats');
 
-    res.writeHead(301, {
-        'Location': '/'
-    });
-    res.end();
+    res.redirect('/')
 }
 
 module.exports = {

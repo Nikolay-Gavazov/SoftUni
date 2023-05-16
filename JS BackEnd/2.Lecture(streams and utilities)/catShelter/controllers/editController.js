@@ -15,8 +15,7 @@ async function editController(req, res) {
             '{{{breeds}}}',
             breeds.map(el => `
             <option value="${el.breed}">${el.breed}</option>`).join('\n'))
-        res.write(render(html));
-        res.end();
+            res.html(render(html));  
     });
 }
 
