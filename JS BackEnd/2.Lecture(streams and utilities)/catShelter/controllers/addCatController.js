@@ -9,7 +9,7 @@ async function addCatController(req, res) {
             '{{{breeds}}}',
             breeds.map(el => `
             <option value="${el.breed}">${el.breed}</option>`).join('\n'))
-            res.html(render(html));
+        res.html(render(html));
     });
 }
 
