@@ -7,10 +7,10 @@ const { addCatController, createCat } = require('./controllers/addCatController'
 const { deleteCat, catShelterController, } = require('./controllers/deleteCat');
 const fs = require('fs')
 const server = http.createServer((req, res) => {
-    
-    if(req.url.startsWith('/views/')){
+
+    if (req.url.startsWith('/views/')) {
         fs.createReadStream(`.${req.url}`).pipe(res);
-    }else{
+    } else {
         router.main(req, res);
     }
 });
