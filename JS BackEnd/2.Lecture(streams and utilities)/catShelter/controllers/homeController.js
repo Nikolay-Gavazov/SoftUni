@@ -18,7 +18,7 @@ async function homeController(req, res) {
                 <li class="btn delete"><a href="/shelter?id=${cat._id}">New Home</a></li>
             </ul>
         </li>`).join('\n'));
-        res.html(render(html));  
+        res.html(render(html));
     });
 }
 
@@ -39,7 +39,7 @@ async function searchCat(req, res) {
                 <li class="btn delete"><a href="/shelter?id=${cat._id}">New Home</a></li>
             </ul>
         </li>`).join('\n'));
-        res.html(render(html));    
+        res.html(render(html));
     });
 }
 
