@@ -1,4 +1,3 @@
-
 const routes = {};
 
 function main(req, res) {
