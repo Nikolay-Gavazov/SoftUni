@@ -13,7 +13,9 @@ router.get('/styles/site.css', styleController);
 router.get('/add-breed', addBreedController);
 router.get('/add-cat', addCatController);
 router.get('/edit', editController);
-router.get('/search', searchCat)
+router.get('/search', searchCat);
+
+
 router.get('/shelter', catShelterController)
 router.post('/create-breed', createBreed);
 router.post('/create-cat', createCat)
