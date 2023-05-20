@@ -23,7 +23,7 @@ router.get('/edit', editController);
 router.get('/search', searchCat);
 router.get('/shelter', catShelterController);
 router.post('/create-breed', createBreed);
-router.post('/create-cat', createCat)
+router.post('/create-cat', createCat);
 router.post('/delete', deleteCat)
 router.post('/edited', editCat);
 
