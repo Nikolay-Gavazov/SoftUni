@@ -4,8 +4,8 @@ function loadRepos() {
    const httpRequest = new XMLHttpRequest();
    httpRequest.addEventListener('readystatechange', request);
 
-   function request(){
-      if(httpRequest.readyState == 4 && httpRequest.status == 200){
+   function request() {
+      if (httpRequest.readyState == 4 && httpRequest.status == 200) {
          document.getElementById('res').textContent = httpRequest.responseText;
       }
    }
