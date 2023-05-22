@@ -13,7 +13,7 @@ function exam(input) {
     let foodWeight = gramFat + gramProtein + gramCarbs;
     let caloriesForGramFood = calories / foodWeight;
     let totalCalories = caloriesForGramFood - (caloriesForGramFood * water / 100);
-    
+
     console.log(totalCalories.toFixed(4));
 
 }
