@@ -1,4 +1,4 @@
-function reverseInPlace(input){
+function reverseInPlace(input) {
 
     let result = input.reverse().join(' ');
     console.log(result);
