@@ -1,6 +1,6 @@
 function modernTimesOfHashTag(text) {
 
-    const textArr = text.split(' ')
+    const textArr = text.split(' ');
 
     textArr.forEach(word => {
         if (word.startsWith('#') && word.length > 1) {
