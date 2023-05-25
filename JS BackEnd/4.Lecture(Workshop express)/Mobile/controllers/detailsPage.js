@@ -1,5 +1,5 @@
 module.exports = {
-    details(req, res){
+   async details(req, res){
         res.render('details')      
     }
 }

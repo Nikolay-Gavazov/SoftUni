@@ -10,41 +10,35 @@ async function getData(location) {
 
     return Object
     .entries(data)
-    .map(([_id, item]) => Object.assign({}, item, {_id}));
+    .map(([id, item]) => Object.assign({}, item, {id}));
 }
 
 async function getItem(id, location){
     const data = await getData(location);
-    let result ='';
-    data.forEach(el => {
-        if(el._id == id){
-            result = el;
-        }
-    });
-    return result;
+    return data[id];
 }
 
 
 async function createData(data, location){
     const dataBase = await readFile(location);
-    const _id = nextId();
-    dataBase[_id] = data;
+    const id = nextId();
+    dataBase[id] = data;
 
     fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
 }
 
-async function editData(data, _id, location){
+async function editData(data, id, location){
     const dataBase = await readFile(location);
 
-    dataBase[_id] = data;
+    dataBase[id] = data;
 
     fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
 }
 
-async function deleteData(_id, location){
+async function deleteData(id, location){
     const dataBase = await readFile(location);
 
-    delete dataBase[_id];
+    delete dataBase[id];
 
     fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
 }

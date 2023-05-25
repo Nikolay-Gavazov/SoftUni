@@ -32,6 +32,17 @@ async function getAll(){
     .map(([id, v]) => Object.assign({}, {id}, v))
 };
 
+async function getById(id){
+    const data = await readFile();
+    const car = data[id];
+    
+    if(car){
+        return Object.assign({}, {id}, car);
+    }else{
+        return undefined;
+    }
+}
+
 function nextId() {
     return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
