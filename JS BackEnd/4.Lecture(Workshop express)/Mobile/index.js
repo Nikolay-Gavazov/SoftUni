@@ -3,6 +3,12 @@ const hbs = require('express-handlebars');
 
 const app = express();
 
+app.engine('hbs', hbs.create({
+    extname: '.hbs'
+}).engine);
+
+app.set('view engine', 'hbs');
+
 app.use(express.urlencoded({extended: true}));
 app.use('/static', express.static('static'));
 
