@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const carsService = require('./services/cars')
 const { home } = require('./controllers/homePage');
 const create = require('./controllers/createPage');
-const edit  = require('./controllers/editPage');
+const edit = require('./controllers/editPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
 const { notFound } = require('./controllers/notFound');
@@ -17,7 +17,7 @@ app.engine('hbs', hbs.create({
 
 app.set('view engine', 'hbs');
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use('/static', express.static('static'));
 app.use(carsService());
 
@@ -28,12 +28,12 @@ app.get('/details/:id', details);
 app.get('/delete/:id', deletePage);
 
 app.route('/create')
-.get(create.get)
-.post(create.post);
+    .get(create.get)
+    .post(create.post);
 
 app.route('/edit/:id')
-.get(edit.get)
-.post(edit.post)
+    .get(edit.get)
+    .post(edit.post)
 
 app.all('*', notFound)
 
