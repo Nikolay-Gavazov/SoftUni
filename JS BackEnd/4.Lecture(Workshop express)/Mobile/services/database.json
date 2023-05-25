@@ -6,7 +6,7 @@
     "price": 53000
   },
   "8559678e": {
-    "name": "BMW 640 d xDrive Coupe",
+    "name": "BMW 640d xDrive Coupe",
     "description": "149000 km. Newly imported. 03.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
     "imageUrl": "bmw-640D.jpeg",
     "price": 56000
@@ -18,15 +18,15 @@
     "price": 24900
   },
   "bg453sp1": {
-    "name": "BMW X5 4.0D",
-    "description": "189000 km. Newly imported. 09.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
-    "imageUrl": "bmw-x5-m-f15.jpg",
-    "price": 53000
+    "name": "VW Touran 1.9 TDI",
+    "description": "184769 km. Newly imported. 12.2009. Diesel. 105PS. Euro 4. Manual transmission. Silver.",
+    "imageUrl": "touran.jpg",
+    "price": 8700
   },
   "85t9678e": {
-    "name": "BMW 640 d xDrive Coupe",
-    "description": "149000 km. Newly imported. 03.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
-    "imageUrl": "bmw-640D.jpeg",
-    "price": 56000
+    "name": "VW Golf 2.0 tdi",
+    "description": "209000 km. Newly imported. 03.2006. Diesel. 140PS. Euro 4. Manual transmission. silver.",
+    "imageUrl": "golf.jpg",
+    "price": 6700
   }
 }

@@ -3,6 +3,7 @@ const hbs = require('express-handlebars');
 const carsService = require('./services/cars')
 const { home } = require('./controllers/homePage');
 const create = require('./controllers/createPage');
+const edit  = require('./controllers/editPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
 const { notFound } = require('./controllers/notFound');
@@ -29,6 +30,10 @@ app.get('/delete/:id', deletePage);
 app.route('/create')
 .get(create.get)
 .post(create.post);
+
+app.route('/edit/:id')
+.get(edit.get)
+.post(edit.post)
 
 app.all('*', notFound)
 

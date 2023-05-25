@@ -190,7 +190,25 @@ form label {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+.createForm .formInput{
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 12px 20px 12px 12px;
+    border-radius: 0 4px 4px 4px;
+    margin: 8px 0 2em;
+}
 
+.editForm .formInput{
+    width: 100%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    padding: 12px 20px 12px 12px;
+    border-radius: 0 4px 4px 4px;
+    margin: 8px 0 2em;
+}
 input[type=text],
 input[type=number],
 select,
@@ -203,6 +221,7 @@ textarea {
     margin: 0px 3px 2em 5px;
     text-align: center;
 }
+
 
 input.price {
     width: 20%;
@@ -238,6 +257,20 @@ div.form {
     width: 300px;
     margin: auto;
 }
+
+.createForm{
+    border-radius: 5px;
+    padding: 20px;
+    width: 36%;
+    margin: auto;
+}
+.editForm{
+    border-radius: 5px;
+    padding: 20px;
+    width: 36%;
+    margin: auto;
+}
+
 
 span.error {
     animation: fadeOut 1s forwards;
