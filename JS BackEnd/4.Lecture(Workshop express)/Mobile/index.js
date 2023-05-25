@@ -1,6 +1,8 @@
 const express = require('express');
 const hbs = require('express-handlebars');
-const carsService = require('./services/cars')
+
+const carsService = require('./services/cars');
+
 const { home } = require('./controllers/homePage');
 const create = require('./controllers/createPage');
 const edit = require('./controllers/editPage');
