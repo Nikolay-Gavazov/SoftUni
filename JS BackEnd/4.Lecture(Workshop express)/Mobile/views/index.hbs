@@ -1,9 +1,9 @@
 <h1>Browser</h1>
-<form action="" method="">
-  <input type="text" class="search" name="search" placeholder="Search...">
-  <input type="number" name="from" class="price" placeholder="Price from...">
+<form action="/" method="GET">
+  <input type="text" class="search" name="search" placeholder="Search..." value="{{query.search}}">
+  <input type="number" name="from" class="price" placeholder="Price from..." value="{{query.from}}">
   <span>-</span>
-  <input type="number" name="to" class="price" placeholder="Price to...">
+  <input type="number" name="to" class="price" placeholder="Price to..." value="{{query.to}}">
   <input type="submit" value="search">
 </form>
 
@@ -11,6 +11,7 @@
   {{#each cars}}
   {{> carInfo}}
   {{else}}
-  <p>No cars for sale.<a href="/create">Sell your car!</a></p>
+  <p>No cars for sale! <a href="/create">Sell your car!</a></p>
+  
   {{/each}}
 </div>
