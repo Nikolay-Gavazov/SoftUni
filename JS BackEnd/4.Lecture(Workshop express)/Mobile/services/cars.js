@@ -1,8 +1,8 @@
 const fs = require('fs/promises');
 
-const filePath = './services/database.json';
+const filePath = `./services/database.json`;
 
-async function readFile(filePath){
+async function readFile(){
     try {
         const data = JSON.parse(await fs.readFile(filePath));
         return data;
@@ -14,7 +14,7 @@ async function readFile(filePath){
 
 }
 
-async function write(data, filePath){
+async function write(filePath, data){
     try {
         await fs.writeFile(filePath, JSON.stringify(data, null, 2));
     
@@ -36,9 +36,10 @@ function nextId() {
     return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
 
-module.exports = () => (req, res, next){
-    res.storage = {
+module.exports = () => (req, res, next) => {
+    req.storage = {
         getAll
     };
     next();
 }
+    
