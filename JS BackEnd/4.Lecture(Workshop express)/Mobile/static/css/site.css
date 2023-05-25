@@ -59,6 +59,10 @@ main {
     padding: 2em;
 }
 
+main p.nothing{
+    padding: 10em;
+}
+
 div.container {
     display: block;
 }
@@ -73,6 +77,7 @@ div.car {
     border: 1px solid #2b415433;
     background: white;
     vertical-align: top;
+    width: 330px;
 }
 
 div.car:hover p.name {
@@ -94,7 +99,7 @@ button, main a.btn {
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inline;
     font-size: 18px;
     width: 43%;
     margin: 12px;
@@ -102,6 +107,14 @@ button, main a.btn {
     border-radius: 4px;
     background: #607588;
     color: white;
+}
+
+.description {
+    display: none;
+}
+
+.description p {
+    margin: 10px;
 }
 
 button:hover {
@@ -114,6 +127,12 @@ a {
     text-decoration: underline;
     color: white;
     text-transform: uppercase;
+}
+
+a.sell {
+    text-decoration: underline;
+    color: #0B2133;
+    text-transform: none;
 }
 
 div.details {

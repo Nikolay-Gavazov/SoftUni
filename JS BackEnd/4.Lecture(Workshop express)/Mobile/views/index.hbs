@@ -11,7 +11,9 @@
   {{#each cars}}
   {{> carInfo}}
   {{else}}
-  <p>No cars for sale! <a href="/create">Sell your car!</a></p>
-  
+  <p class="nothing">No cars for sale! <a class="sell" href="/create">Sell your car!</a></p>
   {{/each}}
 </div>
+
+
+<script src="/static/app.js"></script>
