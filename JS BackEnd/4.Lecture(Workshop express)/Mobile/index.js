@@ -4,12 +4,12 @@ const hbs = require('express-handlebars');
 const carsService = require('./services/cars');
 
 const { home } = require('./controllers/homePage');
-const create = require('./controllers/createPage');
-const edit = require('./controllers/editPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
 const { notFound } = require('./controllers/notFound');
 const { deletePage } = require('./controllers/deletePage');
+const edit = require('./controllers/editPage');
+const create = require('./controllers/createPage');
 
 const app = express();
 
