@@ -1,4 +1,6 @@
 document.querySelector('#del').addEventListener('click', (e) => {
-    console.log(e.target);
-    alert('Are you sure?')
+    const confirmation = confirm('Are you sure?');
+    if(!confirmation){
+        e.preventDefault();
+    }
 })
