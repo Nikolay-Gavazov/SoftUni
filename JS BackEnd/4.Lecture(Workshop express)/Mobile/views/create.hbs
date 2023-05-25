@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Create Cube Page</title>
+  <title>Create Car Page</title>
   <link href="/css/site.css" type="text/css" rel="stylesheet">
   <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.png' />
 </head>
@@ -13,8 +13,8 @@
     <header>
       <ul>
         <li><img class="logo" src="/images/logo.png"></li>
-        <li><a href="/">Browse</a></li>
-        <li><a href="/create">Add a Cube</a></li>
+        <li><a href="/">Browse Cars</a></li>
+        <li><a href="/create">Add a Car</a></li>
         <li><a href="/about">About</a></li>
       </ul>
     </header>
@@ -28,21 +28,14 @@
           <textarea id="name" name="description"></textarea>
           <label for="image">ImageUrl</label>
           <input type="text" id="image" name="imageUrl">
-          <label for="difficulty">Difficulty</label>
-          <select id="difficulty" name="difficultyLevel">
-            <option value="1">1 - Very Easy</option>
-            <option value="2">2 - Easy</option>
-            <option value="3">3 - Medium (Standard 3x3)</option>
-            <option value="4">4 - Intermediate</option>
-            <option value="5">5 - Expert</option>
-            <option value="6">6 - Hardcore</option>
-          </select>
+          <label for="difficulty">Price</label>
+          <input type="text" id="difficulty" name="price">
           <input type="submit" value="Create">
         </form>
       </div>
     </main>
   </div>
-  <footer>@Cubicle: Exercise for Express.js and Handlebars</footer>
+  <footer>@Mobile: Exercise for Express.js and Handlebars</footer>
 
 </body>
 
