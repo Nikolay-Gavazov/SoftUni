@@ -15,16 +15,16 @@ img {
     width: auto;
 }
 
-img.car {
+img.cube {
     display: block;
     margin: 0 auto;
     text-align: center;
 }
 
 img.logo {
-    width: 76px;
-    height: 56px;
-    padding: 0em;
+    width: 80px;
+    height: 80px;
+    padding: 1em;
     float: left;
 }
 
@@ -32,7 +32,7 @@ header {
     list-style-type: none;
     margin: auto;
     padding: 0;
-    background-color: #32a9cd;
+    background-color: #607588;
 }
 
 header ul li {
@@ -56,26 +56,11 @@ header ul li a:hover {
 main {
     margin: 0 4em;
     border-radius: 15px;
-    padding: 4em;
-}
-
-main p.nothing{
-    padding: 10em;
-}
-
-.search{
-    margin: 0 auto;
-    text-align: center;
+    padding: 2em;
 }
 
 div.container {
     display: block;
-}
-
-.cars{
-    display: block;
-    margin: 0 auto;
-    text-align: center; 
 }
 
 h1 {
@@ -83,16 +68,16 @@ h1 {
     text-transform: uppercase;
 }
 
-div.car {
+div.cube {
     display: inline-block;
     border: 1px solid #2b415433;
     background: white;
+    width: 23%;
     vertical-align: top;
-    width: 330px;
 }
 
-div.car:hover p.name {
-    background: #32a9cd;
+div.cube:hover p.name {
+    background: #607588;
     color: white;
 }
 
@@ -110,31 +95,18 @@ button, main a.btn {
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    display: inline;
+    display: inline-block;
     font-size: 18px;
     width: 43%;
-    
+    margin: 12px;
+    margin-left: 6%;
     border-radius: 4px;
-    background: #32a9cd;
+    background: #607588;
     color: white;
-}
-
-.description {
-    display: none;
-}
-
-.description p {
-    margin: 10px;
 }
 
 button:hover {
-    background-color: #104067;
-    color: white;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #104067;
+    background-color: #0B2133;
     color: white;
     cursor: pointer;
 }
@@ -143,12 +115,6 @@ a {
     text-decoration: underline;
     color: white;
     text-transform: uppercase;
-}
-
-a.sell {
-    text-decoration: underline;
-    color: #0B2133;
-    text-transform: none;
 }
 
 div.details {
@@ -169,11 +135,9 @@ span {
 
 div.about {
     display: block;
-    margin-bottom: 250px;
-    background-color: #d4e7f5;
+    margin: auto;
+    background-color: #f3f3f2;
     padding: 3em;
-    margin-top: 100px;
-    text-align: center;
 }
 
 
@@ -184,63 +148,44 @@ div.about a {
 }
 
 form label {
-    background: #2d4b79;
+    background: #607588;
     color: white;
     padding: 12px;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
-.createForm .formInput{
-    width: 100%;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 12px 20px 12px 12px;
-    border-radius: 0 4px 4px 4px;
-    margin: 8px 0 2em;
-}
 
-.editForm .formInput{
-    width: 100%;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    padding: 12px 20px 12px 12px;
-    border-radius: 0 4px 4px 4px;
-    margin: 8px 0 2em;
-}
 input[type=text],
 input[type=number],
 select,
 textarea {
+    width: 100%;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
     padding: 12px 20px 12px 12px;
     border-radius: 0 4px 4px 4px;
-    margin: 0px 3px 2em 5px;
-    text-align: center;
+    margin: 8px 0 2em;
 }
 
-
-input.price {
+input.difficulty {
     width: 20%;
 }
 
 input.search {
-    width: 20%;
+    width: 50%;
 }
 
 input[type=submit] {
-    background-color: #2d4b79;
+    background-color: #545775;
     border: none;
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    display: block;
+    display: inline-block;
     font-size: 18px;
-    width: 20%;
-    margin: 5px auto 25px;
+    width: 50%;
+    margin: 5px 5px 5px 25%;
     color: white;
     text-transform: uppercase;
     border-radius: 4px;
@@ -254,23 +199,9 @@ input[type=submit]:hover {
 div.form {
     border-radius: 5px;
     padding: 20px;
-    width: 300px;
-    margin: auto;
-}
-
-.createForm{
-    border-radius: 5px;
-    padding: 20px;
     width: 36%;
     margin: auto;
 }
-.editForm{
-    border-radius: 5px;
-    padding: 20px;
-    width: 36%;
-    margin: auto;
-}
-
 
 span.error {
     animation: fadeOut 1s forwards;
@@ -299,7 +230,7 @@ h2{
 }
 
 footer {
-    background: #32a9cd;
+    background: #607588;
     padding: 1em;
     text-align: center;
     color: white;
