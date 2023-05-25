@@ -1,13 +1,14 @@
 <h1>Browser</h1>
-<form action="/" method="GET">
+<form action="/" method="GET" class="search">
   <input type="text" class="search" name="search" placeholder="Search..." value="{{query.search}}">
+  <span>-</span>
   <input type="number" name="from" class="price" placeholder="Price from..." value="{{query.from}}">
   <span>-</span>
   <input type="number" name="to" class="price" placeholder="Price to..." value="{{query.to}}">
   <input type="submit" value="search">
 </form>
 
-<div>
+<div id="cars" class="cars">
   {{#each cars}}
   {{> carInfo}}
   {{else}}
@@ -16,4 +17,4 @@
 </div>
 
 
-<script src="/static/app.js"></script>
+<script src="/static/showHide.js"></script>

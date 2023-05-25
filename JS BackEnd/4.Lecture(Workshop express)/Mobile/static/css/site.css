@@ -22,9 +22,9 @@ img.car {
 }
 
 img.logo {
-    width: 80px;
-    height: 80px;
-    padding: 1em;
+    width: 76px;
+    height: 56px;
+    padding: 0em;
     float: left;
 }
 
@@ -32,7 +32,7 @@ header {
     list-style-type: none;
     margin: auto;
     padding: 0;
-    background-color: #607588;
+    background-color: #32a9cd;
 }
 
 header ul li {
@@ -56,15 +56,26 @@ header ul li a:hover {
 main {
     margin: 0 4em;
     border-radius: 15px;
-    padding: 2em;
+    padding: 4em;
 }
 
 main p.nothing{
     padding: 10em;
 }
 
+.search{
+    margin: 0 auto;
+    text-align: center;
+}
+
 div.container {
     display: block;
+}
+
+.cars{
+    display: block;
+    margin: 0 auto;
+    text-align: center; 
 }
 
 h1 {
@@ -81,7 +92,7 @@ div.car {
 }
 
 div.car:hover p.name {
-    background: #607588;
+    background: #32a9cd;
     color: white;
 }
 
@@ -102,10 +113,9 @@ button, main a.btn {
     display: inline;
     font-size: 18px;
     width: 43%;
-    margin: 12px;
-    margin-left: 6%;
+    
     border-radius: 4px;
-    background: #607588;
+    background: #32a9cd;
     color: white;
 }
 
@@ -118,7 +128,13 @@ button, main a.btn {
 }
 
 button:hover {
-    background-color: #0B2133;
+    background-color: #104067;
+    color: white;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #104067;
     color: white;
     cursor: pointer;
 }
@@ -153,9 +169,11 @@ span {
 
 div.about {
     display: block;
-    margin: auto;
-    background-color: #f3f3f2;
+    margin-bottom: 250px;
+    background-color: #d4e7f5;
     padding: 3em;
+    margin-top: 100px;
+    text-align: center;
 }
 
 
@@ -166,7 +184,7 @@ div.about a {
 }
 
 form label {
-    background: #607588;
+    background: #2d4b79;
     color: white;
     padding: 12px;
     border-top-left-radius: 4px;
@@ -177,13 +195,13 @@ input[type=text],
 input[type=number],
 select,
 textarea {
-    width: 100%;
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
     padding: 12px 20px 12px 12px;
     border-radius: 0 4px 4px 4px;
-    margin: 8px 0 2em;
+    margin: 0px 3px 2em 5px;
+    text-align: center;
 }
 
 input.price {
@@ -191,19 +209,19 @@ input.price {
 }
 
 input.search {
-    width: 50%;
+    width: 20%;
 }
 
 input[type=submit] {
-    background-color: #545775;
+    background-color: #2d4b79;
     border: none;
     padding: 8px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: block;
     font-size: 18px;
-    width: 50%;
-    margin: 5px 5px 5px 25%;
+    width: 20%;
+    margin: 5px auto 25px;
     color: white;
     text-transform: uppercase;
     border-radius: 4px;
@@ -248,7 +266,7 @@ h2{
 }
 
 footer {
-    background: #607588;
+    background: #32a9cd;
     padding: 1em;
     text-align: center;
     color: white;
