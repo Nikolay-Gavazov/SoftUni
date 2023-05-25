@@ -16,5 +16,17 @@
     "description": "109000 km. Newly imported. 03.2016. Diesel. 90PS. Euro 6. Automatic transmission. Beige.",
     "imageUrl": "renault-capture.jpg",
     "price": 24900
+  },
+  "bg453sp1": {
+    "name": "BMW X5 4.0D",
+    "description": "189000 km. Newly imported. 09.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
+    "imageUrl": "bmw-x5-m-f15.jpg",
+    "price": 53000
+  },
+  "85t9678e": {
+    "name": "BMW 640 d xDrive Coupe",
+    "description": "149000 km. Newly imported. 03.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
+    "imageUrl": "bmw-640D.jpeg",
+    "price": 56000
   }
 }

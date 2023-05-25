@@ -65,6 +65,20 @@ async function createCar(car){
     await write(data);
 }
 
+async function deleteCar(id){
+    const data = await readFile();
+    delete data[id];
+    await write(data);
+}
+
+async function editCar(id, car){
+    const data = await readFile();
+
+    data[id] = car;
+
+    await write(data);
+}
+
 function nextId() {
     return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
@@ -73,7 +87,9 @@ module.exports = () => (req, res, next) => {
     req.storage = {
         getAll,
         getById,
-        createCar
+        createCar,
+        deleteCar,
+        editCar
     };
     next();
 }

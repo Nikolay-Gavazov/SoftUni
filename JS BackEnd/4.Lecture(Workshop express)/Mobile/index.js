@@ -6,6 +6,7 @@ const create = require('./controllers/createPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
 const { notFound } = require('./controllers/notFound');
+const { deletePage } = require('./controllers/deletePage');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(carsService());
 app.get('/', home);
 app.get('/about', about);
 app.get('/details/:id', details);
+app.get('/delete/:id', deletePage);
 
 app.route('/create')
 .get(create.get)
