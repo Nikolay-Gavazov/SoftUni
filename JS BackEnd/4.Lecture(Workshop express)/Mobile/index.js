@@ -1,6 +1,9 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 const { home } = require('./controllers/homePage');
+const { create } = require('./controllers/createPage');
+const { about } = require('./controllers/aboutPage');
+const { details } = require('./controllers/detailsPage');
 
 const app = express();
 
@@ -13,7 +16,11 @@ app.set('view engine', 'hbs');
 app.use(express.urlencoded({extended: true}));
 app.use('/static', express.static('static'));
 
-app.get('/', home)
+
+app.get('/', home);
+app.get('/create', create);
+app.get('/about', about);
+app.get('/details/:id', details);
 
 app.listen(3000, () => console.log('Server is listening on port 3000'));
 
