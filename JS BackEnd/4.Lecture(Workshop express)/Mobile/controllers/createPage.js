@@ -1,8 +1,8 @@
 module.exports = {
-    get(req, res){
-        res.render('create', {title: 'Publish your car'});      
+    get(req, res) {
+        res.render('create', { title: 'Publish your car' });
     },
-   async post(req, res){
+    async post(req, res) {
         const data = req.body;
         await req.storage.createCar({
             name: data.name,
