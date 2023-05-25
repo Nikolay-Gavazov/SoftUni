@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('express-handlebars');
 const carsService = require('./services/cars')
 const { home } = require('./controllers/homePage');
-const { create } = require('./controllers/createPage');
+const create = require('./controllers/createPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
 const { notFound } = require('./controllers/notFound');
@@ -21,9 +21,10 @@ app.use(carsService());
 
 
 app.get('/', home);
-app.get('/create', create);
 app.get('/about', about);
 app.get('/details/:id', details);
+
+app.route('/create').get(create.get).post(create.post);
 
 app.all('*', notFound)
 

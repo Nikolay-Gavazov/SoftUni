@@ -14,7 +14,7 @@ async function readFile(){
 
 }
 
-async function write(filePath, data){
+async function write(data){
     try {
         await fs.writeFile(filePath, JSON.stringify(data, null, 2));
     
@@ -43,13 +43,24 @@ async function getById(id){
     }
 }
 
+async function createCar(car){
+    const data = await readFile();
+    const id = nextId();
+
+    data[id] = car;
+
+    await write(data);
+}
+
 function nextId() {
     return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
 
 module.exports = () => (req, res, next) => {
     req.storage = {
-        getAll
+        getAll,
+        getById,
+        createCar
     };
     next();
 }

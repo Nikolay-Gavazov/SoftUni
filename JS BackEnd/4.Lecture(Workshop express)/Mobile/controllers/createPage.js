@@ -1,5 +1,8 @@
 module.exports = {
-    create(req, res){
-        res.render('create')      
+    get(req, res){
+        res.render('create', {title: 'Publish your car'});      
+    },
+    post(req, res){
+        console.log(req.params);
     }
 }
