@@ -4,6 +4,7 @@ const { home } = require('./controllers/homePage');
 const { create } = require('./controllers/createPage');
 const { about } = require('./controllers/aboutPage');
 const { details } = require('./controllers/detailsPage');
+const { notFound } = require('./controllers/notFound');
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.get('/', home);
 app.get('/create', create);
 app.get('/about', about);
 app.get('/details/:id', details);
+
+app.all('*', notFound)
 
 app.listen(3000, () => console.log('Server is listening on port 3000'));
 
