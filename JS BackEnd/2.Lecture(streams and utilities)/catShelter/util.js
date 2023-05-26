@@ -64,7 +64,6 @@ async function searchItem(req) {
         }
     });
     return result;
-
 }
 
 function nextId() {

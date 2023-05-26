@@ -221,3 +221,11 @@ body > form > label:nth-child(3) {
     background-color: lightskyblue;
     margin-bottom: 1.5rem;
 }
+
+img#sadFaceImg{
+    display: block;
+    margin: 0 auto;
+}
+.err404{
+    text-align: center;
+}

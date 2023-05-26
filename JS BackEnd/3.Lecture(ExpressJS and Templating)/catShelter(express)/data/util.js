@@ -15,7 +15,12 @@ async function write(location, data){
     }
 }
 
-async function getData(location) {
+async function getItem(id, location){
+    const data = await getData(location);
+    return data[id];
+}
+
+async function getAll(location) {
     const data = await readFile(location);
 
     return Object
@@ -23,12 +28,14 @@ async function getData(location) {
     .map(([id, item]) => Object.assign({}, item, {id}));
 }
 
-async function getItem(id, location){
-    const data = await getData(location);
-    let result ='';
-    data.forEach(el => {
-        if(el.id == id){
-            result = el;
+async function searchItem(query) {
+    const cats = await getData('cats');
+    const result = [];
+    cats.forEach(cat => {
+        for (let el in cat) {
+            if (cat[el] == query.search) {
+                result.push(cat);
+            }
         }
     });
     return result;
@@ -59,45 +66,18 @@ async function deleteData(id, location){
     await write(location, dataBase);
 }
 
-function getFormData(body){
-    const formdata = body
-            .split('&')
-            .map(prop => prop.split('='))
-            .reduce((r, [k, v]) => Object.assign(r, { [k]: decodeURIComponent(v.split('+').join(' ')) }), {});
-
-    return formdata;
-}
-
-async function searchItem(req) {
-    const query = getParams(req, 'query');
-    const cats = await getData('cats');
-    const result = [];
-    cats.forEach(cat => {
-        for (let el in cat) {
-            if (cat[el] == query) {
-                result.push(cat);
-            }
-        }
-    });
-    return result;
-
-}
-
 function nextId() {
     return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
 };
 
-function getParams(req, param) {
-    return req.url.searchParams.get(param);
-}
-
-module.exports = {
-    getData,
-    createData,
-    getItem,
-    getParams,
-    editData,
-    getFormData,
-    deleteData,
-    searchItem
+module.exports = () => (req, res, next) => {
+    req.storage = {
+        getAll,
+        createData,
+        getItem,
+        editData,
+        deleteData,
+        searchItem
+    };
+    next();
 }
