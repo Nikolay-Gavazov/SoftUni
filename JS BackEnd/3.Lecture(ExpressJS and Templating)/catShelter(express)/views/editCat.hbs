@@ -1,6 +1,7 @@
+{{#with cat}}
 </header>
 <main>
-    <form action="/edited?id={{id}}" method="POST" class="cat-form">
+    <form action="/edit/{{id}}" method="POST" class="cat-form">
         <h2>Edit Cat</h2>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="{{name}}">
@@ -8,9 +9,12 @@
         <textarea name="description" id="description">{{description}}</textarea>
         <label for="image">Image</label>
         <input type="text" name="img" value ="{{img}}" id="image">
+        {{/with}}
         <label for="group">Breed</label>
         <select name="breed" id="group">
-        <!-- {{{breeds}}} -->
+            {{#each breeds}}
+            {{> breedInfo}}
+            {{/each}}
         </select>
         <button type="submit">Edit Cat</button>
     </form>

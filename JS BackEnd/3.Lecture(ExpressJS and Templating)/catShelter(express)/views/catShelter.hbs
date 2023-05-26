@@ -1,6 +1,7 @@
+{{#with cat}}
 </header>
 <main>
-    <form action="/delete?id={{id}}" method="POST" class="cat-form">
+    <form action="/delete/{{id}}" method="POST" class="cat-form">
         <h2>Shelter the cat</h2>
         <img src="{{img}}" alt="">
         <label for="name">Name</label>
@@ -9,8 +10,9 @@
         <textarea id="description" disabled>{{description}}</textarea>
         <label for="group">Breed</label>
         <select id="group" disabled>
-            <option value="${cat.breed}">{{breed}}</option>
+            <option value="{{breed}}">{{breed}}</option>
         </select>
         <button type="submit">SHELTER THE CAT</button>
     </form>
 </main>
+{{/with}}

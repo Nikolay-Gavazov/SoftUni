@@ -5,6 +5,8 @@ const dataService = require('./data/util');
 
 const createCat = require('./controllers/addCat');
 const createBreed = require('./controllers/addBreed');
+const edit = require('./controllers/edit');
+const deleteCat = require('./controllers/deleteCat');
 
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
@@ -30,6 +32,14 @@ app.route('/create-cat')
 app.route('/create-breed')
     .get(createBreed.get)
     .post(createBreed.post);
+
+app.route('/edit/:id')
+    .get(edit.get)
+    .post(edit.post);
+
+app.route('/delete/:id')
+    .get(deleteCat.get)
+    .post(deleteCat.post);
 
 app.all('*', notFound);
 
