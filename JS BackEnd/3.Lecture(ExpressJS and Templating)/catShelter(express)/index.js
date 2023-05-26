@@ -2,6 +2,9 @@ const express = require('express');
 const hbs = require('express-handlebars');
 
 const dataService = require('./data/util');
+
+const create = require('./controllers/addCat');
+
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
 
@@ -19,6 +22,9 @@ app.use(dataService());
 
 app.get('/', home);
 
+app.route('/create-cat')
+    .get(create.get)
+    .post(create.post);
 
 app.all('*', notFound);
 

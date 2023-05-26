@@ -16,8 +16,14 @@ async function write(location, data){
 }
 
 async function getItem(id, location){
-    const data = await getData(location);
-    return data[id];
+    const data = await readFile(location);
+    const element = data[id];
+    
+    if(element){
+        return Object.assign({}, {id}, element);
+    }else{
+        return undefined;
+    }
 }
 
 async function getAll(location) {
@@ -31,8 +37,7 @@ async function getAll(location) {
 async function searchItem(query) {
     const cats = await getAll('cats');
     const result = [];
-
-    console.log(query.search);
+    
     if(query.search){
     cats.forEach(cat => {
         for (let el in cat) {
