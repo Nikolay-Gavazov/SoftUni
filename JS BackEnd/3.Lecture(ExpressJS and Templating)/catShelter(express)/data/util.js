@@ -5,19 +5,29 @@ async function readFile(location){
     return data;
 }
 
+async function write(location, data){
+    try {
+       await fs.writeFile(`./data/${location}.json`, JSON.stringify(data, null, 2))
+    } catch (error) {
+        console.log('Database read error');
+        console.log(error);
+        process.exit(1);
+    }
+}
+
 async function getData(location) {
     const data = await readFile(location);
 
     return Object
     .entries(data)
-    .map(([_id, item]) => Object.assign({}, item, {_id}));
+    .map(([id, item]) => Object.assign({}, item, {id}));
 }
 
 async function getItem(id, location){
     const data = await getData(location);
     let result ='';
     data.forEach(el => {
-        if(el._id == id){
+        if(el.id == id){
             result = el;
         }
     });
@@ -27,26 +37,26 @@ async function getItem(id, location){
 
 async function createData(data, location){
     const dataBase = await readFile(location);
-    const _id = nextId();
-    dataBase[_id] = data;
+    const id = nextId();
+    dataBase[id] = data;
 
-    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+    await write(location, dataBase);
 }
 
-async function editData(data, _id, location){
+async function editData(data, id, location){
     const dataBase = await readFile(location);
 
-    dataBase[_id] = data;
+    dataBase[id] = data;
 
-    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+    await write(location, dataBase);
 }
 
-async function deleteData(_id, location){
+async function deleteData(id, location){
     const dataBase = await readFile(location);
 
-    delete dataBase[_id];
+    delete dataBase[id];
 
-    fs.writeFile(`./data/${location}.json`, JSON.stringify(dataBase, null, 2))
+    await write(location, dataBase);
 }
 
 function getFormData(body){
