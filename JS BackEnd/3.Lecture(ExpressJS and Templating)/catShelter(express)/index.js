@@ -3,7 +3,8 @@ const hbs = require('express-handlebars');
 
 const dataService = require('./data/util');
 
-const create = require('./controllers/addCat');
+const createCat = require('./controllers/addCat');
+const createBreed = require('./controllers/addBreed');
 
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
@@ -23,8 +24,12 @@ app.use(dataService());
 app.get('/', home);
 
 app.route('/create-cat')
-    .get(create.get)
-    .post(create.post);
+    .get(createCat.get)
+    .post(createCat.post);
+
+app.route('/create-breed')
+    .get(createBreed.get)
+    .post(createBreed.post);
 
 app.all('*', notFound);
 
