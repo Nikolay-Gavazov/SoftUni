@@ -29,16 +29,23 @@ async function getAll(location) {
 }
 
 async function searchItem(query) {
-    const cats = await getData('cats');
+    const cats = await getAll('cats');
     const result = [];
+
+    console.log(query.search);
+    if(query.search){
     cats.forEach(cat => {
         for (let el in cat) {
-            if (cat[el] == query.search) {
+            if (cat[el].toLocaleLowerCase().includes(query.search.toLocaleLowerCase())) {
                 result.push(cat);
             }
         }
     });
     return result;
+    }else{
+        return cats;
+    }
+    
 }
 
 
