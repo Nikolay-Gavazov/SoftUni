@@ -11,4 +11,4 @@ const catSchema = new Schema({
 
 const Cat = model('Cat',catSchema);
 
-model.exports = Cat;
+module.exports = Cat;

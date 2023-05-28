@@ -7,4 +7,4 @@ const breedSchema = new Schema({
 
 const Breed = model('Breed',breedSchema);
 
-model.exports = Breed;
+module.exports = Breed;
