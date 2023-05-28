@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 
+const db = require('./models/index');
 const dataService = require('./data/util');
 
 const createCat = require('./controllers/addCat');
@@ -11,6 +12,7 @@ const deleteCat = require('./controllers/deleteCat');
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
 
+db();
 const app = express();
 
 app.engine('hbs', hbs.create({
