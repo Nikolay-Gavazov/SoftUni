@@ -9,9 +9,14 @@ async function init(){
             useUnifiedtoplogy: true
         });
 
-        mongoose.connection.on('error', (error) => )
-    } catch (error) {
+        mongoose.connection.on('error', (error) => {
+            console.error('Database error');
+            console.error(error);
+        });
+    } catch (error) { 
         console.error('Error connecting to DB');
         process.exit(1);
     }
 }
+
+module.exports = init;
