@@ -1,42 +1,35 @@
-const fs = require('fs/promises');
+const Breed = require('../models/Breed');
+const Cat = require('../models/Cat');
 
 
-async function readFile(location){
-    const data = JSON.parse((await fs.readFile(`./data/${location}.json`)).toString());
-    return data;
-}
-
-async function write(location, data){
-    try {
-       await fs.writeFile(`./data/${location}.json`, JSON.stringify(data, null, 2))
-    } catch (error) {
-        console.log('Database read error');
-        console.log(error);
-        process.exit(1);
+async function getItem(_id, location){
+    let data = null;
+    if(location == 'Cat'){
+        data = await Cat.findById(_id).lean();
+    }else if(location == 'Breed'){
+        data = await Breed.findById(_id).lean();
     }
-}
-
-async function getItem(id, location){
-    const data = await readFile(location);
-    const element = data[id];
     
-    if(element){
-        return Object.assign({}, {id}, element);
+    if(data){
+        return data;
     }else{
         return undefined;
     }
 }
 
 async function getAll(location) {
-    const data = await readFile(location);
-
-    return Object
-    .entries(data)
-    .map(([id, item]) => Object.assign({}, item, {id}));
+    let data = null;
+    if(location == 'Cat'){
+        data = await Cat.find({}).lean();
+    }else if(location == 'Breed'){
+        data = await Breed.find({}).lean();
+    }
+    console.log(data);
+    return data;
 }
 
 async function searchItem(query) {
-    const cats = await getAll('cats');
+    const cats = await Cat.find({}).lean();
     const result = [];
     
     if(query.search){
@@ -57,24 +50,24 @@ async function searchItem(query) {
 
 async function createData(data, location){
     const dataBase = await readFile(location);
-    const id = nextId();
-    dataBase[id] = data;
+    const _id = nextId();
+    dataBase[_id] = data;
 
     await write(location, dataBase);
 }
 
-async function editData(data, id, location){
+async function editData(data, _id, location){
     const dataBase = await readFile(location);
 
-    dataBase[id] = data;
+    dataBase[_id] = data;
 
     await write(location, dataBase);
 }
 
-async function deleteData(id, location){
+async function deleteData(_id, location){
     const dataBase = await readFile(location);
 
-    delete dataBase[id];
+    delete dataBase[_id];
 
     await write(location, dataBase);
 }

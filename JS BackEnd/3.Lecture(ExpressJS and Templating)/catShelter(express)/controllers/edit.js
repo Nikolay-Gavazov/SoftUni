@@ -1,8 +1,8 @@
 module.exports = {
     async get(req, res){
         const id = req.params.id;
-        const breeds = await req.storage.getAll('breeds');
-        const cat = await req.storage.getItem(id,'cats');
+        const breeds = await req.storage.getAll('Breed');
+        const cat = await req.storage.getItem(id,'Cat');
         res.render('editCat', {cat, breeds})
     },
     async post(req, res){
