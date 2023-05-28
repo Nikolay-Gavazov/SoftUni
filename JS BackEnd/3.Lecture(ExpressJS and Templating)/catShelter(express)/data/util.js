@@ -1,5 +1,6 @@
 const fs = require('fs/promises');
 
+
 async function readFile(location){
     const data = JSON.parse((await fs.readFile(`./data/${location}.json`)).toString());
     return data;
