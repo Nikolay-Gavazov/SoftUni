@@ -1,7 +1,7 @@
 module.exports = {
     async get(req, res){
         const id = req.params.id;
-        const breeds = await req.storage.getAll('Breed');
+        const breeds = await req.storage.getBreeds();
         const cat = await req.storage.getItem(id,'Cat');
         res.render('editCat', {cat, breeds})
     },
@@ -12,7 +12,7 @@ module.exports = {
             "name": data.name,
             "description": data.description,
             "img": data.img,
-            "breed": data.breed},id, 'cats')
+            "breed": data.breed},id, 'Cat')
         res.redirect('/');
     }
 }

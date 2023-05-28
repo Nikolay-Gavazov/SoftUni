@@ -1,6 +1,6 @@
 module.exports = {
     async get(req, res){
-        const breeds = await req.storage.getAll('Breed');
+        const breeds = await req.storage.getBreeds();
         res.render('addCat', {breeds})
     },
     async post(req, res){

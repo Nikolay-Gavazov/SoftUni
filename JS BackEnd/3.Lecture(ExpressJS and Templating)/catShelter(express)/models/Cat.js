@@ -3,8 +3,7 @@ const {Schema, model} = require('mongoose');
 const catSchema = new Schema({
     name: {type: String,
     minLength: 3},
-    description: {type: String,
-    minLength: 10},
+    description: {type: String},
     img: {type: String},
     breed: {type: String}
 });
