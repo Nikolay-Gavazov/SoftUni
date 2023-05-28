@@ -12,7 +12,10 @@ const deleteCat = require('./controllers/deleteCat');
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
 
-db();
+start()
+
+async function start(){
+   await db();
 const app = express();
 
 app.engine('hbs', hbs.create({
@@ -46,3 +49,4 @@ app.route('/delete/:id')
 app.all('*', notFound);
 
 app.listen(3000, () => console.log('Server works on port 3000'));
+}
