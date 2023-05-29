@@ -23,22 +23,17 @@ async function getBreeds() {
 }
 
 async function searchItem(query) {
-    const cats = await Cat.find({}).lean();
-    const result = [];
-    console.log(cats);
+    console.log(query.search);
+    let options = {};
     if (query.search) {
-        cats.forEach(cat => {
-            for (let el in cat) {
-                if (cat[el].toLocaleLowerCase().includes(query.search.toLocaleLowerCase())) {
-                    result.push(cat);
-                }
-            }
-        });
-        return cats;
-    } else {
-        return cats;
+        
+    // options.name = new RegExp(query.search, 'i');
+    // options.description = new RegExp(query.search, 'i');
+    // options.breed = {new RegExp(query.search, 'i')};
     }
 
+    const cats = await Cat.find(options).lean();
+    return cats
 }
 
 async function createData(data, location) {
