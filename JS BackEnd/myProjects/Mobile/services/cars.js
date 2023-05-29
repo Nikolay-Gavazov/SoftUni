@@ -2,10 +2,7 @@ const Car = require('../models/Car');
 
 async function getAll(query){
     const data = await Car.find({});
-    let cars = Object
-    .entries(data)
-    .map(([id, v]) => Object.assign({}, {id}, v));
-
+    let cars = data;
     if(query.search){
         cars = cars.filter(car => car.name.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()));
     }
@@ -17,7 +14,7 @@ async function getAll(query){
     if(query.to){
         cars = cars.filter(car => car.price <= Number(query.to));
     }
-    return data;
+    return cars;
 };
 
 async function getById(id){
