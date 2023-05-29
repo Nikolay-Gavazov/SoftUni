@@ -2,14 +2,8 @@ const Breed = require('../models/Breed');
 const Cat = require('../models/Cat');
 
 
-async function getItem(_id, location) {
-    let data = null;
-    if (location == 'Cat') {
-        data = await Cat.findById(_id).lean();
-    } else if (location == 'Breed') {
-        data = await Breed.findById(_id).lean();
-    }
-
+async function getItem(_id) {
+    const data = await Cat.findById(_id).lean();
     if (data) {
         return data;
     } else {
@@ -26,12 +20,11 @@ async function searchItem(query) {
     console.log(query.search);
     let options = {};
     if (query.search) {
-        
-    // options.name = new RegExp(query.search, 'i');
+    options.name = new RegExp(query.search, 'i');
     // options.description = new RegExp(query.search, 'i');
-    // options.breed = {new RegExp(query.search, 'i')};
+    // options.breed = new RegExp(query.search, 'i');
     }
-
+    console.log(options);
     const cats = await Cat.find(options).lean();
     return cats
 }
