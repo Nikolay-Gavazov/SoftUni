@@ -1,19 +1,20 @@
 const Car = require('../models/Car');
 
 async function getAll(query){
-    const data = await Car.find({});
-    let cars = data;
+    const options = {}
     if(query.search){
-        cars = cars.filter(car => car.name.toLocaleLowerCase().includes(query.search.toLocaleLowerCase()));
+        options.name = new RegExp(query.search, 'i');
     }
-
     if(query.from){
-        cars = cars.filter(car => car.price >= Number(query.from));
+        options.price = {$gte: Number(query.from)}; 
     }
-
     if(query.to){
-        cars = cars.filter(car => car.price <= Number(query.to));
+        if(!options.price){
+            options.price = {};
+        }
+        options.price.$lte = Number(query.to);
     }
+    const cars = await Car.find(options);
     return cars;
 };
 
