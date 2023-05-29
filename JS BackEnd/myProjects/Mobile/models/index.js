@@ -1,1 +1,1 @@
-const {} = require()
+const mongoose = require('mongoose');
