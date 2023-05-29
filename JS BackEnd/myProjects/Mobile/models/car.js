@@ -7,3 +7,6 @@ const carSchema = new Schema({
     price: {type: Number}
 });
 
+const Car = model('Car', carSchema);
+
+module.exports = Car;
