@@ -4,8 +4,14 @@ module.exports = {
     },
     async post(req, res){
         const data = req.body;
-        await req.storage.createData({
-            "breed": data.breed}, 'Breed')
-        res.redirect('/');
+        
+        try {
+            await req.storage.createData({
+                breed: data.breed}, 'Breed')
+                res.redirect('/');
+        } catch (error) {
+            console.log('Error creating record');
+            res.redirect('/create-breed');
+        }
     }
 }
