@@ -39,9 +39,7 @@ async function deleteCar(id){
 }
 
 async function editCar(id, car){
-    console.log(id);
-    console.log(car);
-    Car.findByIdAndUpdate(id, car)
+    await Car.findByIdAndUpdate(id, car)
 }
 
 module.exports = () => (req, res, next) => {
