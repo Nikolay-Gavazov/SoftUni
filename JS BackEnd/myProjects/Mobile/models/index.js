@@ -12,11 +12,7 @@ async function init(){
         });
 
         console.log('DB connected');
-        
-        Car.create({"name": "BMW X5 4.0D",
-        "description": "189000 km. Newly imported. 09.2015. Diesel. 313PS. Euro 6. Automatic transmission. Black.",
-        "imageUrl": "bmw-x5-m-f15.jpg",
-        "price": 53000})
+
         mongoose.connection.on('error', (err) => {
             console.error('DB Error');
             console.error(err);

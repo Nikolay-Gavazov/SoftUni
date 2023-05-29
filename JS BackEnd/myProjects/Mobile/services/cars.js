@@ -1,32 +1,7 @@
-const fs = require('fs/promises');
-
-const filePath = `./services/database.json`;
-
-async function readFile(){
-    try {
-        const data = JSON.parse(await fs.readFile(filePath));
-        return data;
-    } catch (error) {
-        console.log('Database read error');
-        console.log(error);
-        process.exit(1);
-    }
-
-}
-
-async function write(data){
-    try {
-        await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-    
-    } catch (error) {
-        console.log('Database read error');
-        console.log(error);
-        process.exit(1);
-    }
-}
+const Car = require('../models/Car');
 
 async function getAll(query){
-    const data = await readFile();
+    const data = await Car.find({});
     let cars = Object
     .entries(data)
     .map(([id, v]) => Object.assign({}, {id}, v));
@@ -42,46 +17,32 @@ async function getAll(query){
     if(query.to){
         cars = cars.filter(car => car.price <= Number(query.to));
     }
-    return cars;
+    return data;
 };
 
 async function getById(id){
-    const data = await readFile();
-    const car = data[id];
-    
-    if(car){
-        return Object.assign({}, {id}, car);
+    const data = await Car.findById(id);
+ 
+    if(data){
+        return data
     }else{
         return undefined;
     }
 }
 
 async function createCar(car){
-    const data = await readFile();
-    const id = nextId();
-
-    data[id] = car;
-
-    await write(data);
+    await Car.create(car);
 }
 
 async function deleteCar(id){
-    const data = await readFile();
-    delete data[id];
-    await write(data);
+    await Car.findByIdAndDelete(id);
 }
 
 async function editCar(id, car){
-    const data = await readFile();
-
-    data[id] = car;
-
-    await write(data);
+    console.log(id);
+    console.log(car);
+    Car.findByIdAndUpdate(id, car)
 }
-
-function nextId() {
-    return 'xxxxxxxx'.replace(/x/g, () => (Math.random() * 16 | 0).toString(16));
-};
 
 module.exports = () => (req, res, next) => {
     req.storage = {
