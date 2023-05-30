@@ -1,8 +1,8 @@
 module.exports = {
-    async get(req, res){
-        res.render('createAccessory', {title: 'Create a Accessory'});
+    async get(req, res) {
+        res.render('createAccessory', { title: 'Create a Accessory' });
     },
-    async post(req, res){
+    async post(req, res) {
         const data = req.body;
         const accessory = {
             name: data.name,
@@ -11,7 +11,7 @@ module.exports = {
         };
 
         try {
-            await req.storage.createItem(accessory);
+            await req.accessory.createItem(accessory);
             res.redirect('/');
         } catch (error) {
             console.log(error);
