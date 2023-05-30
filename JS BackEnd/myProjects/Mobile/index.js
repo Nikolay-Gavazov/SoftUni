@@ -23,7 +23,7 @@ async function start(){
     
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(carsService());
+    //app.use(carsService());
     
     
     app.get('/', home);
