@@ -1,35 +1,27 @@
 const Accessory = require('../models/Accessory');
 
-async function getAll(){
+async function getAll() {
     const data = await Accessory.find({});
-    return data
+    return data;
 };
 
-async function getById(id){
-    const data = await Accessory.findById(id);
+async function getRest(ids) {
+    const data = await Accessory.find({ _id: { $nin: ids } });
 
-    if(data){
+    if (data) {
         return data;
-    }else{
+    } else {
         return undefined;
     }
 };
 
-async function createItem(data){
+async function createItem(data) {
     const accessory = dataParcer(data);
     await Accessory.create(accessory);
 };
 
-async function deleteItem(id){
-    await Accessory.findByIdAndDelete(id);
-};
 
-async function editItem(id, data){
-    const accessory = dataParcer(data);
-    await Accessory.findByIdAndUpdate(id, accessory);
-}
-
-function dataParcer(data){
+function dataParcer(data) {
     return {
         name: data.name,
         description: data.description,
@@ -38,12 +30,10 @@ function dataParcer(data){
 }
 
 module.exports = () => (req, res, next) => {
-    req.storage = {
+    req.accessory = {
         getAll,
-        getById,
+        getRest,
         createItem,
-        deleteItem,
-        editItem
     };
     next();
 }
