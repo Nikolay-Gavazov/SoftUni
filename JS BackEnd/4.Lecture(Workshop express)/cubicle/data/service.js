@@ -41,7 +41,7 @@ async function createItem(data){
 
 async function deleteItem(id){
     await Cube.findByIdAndDelete(id);
-}
+};
 
 module.exports = () => (req, res, next) => {
     req.storage = {
