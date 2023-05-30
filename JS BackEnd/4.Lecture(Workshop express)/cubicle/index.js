@@ -2,12 +2,13 @@ const express = require('express');
 const hbs = require('express-handlebars');
 
 const dataService = require('./data/service');
-const db = require('./models/index');
+const db = require('./models/database');
 
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
 const { notFound } = require('./controllers/notFound');
 const create = require('./controllers/create');
+const { details } = require('./controllers/details');
 
 async function start() {
     await db();
@@ -25,7 +26,7 @@ async function start() {
 
     app.get('/', home);
     app.get('/about', about);
-    app.get('/details/:id');
+    app.get('/details/:id', details);
 
     app.route('/create')
         .get(create.get)
