@@ -1,7 +1,7 @@
 module.exports = {
     async get(req, res) {
         const id = req.params.id;
-        const cube = await req.storage.getById(id);
+        const cube = await req.cube.getById(id);
         res.render('edit', { cube, title: `Edit - ${cube.name}` });
     },
     async post(req, res) {
@@ -15,7 +15,7 @@ module.exports = {
         };
 
         try {
-            await req.storage.editItem(id, cube);
+            await req.cube.editItem(id, cube);
             res.redirect('/');
         } catch (error) {
             console.log(error);
