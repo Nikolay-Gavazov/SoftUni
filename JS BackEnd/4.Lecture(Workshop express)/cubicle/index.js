@@ -42,7 +42,7 @@ async function start() {
     app.route('/edit/:id')
         .get(edit.get)
         .post(edit.post);
-    
+
     app.route('/create/accessory')
         .get(createaccessory.get)
         .post(createaccessory.post);
