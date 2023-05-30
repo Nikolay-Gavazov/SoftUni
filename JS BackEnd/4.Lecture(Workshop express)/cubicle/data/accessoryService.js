@@ -17,7 +17,7 @@ async function getById(id){
 
 async function createItem(data){
     const accessory = dataParcer(data);
-    await Accessory.create(cube);
+    await Accessory.create(accessory);
 };
 
 async function deleteItem(id){
@@ -26,7 +26,7 @@ async function deleteItem(id){
 
 async function editItem(id, data){
     const accessory = dataParcer(data);
-    await Accessory.findByIdAndUpdate(id, cube);
+    await Accessory.findByIdAndUpdate(id, accessory);
 }
 
 function dataParcer(data){
