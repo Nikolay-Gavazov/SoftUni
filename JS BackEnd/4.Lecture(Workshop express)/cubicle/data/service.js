@@ -19,6 +19,15 @@ async function getAll(query){
     return cubes
 }
 
+async function getById(id){
+    const data = await Cube.findById(id);
+
+    if(data){
+        return data;
+    }else{
+        return undefined;
+    }
+}
 
 module.exports = () => (req, res, next) => {
     req.storage = {
