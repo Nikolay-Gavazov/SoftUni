@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const connectionStr = 'mongodb://127.0.0.1:27017/Cubicle';
 
 const Cube = require('../models/Cube');
+const Accessory = require('../models/Accessory')
 
 async function init() {
     try {
