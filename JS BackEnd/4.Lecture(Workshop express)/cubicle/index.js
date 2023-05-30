@@ -1,7 +1,7 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 
-
+const dataService = require('./data/service');
 
 async function start(){
 
@@ -15,6 +15,8 @@ async function start(){
 
     app.use(express.urlencoded({extended: true}));
     app.use('/static', express.static('static'));
-    app.use
+    app.use(dataService());
+
+    app.get('/',)
 }
 start()
