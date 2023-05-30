@@ -9,6 +9,8 @@ const { about } = require('./controllers/about');
 const { notFound } = require('./controllers/notFound');
 const create = require('./controllers/create');
 const { details } = require('./controllers/details');
+const { deletePage } = require('./controllers/deleteController');
+const edit = require('./controllers/edit');
 
 async function start() {
     await db();
@@ -27,10 +29,15 @@ async function start() {
     app.get('/', home);
     app.get('/about', about);
     app.get('/details/:id', details);
+    app.get('/delete/:id', deletePage)
 
     app.route('/create')
         .get(create.get)
         .post(create.post);
+
+    app.route('/edit/:id')
+        .get(edit.get)
+        .post(edit.post);
 
     app.all('*', notFound);
 
