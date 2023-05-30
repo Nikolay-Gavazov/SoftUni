@@ -1,8 +1,8 @@
 const Breed = require('../models/Breed');
 const Cat = require('../models/Cat');
 
-async function getItem(_id) {
-    const data = await Cat.findById(_id).lean();
+async function getItem(id) {
+    const data = await Cat.findById(id).lean();
     if (data) {
         return data;
     } else {
@@ -19,8 +19,6 @@ async function searchItem(query) {
     const options = {};
     if (query.search) {
         options.name = new RegExp(query.search, 'i');
-        // options.description = new RegExp(query.search, 'i');
-        // options.breed = new RegExp(query.search, 'i');
     }
 
     const cats = await Cat.find(options).lean();
@@ -35,12 +33,12 @@ async function createData(data, location) {
     }
 }
 
-async function editData(data, _id) {
-    await Cat.findByIdAndUpdate(_id, data);
+async function editData(data, id) {
+    await Cat.findByIdAndUpdate(id, data);
 }
 
-async function deleteData(_id) {
-    await Cat.findByIdAndDelete(_id);
+async function deleteData(id) {
+    await Cat.findByIdAndDelete(id);
 }
 
 module.exports = () => (req, res, next) => {
