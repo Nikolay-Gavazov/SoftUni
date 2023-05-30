@@ -1,7 +1,6 @@
 const express = require('express');
 const hbs = require('express-handlebars');
 
-const carsService = require('./services/cars');
 const db = require('./models/index');
 
 const { home } = require('./controllers/homePage');
