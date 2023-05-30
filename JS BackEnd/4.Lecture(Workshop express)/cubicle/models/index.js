@@ -4,7 +4,7 @@ const connectionStr = 'mongodb://127.0.0.1:27017/Cubicle';
 
 const Cube = require('./Cube');
 
-async function init(){
+async function init() {
     try {
         await mongoose.connect(connectionStr, {
             useNewUrlParser: true,
@@ -22,3 +22,5 @@ async function init(){
         process.exit(1);
     }
 }
+
+module.exports = init;

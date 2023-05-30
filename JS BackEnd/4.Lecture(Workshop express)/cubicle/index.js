@@ -2,13 +2,15 @@ const express = require('express');
 const hbs = require('express-handlebars');
 
 const dataService = require('./data/service');
+const db = require('./models/index');
+
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
 const { notFound } = require('./controllers/notFound');
 const create = require('./controllers/create');
 
-async function start(){
-
+async function start() {
+    await db();
     const app = express();
 
     app.engine('hbs', hbs.create({
@@ -17,7 +19,7 @@ async function start(){
 
     app.set('view engine', 'hbs');
 
-    app.use(express.urlencoded({extended: true}));
+    app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
     app.use(dataService());
 
@@ -30,7 +32,7 @@ async function start(){
         .post(create.post);
 
     app.all('*', notFound);
-    
-    app.listen(3000, () => console.log('Serve is listening on port 3000'))
+
+    app.listen(3000, () => console.log('Server is listening on port 3000'))
 }
 start()
