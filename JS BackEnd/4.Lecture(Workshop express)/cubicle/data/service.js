@@ -30,12 +30,7 @@ async function getById(id){
 };
 
 async function createItem(data){
-    const cube = {
-        name: data.name,
-        description: data.description,
-        imageUrl: data.imageUrl,
-        difficultyLevel: Number(data.difficultyLevel)
-    };
+    const cube = dataParcer(data);
     await Cube.create(cube);
 };
 
@@ -43,11 +38,26 @@ async function deleteItem(id){
     await Cube.findByIdAndDelete(id);
 };
 
+async function editItem(id, data){
+    const cube = dataParcer(data);
+    await Cube.findByIdAndUpdate(id, cube);
+}
+
+function dataParcer(data){
+    return {
+        name: data.name,
+        description: data.description,
+        imageUrl: data.imageUrl,
+        difficultyLevel: Number(data.difficultyLevel)
+    }
+}
+
 module.exports = () => (req, res, next) => {
     req.storage = {
         getAll,
         getById,
-        createItem
+        createItem,
+        deleteItem
     };
     next();
 }
