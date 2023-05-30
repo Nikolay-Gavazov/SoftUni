@@ -1,8 +1,8 @@
 module.exports = {
-    async get(req, res){
-        res.render('create', {title: 'Create a cube'});
+    async get(req, res) {
+        res.render('create', { title: 'Create a cube' });
     },
-    async post(req, res){
+    async post(req, res) {
         const data = req.body;
         const cube = {
             name: data.name,
