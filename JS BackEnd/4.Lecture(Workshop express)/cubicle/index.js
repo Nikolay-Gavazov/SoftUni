@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('express-handlebars');
 
 const dataService = require('./data/service');
+const { home } = require('./controllers/home');
 
 async function start(){
 
@@ -17,6 +18,8 @@ async function start(){
     app.use('/static', express.static('static'));
     app.use(dataService());
 
-    app.get('/',)
+    app.get('/', home)
+
+    app.listen(3000, () => console.log('Serve is listening on port 3000'))
 }
 start()
