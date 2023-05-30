@@ -11,6 +11,7 @@ const create = require('./controllers/create');
 const { details } = require('./controllers/details');
 const { deletePage } = require('./controllers/deleteController');
 const edit = require('./controllers/edit');
+const accessory = require('./controllers/accessory');
 
 async function start() {
     await db();
@@ -38,6 +39,10 @@ async function start() {
     app.route('/edit/:id')
         .get(edit.get)
         .post(edit.post);
+    
+    app.route('/create/accessory')
+        .get(accessory.get)
+        .post(accessory.post);
 
     app.all('*', notFound);
 
