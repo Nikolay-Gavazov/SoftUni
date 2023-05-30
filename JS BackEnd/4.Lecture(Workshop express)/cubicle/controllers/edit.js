@@ -1,7 +1,7 @@
 module.exports = {
     async get(req, res) {
         const id = req.params.id;
-        const cube = req.storage.getById(id);
+        const cube = await req.storage.getById(id);
         res.render('edit', { cube, title: `Edit - ${cube.name}` });
     },
     async post(req, res) {
