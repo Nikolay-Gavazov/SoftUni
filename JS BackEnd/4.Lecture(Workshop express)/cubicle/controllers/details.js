@@ -1,7 +1,7 @@
 module.exports = {
     async details(req, res){
         const id = req.params.id;
-        const cube = await req.storage.getById(id);
+        const cube = await req.cube.getById(id);
 
         if(cube){
             res.render('details', {cube, title: `Cubicle - ${cube.name}`});
