@@ -31,7 +31,8 @@ async function getById(id){
 
 module.exports = () => (req, res, next) => {
     req.storage = {
-        getAll
+        getAll,
+        getById
     };
     next();
 }
