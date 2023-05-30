@@ -18,7 +18,7 @@ async function init() {
             console.error(err);
         })
     } catch (error) {
-        console.error('DB error:', error);
+        console.error('DB error');
         process.exit(1);
     }
 }
