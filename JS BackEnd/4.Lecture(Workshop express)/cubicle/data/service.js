@@ -17,7 +17,7 @@ async function getAll(query){
     }
     const cubes = await Cube.find(options);
     return cubes
-}
+};
 
 async function getById(id){
     const data = await Cube.findById(id);
@@ -27,7 +27,7 @@ async function getById(id){
     }else{
         return undefined;
     }
-}
+};
 
 async function createItem(data){
     const cube = {
@@ -37,6 +37,10 @@ async function createItem(data){
         difficultyLevel: Number(data.difficultyLevel)
     };
     await Cube.create(cube);
+};
+
+async function deleteItem(id){
+    await Cube.findByIdAndDelete(id);
 }
 
 module.exports = () => (req, res, next) => {
