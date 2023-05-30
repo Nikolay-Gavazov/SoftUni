@@ -29,10 +29,21 @@ async function getById(id){
     }
 }
 
+async function createItem(data){
+    const cube = {
+        name: data.name,
+        description: data.description,
+        imageUrl: data.imageUrl,
+        difficultyLevel: Number(data.difficultyLevel)
+    };
+    await Cube.create(cube);
+}
+
 module.exports = () => (req, res, next) => {
     req.storage = {
         getAll,
-        getById
+        getById,
+        createItem
     };
     next();
 }
