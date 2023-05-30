@@ -2,7 +2,7 @@ const express = require('express');
 const hbs = require('express-handlebars');
 
 const dataService = require('./data/service');
-const db = require('./models/database');
+const db = require('./data/database');
 
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');

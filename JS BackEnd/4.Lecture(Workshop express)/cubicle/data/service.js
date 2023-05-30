@@ -13,7 +13,7 @@ async function getAll(query){
         if(!options.difficultyLevel){
             options.difficultyLevel = {};
         }
-        options.difficultyLevel.$lte = Number(query.from);
+        options.difficultyLevel.$lte = Number(query.to);
     }
     const cubes = await Cube.find(options);
     return cubes
@@ -57,7 +57,8 @@ module.exports = () => (req, res, next) => {
         getAll,
         getById,
         createItem,
-        deleteItem
+        deleteItem,
+        editItem
     };
     next();
 }
