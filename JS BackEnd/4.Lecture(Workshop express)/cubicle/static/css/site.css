@@ -105,7 +105,7 @@ button, main a.btn {
     color: white;
 }
 
-button:hover {
+a.btn:hover {
     background-color: #0B2133;
     color: white;
     cursor: pointer;
