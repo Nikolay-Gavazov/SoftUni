@@ -53,7 +53,7 @@ function dataParcer(data){
 }
 
 module.exports = () => (req, res, next) => {
-    req.storage = {
+    req.cube = {
         getAll,
         getById,
         createItem,
