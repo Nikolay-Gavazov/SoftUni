@@ -10,7 +10,7 @@ module.exports = {
             imageUrl: data.imageUrl,
             difficultyLevel: Number(data.difficultyLevel)
         };
-        console.log(cube);
+
         try {
             await req.storage.createItem(cube);
             res.redirect('/');
