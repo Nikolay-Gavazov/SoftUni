@@ -5,6 +5,7 @@ const dataService = require('./data/service');
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
 const { notFound } = require('./controllers/notFound');
+const create = require('./controllers/create');
 
 async function start(){
 
@@ -22,6 +23,11 @@ async function start(){
 
     app.get('/', home);
     app.get('/about', about);
+    app.get('/details/:id');
+
+    app.route('/create')
+        .get(create.get)
+        .post(create.post);
 
     app.all('*', notFound);
     
