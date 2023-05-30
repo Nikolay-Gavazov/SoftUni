@@ -12,7 +12,7 @@ module.exports = {
         };
 
         try {
-            await req.storage.createItem(cube);
+            await req.cube.createItem(cube);
             res.redirect('/');
         } catch (error) {
             console.log(error);
