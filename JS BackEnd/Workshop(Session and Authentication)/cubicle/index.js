@@ -1,9 +1,11 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const cookieParser = require('cookie-parser');
 
 const dataService = require('./data/cubeService');
 const accessoryService = require('./data/accessoryService');
 const db = require('./data/database');
+const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
 const { about } = require('./controllers/about');
@@ -16,6 +18,7 @@ const createaccessory = require('./controllers/createAccessory');
 const attachAccessory = require('./controllers/attachAccessory');
 const login = require('./controllers/login');
 const register = require('./controllers/register');
+const { logout } = require('./controllers/logout');
 
 async function start() {
     await db();
@@ -31,11 +34,14 @@ async function start() {
     app.use('/static', express.static('static'));
     app.use(dataService());
     app.use(accessoryService());
+    app.use(cookieParser());
+    app.use(userService());
 
     app.get('/', home);
     app.get('/about', about);
     app.get('/details/:id', details);
-    app.get('/delete/:id', deletePage)
+    app.get('/delete/:id', deletePage);
+    app.get('/logout', logout)
 
     app.route('/create')
         .get(create.get)
