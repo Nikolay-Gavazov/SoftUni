@@ -14,6 +14,8 @@ const { deletePage } = require('./controllers/deleteController');
 const edit = require('./controllers/edit');
 const createaccessory = require('./controllers/createAccessory');
 const attachAccessory = require('./controllers/attachAccessory');
+const login = require('./controllers/login');
+const register = require('./controllers/register');
 
 async function start() {
     await db();
@@ -50,6 +52,14 @@ async function start() {
     app.route('/details/:id/attach-accessory')
         .get(attachAccessory.get)
         .post(attachAccessory.post);
+
+    app.route('/login')
+        .get(login.get)
+        .post(login.post);
+
+    app.route('/register')
+        .get(register.get)
+        .post(register.post);
 
     app.all('*', notFound);
 
