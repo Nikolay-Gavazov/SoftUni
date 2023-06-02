@@ -1,6 +1,7 @@
-const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('../jwt-to-promise');
+const secret = 'lapamChushki';
+
 module.exports = {
     async get(req, res) {
         res.render('loginPage', { title: 'Login' });
@@ -8,12 +9,23 @@ module.exports = {
     async post(req, res) {
         const {username, password} = req.body;
 
-        try {
-            await req.accessory.createItem(accessory);
-            res.redirect('/');
-        } catch (error) {
-            console.log(error);
-            res.redirect('/login');
+        const user = await req.user.getUser(username);
+        console.log(user);
+        const hash = user.hash;
+        const isValid = await bcrypt.compare(password, hash);
+
+        if(isValid){
+            const payload = {username};
+            try {
+                const token = await jwt.sign(payload, secret, { expiresIn: '2d'});
+                res.cookie('token', token);
+                res.redirect('/');
+            } catch (error) {
+                console.log(error);
+                res.redirect('/login');
+            }
+        }else{
+            res.status(401).redirect('/login');
         }
     }
 }
