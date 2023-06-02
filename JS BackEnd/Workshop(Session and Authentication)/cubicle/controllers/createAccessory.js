@@ -1,6 +1,7 @@
 module.exports = {
     async get(req, res) {
-        res.render('createAccessory', { title: 'Create a Accessory' });
+        const user = await req.user.checkUser(req);
+        res.render('createAccessory', { title: 'Create a Accessory', user});
     },
     async post(req, res) {
         const data = req.body;
