@@ -1,21 +1,19 @@
+const cookieParser = require('cookie-parser');
+const bcrypt = require('bcrypt');
+const jwt = require('../jwt-to-promise');
 module.exports = {
     async get(req, res) {
         res.render('loginPage', { title: 'Login' });
     },
     async post(req, res) {
-        const data = req.body;
-        const accessory = {
-            name: data.name,
-            description: data.description,
-            imageUrl: data.imageUrl,
-        };
+        const {username, password} = req.body;
 
         try {
             await req.accessory.createItem(accessory);
             res.redirect('/');
         } catch (error) {
             console.log(error);
-            res.redirect('/create/accessory');
+            res.redirect('/login');
         }
     }
 }
