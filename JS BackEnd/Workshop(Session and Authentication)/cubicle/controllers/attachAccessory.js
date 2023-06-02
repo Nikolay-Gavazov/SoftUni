@@ -1,11 +1,12 @@
 module.exports = {
     async get(req, res) {
+        const user = await req.user.checkUser(req);
         const id = req.params.id;
         const cube = await req.cube.getById(id);
         const accessories = await req.accessory.getRest(cube.accessories);
         const haveAccessories = accessories.length > 0;
 
-        res.render('attachAccessory', { cube, accessories, haveAccessories, title: 'Attach a Accessory' });
+        res.render('attachAccessory', { cube, accessories, haveAccessories, title: 'Attach a Accessory', user});
     },
     async post(req, res) {
         const data = req.body;
