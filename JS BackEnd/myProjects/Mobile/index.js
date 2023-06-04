@@ -1,5 +1,6 @@
 const express = require('express');
 const hbs = require('express-handlebars');
+const fileUpload = require('express-fileupload');
 
 const carsService = require('./services/cars');
 const db = require('./models/index');
@@ -11,6 +12,7 @@ const { notFound } = require('./controllers/notFound');
 const { deletePage } = require('./controllers/deletePage');
 const edit = require('./controllers/editPage');
 const create = require('./controllers/createPage');
+
 
 async function start(){
     await db();
@@ -25,7 +27,7 @@ async function start(){
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
     app.use(carsService());
-    
+    app.use(fileUpload({createParentPath: true}));
     
     app.get('/', home);
     app.get('/about', about);
