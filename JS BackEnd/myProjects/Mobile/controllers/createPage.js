@@ -4,13 +4,17 @@ module.exports = {
     },
     async post(req, res) {
         const data = req.body;
+        const file = req.files.imageUrl;
+        file.mv('./static/cars/' + file.name);
+        console.log(data);
         const car = {
             name: data.name,
             description: data.description,
-            imageUrl: data.imageUrl,
+            imageUrl: file.name,
             price: Number(data.price)
 
         };
+
         try {
             await req.storage.createCar(car);
             res.redirect('/');
