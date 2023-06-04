@@ -7,24 +7,24 @@ module.exports = {
         res.render('loginPage', { title: 'Login' });
     },
     async post(req, res) {
-        const {username, password} = req.body;
+        const { username, password } = req.body;
 
         const user = await req.user.getUser(username);
         console.log(user);
         const hash = user.hash;
         const isValid = await bcrypt.compare(password, hash);
 
-        if(isValid){
-            const payload = {username};
+        if (isValid) {
+            const payload = { username };
             try {
-                const token = await jwt.sign(payload, secret, { expiresIn: '2d'});
+                const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
                 res.redirect('/');
             } catch (error) {
                 console.log(error);
                 res.redirect('/login');
             }
-        }else{
+        } else {
             res.status(401).redirect('/login');
         }
     }
