@@ -1,6 +1,7 @@
 module.exports = {
-    get(req, res) {
-        res.render('createOption', { title: 'Create option' });
+   async get(req, res) {
+        const user = await req.user.checkUser(req);
+        res.render('createOption', { title: 'Create option', user });
     },
     async post(req, res) {
         const data = req.body;
@@ -11,13 +12,13 @@ module.exports = {
             description: data.description,
             imageUrl: file.name,
         };
-
+        
         try {
-            await req.storage.createCar(car);
+            await req.option.createOption(option);
             res.redirect('/');
         } catch (error) {
             console.log('Error creating record');
-            res.redirect('/create');
+            res.redirect('/create/options');
         }
     }
 }
