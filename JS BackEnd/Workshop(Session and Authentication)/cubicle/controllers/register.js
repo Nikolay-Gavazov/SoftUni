@@ -17,8 +17,7 @@ module.exports = {
         const payload = { username };
         const user = {
             username,
-            password,
-            hash
+            password: hash,
         }
         try {
             const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
