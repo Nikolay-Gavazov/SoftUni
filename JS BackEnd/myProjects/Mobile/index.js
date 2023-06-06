@@ -4,7 +4,7 @@ const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 
 const carsService = require('./data/carsService');
-const accessoriesService = require('./data/accessoryService');
+const optionsService = require('./data/optionsService');
 const userService = require('./data/userService');
 const db = require('./data/database');
 
@@ -17,6 +17,7 @@ const { logout } = require('./controllers/logout');
 const edit = require('./controllers/editPage');
 const create = require('./controllers/createPage');
 const register = require('./controllers/register');
+const login = require('./controllers/login');
 
 
 async function start(){
@@ -33,7 +34,7 @@ async function start(){
     app.use('/static', express.static('static'));
     app.use(carsService());
     app.use(userService());
-    app.use(accessoriesService());
+    app.use(optionsService());
     app.use(cookieParser());
     app.use(fileUpload({createParentPath: true}));
     
@@ -54,6 +55,10 @@ async function start(){
     app.route('/register')
         .get(register.get)
         .post(register.post);
+
+    app.route('/login')
+        .get(login.get)
+        .post(login.post);
 
     app.all('*', notFound)
     
