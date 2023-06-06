@@ -5,9 +5,9 @@ const secret = 'samoLevski';
 async function createUserData(data){
     const user = await User.find({username: data.username});
     if(user.length > 0){
-        return new Error('This username is taken');
+        return undefined;
     }
-    await User.create(data);
+   return await User.create(data);
 };
 
 async function getUser(username){
@@ -41,4 +41,5 @@ module.exports = () => (req, res, next) => {
         getUser,
         createUserData
     }
+    next();
 }
