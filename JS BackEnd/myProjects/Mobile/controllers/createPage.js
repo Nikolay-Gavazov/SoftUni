@@ -1,6 +1,7 @@
 module.exports = {
-    get(req, res) {
-        res.render('create', { title: 'Publish your car' });
+    async get(req, res) {
+        const user = await req.user.checkUser(req);
+        res.render('create', { title: 'Publish your car' , user});
     },
     async post(req, res) {
         const data = req.body;
@@ -12,7 +13,6 @@ module.exports = {
             description: data.description,
             imageUrl: file.name,
             price: Number(data.price)
-
         };
 
         try {
