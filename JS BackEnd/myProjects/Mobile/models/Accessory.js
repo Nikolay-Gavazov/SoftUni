@@ -3,10 +3,9 @@ const {Schema, model} = require('mongoose');
 const accessorySchema = new Schema({
     name: {type: String, required: true},
     description: {type: String},
-    imageUrl: {type: String},
-    price: {type: Number}
+    imageUrl: {type: String}
 });
 
-const Car = model('Car', carSchema);
+const Accessory = model('Accessory', accessorySchema);
 
-module.exports = Car;
+module.exports = Accessory;
