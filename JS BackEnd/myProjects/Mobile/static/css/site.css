@@ -190,6 +190,17 @@ form label {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+
+.registerForm .formInput{
+    width: fit-content;
+display: block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+padding: 12px 20px 12px 12px;
+border-radius: 0 4px 4px 4px;
+margin: 8px auto 1px;
+}
+
 .createForm .formInput{
     width: 100%;
     display: inline-block;
@@ -211,6 +222,8 @@ form label {
 }
 input[type=text],
 input[type=number],
+input[type=password],
+input[type=repeatPassword],
 select,
 textarea {
     display: inline-block;
@@ -233,17 +246,17 @@ input.search {
 
 input[type=submit] {
     background-color: #2d4b79;
-    border: none;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-    width: 20%;
-    margin: 5px auto 25px;
-    color: white;
-    text-transform: uppercase;
-    border-radius: 4px;
+border: none;
+padding: 8px;
+text-align: center;
+text-decoration: none;
+display: block;
+font-size: 18px;
+width: 20%;
+margin: 32px auto 25px auto;
+color: white;
+text-transform: uppercase;
+border-radius: 4px;
 }
 
 input[type=submit]:hover {
@@ -296,6 +309,19 @@ img#sadFaceImg{
 
 h2{
     text-align: center;
+}
+
+.accessories .accessory{
+    display: inline-block;
+    background-color: #f3f3f2;
+    width: 20%;
+    padding: 1%;
+    margin: 1%;
+}
+
+.accessories, .italic{
+    text-align: center;
+    font-style: italic;
 }
 
 footer {
