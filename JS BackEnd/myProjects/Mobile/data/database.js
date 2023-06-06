@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const connectionStr = 'mongodb://127.0.0.1:27017/mobile';
 
 const Car =  require('../models/car');
-const Accessory =  require('../models/Accessory');
+const Accessory =  require('../models/Option');
 const User = require('../models/User');
 
 
