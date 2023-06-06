@@ -12,7 +12,10 @@ async function createUserData(data){
 
 async function getUser(username){
     const data = await User.findOne({username: username});
-    return data;
+    if(data){
+        return data;
+    }
+    return null;
 };
 
 async function getById(id){
