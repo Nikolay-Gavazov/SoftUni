@@ -191,8 +191,8 @@ form label {
     border-top-right-radius: 4px;
 }
 
-.registerForm .formInput{
-    width: fit-content;
+.userForm .formInput{
+width: fit-content;
 display: block;
 border: 1px solid #ccc;
 box-sizing: border-box;
@@ -223,7 +223,6 @@ margin: 8px auto 1px;
 input[type=text],
 input[type=number],
 input[type=password],
-input[type=repeatPassword],
 select,
 textarea {
     display: inline-block;
