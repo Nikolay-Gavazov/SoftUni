@@ -1,5 +1,6 @@
 module.exports = {
-    about(req, res) {
-        res.render('about')
+    async about(req, res) {
+        const user = await req.user.checkUser(req);
+        res.render('about' ,{title: 'About us', user})
     }
 }
