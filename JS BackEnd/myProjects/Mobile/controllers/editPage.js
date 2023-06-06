@@ -1,9 +1,10 @@
 module.exports = {
     async get(req, res) {
+        const user = await req.user.checkUser(req);
         const id = req.params.id;
         const car = await req.storage.getById(id);
         if (car) {
-            res.render('edit', { title: `Mobile - ${car.name}`, car })
+            res.render('edit', { title: `Mobile - ${car.name}`, car, user })
         } else {
             res.redirect('/404')
         }
