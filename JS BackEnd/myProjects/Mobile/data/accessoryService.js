@@ -25,4 +25,5 @@ module.exports = () => (req, res, next) => {
         createAccessory,
         getRest
     }
+    next();
 }
