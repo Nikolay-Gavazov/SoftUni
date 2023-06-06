@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const connectionStr = 'mongodb://127.0.0.1:27017/mobile';
 
 require('../models/Car');
+require('../models/Accessory');
+require('../models/User');
+
 
 async function init(){
     try {
