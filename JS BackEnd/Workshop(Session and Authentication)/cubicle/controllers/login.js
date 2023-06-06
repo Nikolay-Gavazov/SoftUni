@@ -10,8 +10,7 @@ module.exports = {
         const { username, password } = req.body;
 
         const user = await req.user.getUser(username);
-        console.log(user);
-        const hash = user.hash;
+        const hash = user.password;
         const isValid = await bcrypt.compare(password, hash);
 
         if (isValid) {
