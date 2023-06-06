@@ -1,14 +1,17 @@
 <h1>Register Form</h1>
-<div class="form">
+<div class="registerForm">
     <form action="/register" method="POST">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username">
+        <label for="username" class="formInput">Username</label>
+        <input type="text" id="username" name="username" class="formInput">
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password">
+        <label for="password" class="formInput">Password</label>
+        <input type="password" id="password" name="password" class="formInput">
 
-        <label for="repeatPassword">Re-Password</label>
-        <input type="password" id="repeatPassword" name="repeatPassword">
+        <label for="repeatPassword" class="formInput">Re-Password</label>
+        {{#if error}}
+        <h3 class="formInput">{{error}}</h3>
+        {{/if}}
+        <input type="password" id="repeatPassword" name="repeatPassword" class="formInput">
         <input type="submit" value="Register">
     </form>
 </div>
