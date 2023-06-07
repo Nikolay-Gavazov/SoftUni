@@ -1,12 +1,12 @@
 <h1>Create Option</h1>
 <div class="createForm">
-    <form action="/create/option" method="POST">
+    <form action="/create/options" method="POST" enctype="multipart/form-data">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" class="formInput">
         <label for="name">Description</label>
         <textarea id="description" name="description" class="formInput"></textarea>
         <label for="image">ImageUrl</label>
-        <input type="text" id="image" name="imageUrl" class="formInput">
+        <input type="file" id="image" name="imageUrl" class="formInput">
         <input type="submit" value="Create">
     </form>
 </div>
