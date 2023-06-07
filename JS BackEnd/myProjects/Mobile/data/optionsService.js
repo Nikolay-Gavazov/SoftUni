@@ -5,7 +5,7 @@ async function getAll(){
     return data;
 };
 
-async function createoption(data){
+async function createOption(data){
     await Option.create(data);
 };
 
@@ -22,7 +22,7 @@ async function getRest(ids){
 module.exports = () => (req, res, next) => {
     req.option = {
         getAll,
-        createoption,
+        createOption,
         getRest
     }
     next();
