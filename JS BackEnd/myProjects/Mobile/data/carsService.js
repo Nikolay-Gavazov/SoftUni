@@ -19,7 +19,7 @@ async function getAll(query){
 };
 
 async function getById(id){
-    const data = await Car.findById(id);
+    const data = await Car.findById(id).populate('options');;
  
     if(data){
         return data
@@ -40,13 +40,20 @@ async function editCar(id, car){
     await Car.findByIdAndUpdate(id, car)
 }
 
+async function attachOption(carId, optionId){
+    const car = await Car.findById(carId);
+    car.options.push(optionId);
+    await car.save();
+}
+
 module.exports = () => (req, res, next) => {
     req.storage = {
         getAll,
         getById,
         createCar,
         deleteCar,
-        editCar
+        editCar,
+        attachOption
     };
     next();
 }
