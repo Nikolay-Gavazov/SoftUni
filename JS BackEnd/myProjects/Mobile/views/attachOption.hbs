@@ -1,0 +1,20 @@
+<h1>Attach a new option</h1>
+<div class="createForm">
+    <h2>{{car.name}}</h2>
+    <img class="car" src="/static/cars/{{car.imageUrl}}">
+    {{#if haveOptions}}
+    <form method="POST" class="option">
+        <label for="option" class="option">Options</label>
+        <select id="option" name="option" class="option"/>
+        {{#each options}}
+        {{> optionInfo}}
+        {{/each}}
+        </select>
+        <input type="submit" value="Attach">
+    </form>
+    {{else}}
+    <h3 class="italic">This car has all available options so far or there is no available at all...
+    </h3>
+    {{/if}}
+    <a class="btn" href="/">Back</a>
+</div>
