@@ -18,12 +18,15 @@ module.exports = {
             try {
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
+                req.userData = user;
                 res.redirect('/');
             } catch (error) {
                 console.log(error);
                 res.redirect('/login');
             }
         } else {
+            res.clearCookie('token');
+            req.userData = null;
             res.status(401).redirect('/login');
         }
     }
