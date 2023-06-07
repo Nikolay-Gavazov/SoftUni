@@ -18,6 +18,8 @@ const edit = require('./controllers/editPage');
 const create = require('./controllers/createPage');
 const register = require('./controllers/register');
 const login = require('./controllers/login');
+const createOption = require('./controllers/createOption');
+const attachOption = require('./controllers/attachOption');
 
 
 async function start(){
@@ -59,6 +61,14 @@ async function start(){
     app.route('/login')
         .get(login.get)
         .post(login.post);
+
+    app.route('/create/options')
+        .get(createOption.get)
+        .post(createOption.post);
+
+    app.route('/details/:id/attach-option')
+        .get(attachOption.get)
+        .post(attachOption.post);
 
     app.all('*', notFound)
     
