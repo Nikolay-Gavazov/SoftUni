@@ -12,7 +12,7 @@ header ul {
 
 img {
     height: 200px;
-    width: auto;
+    width: 300px;
 }
 
 img.car {
@@ -201,6 +201,17 @@ border-radius: 0 4px 4px 4px;
 margin: 8px auto 1px;
 }
 
+.createForm .option{
+    width: 100%;
+display: block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+padding: 12px 20px 12px 12px;
+border-radius: 0 4px 4px 4px;
+margin: 8px 0 2em;
+text-align: center;
+}
+
 .createForm .formInput{
     width: 100%;
     display: inline-block;
@@ -310,15 +321,15 @@ h2{
     text-align: center;
 }
 
-.accessories .accessory{
-    display: inline-block;
+.options .option{
+    display: inline;
     background-color: #f3f3f2;
-    width: 20%;
-    padding: 1%;
-    margin: 1%;
+    width: 300px;
+    padding: 1px;
+    margin: auto;
 }
 
-.accessories, .italic{
+.options, .italic{
     text-align: center;
     font-style: italic;
 }
