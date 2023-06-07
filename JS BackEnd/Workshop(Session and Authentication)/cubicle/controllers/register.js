@@ -22,10 +22,13 @@ module.exports = {
         try {
             const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
             await req.user.createData(user);
+            req.userData = user;
             res.cookie('token', token);
             res.redirect('/');
         } catch (error) {
             console.log(error);
+            res.clearCookie('token');
+            req.userData = null;
             res.redirect('/register');
         }
     }
