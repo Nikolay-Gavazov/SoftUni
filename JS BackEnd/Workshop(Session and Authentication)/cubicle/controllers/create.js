@@ -1,17 +1,15 @@
 module.exports = {
     async get(req, res) {
-        const user = await req.user.checkUser(req);
-        res.render('create', { title: 'Create a cube', user });
+        res.render('create', { title: 'Create a cube', user: req.userData });
     },
     async post(req, res) {
-        const user = await req.user.checkUser(req);
         const data = req.body;
         const cube = {
             name: data.name,
             description: data.description,
             imageUrl: data.imageUrl,
             difficultyLevel: Number(data.difficultyLevel),
-            ownerId: user._id
+            ownerId: req.userData._id
         };
 
         try {
