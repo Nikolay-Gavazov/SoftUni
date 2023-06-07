@@ -5,11 +5,11 @@ const carSchema = new Schema({
     description: {type: String},
     imageUrl: {type: String},
     price: {type: Number},
-    // accessories: [{
-    //     type: mongoose.Types.ObjectId,
-    //     ref: 'Accessory'
-    // }],
-    // ownerId: {type: String}
+    options: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Option'
+    }],
+    ownerId: {type: String}
 });
 
 const Car = model('Car', carSchema);
