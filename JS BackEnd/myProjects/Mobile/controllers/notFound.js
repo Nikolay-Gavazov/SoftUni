@@ -1,5 +1,6 @@
 module.exports = {
-    notFound(req, res) {
-        res.render('404')
+    async notFound(req, res) {
+        const user = await req.user.checkUser(req);
+        res.render('404', {title: 'Not found', user})
     }
 }
