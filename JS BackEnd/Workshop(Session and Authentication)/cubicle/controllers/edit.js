@@ -1,9 +1,8 @@
 module.exports = {
     async get(req, res) {
-        const user = await req.user.checkUser(req);
         const id = req.params.id;
         const cube = await req.cube.getById(id);
-        res.render('edit', { cube, title: `Edit - ${cube.name}`, user });
+        res.render('edit', { cube, title: `Edit - ${cube.name}`, user: req.userData });
     },
     async post(req, res) {
         const id = req.params.id;
