@@ -4,7 +4,7 @@
     {{#if error}}
     <div>
         <div class="errorContainer">
-            <p>Error</p>
+            <p>{{error}}</p>
         </div>
     </div>
     {{/if}}
@@ -13,9 +13,9 @@
         <h1>Login</h1>
         <form action="/login" method="POST">
             <label>Email</label>
-            <input type="text" name="" placeholder="Email..">
+            <input type="text" name="email" placeholder="Email..">
             <label>Password</label>
-            <input type="password" name="" placeholder="Password..">
+            <input type="password" name="password" placeholder="Password..">
             <input type="submit" value="Login">
         </form>
         <p>Don't have an account? <a href="/register">Register here</a></p>
