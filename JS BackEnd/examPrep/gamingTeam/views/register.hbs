@@ -4,7 +4,9 @@
     {{#if error}}
     <div>
             <div class="errorContainer">
-                <p>Error</p>
+                {{#each error}}
+                <p>{{msg}}</p>
+                {{/each}}
             </div>
     </div>
     {{/if}}
@@ -13,13 +15,13 @@
         <h4>It's free and only takes a minute</h4>
         <form action="/register" method="POST">
             <label>Username</label>
-            <input type="text" name="" placeholder="Username..">
+            <input type="text" name="username" placeholder="Username..">
             <label>Email</label>
-            <input type="text" name="" placeholder="Email..">
+            <input type="text" name="email" placeholder="Email..">
             <label>Password</label>
-            <input type="password" name="" placeholder="Password..">
+            <input type="password" name="password" placeholder="Password..">
             <label>Confirm Password</label>
-            <input type="password" name="" placeholder="Confirm Password..">
+            <input type="password" name="rePass" placeholder="Confirm Password..">
             <input type="submit" value="Register">
         </form>
         <p>Already have an account? <a href="/login">Login here</a></p>
