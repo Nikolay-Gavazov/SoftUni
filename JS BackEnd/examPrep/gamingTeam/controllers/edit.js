@@ -1,11 +1,16 @@
-module.exports = {
-    async get(req, res) {
+const { Router } = require('express');
+const { body, validationResult } = require('express-validator');
+
+const router = Router();
+
+    router.get('/edit/:id', async(req, res) => {
         const id = req.params.id;
-        const cube = await req.game.getById(id);
+        console.log(id);
+        const game = await req.game.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
-        res.render('edit', { cube, title: `Edit - ${cube.name}`, user});
-    },
-    async post(req, res) {
+        res.render('edit', { game, title: `Edit - ${game.name}`, user});
+    }),
+    router.post('/edit/:id', async(req, res) => {
         const id = req.params.id;
         const data = req.body;
         const cube = {
@@ -22,5 +27,5 @@ module.exports = {
             console.log(error);
             res.redirect('/edit/:id');
         }
-    }
-}
+    });
+module.exports = router;
