@@ -40,6 +40,7 @@ const router = Router();
             price: Number(data.price),
             genre: data.genre,
             description: data.description,
+            ownerId: user._id
         };
 
         try {
