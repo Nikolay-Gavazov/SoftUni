@@ -31,6 +31,7 @@ const router = Router();
         .isLength({min: 10}),
         async(req, res) => {
         const data = req.body;
+        const user = await req.storage.getUser(await req.storage.checkUser(req));
         const { errors } = validationResult(req);
         const game = {
             platform: data.platform,
@@ -49,7 +50,7 @@ const router = Router();
             res.redirect('/');
         } catch (error) {
             console.log(error);
-            res.render('create', { title: 'Create Game', user, game});
+            res.render('create', { title: 'Create Game',error, user, game});
         }
     });
 
