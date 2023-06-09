@@ -19,8 +19,19 @@ const router = Router();
         value == 'PS4' ||
         value == 'PS5' ||
         value == 'XBOX'),
+        body('name', 'Name should be at least four characters')
+        .isLength({min: 4}),
+        body('image', 'Game image should start with "http://" or "https://"')
+        .isURL(),
+        body('price', 'Price should be a positive number')
+        .isInt({min: 0}),
+        body('genre', 'Genre should be at least two characters long')
+        .isLength({min: 2}),
+        body('description', 'Description should be at least ten characters long')
+        .isLength({min: 10}),
         async(req, res) => {
         const data = req.body;
+        const { errors } = validationResult(req);
         const game = {
             platform: data.platform,
             name: data.name,
@@ -31,11 +42,14 @@ const router = Router();
         };
 
         try {
+            if(errors.length > 0){
+                throw errors
+            }
             await req.game.createItem(game);
             res.redirect('/');
         } catch (error) {
             console.log(error);
-            res.redirect('/create');
+            res.render('create', { title: 'Create Game', user, game});
         }
     });
 
