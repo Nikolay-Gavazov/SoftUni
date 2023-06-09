@@ -1,16 +1,17 @@
 module.exports = {
     async get(req, res) {
         const user = await req.storage.getUser(await req.storage.checkUser(req));
-        res.render('create', { title: 'Create a cube', user });
+        res.render('create', { title: 'Create Game', user });
     },
     async post(req, res) {
         const data = req.body;
         const game = {
             name: data.name,
+            image: data.image,
+            price: Number(data.price),
             description: data.description,
-            imageUrl: data.imageUrl,
-            difficultyLevel: Number(data.difficultyLevel),
-            ownerId: user._id
+            genre: data.genre,
+            platform: data.platform,
         };
 
         try {
