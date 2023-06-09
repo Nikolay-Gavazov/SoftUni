@@ -36,15 +36,12 @@ async function start() {
     app.get('/details/:id', details);
     app.get('/delete/:id', deletePage);
 
-    app.route('/create')
-        .get(create.get)
-        .post(create.post);
-
     app.route('/edit/:id')
         .get(edit.get)
         .post(edit.post);
 
-    app.use(auth)
+    app.use(auth);
+    app.use(create);
 
     app.all('*', notFound);
 
