@@ -1,7 +1,7 @@
 module.exports = {
     async get(req, res) {
         const id = req.params.id;
-        const cube = await req.cube.getById(id);
+        const cube = await req.game.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
         res.render('edit', { cube, title: `Edit - ${cube.name}`, user});
     },
