@@ -4,7 +4,9 @@
     {{#if error}}
     <div>
         <div class="errorContainer">
-            <p>{{error}}</p>
+            {{#each error}}
+                <p>{{msg}}</p>
+                {{/each}}
         </div>
     </div>
     {{/if}}
