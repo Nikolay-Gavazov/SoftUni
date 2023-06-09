@@ -10,10 +10,10 @@ const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
 const { details } = require('./controllers/details');
 const { deletePage } = require('./controllers/deleteController');
+const { catalog } = require('./controllers/catalog');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth')
-const { catalog } = require('./controllers/catalog');
 
 async function start() {
     await db();
@@ -36,10 +36,7 @@ async function start() {
     app.get('/details/:id', details);
     app.get('/delete/:id', deletePage);
 
-    app.route('/edit/:id')
-        .get(edit.get)
-        .post(edit.post);
-
+    app.use(edit);
     app.use(auth);
     app.use(create);
 
