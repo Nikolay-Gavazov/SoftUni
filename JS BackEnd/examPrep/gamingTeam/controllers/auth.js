@@ -59,16 +59,19 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login',
-    body('email')
+    body('email', 'Email ist required')
         .trim()
         .isLength({ min: 10 }),
-    body('password')
+    body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
     async (req, res) => {
         const { email, password } = req.body;
-
+        const { errors } = validationResult(req);
         try {
+            if(errors.length > 0) {
+                throw errors
+            }
             const user = await req.storage.getUser(email);
             const hash = user.password;
             const isValid = await bcrypt.compare(password, hash);
@@ -84,8 +87,7 @@ router.post('/login',
             }
         } catch (error) {
             console.log(error);
-            //const errorMessages = Object.values(error.errors).map(e => e.message);
-            res.render('login', { title: 'Login Page', error: error.message });
+            res.render('login', { title: 'Login Page', error});
         }
     });
 
