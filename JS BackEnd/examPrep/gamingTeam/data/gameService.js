@@ -15,7 +15,7 @@ async function getAll(query) {
         }
         options.difficultyLevel.$lte = Number(query.to);
     }
-    const games = await Game.find(options);
+    const games = await Game.find(options).lean();
     if(games){
         return games;
     }
@@ -23,7 +23,7 @@ async function getAll(query) {
 };
 
 async function getById(id) {
-    const data = await Game.findById(id).populate('accessories');
+    const data = await Game.findById(id).lean().populate('bougthBy');
 
     if (data) {
         return data;
@@ -54,7 +54,7 @@ async function editItem(id, data) {
 // }
 
 module.exports = () => (req, res, next) => {
-    req.games = {
+    req.game = {
         getAll,
         getById,
         createItem,
