@@ -17,12 +17,9 @@
             <form action="/edit/{{game._id}}" method="POST">
                 <label>Platform:</label>
                 <select id="platform" name="platform" value="{{game.platform}}">
-                    <option value="">-------</option>
-                    <option value="PC">PC</option>
-                    <option value="Nintendo">Nintendo</option>
-                    <option value="PS4">PS4</option>
-                    <option value="PS5">PS5</option>
-                    <option value="XBOX">XBOX</option>
+                    {{#each platforms}}
+                    <option value="{{value}}" {{#if isSelected}}selected{{/if}}>{{label}}</option>
+                    {{/each}}
                 </select>
                 <label>Name:</label>
                 <input type="text" id="name" name="name" value="{{game.name}}">
