@@ -12,7 +12,7 @@ const gameSchema = new Schema({
         ref: 'User'
     }],
     ownerId: {
-        type: mongoose.Types.ObjectId,
+        type: String,
         ref: 'User'
     }
 });
