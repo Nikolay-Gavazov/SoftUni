@@ -5,6 +5,9 @@ const router = Router();
 
     router.get('/create', async (req, res) => {
         const user = await req.storage.getUser(await req.storage.checkUser(req));
+        if(!user){
+            return res.render('notFound');
+        }
         res.render('create', { title: 'Create Game', user });
     })
     router.post('/create',
