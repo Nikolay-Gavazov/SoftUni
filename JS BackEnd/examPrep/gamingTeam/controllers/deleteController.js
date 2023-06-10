@@ -4,6 +4,6 @@ module.exports = {
 
         await req.game.deleteItem(id);
 
-        res.redirect('/')
+        res.redirect('/catalog')
     }
 }
