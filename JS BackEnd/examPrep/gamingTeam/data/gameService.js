@@ -3,18 +3,16 @@ const Game = require('../models/Game');
 async function getAll(query) {
     const options = {};
 
-    if (query.search) {
-        options.name = new RegExp(query.search, 'i');
+    if (query.name) {
+        options.name = new RegExp(query.name, 'i');
     }
-    if (query.from) {
-        options.difficultyLevel = { $gte: Number(query.from) };
-    }
-    if (query.to) {
-        if (!options.difficultyLevel) {
-            options.difficultyLevel = {};
+    if (query.platform) {
+        if (!options.platform) {
+            options.platform = {};
         }
-        options.difficultyLevel.$lte = Number(query.to);
+        options.platform = new RegExp(query.platform, 'i');
     }
+    
     const games = await Game.find(options).lean();
     if(games){
         return games;
@@ -44,6 +42,12 @@ async function editItem(id, data) {
     await Game.findByIdAndUpdate(id, data);
 }
 
+async function buyGame(gameId, userId) {
+    const game = await Game.findById(gameId);
+    game.bougthBy.push(userId);
+    await game.save();
+}
+
 // function dataParcer(data) {
 //     return {
 //         name: data.name,
@@ -60,6 +64,7 @@ module.exports = () => (req, res, next) => {
         createItem,
         deleteItem,
         editItem,
+        buyGame
     };
     next();
 }
