@@ -14,12 +14,18 @@
             </select>
             <button type="submit" class="btn-search">Search</button>
         </form>
-        {{#each result}}
+        {{#if games}}
+        <div class="search-result">
+        <div class="search-list">
+        {{#each games}}
         {{> resultInfo}}
+        {{/each}}
+        </div>
+        </div>
         {{else}}
         <div class="no-match">
-                <p>No match was found!</p>
+            <p>No match was found!</p>
         </div>
-        {{/each}}
+        {{/if}}
     </section>
 </main>
