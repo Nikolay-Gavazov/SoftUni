@@ -4,11 +4,7 @@ module.exports = {
         const game = await req.game.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
         const isOwner = user._id == game.ownerId;
-        console.log(game);
-        let isBougth = game.bougthBy.filter(el => el.username == user.username);
-        if(isBougth.length == 0){
-            isBougth = false;
-        };
+        let isBougth = game.bougthBy?.filter(el => el.username == user.username);
         if(game){
             res.render('details', {game, title: `Details - ${game.name}`, user, isOwner, isBougth});
         }else{
