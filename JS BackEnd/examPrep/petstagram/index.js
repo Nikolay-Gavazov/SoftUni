@@ -3,7 +3,8 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const gameService = require('./data/gameService');
+const photoService = require('./data/photoService');
+
 const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
@@ -29,7 +30,7 @@ async function start() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(gameService());
+    app.use(photoService());
     app.use(cookieParser());
     app.use(userService());
 
@@ -47,5 +48,5 @@ async function start() {
     app.all('*', notFound);
 
     app.listen(3000, () => console.log('Server is listening on port 3000'))
-} 
+}
 start()
