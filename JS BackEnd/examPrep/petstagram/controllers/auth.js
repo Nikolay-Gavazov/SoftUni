@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 const router = Router();
 
 router.get('/register', (req, res) => {
-    res.render('register', { title: 'Register Page' });
+    res.render('register',);
 });
 
 router.post('/register',
@@ -50,7 +50,7 @@ router.post('/register',
             res.redirect('/');
         } catch (error) {
             console.log(error);
-            res.render('register', { title: 'Register Page', error, username, email })
+            res.render('register', { error, username, email })
         }
     });
 
