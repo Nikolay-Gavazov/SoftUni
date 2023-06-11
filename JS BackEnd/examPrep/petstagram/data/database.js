@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://127.0.0.1:27017/GamingTeam';
+const connectionStr = 'mongodb://127.0.0.1:27017/Petstagram';
 
-const Game = require('../models/Game');
+const Photo = require('../models/Photo');
 const User = require('../models/User');
 
 async function init() {
