@@ -16,8 +16,8 @@ router.post('/register',
     body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('username', 'Username must be at least 5 characters long')
-        .isLength({ min: 5 })
+    body('username', 'Username must be at least 2 characters long')
+        .isLength({ min: 2 })
         .isAlphanumeric(),
     body('email', 'Email must be at lest 10 characters long')
         .isLength({ min: 10 })
