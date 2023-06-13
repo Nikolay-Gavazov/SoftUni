@@ -34,7 +34,7 @@ router.post('/register',
             }
             const salt = await bcrypt.genSalt(3);
             const hash = await bcrypt.hash(password, salt);
-            const payload = { email };
+            const payload = { username };
             const user = {
                 username,
                 email,
@@ -59,35 +59,35 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login',
-    body('email', 'Email ist required')
+    body('username', 'Username ist required')
         .trim()
-        .isLength({ min: 10 }),
+        .isLength({ min: 2 }),
     body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
     async (req, res) => {
-        const { email, password } = req.body;
+        const { username , password } = req.body;
         const { errors } = validationResult(req);
         try {
             if(errors.length > 0) {
                 throw errors
             }
-            const user = await req.storage.getUser(email);
+            const user = await req.storage.getUser(username);
             const hash = user.password;
             const isValid = await bcrypt.compare(password, hash);
 
             if (isValid) {
-                const payload = { email };
+                const payload = { username };
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
-                req.user = email;
+                req.user = username;
                 res.redirect('/');
             } else {
                 throw new Error('Expired Session. Please Login.')
             }
         } catch (error) {
             console.log(error);
-            res.render('login', { title: 'Login Page', error});
+            res.render('login', { error});
         }
     });
 
