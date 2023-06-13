@@ -12,31 +12,42 @@ async function checkUser(req) {
     let user = null;
     if (token) {
         const payload = await jwt.verify(token, secret);
-        user = payload.username;
+        user = payload.email;
     }
     return user;
 }
 
-async function getUser(username) {
-    const data = await User.findOne({ username: username }).lean();
+async function getUser(email) {
+    const data = await User.findOne({ email: email }).lean().populate('myPosts');
     return data;
 }
 
 async function createData(data) {
-    const user = await User.find({ username: data.username });
+    const user = await User.find({ email: data.email });
     if (user.length > 0) {
         return new Error('This username is taken');
     }
-    await User.create(data);
+    return await User.create(data);
 };
 
+async function editUser(id, data) {
+    await User.findByIdAndUpdate(id, data);
+}
+
+async function addPostToUser(id, postId){
+    const user = await User.findById(id);
+    user.myPosts.push(postId);
+    user.save();
+}
 
 module.exports = () => (req, res, next) => {
     req.storage = {
         getById,
         getUser,
         createData,
-        checkUser
+        checkUser,
+        editUser,
+        addPostToUser
     };
     next();
 }
