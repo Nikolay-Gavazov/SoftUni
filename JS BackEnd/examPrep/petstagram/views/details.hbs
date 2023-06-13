@@ -25,8 +25,8 @@
                         <span>{{photo.location}}</span>
                         {{#if isOwner}}
                         <div class="edit-delete-btns">
-                            <a href="/edit/{{photo_id}}"><img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button"></a>
-                            <a href="/delete/{{photo_id}}"><img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button"></a>
+                            <a href="/edit/{{photo._id}}"><img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button"></a>
+                            <a href="/delete/{{photo._id}}"><img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button"></a>
                         </div>
                         {{/if}}
                     </h3>
@@ -46,18 +46,16 @@
                 </div>
                 <div class="comments">
                     <div class="comments-top">
-                    {{#if comments}}
-                    {{#each comment}}
+                    {{#each photo.commentList}}
                     {{> comment}}
                     {{/each}}
-                    {{/if}}
                     </div>
                 </div>
             </div>
             {{#if isNotOwner}}
             <div class="addComments">
                 <!-- Start Add Comments Form -->
-                <form method="/details/{{photo_id}}/comment" action="POST">
+                <form method="POST" action="/details/{{id}}/comment">
                     <textarea id="comment-textarea" name="comment" cols="40" rows="10" placeholder="Add comment..."></textarea>
                     <!-- Post Comments Button -->
                     <button type="submit">Post</button>
