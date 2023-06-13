@@ -1,46 +1,47 @@
 const { Router } = require('express');
-const { body, validationResult } = require('express-validator');
 
 const router = Router();
 
 
     router.get('/details/:id', async(req, res) => {
         const id = req.params.id;
-        const photo = await req.photo.getById(id);
+        const post = await req.post.getById(id);
+        console.log(post.author);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
-        const isOwner = user?._id.toString() == photo.ownerId._id.toString();
-        const isNotOwner = user?._id.toString() != photo.ownerId._id.toString() && user;
-        if(photo){
-            res.render('details', {user,photo, isOwner, isNotOwner, id});
+        const isOwner = user?._id.toString() == post.author.user._id.toString();
+
+        const isVoted = await req.post.getUserVote(id, user._id);
+        const isNotVoted = !isVoted;
+        if(post){
+            res.render('details', { _title: 'Details Page', user,post, isOwner,isVoted, isNotVoted, id});
         }else{
             res.redirect('/404');
         }
     });
 
-    router.post('/details/:id/comment',
-    body('comment').trim(),
-    body('comment', 'Comment should be at least 1 and no longer than 100 characters.')
-        .isLength({min: 1, max: 100}),
-     async (req, res) => {
+    router.get('/details/:id/voteUp', async (req, res) => {
         const id = req.params.id;
-        const photo = await req.photo.getById(id);
+        const post = await req.post.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
-        const isOwner = user._id.toString() == photo.ownerId._id.toString();
-        const isNotOwner = user._id.toString() != photo.ownerId._id.toString();
-        const { errors } = validationResult(req);
-        const comment = {
-                userId: user._id,
-                username: user.username,
-                comment: req.body.comment
-            }
         try {
-            if(errors.length > 0){
-                throw errors;
-            }
-            await req.photo.comment(id, comment);
+            await req.post.voteUp(id, user._id);
             res.redirect(`/details/${id}`)
         } catch (error) {
-            res.render('details', { error: error.message, photo, isOwner, isNotOwner});
+            console.log(error);
+            res.render('details', { _title: 'Details Page', error: error.message, post});
+        }
+    });
+
+    router.get('/details/:id/voteDown', async (req, res) => {
+        const id = req.params.id;
+        const post = await req.post.getById(id);
+        const user = await req.storage.getUser(await req.storage.checkUser(req));
+        try {
+            await req.post.voteDown(id, user._id);
+            res.redirect(`/details/${id}`)
+        } catch (error) {
+            console.log(error);
+            res.render('details', { _title: 'Details Page', error: error.message, post});
         }
     });
 
