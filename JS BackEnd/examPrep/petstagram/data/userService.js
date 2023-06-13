@@ -12,13 +12,13 @@ async function checkUser(req) {
     let user = null;
     if (token) {
         const payload = await jwt.verify(token, secret);
-        user = payload.email;
+        user = payload.username;
     }
     return user;
 }
 
-async function getUser(email) {
-    const data = await User.findOne({ email: email }).lean();
+async function getUser(username) {
+    const data = await User.findOne({ username: username }).lean();
     return data;
 }
 
