@@ -8,6 +8,7 @@ const photoSchema = new Schema({
     image: { type: String, required: true },
     commentList: [{
         userId: {type: String},
+        username: {type: String},
         comment: {type: String}
     }],
     ownerId: {
