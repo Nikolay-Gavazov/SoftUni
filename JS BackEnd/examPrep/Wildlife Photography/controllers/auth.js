@@ -8,15 +8,19 @@ const { body, validationResult } = require('express-validator');
 const router = Router();
 
 router.get('/register', (req, res) => {
-    res.render('register',);
+    res.render('register', {_title: 'Register Page'});
 });
 
 router.post('/register',
-    body('username').trim(),
+    body('firstName').trim(),
+    body('lastName').trim(),
     body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('username', 'Username must be at least 2 characters long')
+    body('firstName', 'Firstname must be at least 2 characters long')
+        .isLength({ min: 2 })
+        .isAlphanumeric(),
+    body('lastName', 'Lastname must be at least 2 characters long')
         .isLength({ min: 2 })
         .isAlphanumeric(),
     body('email', 'Email must be at lest 10 characters long')
@@ -26,7 +30,7 @@ router.post('/register',
         .isLength({ min: 4 }),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
     async (req, res) => {
-        const { username, email, password, rePass } = req.body;
+        const { firstName, lastName, email, password, rePass } = req.body;
         const { errors } = validationResult(req);
         try {
             if (errors.length > 0) {
@@ -34,9 +38,10 @@ router.post('/register',
             }
             const salt = await bcrypt.genSalt(3);
             const hash = await bcrypt.hash(password, salt);
-            const payload = { username };
+            const payload = { email };
             const user = {
-                username,
+                firstName,
+                lastName,
                 email,
                 password: hash,
             }
@@ -44,50 +49,51 @@ router.post('/register',
             await req.storage.createData(user);
             res.cookie('token', token);
             req.user = {
-                username,
+                firstName,
+                lastName,
                 email
             };
             res.redirect('/');
         } catch (error) {
             console.log(error);
-            res.render('register', { error, username, email })
+            res.render('register', { _title: 'Register Page', error, firstName,lastName, email })
         }
     });
 
 router.get('/login', (req, res) => {
-    res.render('login', { title: 'Login Page' });
+    res.render('login', { _title: 'Login Page' });
 });
 
 router.post('/login',
-    body('username', 'Username ist required')
+    body('email', 'Email ist required')
         .trim()
         .isLength({ min: 2 }),
     body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
     async (req, res) => {
-        const { username , password } = req.body;
+        const { email , password } = req.body;
         const { errors } = validationResult(req);
         try {
             if(errors.length > 0) {
                 throw errors
             }
-            const user = await req.storage.getUser(username);
+            const user = await req.storage.getUser(email);
             const hash = user.password;
             const isValid = await bcrypt.compare(password, hash);
 
             if (isValid) {
-                const payload = { username };
+                const payload = { email };
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
-                req.user = username;
+                req.user = user;
                 res.redirect('/');
             } else {
                 throw new Error('Expired Session. Please Login.')
             }
         } catch (error) {
             console.log(error);
-            res.render('login', { error});
+            res.render('login', {_title: 'Login Page', error});
         }
     });
 
