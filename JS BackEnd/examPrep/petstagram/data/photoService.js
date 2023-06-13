@@ -44,10 +44,15 @@ async function editItem(id, data) {
     await Photo.findByIdAndUpdate(id, data);
 }
 
-async function comment(photoId, userId, comment) {
+async function comment(photoId, comment) {
     const photo = await Photo.findById(photoId);
-    photo.commentList.push({userId, comment});
+    photo.commentList.push(comment);
     await photo.save();
+}
+
+async function getOwnPhotos(userId){
+    const photos = await Photo.find({ ownerId: userId }).lean();
+    return photos;
 }
 
 // function dataParcer(data) {
@@ -66,7 +71,8 @@ module.exports = () => (req, res, next) => {
         createItem,
         deleteItem,
         editItem,
-        comment
+        comment,
+        getOwnPhotos
     };
     next();
 }
