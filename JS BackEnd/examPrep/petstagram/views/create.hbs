@@ -3,11 +3,11 @@
     <h2>Add photo</h2>
     <!-- Start Add Photo Form -->
     <form action="/create" method="POST">
-        <p><input type="text" name="name" placeholder="Name"></p>
-        <p><input type="number" name="age" placeholder="Age"></p>
-        <p><textarea type="text" name="description" placeholder="Description"></textarea></p>
-        <p><input type="text" name="location" placeholder="Location"></p>
-        <p><input type="text" name="image" placeholder="Link to image"></p>
+        <p><input type="text" name="name" placeholder="Name" value="{{photo.name}}"></p>
+        <p><input type="number" name="age" placeholder="Age" value="{{photo.age}}"></p>
+        <p><textarea type="text" name="description" placeholder="Description">{{photo.description}}</textarea></p>
+        <p><input type="text" name="location" placeholder="Location" value="{{photo.location}}"></p>
+        <p><input type="text" name="image" placeholder="Link to image" value="{{photo.image}}"></p>
         <button class="add-btn" type="submit">Add Photo</button>
     </form>
 </div>
