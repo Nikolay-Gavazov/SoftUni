@@ -11,12 +11,11 @@ const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
 const { deletePage } = require('./controllers/deleteController');
 const { catalog } = require('./controllers/catalog');
-const { buy } = require('./controllers/buy');
 const details = require('./controllers/details');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth');
-const search = require('./controllers/search')
+const profile = require('./controllers/profile')
 
 async function start() {
     await db();
@@ -37,13 +36,12 @@ async function start() {
     app.get('/', home);
     app.get('/catalog', catalog);
     app.get('/delete/:id', deletePage);
-    app.get('/buy/:id', buy)
 
     app.use(edit);
     app.use(auth);
     app.use(create);
-    app.use(search);
     app.use(details);
+    app.use(profile)
 
     app.all('*', notFound);
 
