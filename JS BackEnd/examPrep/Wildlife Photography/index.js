@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const photoService = require('./data/photoService');
+const postService = require('./data/postService');
 
 const userService = require('./data/userService');
 
@@ -15,7 +15,7 @@ const details = require('./controllers/details');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth');
-const profile = require('./controllers/profile')
+const myPosts = require('./controllers/myPosts')
 
 async function start() {
     await db();
@@ -29,7 +29,7 @@ async function start() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(photoService());
+    app.use(postService());
     app.use(cookieParser());
     app.use(userService());
 
@@ -41,7 +41,7 @@ async function start() {
     app.use(auth);
     app.use(create);
     app.use(details);
-    app.use(profile)
+    app.use(myPosts)
 
     app.all('*', notFound);
 
