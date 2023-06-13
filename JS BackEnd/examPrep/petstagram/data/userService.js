@@ -3,7 +3,7 @@ const jwt = require('../jwt-to-promise');
 const secret = 'lapamChushki';
 
 async function getById(id) {
-    const user = await User.findById(id);
+    const user = await User.findById(id).lean();
     return user;
 };
 
@@ -18,7 +18,7 @@ async function checkUser(req) {
 }
 
 async function getUser(email) {
-    const data = await User.findOne({ email: email });
+    const data = await User.findOne({ email: email }).lean();
     return data;
 }
 
