@@ -19,112 +19,51 @@
                         </div>
                     </div>
                     <h3>
-
                         <!-- Link to User Profile Details Page -->
-                        <p>
-                            <!-- User's username -->
-                            MayaM
-                        </p>
+                        <p>{{photo.ownerId.username}}</p>
                         <!-- photo's location -->
-                        <span>Bansko, Bulgaria</span>
-
-                        <!-- IF the viewer is the creator of the photo -->
+                        <span>{{photo.location}}</span>
+                        {{#if isOwner}}
                         <div class="edit-delete-btns">
-
-                            <!-- Edit Pet Photo -->
-                            <a href="#">
-                                <img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button">
-                            </a>
-
-                            <!--Delete Pet Photo -->
-                            <a href="#">
-                                <img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button">
-                            </a>
+                            <a href="/edit/{{photo_id}}"><img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button"></a>
+                            <a href="/delete/{{photo_id}}"><img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button"></a>
                         </div>
-
+                        {{/if}}
                     </h3>
                 </div>
-
             </div>
-
             <!-- Start Pet Photo -->
             <div class="imgBx">
                 <!-- Pet Photo -->
-                <img src="/static/images/axolotl.jpeg" alt="post" class="cover">
+                <img src="{{photo.image}}" alt="post" class="cover">
             </div>
-
-
-
             <div class="bottom">
-
-                <p class="message">
-                    <b class="petDescription">This is my pet!</b>
-                </p>
-
-
+                <p class="message"><b class="petDescription">{{photo.description}}</b></p>
                 <!-- Photo description -->
                 <div class="pet-details">
-                    <p class="petName">Name: Sal</p>
-                    <p class="petAge">Age: 4</p>
+                    <p class="petName">Name: {{photo.name}}</p>
+                    <p class="petAge">Age: {{photo.age}}</p>
                 </div>
                 <div class="comments">
                     <div class="comments-top">
-                        <div class="userDetails">
-                            <div class="comment-data">
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <!-- User Profile Image -->
-                                            <img src="/static/images/person.png" alt="img8">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--User's username-->
-                                <p><b>StevIvanov</b>- OMG where can i get one</p>
-                            </div>
-                        </div>
-                        <div class="userDetails">
-                            <div class="comment-data">
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <!-- User Profile Image -->
-                                            <img src="/static/images/person.png" alt="img8">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--User's username-->
-                                <p><b>StevIvanov</b>- OMG where can i get one</p>
-                            </div>
-                        </div>
-                        <div class="userDetails">
-                            <div class="comment-data">
-                                <div class="profilepic">
-                                    <div class="profile_img">
-                                        <div class="image">
-                                            <!-- User Profile Image -->
-                                            <img src="/static/images/person.png" alt="img8">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--User's username-->
-                                <p><b>StevIvanov</b>- OMG where can i get one</p>
-                            </div>
-                        </div>
+                    {{#if comments}}
+                    {{#each comment}}
+                    {{> comment}}
+                    {{/each}}
+                    {{/if}}
                     </div>
                 </div>
             </div>
+            {{#if isNotOwner}}
             <div class="addComments">
                 <!-- Start Add Comments Form -->
-                <form method="#" action="#">
-                    <textarea id="comment-textarea" name="" cols="40" rows="10" placeholder="Add comment..."></textarea>
+                <form method="/details/{{photo_id}}/comment" action="POST">
+                    <textarea id="comment-textarea" name="comment" cols="40" rows="10" placeholder="Add comment..."></textarea>
                     <!-- Post Comments Button -->
                     <button type="submit">Post</button>
                 </form>
             </div>
+            {{/if}}
         </div>
     </div>
 </div>
