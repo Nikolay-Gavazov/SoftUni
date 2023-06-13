@@ -21,7 +21,9 @@ async function getAll(query) {
 };
 
 async function getById(id) {
-    const data = await Photo.findById(id).lean().populate('commentList');
+    const data = await Photo.findById(id).lean().populate('ownerId');
+    const data2 = await Photo.findById(id).lean().populate('commentList');
+    data['commentList'] = data2.commentList;
 
     if (data) {
         return data;
