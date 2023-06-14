@@ -5,43 +5,28 @@ const router = Router();
 
     router.get('/details/:id', async(req, res) => {
         const id = req.params.id;
-        const post = await req.post.getById(id);
-        console.log(post.author);
+        const trip = await req.trip.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
-        const isOwner = user?._id.toString() == post.author.user._id.toString();
-
-        const isVoted = await req.post.getUserVote(id, user._id);
-        const isNotVoted = !isVoted;
-        if(post){
-            res.render('details', { _title: 'Details Page', user,post, isOwner,isVoted, isNotVoted, id});
+        const isOwner = user?._id.toString() == trip.creator.user._id.toString();
+        const isJoined = await req.trip.getJoinedUser(id, user?._id)
+        const noSeats = trip.seats == 0;
+        if(trip){
+            res.render('details', { _title: 'Details Page', user,trip, isOwner, isJoined, id, noSeats});
         }else{
             res.redirect('/404');
         }
     });
 
-    router.get('/details/:id/voteUp', async (req, res) => {
+    router.get('/details/:id/join', async (req, res) => {
         const id = req.params.id;
-        const post = await req.post.getById(id);
+        const trip = await req.trip.getById(id);
         const user = await req.storage.getUser(await req.storage.checkUser(req));
         try {
-            await req.post.voteUp(id, user._id);
+            await req.trip.join(id, user._id);
             res.redirect(`/details/${id}`)
         } catch (error) {
             console.log(error);
-            res.render('details', { _title: 'Details Page', error: error.message, post});
-        }
-    });
-
-    router.get('/details/:id/voteDown', async (req, res) => {
-        const id = req.params.id;
-        const post = await req.post.getById(id);
-        const user = await req.storage.getUser(await req.storage.checkUser(req));
-        try {
-            await req.post.voteDown(id, user._id);
-            res.redirect(`/details/${id}`)
-        } catch (error) {
-            console.log(error);
-            res.render('details', { _title: 'Details Page', error: error.message, post});
+            res.render('details', { _title: 'Details Page', error: error.message, trip});
         }
     });
 
