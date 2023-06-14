@@ -12,26 +12,19 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register',
-    body('firstName').trim(),
-    body('lastName').trim(),
     body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('firstName', 'Firstname must be at least 2 characters long')
-        .isLength({ min: 2 })
-        .isAlphanumeric(),
-    body('lastName', 'Lastname must be at least 2 characters long')
-        .isLength({ min: 2 })
-        .isAlphanumeric(),
-    body('email', 'Email must be at lest 10 characters long')
-        .isLength({ min: 10 })
-        .isEmail(),
+    body('email', 'Email should be in the following format (mailboxname @ domainname) - "username@domain.bg"')
+    .isEmail(),
     body('password', 'Password must be at least 4 characters long')
-        .isLength({ min: 4 }),
+    .isLength({ min: 4 }),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
+    body('gender', 'Gender must be checked').isLength({min: 1}),
     async (req, res) => {
-        const { firstName, lastName, email, password, rePass } = req.body;
+        const { email, password, rePass, gender } = req.body;
         const { errors } = validationResult(req);
+        const isMale = gender == 'male';
         try {
             if (errors.length > 0) {
                 throw errors;
@@ -40,23 +33,28 @@ router.post('/register',
             const hash = await bcrypt.hash(password, salt);
             const payload = { email };
             const user = {
-                firstName,
-                lastName,
                 email,
                 password: hash,
+                gender
             }
-            const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
-            await req.storage.createData(user);
-            res.cookie('token', token);
-            req.user = {
-                firstName,
-                lastName,
-                email
-            };
-            res.redirect('/');
+            const result = await req.storage.createData(user);
+            console.log(result);
+            if(result){
+                const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
+                res.cookie('token', token);
+                req.user = {
+                    email,
+                    gender
+                };
+                res.redirect('/');
+            }else{
+                const error = [];
+                error.push({msg: 'This user is already taken!'});
+                throw error;
+            }
         } catch (error) {
             console.log(error);
-            res.render('register', { _title: 'Register Page', error, firstName,lastName, email })
+            res.render('register', { _title: 'Register Page', error, email, isMale })
         }
     });
 
@@ -67,7 +65,8 @@ router.get('/login', (req, res) => {
 router.post('/login',
     body('email', 'Email ist required')
         .trim()
-        .isLength({ min: 2 }),
+        .isLength({ min: 2 })
+        .isEmail(),
     body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
