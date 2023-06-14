@@ -3,8 +3,7 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const postService = require('./data/postService');
-
+const tripService = require('./data/tripService');
 const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
@@ -15,7 +14,7 @@ const details = require('./controllers/details');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth');
-const myPosts = require('./controllers/myPosts')
+const profile = require('./controllers/profile')
 
 async function start() {
     await db();
@@ -24,12 +23,12 @@ async function start() {
     app.engine('hbs', hbs.create({
         extname: '.hbs'
     }).engine);
-
+    
     app.set('view engine', 'hbs');
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(postService());
+    app.use(tripService());
     app.use(cookieParser());
     app.use(userService());
 
@@ -41,7 +40,7 @@ async function start() {
     app.use(auth);
     app.use(create);
     app.use(details);
-    app.use(myPosts)
+    app.use(profile);
 
     app.all('*', notFound);
 
