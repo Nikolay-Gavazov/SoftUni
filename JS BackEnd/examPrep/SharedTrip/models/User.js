@@ -1,12 +1,7 @@
 const { Schema, model, default: mongoose } = require('mongoose');
 
 const userSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true
-    },
-
-    lastName: {
+    gender: {
         type: String,
         required: true
     },
@@ -21,9 +16,9 @@ const userSchema = new Schema({
         required: true,
         minLength: 10
     },
-    myPosts: [{
+    tripsHistory: [{
         type: mongoose.Types.ObjectId,
-        ref: 'Post'
+        ref: 'Trip'
     }]
 });
 
