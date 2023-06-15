@@ -5,47 +5,27 @@ const router = Router();
 
     router.get('/details/:id', async(req, res) => {
         const id = req.params.id;
-        const item = await req.storage.getById(id);
+        const ad = await req.storage.getById(id);
         const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-        const isOwner = user?._id.toString() == item.author[0]._id.toString();
-        const isBidder = await req.storage.getBidder(id, user?._id)
-        const fullName = `${item.author[0].firstName} ${item.author[0].lastName}`
-        const bidderName = `${item.bidder[0]?.firstName} ${item.bidder[0]?.lastName}`
-        if(item){  
-         res.render('details', { _title: 'Details Page', user,item,isBidder,fullName, id});   
+        const isOwner = user?._id.toString() == ad.author._id.toString();
+        const isApplied = await req.storage.getApply(id, user?._id)
+        if(ad){  
+         res.render('details', { _title: 'Details Page', user,ad,isOwner, isApplied});   
         }else{
             res.redirect('/404');
         }
     });
 
-    router.post('/details/:id/bid', async (req, res) => {
+    router.get('/details/:id/apply', async (req, res) => {
         const id = req.params.id;
-        const {amount} = req.body;
-        const item = await req.storage.getById(id);
+        const ad = await req.storage.getById(id);
         const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
         try {
-            if(amount <= item.price){
-                const error = [];
-                error.push({msg: 'This is not the best price.Bid more please.'});
-                throw error;
-            }
-            await req.storage.bid(id,user, amount);
+            await req.storage.apply(id,user._id);
             res.redirect(`/details/${id}`)
         } catch (error) {
             console.log(error);
-            res.render('details', { _title: 'Details Page', error, item});
-        }
-    });
-    router.get('/details/:id/close', async (req, res) => {
-        const id = req.params.id;
-        const item = await req.storage.getById(id);
-        const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-        try {
-            await req.storage.close(id, user);
-            res.redirect(`/profile`);
-        } catch (error) {
-            console.log(error);
-            res.render('details', { _title: 'Details Page', error,user, item});
+            res.render('details', { _title: 'Details Page', error, ad});
         }
     });
 
