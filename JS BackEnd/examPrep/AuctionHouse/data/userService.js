@@ -18,7 +18,7 @@ async function checkUser(req) {
 }
 
 async function getUser(email) {
-    const data = await User.findOne({ email: email }).lean().populate('wishingList');
+    const data = await User.findOne({ email: email }).lean().populate('auctions');
 
     return data;
 }
@@ -35,9 +35,9 @@ async function editUser(id, data) {
     await User.findByIdAndUpdate(id, data);
 }
 
-async function wish(id, bookId) {
+async function addAuction(id, itemId) {
     const user = await User.findById(id);
-    user.wishingList.push(bookId);
+    user.auctions.push(itemId);
     await user.save();
 }
 
@@ -62,7 +62,7 @@ module.exports = () => (req, res, next) => {
         createData,
         checkUser,
         editUser,
-        wish,
+        addAuction,
         getWishes
     };
     next();

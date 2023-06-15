@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://127.0.0.1:27017/BookTalk';
+const connectionStr = 'mongodb://127.0.0.1:27017/AuctionHouse';
 
-const Book = require('../models/Book');
+const Item = require('../models/Item');
 const User = require('../models/User');
 
 async function init() {
@@ -16,7 +16,7 @@ async function init() {
 
         mongoose.connection.on('error', (err) => {
             console.error('DB error');
-            console.error(err);
+            //console.error(err);
         })
     } catch (error) {
         console.error('DB error');

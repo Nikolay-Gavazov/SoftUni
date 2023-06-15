@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const bookService = require('./data/bookService');
+const itemService = require('./data/itemService');
 const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
@@ -28,7 +28,7 @@ async function start() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(bookService());
+    app.use(itemService());
     app.use(cookieParser());
     app.use(userService());
 
