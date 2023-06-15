@@ -12,17 +12,17 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register',
+    body('username').trim(),
     body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('username').trim(),
-    body('email', 'Email must be at least 4 characters long')
+    body('username', 'Username must be at least 5 characters long')
+    .isLength({min: 5}),
+    body('email', 'Email must be at least 10 characters long')
     .isLength({min:10}),
-    body('password', 'Password must be at least 3 characters long')
-    .isLength({ min: 3 }),
+    body('password', 'Password must be at least 4 characters long')
+    .isLength({ min: 4 }),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
-    body('username', 'Username must be at least 4 characters long')
-    .isLength({min: 4}),
     async (req, res) => {
         const { email, password, rePass, username } = req.body;
         const { errors } = validationResult(req);
@@ -65,7 +65,7 @@ router.get('/login', (req, res) => {
 router.post('/login',
     body('email', 'Email ist required')
         .trim()
-        .isLength({ min: 2 }),
+        .isEmail(),
     body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
