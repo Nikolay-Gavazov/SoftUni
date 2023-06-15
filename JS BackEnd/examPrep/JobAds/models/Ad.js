@@ -18,11 +18,11 @@ const AdSchema = new Schema({
         type: String,
         required: true
     },
-    author: [{
+    author: {
         type: mongoose.Types.ObjectId,
         ref: 'User'
     ,
-    }],
+    },
     applied: [{
             type: mongoose.Types.ObjectId,
             ref: 'User'
