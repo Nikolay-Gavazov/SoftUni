@@ -21,7 +21,7 @@ router.post('/register',
     body('password', 'Password must be at least 5 characters long')
     .isLength({ min: 5 }),
     body('description', 'Description must be a maximum 40 characters long')
-    .isLength({min: 1}),
+    .isLength({max: 40}),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
     async (req, res) => {
         const { email, password, rePass, description } = req.body;

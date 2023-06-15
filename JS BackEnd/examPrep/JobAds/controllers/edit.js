@@ -4,65 +4,44 @@ const { body, validationResult } = require('express-validator');
 const router = Router();
 
     router.get('/edit/:id', async(req, res) => {
-        const options = {
-            'estate': 'estate',
-            'vehicles': 'vehicles',
-            'furniture': 'furniture',
-            'electronics': 'electronics',
-            'other': 'other'
-        }
         const id = req.params.id;
-        const item = await req.storage.getById(id);
+        const ad = await req.storage.getById(id);
         const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-        const hasBidder = item.bidder.length > 0;
-        const category = Object.keys(options).map(value => ({
-            value,
-            label: options[value],
-            isSelected: item.category == value
-
-        }));
-        res.render('edit', { _title: 'Edit Page', id, item,category,hasBidder, user});
+        res.render('edit', { _title: 'Edit Page', ad, user});
     }),
     router.post('/edit/:id',
-    body('title').trim(),
-    body('description').trim(),
-    body('image').trim(),
-    body('title', 'Title should be at least 4 characters')
+    body('headline').trim(),
+    body('location').trim(),
+    body('companyName').trim(),
+    body('companyDescription').trim(),
+    body('headline', 'Headline should be at least 4 characters')
     .isLength({min: 4}),
-    body('description', 'Author should be a maximum of 200 characters long')
-    .isLength({max: 200}),
-    body('image', 'Image should start with "http://" or "https://"')
-    .isURL(),
-    body('price', 'Price should be positive number')
-    .isInt({min: 0}),
-    body('category')
-    .custom(value => value == 'estate' || 
-    value == 'vehicles' || 
-    value == 'furniture' ||
-    value == 'electronics' ||
-    value == 'other'),
+    body('location', 'Location should be at least 8 characters')
+    .isLength({min: 8}),
+    body('companyName', 'Company Name should be at least 3 characters')
+    .isLength({min: 3}),
+    body('companyDescription', 'Company Description should be a maximum of 40 characters long')
+    .isLength({max: 40}),
     async(req, res) => {
     const id = req.params.id;
     const data = req.body;
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
     const { errors } = validationResult(req);
-    const item = {
-        title: data.title,
-        description: data.description,
-        category: data.category,
-        image: data.image,
-        price: Number(data.price),
+    const ad = {
+        headline: data.headline,
+        location: data.location,
+        companyName: data.companyName,
+        companyDescription: data.companyDescription,
     };
-    console.log(item);
         try {
             if(errors.length > 0){
                 throw errors;
             }
-            await req.storage.editItem(id, item);
+            await req.storage.editItem(id, ad);
             res.redirect(`/details/${id}`);
         } catch (error) {
-            //console.log(error);
-            res.render('edit', {_title: 'Edit Page', error, user, item, id});
+            console.log(error);
+            res.render('edit', {_title: 'Edit Page', error, user, ad});
         }
     });
 module.exports = router;
