@@ -18,7 +18,7 @@ async function checkUser(req) {
 }
 
 async function getUser(email) {
-    const data = await User.findOne({ email: email }).lean().populate('auctions');
+    const data = await User.findOne({ email: email }).lean();
 
     return data;
 }
@@ -35,19 +35,19 @@ async function editUser(id, data) {
     await User.findByIdAndUpdate(id, data);
 }
 
-async function addAuction(id, itemId) {
+async function addAd(id, adId) {
     const user = await User.findById(id);
-    user.auctions.push(itemId);
+    user.myAds.push(adId);
     await user.save();
 }
 
-async function getWishes(id, bookId){
-    const user = await User.findById(id).lean();
-    if(user && user.wishingList.length > 0){
-        return user.wishingList.some(el => el._id.toString() == bookId?.toString());
-    };
-    return undefined;
-}
+// async function getWishes(id, bookId){
+//     const user = await User.findById(id).lean();
+//     if(user && user.wishingList.length > 0){
+//         return user.wishingList.some(el => el._id.toString() == bookId?.toString());
+//     };
+//     return undefined;
+// }
 
 // async function addTrip(id, tripId){
 //     const user = await User.findById(id);
@@ -62,8 +62,8 @@ module.exports = () => (req, res, next) => {
         createData,
         checkUser,
         editUser,
-        addAuction,
-        getWishes
+        addAd,
+        // getWishes
     };
     next();
 }
