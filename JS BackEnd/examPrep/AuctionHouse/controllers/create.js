@@ -6,51 +6,53 @@ const router = Router();
     router.get('/create', async (req, res) => {
         const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
         if(!user){
-            return res.render('notFound');
+            return res.status(401).redirect('/login');
         }
-        res.render('create', { _title: 'Create Page', user });
+        res.render('create', { _title: 'Publish Auction', user });
     })
     router.post('/create',
         body('title').trim(),
-        body('author').trim(),
-        body('genre').trim(),
+        body('description').trim(),
+        body('category').trim(),
         body('image').trim(),
-        body('review').trim(),
-        body('title', 'Title should be at least 2 characters')
-        .isLength({min: 2}),
-        body('author', 'Author should be at least 5 characters')
-        .isLength({min: 5}),
-        body('image', 'Genre should start with "http://" or "https://"')
+        body('title', 'Title should be at least 4 characters')
+        .isLength({min: 4}),
+        body('description', 'Author should be a maximum of 200 characters long')
+        .isLength({max: 200}),
+        body('image', 'Image should start with "http://" or "https://"')
         .isURL(),
-        body('genre', 'Genre should be at least 3 characters')
-        .isLength({min: 3}),
-        body('stars', 'Stars should be positive number (from 1 to 5 inclusive)')
-        .isInt({min: 1, max: 5}),
-        body('review', 'Review should be at least 10 characters.')
-        .isLength({min: 10}),
+        body('price', 'Price should be positive number')
+        .isInt({min: 0}),
+        body('category')
+        .custom(value => value == 'estate' || 
+        value == 'vehicles' || 
+        value == 'furniture' ||
+        value == 'electronics' ||
+        value == 'other'),
         async(req, res) => {
         const data = req.body;
         const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
         const { errors } = validationResult(req);
-        const book = {
+        const item = {
             title: data.title,
-            author: data.author,
-            genre: data.genre,
-            stars: Number(data.stars),
+            description: data.description,
+            category: data.category,
             image: data.image,
-            review: data.review,
-            owner: {user: user._id, email: user.email},
+            price: Number(data.price),
+            author:[ {_id: user._id}],
+            isOpen: true
         };
 
         try {
             if(errors.length > 0){
                 throw errors;
             }
-            const result = await req.storage.createItem(book);
+            const result = await req.storage.createItem(item);
+            await req.userStorage.addAuction(user._id, result._id);
             res.redirect('/catalog');
         } catch (error) {
             console.log(error);
-            res.render('create', { error, user, book});
+            res.render('create', { error, user, item});
         }
     });
 
