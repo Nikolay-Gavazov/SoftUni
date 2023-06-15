@@ -1,10 +1,6 @@
 const { Schema, model, default: mongoose } = require('mongoose');
 
 const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true
-    },
     email: {
         type: String,
         required: true,
@@ -13,9 +9,21 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    wishingList: [{
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    auctions: [
+        {
             type: mongoose.Types.ObjectId,
-            ref: 'Book'}],
+            ref: 'Item'
+        }
+
+    ]
 });
 
 const User = model('User', userSchema);
