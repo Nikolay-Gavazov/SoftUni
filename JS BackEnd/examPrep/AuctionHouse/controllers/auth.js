@@ -16,15 +16,17 @@ router.post('/register',
     body('password').trim(),
     body('rePass').trim(),
     body('username').trim(),
-    body('email', 'Email must be at least 4 characters long')
-    .isLength({min:10}),
-    body('password', 'Password must be at least 3 characters long')
-    .isLength({ min: 3 }),
+    body('email', 'Email should be in the following format: <name>@<domain>.<extension>')
+    .isEmail(),
+    body('password', 'Password must be at least 5 characters long')
+    .isLength({ min: 5 }),
+    body('firstName', 'Firstname must be at least 1 characters long')
+    .isLength({min: 1}),
+    body('lastName', 'Lastname must be at least 1 characters long')
+    .isLength({min: 1}),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
-    body('username', 'Username must be at least 4 characters long')
-    .isLength({min: 4}),
     async (req, res) => {
-        const { email, password, rePass, username } = req.body;
+        const { email, password, rePass, firstName, lastName } = req.body;
         const { errors } = validationResult(req);
         try {
             if (errors.length > 0) {
@@ -36,7 +38,8 @@ router.post('/register',
             const user = {
                 email,
                 password: hash,
-                username
+                firstName,
+                lastName
             }
             const result = await req.userStorage.createData(user);
             if(result){
@@ -44,7 +47,7 @@ router.post('/register',
                 res.cookie('token', token);
                 req.user = {
                     email,
-                    username
+                    fullName: `${firstName} ${lastName}`
                 };
                 res.redirect('/');
             }else{
@@ -54,7 +57,7 @@ router.post('/register',
             }
         } catch (error) {
             console.log(error);
-            res.render('register', { _title: 'Register Page', error, email, username })
+            res.render('register', { _title: 'Register Page', error, email, firstName, lastName })
         }
     });
 
