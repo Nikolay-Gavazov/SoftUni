@@ -1,0 +1,29 @@
+{{#if error}}
+<div class="errorContainer">
+    {{#each error}}
+    <p>{{msg}}</p>
+    {{/each}}
+</div>
+{{/if}}
+<section id="edit-container">
+    <div class="edit-container-info">
+        <h1>Edit Announcement</h1>
+        <form action="/edit/{{coin._id}}" method="post">
+            <label>Name:</label>
+            <input type="text" id="name" name="name" value="{{coin.name}}">
+            <label>Image:</label>
+            <input type="text" id="image" name="image" value="{{coin.image}}">
+            <label>Price:</label>
+            <input type="number" id="price" name="price" value="{{coin.price}}">
+            <label>Description:</label>
+            <textarea id="description" name="description">{{coin.description}}</textarea>
+            <label>Payment method:</label>
+            <select id="payment" name="payment">
+                    {{#each payment}}
+                    <option value="{{value}}" {{#if isSelected}}selected{{/if}}>{{label}}</option>
+                    {{/each}}
+            </select>
+            <input type="submit" id="btn" value="EDIT"></input>
+        </form>
+    </div>
+</section>
