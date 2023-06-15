@@ -13,9 +13,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    wishingList: [{
-            type: mongoose.Types.ObjectId,
-            ref: 'Book'}],
 });
 
 const User = model('User', userSchema);
