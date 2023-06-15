@@ -3,7 +3,7 @@ const jwt = require('../jwt-to-promise');
 const secret = 'lapamChushki';
 
 async function getById(id) {
-    const user = await User.findById(id).lean();
+    const user = await User.findById(id).lean()
     return user;
 };
 
@@ -18,7 +18,8 @@ async function checkUser(req) {
 }
 
 async function getUser(email) {
-    const data = await User.findOne({ email: email }).lean().populate('tripsHistory');
+    const data = await User.findOne({ email: email }).lean().populate('wishingList');
+
     return data;
 }
 
@@ -34,11 +35,25 @@ async function editUser(id, data) {
     await User.findByIdAndUpdate(id, data);
 }
 
-async function addTrip(id, tripId){
+async function wish(id, bookId) {
     const user = await User.findById(id);
-    user.tripsHistory.push(tripId);
+    user.wishingList.push(bookId);
     await user.save();
 }
+
+async function getWishes(id, bookId){
+    const user = await User.findById(id).lean();
+    if(user && user.wishingList.length > 0){
+        return user.wishingList.some(el => el._id.toString() == bookId?.toString());
+    };
+    return undefined;
+}
+
+// async function addTrip(id, tripId){
+//     const user = await User.findById(id);
+//     user.tripsHistory.push(tripId);
+//     await user.save();
+// }
 
 module.exports = () => (req, res, next) => {
     req.userStorage = {
@@ -47,7 +62,8 @@ module.exports = () => (req, res, next) => {
         createData,
         checkUser,
         editUser,
-        addTrip
+        wish,
+        getWishes
     };
     next();
 }
