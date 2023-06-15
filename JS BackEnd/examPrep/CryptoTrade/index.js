@@ -3,7 +3,7 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const bookService = require('./data/bookService');
+const coinService = require('./data/coinService');
 const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
@@ -14,7 +14,7 @@ const details = require('./controllers/details');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth');
-const profile = require('./controllers/profile')
+const search = require('./controllers/search')
 
 async function start() {
     await db();
@@ -28,7 +28,7 @@ async function start() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(bookService());
+    app.use(coinService());
     app.use(cookieParser());
     app.use(userService());
 
@@ -40,7 +40,7 @@ async function start() {
     app.use(auth);
     app.use(create);
     app.use(details);
-    app.use(profile);
+    app.use(search);
 
     app.all('*', notFound);
 
