@@ -15,16 +15,17 @@ router.post('/register',
     body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('email', 'Email should be in the following format (mailboxname @ domainname) - "username@domain.bg"')
-    .isEmail(),
-    body('password', 'Password must be at least 4 characters long')
-    .isLength({ min: 4 }),
+    body('username').trim(),
+    body('email', 'Email must be at least 4 characters long')
+    .isLength({min:10}),
+    body('password', 'Password must be at least 3 characters long')
+    .isLength({ min: 3 }),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
-    body('gender', 'Gender must be checked').isLength({min: 1}),
+    body('username', 'Username must be at least 4 characters long')
+    .isLength({min: 4}),
     async (req, res) => {
-        const { email, password, rePass, gender } = req.body;
+        const { email, password, rePass, username } = req.body;
         const { errors } = validationResult(req);
-        const isMale = gender == 'male';
         try {
             if (errors.length > 0) {
                 throw errors;
@@ -35,7 +36,7 @@ router.post('/register',
             const user = {
                 email,
                 password: hash,
-                gender
+                username
             }
             const result = await req.userStorage.createData(user);
             if(result){
@@ -43,7 +44,7 @@ router.post('/register',
                 res.cookie('token', token);
                 req.user = {
                     email,
-                    gender
+                    username
                 };
                 res.redirect('/');
             }else{
@@ -53,7 +54,7 @@ router.post('/register',
             }
         } catch (error) {
             console.log(error);
-            res.render('register', { _title: 'Register Page', error, email, isMale })
+            res.render('register', { _title: 'Register Page', error, email, username })
         }
     });
 
@@ -64,8 +65,7 @@ router.get('/login', (req, res) => {
 router.post('/login',
     body('email', 'Email ist required')
         .trim()
-        .isLength({ min: 2 })
-        .isEmail(),
+        .isLength({ min: 2 }),
     body('password', 'Password ist required')
         .trim()
         .isLength({ min: 4 }),
@@ -73,10 +73,15 @@ router.post('/login',
         const { email , password } = req.body;
         const { errors } = validationResult(req);
         try {
+            const user = await req.userStorage.getUser(email);
+            if(!user){
+                const error = [];
+                error.push({msg: 'Invalid Credentials.'});
+                throw error;
+            }
             if(errors.length > 0) {
                 throw errors
             }
-            const user = await req.storage.getUser(email);
             const hash = user.password;
             const isValid = await bcrypt.compare(password, hash);
 
@@ -87,11 +92,13 @@ router.post('/login',
                 req.user = user;
                 res.redirect('/');
             } else {
-                throw new Error('Expired Session. Please Login.')
+                const error = [];
+                error.push({msg: 'Expired Session. Please Login.'});
+                throw error;
             }
         } catch (error) {
             console.log(error);
-            res.render('login', {_title: 'Login Page', error});
+            res.render('login', {_title: 'Login Page', error, email});
         }
     });
 
