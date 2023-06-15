@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectionStr = 'mongodb://127.0.0.1:27017/BookTalk';
 
-const Book = require('../models/Book');
+const Item = require('../models/Item');
 const User = require('../models/User');
 
 async function init() {
