@@ -4,14 +4,14 @@ const router = Router();
 
 router.get('/search', async (req, res) => {
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-    const ads = await req.storage.getAll(req.query);
+    const homes = await req.storage.getAll(req.query);
     let result;
     let isSerched = false; 
-    if(req.query.search){
+    if(req.query.type){
         isSerched = true;
-        result = ads.filter(el => el.author.email.toLowerCase() == req.query.search.toLowerCase())
+        result = homes;
     }
-    res.render('search', { _title: 'Search', user, result, isSerched})
+    res.render('search', { _title: 'Search Page', user, result, isSerched})
 });
 
 module.exports = router;
