@@ -12,19 +12,19 @@ router.get('/register', (req, res) => {
 });
 
 router.post('/register',
-    body('email').trim(),
+    body('username').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('desciption').trim(),
-    body('email', 'Email should be in the following format: <name>@<domain>.<extension>')
-    .isEmail(),
-    body('password', 'Password must be at least 5 characters long')
-    .isLength({ min: 5 }),
-    body('description', 'Description must be a maximum 40 characters long')
-    .isLength({max: 40}),
+    body('fullName').trim(),
+    body('fullName', 'Name name should be in the following format -> (firstname lastname) - "Alexandur Petrov"')
+    .matches(/^[a-zA-Z]+ [a-zA-Z]+$/gm),
+    body('password', 'Password must be at least 4 characters long')
+    .isLength({ min: 4 }),
+    body('username', 'Username must be at least 5 characters long')
+    .isLength({min: 5}),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
     async (req, res) => {
-        const { email, password, rePass, description } = req.body;
+        const { fullName, password, rePass, username } = req.body;
         const { errors } = validationResult(req);
         try {
             if (errors.length > 0) {
@@ -32,19 +32,19 @@ router.post('/register',
             }
             const salt = await bcrypt.genSalt(3);
             const hash = await bcrypt.hash(password, salt);
-            const payload = { email };
+            const payload = { username };
             const user = {
-                email,
+                username,
+                fullName,
                 password: hash,
-                description
             }
             const result = await req.userStorage.createData(user);
             if(result){
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
                 req.user = {
-                    email,
-                    description
+                    username,
+                    fullName
                 };
                 res.redirect('/');
             }else{
@@ -54,7 +54,7 @@ router.post('/register',
             }
         } catch (error) {
             console.log(error);
-            res.render('register', { _title: 'Register Page', error, email, description})
+            res.render('register', { _title: 'Register Page', error, fullName, username})
         }
     });
 
@@ -63,17 +63,17 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login',
-    body('email', 'Email ist required')
+    body('username', 'Username ist required')
         .trim()
-        .isLength({ min: 2 }),
+        .isLength({ min: 1 }),
     body('password', 'Password ist required')
         .trim()
-        .isLength({ min: 5 }),
+        .isLength({ min: 3 }),
     async (req, res) => {
-        const { email , password } = req.body;
+        const { username , password } = req.body;
         const { errors } = validationResult(req);
         try {
-            const user = await req.userStorage.getUser(email);
+            const user = await req.userStorage.getUser(username);
             if(!user){
                 const error = [];
                 error.push({msg: 'Invalid Credentials.'});
@@ -86,7 +86,7 @@ router.post('/login',
             const isValid = await bcrypt.compare(password, hash);
 
             if (isValid) {
-                const payload = { email };
+                const payload = { username };
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
                 req.user = user;
@@ -98,7 +98,7 @@ router.post('/login',
             }
         } catch (error) {
             console.log(error);
-            res.render('login', {_title: 'Login Page', error, email});
+            res.render('login', {_title: 'Login Page', error, username});
         }
     });
 
