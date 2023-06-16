@@ -1,7 +1,7 @@
 const { Schema, model, default: mongoose } = require('mongoose');
 
 const userSchema = new Schema({
-    email: {
+    username: {
         type: String,
         required: true,
     },
@@ -9,17 +9,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    description: {
+    fullName: {
         type: String,
         required: true
     },
-    myAds: [
-        {
-            type: mongoose.Types.ObjectId,
-            ref: 'Ad'
-        }
 
-    ]
 });
 
 const User = model('User', userSchema);
