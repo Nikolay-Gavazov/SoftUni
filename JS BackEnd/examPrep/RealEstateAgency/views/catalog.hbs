@@ -1,0 +1,12 @@
+<section id="all-listings">
+    <h1>Apartments for recents</h1>
+    {{#if data}}
+    {{#each data}}
+    {{> houseCatalog}}
+    {{/each}}
+    {{/if}}
+    <div class="no-data-listing">
+        <p class="no-offer">There are no housing offers found...</p>
+    </div>
+
+</section>
