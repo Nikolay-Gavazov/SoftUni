@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-const connectionStr = 'mongodb://127.0.0.1:27017/JobAds';
+const connectionStr = 'mongodb://127.0.0.1:27017/RealEstateAgency';
 
-const Ad = require('../models/Ad');
+const Home = require('../models/Home');
 const User = require('../models/User');
 
 async function init() {
