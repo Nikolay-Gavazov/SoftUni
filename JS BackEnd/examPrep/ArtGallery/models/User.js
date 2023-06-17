@@ -9,10 +9,18 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    fullName: {
+    address: {
         type: String,
         required: true
     },
+    myPublications: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Publication'
+    }],
+    shares: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Publication'
+    }],
 
 });
 
