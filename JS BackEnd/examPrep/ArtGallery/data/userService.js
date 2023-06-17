@@ -18,8 +18,7 @@ async function checkUser(req) {
 }
 
 async function getUser(username) {
-    const data = await User.findOne({ username: username }).lean();
-
+    const data = await User.findOne({ username: username }).lean().populate('myPublications').populate('shares');
     return data;
 }
 
@@ -37,9 +36,15 @@ async function editUser(id, data) {
 
 async function addAd(id, adId) {
     const user = await User.findById(id);
-    user.myAds.push(adId);
+    user.myPublications.push(adId);
     await user.save();
 }
+
+async function share(id, publicationId) {
+    const data = await User.findById(id);
+    data.shares.push(publicationId)
+    await data.save();
+};
 
 // async function getWishes(id, bookId){
 //     const user = await User.findById(id).lean();
@@ -63,7 +68,7 @@ module.exports = () => (req, res, next) => {
         checkUser,
         editUser,
         addAd,
-        // getWishes
+        share
     };
     next();
 }
