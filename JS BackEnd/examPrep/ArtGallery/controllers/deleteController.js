@@ -1,9 +1,20 @@
-module.exports = {
-    async deletePage(req, res) {
-        const id = req.params.id;
+const { Router } = require('express');
+const { autMidd, isAuth } = require('../middlewares/authMidd');
 
-        await req.storage.deleteItem(id);
+const router = Router();
 
-        res.redirect('/catalog')
+router.get('/delete/:id', autMidd, isAuth, async (req, res) => {
+    const id = req.params.id;
+    const publication = await req.storage.getById(id);
+    const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
+    const isOwner = user?._id.toString() == publication.author._id.toString();
+    if (!isOwner) {
+        return res.status(403).redirect('/');
     }
-}
+    await req.storage.deleteItem(id);
+
+    res.redirect('/catalog')
+})
+
+
+module.exports = router;
