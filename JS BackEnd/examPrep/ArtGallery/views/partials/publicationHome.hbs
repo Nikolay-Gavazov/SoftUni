@@ -1,0 +1,8 @@
+<article class="content-publication">
+    <h1>Title: {{title}}</h1>
+    {{#if isShared}}
+    <p>Number of people shared the publication: {{shares}}</p>
+    {{else}}
+    <a href="/details/{{_id}}" class="image-details">View publication</a>
+    {{/if}}
+</article>
