@@ -11,11 +11,9 @@
                     </div>
                     <div class="flex">
                         <p>Reservations: </p>
-                        {{#each user.bookedHotels}}
-                        <p>
-                            <span>{{name}}</span>
-                        </p>
-                        {{/each}}
+                        {{#if user.bookedHotels}}
+                        <p><span>{{bookedHotels}}</span></p>
+                        {{/if}}
                     </div>
                 </div>
         </section>
