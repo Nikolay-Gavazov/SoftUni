@@ -3,18 +3,19 @@ const hbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 
 const db = require('./data/database');
-const homeService = require('./data/homeService');
+const publicationService = require('./data/publicationService');
 const userService = require('./data/userService');
 
 const { home } = require('./controllers/home');
 const { notFound } = require('./controllers/notFound');
-const { deletePage } = require('./controllers/deleteController');
+const deleteController = require('./controllers/deleteController');
 const { catalog } = require('./controllers/catalog');
 const details = require('./controllers/details');
 const create = require('./controllers/create');
 const edit = require('./controllers/edit');
 const auth = require('./controllers/auth');
-const search = require('./controllers/search')
+const profile = require('./controllers/profile')
+const { isAuth, autMidd } = require('./middlewares/authMidd')
 
 async function start() {
     await db();
@@ -28,19 +29,20 @@ async function start() {
 
     app.use(express.urlencoded({ extended: true }));
     app.use('/static', express.static('static'));
-    app.use(homeService());
     app.use(cookieParser());
     app.use(userService());
-
+    app.use(publicationService());
+    app.use(auth);
+    app.use(autMidd);
+    
     app.get('/', home);
     app.get('/catalog', catalog);
-    app.get('/delete/:id', deletePage);
-
+    
     app.use(edit);
-    app.use(auth);
     app.use(create);
     app.use(details);
-    app.use(search);
+    app.use(profile);
+    app.use(deleteController);
 
     app.all('*', notFound);
 
