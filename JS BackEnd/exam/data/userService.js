@@ -12,18 +12,18 @@ async function checkUser(req) {
     let user = null;
     if (token) {
         const payload = await jwt.verify(token, secret);
-        user = payload.username;
+        user = payload.email;
     }
     return user;
 }
 
-async function getUser(username) {
-    const data = await User.findOne({ username: username }).lean().populate('myPublications').populate('shares');
+async function getUser(email) {
+    const data = await User.findOne({ email: email }).lean()
     return data;
 }
 
 async function createData(data) {
-    const user = await User.find({ username: data.username });
+    const user = await User.find({ email: data.email });
     if (user.length > 0) {
         return undefined;
     }
@@ -34,17 +34,17 @@ async function editUser(id, data) {
     await User.findByIdAndUpdate(id, data);
 }
 
-async function addAd(id, adId) {
-    const user = await User.findById(id);
-    user.myPublications.push(adId);
-    await user.save();
-}
+// async function addAd(id, adId) {
+//     const user = await User.findById(id);
+//     user.myPublications.push(adId);
+//     await user.save();
+// }
 
-async function share(id, publicationId) {
-    const data = await User.findById(id);
-    data.shares.push(publicationId)
-    await data.save();
-};
+// async function share(id, publicationId) {
+//     const data = await User.findById(id);
+//     data.shares.push(publicationId)
+//     await data.save();
+// };
 
 // async function getWishes(id, bookId){
 //     const user = await User.findById(id).lean();
@@ -67,8 +67,8 @@ module.exports = () => (req, res, next) => {
         createData,
         checkUser,
         editUser,
-        addAd,
-        share
+        // addAd,
+        // share
     };
     next();
 }
