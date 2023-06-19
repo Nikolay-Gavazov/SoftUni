@@ -5,9 +5,9 @@ const router = Router();
 
 router.get('/delete/:id', autMidd, isAuth, async (req, res) => {
     const id = req.params.id;
-    const publication = await req.storage.getById(id);
+    const animal = await req.storage.getById(id);
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-    const isOwner = user?._id.toString() == publication.author._id.toString();
+    const isOwner = user?._id.toString() == animal.owner._id.toString();
     if (!isOwner) {
         return res.status(403).redirect('/');
     }
