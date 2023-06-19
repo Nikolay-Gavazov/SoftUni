@@ -5,29 +5,34 @@ const router = Router();
 
 router.get('/details/:id', async (req, res) => {
     const id = req.params.id;
-    const publication = await req.storage.getById(id);
+    const animal = await req.storage.getById(id);
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-    const isOwner = user?._id.toString() == publication.author._id.toString();
-    const isShared = await req.storage.getShare(id, user?._id);
-    // const tenants = home.rented.map(el => el.fullName);
-    if (publication) {
-        res.render('details', { _title: 'Details Page', user, publication, isOwner, isShared });
+    const isOwner = user?._id.toString() == animal.owner._id.toString();
+    const isDonated = await req.storage.getDonations(id, user?._id);
+
+    if (animal) {
+        res.render('details', { _title: 'Details Page', user, animal, isOwner, isDonated });
     } else {
         res.redirect('/404');
     }
 });
 
-router.get('/details/:id/share', autMidd, isAuth, async (req, res) => {
+router.get('/details/:id/donate', autMidd, isAuth, async (req, res) => {
     const id = req.params.id;
-    const publication = await req.storage.getById(id);
+    const animal = await req.storage.getById(id);
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
+    const isDonated = await req.storage.getDonations(id, user?._id);
+    if(isDonated){
+        const error = [];
+        error.push({ msg: 'You already donated!' });
+        return res.render('details', { _title: 'Details Page', error, animal, user,isDonated});
+    }
     try {
-        await req.storage.share(id, user?._id);
-        await req.userStorage.share(user?._id, id);
+        await req.storage.donate(id, user?._id);
         res.redirect(`/`)
     } catch (error) {
         console.log(error);
-        res.render('details', { _title: 'Details Page', error, publication });
+        res.render('details', { _title: 'Details Page', error, animal, user, isDonated });
     }
 });
 
