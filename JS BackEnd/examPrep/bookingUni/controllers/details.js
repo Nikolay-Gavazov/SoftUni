@@ -9,7 +9,6 @@ router.get('/details/:id', async (req, res) => {
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
     const isOwner = user?._id.toString() == hotel.owner._id.toString();
     const isBooked = await req.storage.getBook(id, user?._id);
-    console.log(isBooked);
     // const tenants = home.rented.map(el => el.fullName);
     if (hotel) {
         res.render('details', { _title: 'Details Page', user, hotel, isOwner, isBooked });
