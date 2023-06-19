@@ -1,7 +1,7 @@
 const { Schema, model, default: mongoose } = require('mongoose');
 
 const userSchema = new Schema({
-    username: {
+    email: {
         type: String,
         required: true,
     },
@@ -9,18 +9,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    address: {
-        type: String,
-        required: true
-    },
-    myPublications: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Publication'
-    }],
-    shares: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Publication'
-    }],
 
 });
 
