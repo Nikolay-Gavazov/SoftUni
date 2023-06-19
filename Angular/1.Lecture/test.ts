@@ -1,0 +1,1 @@
+const isOpen: boolean = true;
