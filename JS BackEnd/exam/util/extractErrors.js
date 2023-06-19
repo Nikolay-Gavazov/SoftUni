@@ -1,3 +1,0 @@
-exports.extractErrors = (error) => {
-    
-}
