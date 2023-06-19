@@ -7,23 +7,26 @@ const { body, validationResult } = require('express-validator');
 const router = Router();
 
 router.get('/register', (req, res) => {
+    if(req.cookies.token){
+        return res.redirect('/')
+    }
     res.render('register', { _title: 'Register Page' });
 });
 
 router.post('/register',
-    body('username').trim(),
+    body('email').trim(),
     body('password').trim(),
     body('rePass').trim(),
-    body('address').trim(),
-    body('username', 'Username must be at least 4 characters long')
+    body('email', 'Email must be at least 10 characters long')
         .isLength({ min: 4 }),
-    body('password', 'Password must be at least 3 characters long')
-        .isLength({ min: 3 }),
-    body('address', 'Address must be a maximum 20 characters long')
-        .isLength({ max: 20 }),
+    body('password', 'Password must be at least 4 characters long')
+        .isLength({ min: 4 }),
     body('rePass', 'Password missmatch.').custom((value, { req }) => value == req.body.password),
     async (req, res) => {
-        const { address, password, rePass, username } = req.body;
+        if(req.cookies.token){
+            return res.redirect('/')
+        }
+        const { email, password, } = req.body;
         const { errors } = validationResult(req);
         try {
             if (errors.length > 0) {
@@ -31,10 +34,9 @@ router.post('/register',
             }
             const salt = await bcrypt.genSalt(3);
             const hash = await bcrypt.hash(password, salt);
-            const payload = { username };
+            const payload = { email };
             const user = {
-                username,
-                address,
+                email,
                 password: hash,
             }
             const result = await req.userStorage.createData(user);
@@ -42,8 +44,7 @@ router.post('/register',
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
                 req.user = {
-                    username,
-                    address
+                    email,
                 };
                 res.redirect('/');
             } else {
@@ -53,26 +54,32 @@ router.post('/register',
             }
         } catch (error) {
             console.log(error);
-            res.render('register', { _title: 'Register Page', error, address, username })
+            res.render('register', { _title: 'Register Page', error, email })
         }
     });
 
 router.get('/login', (req, res) => {
+    if(req.cookies.token){
+        return res.redirect('/')
+    }
     res.render('login', { _title: 'Login Page' });
 });
 
 router.post('/login',
-    body('username', 'Username ist required')
+    body('email', 'Email ist required')
         .trim()
-        .isLength({ min: 1 }),
+        .isLength({ min: 10 }),
     body('password', 'Password ist required')
         .trim()
-        .isLength({ min: 3 }),
+        .isLength({ min: 4 }),
     async (req, res) => {
-        const { username, password } = req.body;
+        if(req.cookies.token){
+            return res.redirect('/')
+        }
+        const { email, password } = req.body;
         const { errors } = validationResult(req);
         try {
-            const user = await req.userStorage.getUser(username);
+            const user = await req.userStorage.getUser(email);
             if (!user) {
                 const error = [];
                 error.push({ msg: 'Invalid Credentials.' });
@@ -85,19 +92,19 @@ router.post('/login',
             const isValid = await bcrypt.compare(password, hash);
 
             if (isValid) {
-                const payload = { username };
+                const payload = { email };
                 const token = await jwt.sign(payload, secret, { expiresIn: '2d' });
                 res.cookie('token', token);
-                req.user = { username };
+                req.user = { email };
                 res.redirect('/');
             } else {
                 const error = [];
-                error.push({ msg: 'Expired Session. Please Login.' });
+                error.push({ msg: 'Invalid Credentials.' });
                 throw error;
             }
         } catch (error) {
             console.log(error);
-            res.render('login', { _title: 'Login Page', error, username });
+            res.render('login', { _title: 'Login Page', error, email });
         }
     });
 

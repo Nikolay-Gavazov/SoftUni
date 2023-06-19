@@ -6,47 +6,59 @@ const router = Router();
 
 router.get('/edit/:id', autMidd, isAuth, async (req, res) => {
     const id = req.params.id;
-    const publication = await req.storage.getById(id);
+    const animal = await req.storage.getById(id);
     const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-    const isOwner = user?._id.toString() == publication.author._id.toString();
+    const isOwner = user?._id.toString() == animal.owner._id.toString();
     if (!isOwner) {
         res.status(403).redirect('/');
     }
-    res.render('edit', { _title: 'Edit Page', publication, user, id });
+    res.render('edit', { _title: 'Edit Page', animal, user, id });
 }),
     router.post('/edit/:id',
-        body('title').trim(),
-        body('paintingTech').trim(),
-        body('certificate').trim(),
-        body('image').trim(),
-        body('title', 'Title should be at least 6 characters')
-            .isLength({ min: 6 }),
-        body('paintingTech', 'Painting Technique should be a maximum of 15 characters')
-            .isLength({ max: 15 }),
-        body('image', 'Publication image should start with "http://" or "https://"')
-            .isURL(),
-        body('certificate', '⦁	The Certificate of authenticity there must be value "Yes" or "No".')
-            .custom((value) => value == 'Yes' || value == 'No'),
-        autMidd, isAuth, async (req, res) => {
-            const id = req.params.id;
-            const data = req.body;
-            const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
-            const { errors } = validationResult(req);
-            const publication = {
-                title: data.title,
-                paintingTech: data.paintingTech,
-                certificate: data.certificate,
-                image: data.image,
-            };
+    body('name').trim(),
+    body('kind').trim(),
+    body('image').trim(),
+    body('needOf').trim(),
+    body('description').trim(),
+    body('location').trim(),
+    body('name', 'Name should be at least 2 characters')
+        .isLength({ min: 2 }),
+    body('kind', 'Kind should be at least 3 characters')
+        .isLength({ min: 3 }),
+    body('image', 'Publication image should start with "http://" or "https://"')
+        .isURL(),
+    body('years', 'Years are required and should be a number between 1 and 100')
+        .isInt({ min:1, max: 100 }),
+    body('needOf', 'Need is required and should be at least 3 and no longer than 20 characters')
+        .isLength({ min:3, max: 20 }),
+    body('description', 'Description is required and should be at least 5 and no longer than 50 characters')
+        .isLength({ min:5, max: 50 }),
+    body('location', 'Location is required and should be at least 5 and no longer than 15 characters')
+        .isLength({ min:5, max: 15 }),
+    autMidd, isAuth, async (req, res) => {
+        const id = req.params.id;
+        const data = req.body;
+        const user = await req.userStorage.getUser(await req.userStorage.checkUser(req));
+        const { errors } = validationResult(req);
+        const animal = {
+            name: data.name,
+            kind: data.kind,
+            image: data.image,
+            years: Number(data.years),
+            needOf: data.needOf,
+            description: data.description,
+            location: data.location,
+            owner: { _id: user._id }
+        };
             try {
                 if (errors.length > 0) {
                     throw errors;
                 }
-                await req.storage.editItem(id, publication);
+                await req.storage.editItem(id, animal);
                 res.redirect(`/details/${id}`);
             } catch (error) {
                 console.log(error);
-                res.render('edit', { _title: 'Edit Page', error, user, publication, id });
+                res.render('edit', { _title: 'Edit Page', error, user, animal, id });
             }
         });
 module.exports = router;
