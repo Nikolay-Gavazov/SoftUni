@@ -1,0 +1,19 @@
+<main class="create">
+    <section id="create">
+        <div class="form">
+            <h2>Add item</h2>
+            <form class="create-form" method="post" action="/create">
+                <input type="text" name="name" id="name" placeholder="Name" value="{{animal.name}}" />
+                <input type="text" name="years" id="years" placeholder="Years" value="{{animal.years}}" />
+                <input type="text" name="kind" id="kind" placeholder="Kind" value="{{animal.kind}}" />
+                <input type="text" name="image" id="animal-img" placeholder="Image url" value="{{animal.image}}" />
+                <input type="text" name="needOf" id="needs-of" placeholder="Needs of" value="{{animal.needOf}}" />
+                <input type="text" name="location" id="location" placeholder="Location" value="{{animal.location}}" />
+                <textarea id="description" placeholder="Description..."
+                    name="description">{{animal.description}}</textarea>
+
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </section>
+</main>
