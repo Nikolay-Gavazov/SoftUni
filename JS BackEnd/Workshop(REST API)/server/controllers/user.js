@@ -8,7 +8,7 @@ router.post('/register', async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(400).json({
-            error: error.message
+            message: error.message
         })
     }
 });
@@ -17,18 +17,17 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await userService.login({ email, password });
-        console.log(user);
         res.json(user);
     } catch (error) {
         console.log(error);
         res.status(400).json({
-            error: error.message
+            message: error.message
         })
     }
 })
 
 router.get('/logout', (req, res) => {
-    res.end();
+    res.status(200).end();
 })
 
 module.exports = router;
