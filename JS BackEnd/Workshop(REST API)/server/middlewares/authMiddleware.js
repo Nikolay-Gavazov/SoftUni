@@ -6,7 +6,7 @@ exports.auth = async(req, res, next) => {
         try {
             const decodedToken = await jwt.verify(token, 'DedovDedov');
         
-            res.user = decodedToken;
+            req.user = decodedToken;
             next();
         } catch (error) {
             res.status(401).json({
