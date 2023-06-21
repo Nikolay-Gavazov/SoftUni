@@ -41,25 +41,28 @@ userList.forEach(({lastName, id}) => {
 
 class Human {
     speack(){
-        console.log('Hello there!');
-        
+        console.log('Hello there!');   
     }
 }
 
 class Person extends Human {
-    private name: string;
+    name: string;
     age: number;
+    private job: string;
 
-    constructor(name: string, age: number){
+    constructor(name: string, age: number, job: string){
         super();
         this.name = name;
         this.age = age;
+        this.job = job;
     }
 }
 
 
-const personMitko = new Person('Mitko', 20);
+
+const personMitko = new Person('Mitko', 20, 'Mechanik');
 personMitko.speack();
+
 
 
 function getIdentity<T>(id: T){
@@ -75,4 +78,8 @@ enum TransactionStatus{
     Failed,
     Rejected
 }
+
+
+const gosho = new Person('Gosho', 21, 'Barman');
+
 
