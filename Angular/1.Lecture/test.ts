@@ -23,7 +23,7 @@ interface AnotherUser{
 class AnotherUserClass implements AnotherUser{
     lastName: string;
     id: number;
-    getUserName () {
+    getUserName (): string {
         return this.lastName;
     }
 }
