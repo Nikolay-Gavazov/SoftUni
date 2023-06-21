@@ -60,3 +60,19 @@ class Person extends Human {
 
 const personMitko = new Person('Mitko', 20);
 personMitko.speack();
+
+
+function getIdentity<T>(id: T){
+    console.log(id);
+}
+getIdentity<string>('123');
+getIdentity<number>(123);
+
+enum TransactionStatus{
+    Initiated,
+    Pending,
+    Successful,
+    Failed,
+    Rejected
+}
+
