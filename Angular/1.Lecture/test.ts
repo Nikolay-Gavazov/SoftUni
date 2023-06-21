@@ -16,7 +16,16 @@ const ivanUser = {
 
 interface AnotherUser{
     lastName: string,
-    id: number
+    id: number,
+    getUserName: () => string;
+}
+
+class AnotherUserClass implements AnotherUser{
+    lastName: string;
+    id: number;
+    getUserName () {
+        return this.lastName;
+    }
 }
 
 const userList = [
@@ -24,6 +33,11 @@ const userList = [
     {lastName: 'Petrov', id: 2},
     {lastName: 'Dimitrov', id: 3},
 ] as AnotherUser[];
+
+userList.forEach(({lastName, id}) => {
+    console.log(`${id}: ${lastName}`);
+    
+});
 
 class Human {
     speack(){
