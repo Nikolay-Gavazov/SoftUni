@@ -25,16 +25,24 @@ const userList = [
     {lastName: 'Dimitrov', id: 3},
 ] as AnotherUser[];
 
+class Human {
+    speack(){
+        console.log('Hello there!');
+        
+    }
+}
 
-class Person {
+class Person extends Human {
     private name: string;
     age: number;
 
     constructor(name: string, age: number){
+        super();
         this.name = name;
         this.age = age;
     }
 }
 
-const personMitko = new Person('Mitko', 20);
 
+const personMitko = new Person('Mitko', 20);
+personMitko.speack();
