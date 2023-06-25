@@ -18,7 +18,7 @@ export class AppComponent {
  
   users = [
     {
-      name: 'Gosho' as string,
+      name: 'Goshko' as string,
       age: 22 as number
     }
   ]
