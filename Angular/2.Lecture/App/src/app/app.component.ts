@@ -43,4 +43,4 @@ export class AppComponent {
 
   //   this.showText = !this.showText;
   // }
-}
+
