@@ -8,5 +8,5 @@ import { IUser } from './interfaces/user';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public userService: UserService) {}
+
 }
