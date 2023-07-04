@@ -29,7 +29,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\Advanced\\tests\\02-oddOrEven.js"
+            "program": "${workspaceFolder}/Angular/Workshop-Components/Rest-api/index.js"
         }
     ]
 }
