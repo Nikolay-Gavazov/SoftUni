@@ -7,8 +7,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  loadUsers(search: string){
+  loadUsers(){
+    const search = null;
     const query = search ? `?email_like=${search}` : '';
-    return this.http.get<IUser[]>(`https://jsonplaceholder.typicode.com/users/${query}`)
+    return this.http.get<any[]>(`https://jsonplaceholder.typicode.com/users/${query}`)
   }
 }
