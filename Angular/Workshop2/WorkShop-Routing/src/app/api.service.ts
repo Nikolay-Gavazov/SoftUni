@@ -18,6 +18,10 @@ export class ApiService {
     return this.http.get<Post[]>(`${appUrl}/posts?${limitFilter}`)
   }
 
+  getTheme(id: string) {
+    return this.http.get<Theme>(`${appUrl}/themes/${id}`);
+  }
+
   getThemes() {
     return this.http.get<Theme[]>(`${appUrl}/themes`)
   }
