@@ -15,6 +15,6 @@ export class AppComponent {
     private pageTitle: Title
   )
   {
-    this.router.events.pipe(filter(e => e.instanceof NavigationEnd), map)
+    /* this.router.events.pipe(filter(e => e.instanceof NavigationEnd), map) */
   }
 }
