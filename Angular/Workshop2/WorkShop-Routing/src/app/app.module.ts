@@ -9,11 +9,12 @@ import { MainComponent } from './main/main.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './theme/create/create.component';
 import { ThemeModule } from './theme/theme.module';
+import { AppRoutingModule } from './app-routing.module';
 import { DetailsComponent } from './theme/details/details.component';
+
 
 @NgModule({
   declarations: [
@@ -22,17 +23,17 @@ import { DetailsComponent } from './theme/details/details.component';
     PostsListComponent,
     HomeComponent,
     CreateComponent,
-    DetailsComponent
+    DetailsComponent,
   ],
   imports: [
-    ThemeModule,
+    RouterModule,
+    AuthModule,
     BrowserModule,
     CoreModule,
     HttpClientModule,
     SharedModule,
-    AuthModule,
+    ThemeModule,
     AppRoutingModule,
-    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
