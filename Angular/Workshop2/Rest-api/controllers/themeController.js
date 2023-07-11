@@ -24,7 +24,7 @@ function getTheme(req, res, next) {
 
 function createTheme(req, res, next) {
     const { themeName, postText } = req.body;
-    const { _id: userId } = req.user;
+    const { _id: userId } = 123 /* req.user */;
 
     themeModel.create({ themeName, userId, subscribers: [userId] })
         .then(theme => {
