@@ -14,6 +14,7 @@ import { CreateComponent } from './theme/create/create.component';
 import { ThemeModule } from './theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DetailsComponent } from './theme/details/details.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DetailsComponent } from './theme/details/details.component';
     SharedModule,
     ThemeModule,
     AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
