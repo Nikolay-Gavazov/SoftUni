@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Theme } from './types/theme';
@@ -24,5 +24,10 @@ export class ApiService {
 
   getThemes() {
     return this.http.get<Theme[]>(`${appUrl}/themes`)
+  }
+  createTheme(themeName: string, postText: string) {
+    const headers = new HttpHeaders({'myHeader': 'nikeca'});
+    return this.http.post(`${appUrl}/themes`, {themeName, postText}, 
+    {headers: headers});
   }
 }
