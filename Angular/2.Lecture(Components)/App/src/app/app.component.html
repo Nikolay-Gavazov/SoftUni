@@ -1,0 +1,31 @@
+<li>
+  <div id="title">{{article.title}}</div>
+  <button *ngIf="showReadMoreBtn" (click)="readMore()">Read More</button>
+  <button *ngIf="showHideBtn" (click)="hideDesc()">Hide Desc</button>
+  <button (click)="toggleImage()">{{imageButtonTitle}}</button>
+  <div class="desc" *ngIf="articleDescLen > 0">{{descToShow}}</div>
+  <img *ngIf="imageIsShown" src="{{article.imageUrl}}" alt="article image" />
+</li>
+
+
+<!-- <div>{{title}}</div>
+<p>Name</p>
+<input type="text" #inputName>
+<p>Age</p>
+<input type="number" #inputAge>
+<p></p>
+<button (click) = "buttonOnClick(inputName, inputAge)">Create User</button>
+
+<div>Users
+  <ul>
+    <li *ngFor = "let user of users">
+     Name: {{user.name}}
+     Age: {{user.age}}
+    </li>
+  </ul>
+</div>
+
+
+<div *ngIf = "showText">Visible</div>
+
+<button (click) = "toggleText($event)">{{showText ? 'Hide Text' : 'Show Text'}}</button> -->
