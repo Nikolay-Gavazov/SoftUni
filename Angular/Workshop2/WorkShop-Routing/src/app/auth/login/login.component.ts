@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router) {
     this.authService.login();
-    
+
   }
-  login(email:string, pass:string):void {
+  login(email: string, pass: string): void {
     this.router.navigate(['/']);
   }
 }
