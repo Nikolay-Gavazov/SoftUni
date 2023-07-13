@@ -8,7 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent {
-  constructor(private router: Router, private authService: AuthService){
+  constructor(private router: Router, private authService: AuthService) {
     this.authService.logout();
     this.router.navigate(['/']);
   }
