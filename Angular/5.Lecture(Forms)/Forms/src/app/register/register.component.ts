@@ -9,11 +9,11 @@ import { NgForm } from '@angular/forms';
 export class RegisterComponent {
   /* @ViewChild('registerForm') registerForm NgForm | undefined; */
   submit(form: NgForm): void {
-    if(form.invalid){
+    if (form.invalid) {
       debugger
       return;
     }
-  const value: {} = form.value;
-   form.reset(); 
+    const value: {} = form.value;
+    form.reset();
   }
 }
