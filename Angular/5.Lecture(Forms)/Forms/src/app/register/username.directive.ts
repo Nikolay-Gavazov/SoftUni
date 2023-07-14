@@ -17,6 +17,8 @@ export class UsernameDirective implements Validator{
 
 
   validate(control: AbstractControl<any, any>): ValidationErrors | null{
+    console.log(new RegExp(/^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$/gm, this.appUsername));
+    
     return null;
   }
 }
