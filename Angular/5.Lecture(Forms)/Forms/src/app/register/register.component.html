@@ -7,14 +7,18 @@
 
       <p class="field field-icon">
         <label for="username"><span><i class="fas fa-user"></i></span></label>
-        <input type="text" name="username" id="username" class="error" placeholder="Mark Ulrich" ngModel>
+        <input type="text" name="username" id="username" placeholder="Mark Ulrich" ngModel required pattern="^[A-Z]{1}[a-z]+ [A-Z]{1}[a-z]+$"
+        #usernameInput = "ngModel">
       </p>
 
-      <!-- if error -->
-      <p class="error">
-        Message for Error
-      </p>
-      <!-- end if error -->
+      <div *ngIf="usernameInput.touched">
+        <p class="error" *ngIf="usernameInput.errors?.['required']">
+          Username is required.
+        </p>
+        <p class="error" *ngIf="usernameInput.errors?.['pattern']">
+          Username is invalid.
+        </p>
+      </div>
 
       <p class="field field-icon">
         <label for="email"><span><i class="fas fa-envelope"></i></span></label>
@@ -35,8 +39,17 @@
         <select name="tel" id="tel" class="tel" ngModel>
           <option value="1">+359</option>
         </select>
-        <input type="text" name="tell" id="tell" placeholder="888 888" ngModel minlength="9" required>
+        <input type="text" name="tell" id="tell" placeholder="888 888" ngModel minlength="9" maxlength="9" required #tellInput="ngModel">
       </p>
+
+      <div *ngIf="tellInput.touched">
+        <p class="error" *ngIf="tellInput.errors?.['minlength'] || tellInput.errors?.['maxlength']">
+          Invalid phone number
+        </p>
+        <p class="error" *ngIf="tellInput.errors?.['required']">
+          Phone number is required.
+        </p>
+      </div>
 
       <p class="field field-icon">
         <label for="building"><span><i class="fas fa-building"></i></span></label>
@@ -45,19 +58,29 @@
         </select>
       </p>
       <div class="ngModelGroup">
-
         <p class="field field-icon">
           <label for="password"><span><i class="fas fa-lock"></i></span></label>
-          <input type="password" name="password" id="password" placeholder="******" ngModel>
+          <input type="password" name="password" id="password" placeholder="******" ngModel pattern="^[A-za-z0-9]{3,16}$" required #passInput="ngModel">
         </p>
-
         <p class="field field-icon">
           <label for="re-password"><span><i class="fas fa-lock"></i></span></label>
-          <input type="re-password" name="re-password" id="re-password" placeholder="******" ngModel>
+          <input type="password" name="re-password" id="re-password" placeholder="******" ngModel pattern="^[A-za-z0-9]{3,16}$" required #rePassInput="ngModel">
+        </p>
+      </div>
+      <div *ngIf="passInput.touched || rePassInput.touched">
+        <p class="error" *ngIf="passInput.errors?.['pattern']">
+          Password is incorrect.
+        </p>
+        <p class="error" *ngIf="passInput.errors?.['required']">
+          Password is required
+        </p>
+        <p class="error" *ngIf="passInput.value != rePassInput.value">
+          Password don`t match.
         </p>
       </div>
       <p>
         <button *ngIf="registerForm.invalid" disabled>Create Account</button>
+        <button *ngIf="!registerForm.invalid">Create Account</button>
       </p>
 
       <p class="text-center">
