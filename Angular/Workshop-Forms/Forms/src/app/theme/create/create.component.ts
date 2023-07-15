@@ -21,6 +21,9 @@ constructor(private apiService: ApiService, private router: Router){}
 
   onSubmit(): void{
     console.log(this.themeForm.value);
+    if(this.themeForm.invalid){
+      return;
+    }
     const name = this.themeForm.value.themeName;
     const text = this.themeForm.value.postText;
     this.apiService.createTheme(name, text).subscribe((response) => {
@@ -28,7 +31,7 @@ constructor(private apiService: ApiService, private router: Router){}
       
     });
     ;
-    
+    this.themeForm.reset();
     this.router.navigate(['/']);
   }
 }
