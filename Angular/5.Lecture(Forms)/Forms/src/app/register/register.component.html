@@ -79,8 +79,7 @@
         </p>
       </div>
       <p>
-        <button *ngIf="registerForm.invalid" disabled>Create Account</button>
-        <button *ngIf="!registerForm.invalid">Create Account</button>
+        <button [disabled]="registerForm.invalid">Create Account</button>
       </p>
 
       <p class="text-center">
