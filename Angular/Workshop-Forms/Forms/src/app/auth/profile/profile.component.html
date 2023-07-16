@@ -1,18 +1,44 @@
 <div class="container">
-    <div class="profile"><img src="./profile.png" alt="default user">
+    <div class="profile"><img src="/assets/profile.png" alt="default user">
         <h3>User Info:</h3>
-        <div class="flex">
-            <p>Username: </p>
-            <p>Johny</p>
+        <div *ngIf="!showEdit">
+            <div class="flex">
+                <p>Username: </p>
+                <p>Johny</p>
+            </div>
+            <div class="flex">
+                <p>Email: </p>
+                <p>john.doe@gmail.com</p>
+            </div>
+            <div class="flex">
+                <p>Phone: </p>
+                <p>+359 885 888 888</p>
+            </div>
+            <button class="edit-button" (click)="toggle()">Edit</button>
         </div>
-        <div class="flex">
-            <p>Email: </p>
-            <p>john.doe@gmail.com</p>
+        <div *ngIf="showEdit">
+            <form #form="ngForm" (ngSubmit)="onSubmit(profileForm)">
+                <div class="flex">
+                    <p>Username: </p>
+                    <input type="text" name="username" id="username" value="Johny" required minlength="5">
+                </div>
+                <div class="flex">
+                    <p>Email: </p>
+                    <input type="email" name="email" id="email" value="john.doe@gmail.com">
+                </div>
+                <div class="flex">
+                    <p>Phone: </p>
+                    <div>
+                        <select name="select-tel" id="select-tel" class="tel">
+                            <option value="00359">+359</option>
+                        </select>
+                        <input type="text" name="tel" id="tel" value="885 888 888">
+                    </div>
+                </div>
+                <button class="red-button">Cancel</button>
+                <button class="green-button">Save</button>
+            </form>
         </div>
-        <div class="flex">
-            <p>Phone: </p>
-            <p>+359 885 888 888</p>
-        </div>
-        <button class="edit-button">Edit</button>
     </div>
+    
 </div>
