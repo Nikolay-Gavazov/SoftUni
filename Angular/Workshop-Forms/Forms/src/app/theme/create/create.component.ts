@@ -27,8 +27,6 @@ constructor(private apiService: ApiService, private router: Router){}
     const name = this.themeForm.value.themeName;
     const text = this.themeForm.value.postText;
     this.apiService.createTheme(name, text).subscribe((response) => {
-      console.log(response);
-      
     });
     ;
     this.themeForm.reset();
