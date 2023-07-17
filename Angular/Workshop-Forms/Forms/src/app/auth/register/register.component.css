@@ -20,7 +20,14 @@ form.login, form.register {
     padding-top: 1.5rem;
 }
 
-.login input, .register input {
+.ng-invalid .ng-touched, .ngModelGroup .ng-touched .ng-invalid .ng-dirty{
+    border-left-color: red;
+}
+.ng-valid, .ngModelGroup .ng-valid .ng-dirty{
+    border-left-color: green !important;
+}
+
+.register input {
     flex: 0 1 100%;
     border: 1px solid;
     padding: 0.3em;
@@ -29,7 +36,7 @@ form.login, form.register {
     border-bottom-right-radius: 0.3em;
 }
 
-.login select, .register select {
+ .register select {
     border-color: black;
 }
 
@@ -78,6 +85,3 @@ p.error {
     padding-top: 0;
 }
 
-.input-error {
-    border-left-color: red;
-}
