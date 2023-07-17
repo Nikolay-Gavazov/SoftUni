@@ -12,10 +12,14 @@ import { DEFAULT_EMAIL_DOMAINS } from 'src/app/shared/constants';
 export class LoginComponent {
   emailDomains = DEFAULT_EMAIL_DOMAINS;
   constructor(private authService: AuthService, private router: Router) {
-    this.authService.login();
-
+    
   }
   login(form: NgForm): void {
+    if(form.invalid){
+      return;
+    }
+    this.authService.login();
+    form.reset();
     this.router.navigate(['/']);
   }
 }
