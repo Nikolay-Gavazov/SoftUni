@@ -1,31 +1,36 @@
 <div class="container">
-    <form class="register" action="" method="post">
+    <form class="register" #form="ngForm" (ngSubmit)="register(form)">
 
         <fieldset>
             <h2>Registration Form</h2>
 
-            <!-- username -->
             <p class="field field-icon">
                 <label for="username"><span><i class="fas fa-user"></i></span></label>
-                <input class="input-error" type="text" name="username" id="username" placeholder="Johny">
+                <input class="input-error" type="text" name="username" id="username" placeholder="Johny" ngModel #usernameInput="ngModel" required minlength="5">
             </p>
-            <!-- <p class="error">
-            Username is required!
-        </p> -->
+            <ng-container *ngIf="usernameInput.touched">
+                <p class="error" *ngIf="usernameInput.errors?.['required']">
+                    Username is required!
+                    </p>
+                    <p class="error" *ngIf="usernameInput.errors?.['minlength']">
+                        Username must be at least 5 characters!
+                        </p>
+            </ng-container>
 
-            <!-- email -->
             <p class="field field-icon">
                 <label for="email"><span><i class="fas fa-envelope"></i></span></label>
-                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com">
+                <input type="email" name="email" id="email" placeholder="john.doe@gmail.com" ngModel #emailInput="ngModel" required [appEmail]="emailDomains">
             </p>
-            <!-- <p class="error">
-            Email is required!
-        </p>
-        <p class="error">
-            Email is not valid!
-        </p> -->
+            
+            <ng-container *ngIf="emailInput.touched">
+                <p class="error" *ngIf="emailInput.errors?.['required']">
+                    Email is required!
+                </p>
+                <p class="error" *ngIf="emailInput.errors?.['emailValidator']">
+                    Email is not valid!
+                </p>
+            </ng-container>
 
-            <!-- telephone -->
             <p class="field field-icon">
                 <label for="tel"><span><i class="fas fa-phone"></i></span></label>
                 <select name="select-tel" id="select-tel" class="tel">
@@ -34,26 +39,29 @@
                 <input type="text" name="tel" id="tel" placeholder="885 888 888">
             </p>
 
-            <!-- password -->
-            <p class="field field-icon">
-                <label for="password"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="password" id="password" placeholder="******">
-            </p>
-            <!-- <p class="error">
-            Password is required!
-        </p>
-        <p class="error">
-            Password must be at least 4 characters!
-        </p> -->
+            <div class="ngModelGroup">
+                <p class="field field-icon">
+                    <label for="password"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="password" id="password" placeholder="******" ngModel #passInput="ngModel" required minlength="5">
+                </p>
+                
+                <ng-container *ngIf="passInput.touched">
+                    <p class="error" *ngIf="passInput.errors?.['required']">
+                        Password is required!
+                    </p>
+                    <p class="error" *ngIf="passInput.errors?.['minlength']">
+                        Password must be at least 5 characters!
+                    </p>
+                </ng-container>
+    
+                <p class="field field-icon">
+                    <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
+                    <input type="password" name="rePassword" id="rePassword" placeholder="******" ngModel #rePassInput required minlength="5">
+                </p>
+                <p class="error" *ngIf="passInput.value != rePassInput.value">Repeat Password does not match password!</p>
+            </div>
 
-            <!-- rePassword -->
-            <p class="field field-icon">
-                <label for="rePassword"><span><i class="fas fa-lock"></i></span></label>
-                <input type="password" name="rePassword" id="rePassword" placeholder="******">
-            </p>
-            <!-- <p class="error">Repeat Password does not match password!</p> -->
-
-            <button disabled>Create Account</button>
+            <button [disabled]="form.invalid">Create Account</button>
 
             <p class="text-center">
                 Have an account?
