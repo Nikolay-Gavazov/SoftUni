@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { interval, map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,4 +21,12 @@ export class AppComponent {
   console.log(this.user);
   
  }
+
+ p = new Promise((resolve)=> {
+  setTimeout(() => {
+    resolve(100);
+ }, 3000);
+});
+
+time$ = interval(1000).pipe(map(() => new Date()));
 }
