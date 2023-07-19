@@ -7,4 +7,6 @@
 <button (click)="addProperty()">Add</button>
 
 </div>
-
+<div>Promise:{{p | async}}
+<h3>Clock: {{time$ | async | date: "hh:mm:ss"}}</h3>
+</div>
