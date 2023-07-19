@@ -1,1 +1,10 @@
-{{user | json}}
+<div>{{user | json}}</div>
+
+<div>
+  <h2>Sum of list:
+    {{user.list | reduce: sum : 0}}
+  </h2>
+<button (click)="addProperty()">Add</button>
+
+</div>
+
