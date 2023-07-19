@@ -1,12 +1,14 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'reduce'
+  name: 'reduce',
+  //pure: false //not pure function will re-render
+  //pure:true //pure function will be memoized //DEFAULT
 })
-export class ReducePipe implements PipeTransform {
+export class ReducePipe<T> implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(array: T[], reduceFn: (acc: any, curr: T) => any, initialValue: T): unknown {
+    return array.reduce(reduceFn, initialValue);
   }
 
 }
