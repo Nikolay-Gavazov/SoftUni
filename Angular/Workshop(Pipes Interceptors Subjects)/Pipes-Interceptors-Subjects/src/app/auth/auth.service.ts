@@ -1,37 +1,40 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { User } from '../types/user';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Subscription, tap } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  user: User | null = null;
+export class AuthService implements OnDestroy{
+
+  private user$$ = new BehaviorSubject<User| undefined>(undefined);
+  user$ = this.user$$.asObservable();
+
+  user: User | undefined;
   USER_KEY = '[user]'
 
-  constructor() {
-    try {
-      const user = localStorage.getItem(this.USER_KEY) || '';
-      this.user = JSON.parse(user);
-    } catch (error) {
-      this.user = null;
-    }
+  subscription: Subscription;
+  constructor(private http: HttpClient) {
+    this.subscription = this.user$.subscribe((user) => {
+      this.user = user;
+    })
   }
 
-  login(): void {
-    this.user = {
-      "email": "peshoKioravia@gmail",
-      "firstName": "Pesho",
-      "phoneNumber": "+123456789",
-      "passWord": "<PASSWORD>"
-    };
-    localStorage.setItem(this.USER_KEY, JSON.stringify(this.user));
+  login(email: string, password:string){
+   return this.http.post<User>('/api/login', {email,password}).pipe(tap(user => this.user$$.next(user)));
   }
-  logout(): void {
-    this.user = null;
-    localStorage.removeItem(this.USER_KEY);
+  register(username: string, email: string, password:string, rePassword:string, tel:string,){
+    return this.http.post<User>('/api/register', {username, email, password, rePassword, tel}).pipe(tap(user => this.user$$.next(user)));
+   }
+  logout(){
+    return this.http.post<User>('/api/logout', {}).pipe(tap(() => this.user$$.next(undefined)));
   }
   get isLoggedIn() {
     return !!this.user
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
