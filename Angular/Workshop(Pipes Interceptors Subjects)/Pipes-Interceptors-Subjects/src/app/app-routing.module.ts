@@ -14,6 +14,10 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'themes',
+    loadChildren: () => import("./theme/theme.module").then((m)=>m.ThemeModule),
+  },
+  {
     path: '**',
     component: NotFoundComponent,
   },
