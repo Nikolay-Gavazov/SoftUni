@@ -20,7 +20,6 @@ constructor(private apiService: ApiService, private router: Router){}
   }
 
   onSubmit(): void{
-    console.log(this.themeForm.value);
     if(this.themeForm.invalid){
       return;
     }
