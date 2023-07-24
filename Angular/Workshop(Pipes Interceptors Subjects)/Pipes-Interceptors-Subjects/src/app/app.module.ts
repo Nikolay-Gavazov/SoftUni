@@ -14,6 +14,7 @@ import { CreateComponent } from './theme/create/create.component';
 import { ThemeModule } from './theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DetailsComponent } from './theme/details/details.component';
+import { AppInterceptorProvider } from './app.interceptor';
 
 
 
@@ -37,7 +38,7 @@ import { DetailsComponent } from './theme/details/details.component';
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [AppInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
