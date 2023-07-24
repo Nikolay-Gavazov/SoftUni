@@ -14,7 +14,7 @@
             </ul>
             <ul *ngIf="isLoggedIn">
                 <li>
-                    <a routerLink="/auth/profile">{{user?.firstName}} profile</a>
+                    <a routerLink="/auth/profile">{{user?.username}} profile</a>
                 </li>
                 <li>
                     <a routerLink="/auth/logout">Logout</a>
@@ -31,7 +31,7 @@
                 <a routerLink="/themes">Themes</a>
             </li>
             <li>
-                <a routerLink="/create">New Theme</a>
+                <a routerLink="/themes/create">New Theme</a>
             </li>
         </ul>
     </nav>
