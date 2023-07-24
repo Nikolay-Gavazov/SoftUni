@@ -1,0 +1,68 @@
+<div class="container">
+    <div class="profile"><img src="/assets/profile.png" alt="default user">
+        <h3>User Info:</h3>
+        <div *ngIf="!showEdit">
+            <div class="flex">
+                <p>Username: </p>
+                <p>{{userData.username}}</p>
+            </div>
+            <div class="flex">
+                <p>Email: </p>
+                <p>{{userData.email}}</p>
+            </div>
+            <div class="flex">
+                <p>Phone: </p>
+                <p>+359 {{userData.phone}}</p>
+            </div>
+            <button class="edit-button" (click)="toggle()">Edit</button>
+        </div>
+        <div *ngIf="showEdit">
+            <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+                <div class="flex">
+                    <p>Username: </p>
+                    <input type="text" name="username" id="username" value="{{userData.username}}" ngModel #usernameInput="ngModel" required minlength="5">
+                </div>
+                <ng-container *ngIf="usernameInput.touched">
+                    <p class="error" *ngIf="usernameInput.errors?.['required']">
+                        Username is required!
+                        </p>
+                        <p class="error" *ngIf="usernameInput.errors?.['minlength']">
+                            Username must be at least 5 characters!
+                            </p>
+                </ng-container>
+                <div class="flex">
+                    <p>Email: </p>
+                    <input type="email" name="email" id="email" value="userData.email" ngModel #emailInput="ngModel" required [appEmail]="emailDomains">
+                </div>
+                <ng-container *ngIf="emailInput.touched">
+                    <p class="error" *ngIf="emailInput.errors?.['required']">
+                        Email is required!
+                    </p>
+                    <p class="error" *ngIf="emailInput.errors?.['emailValidator']">
+                        Email is not valid!
+                    </p>
+                </ng-container>
+                <div class="flex">
+                    <p>Phone: </p>
+                    <div>
+                        <select name="select-tel" id="select-tel" class="tel">
+                            <option value="00359">+359</option>
+                        </select>
+                        <input type="text" name="tel" id="tel" value="userData.phone" ngModel #phoneInput="ngModel" required minlength="9">
+                    </div>
+                </div>
+                <ng-container *ngIf="phoneInput.touched">
+                    <p class="error" *ngIf="phoneInput.errors?.['required']">
+                        Phone is required!
+                    </p>
+                    <p class="error" *ngIf="phoneInput.errors?.['minlength']">
+                        Phone must be at least 9 characters!
+                    </p>
+                </ng-container>
+                <button class="red-button">Cancel</button>
+                <button class="green-button">Save</button>
+            </form>
+        </div>
+    </div>
+    
+</div>
