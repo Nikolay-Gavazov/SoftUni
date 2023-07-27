@@ -1,5 +1,5 @@
 const authController = require('./auth');
-const themeController = require('./studioController');
+const themeController = require('./studiosController');
 const commentController = require('./commentController');
 
 module.exports = {
