@@ -1,18 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { auth } = require('../utils');
-const { studioController, commentController } = require('../controllers');
-
+const { commentController } = require('../controllers');
+const { getStudio, getStudios, createStudio } = require('../controllers/studiosController');
 // middleware that is specific to this router
 
-router.get('/', themeController.getThemes);
-router.post('/', /* auth(), */ themeController.createTheme);
+router.get('/', getStudios);
+router.post('/', /* auth(), */ createStudio);
 
-router.get('/:themeId', themeController.getTheme);
-router.post('/:themeId', /* auth(), */ postController.createPost);
-router.put('/:themeId', auth(), themeController.subscribe);
-router.put('/:themeId/posts/:postId', auth(), commentController.editPost);
-router.delete('/:themeId/posts/:postId', auth(), commentController.deletePost);
+router.get('/:themeId', getStudio);
+router.post('/:themeId', /* auth(), */ commentController.createComment);
+router.put('/:themeId/posts/:postId', auth(), commentController.editComment);
+router.delete('/:themeId/posts/:postId', auth(), commentController.deleteComment);
 
 
 module.exports = router
