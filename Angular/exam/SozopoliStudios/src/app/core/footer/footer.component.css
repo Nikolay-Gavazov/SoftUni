@@ -1,0 +1,20 @@
+footer {
+    margin: 0 auto;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Oswald', sans-serif;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:#000000;
+    font-size:16px;
+    letter-spacing:1px;
+    background-color: rgba(0, 0, 0, 0.244)
+}
+
+footer p {
+    margin: 0 auto;
+    padding: 0;
+    font-size: 1em;
+    text-align: center;
+}
