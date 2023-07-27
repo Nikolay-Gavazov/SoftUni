@@ -482,7 +482,6 @@ button {
   }
 }
 @media (max-width: 750px) {
-
    .error__content {
     position: static;
     margin: 0 auto;
