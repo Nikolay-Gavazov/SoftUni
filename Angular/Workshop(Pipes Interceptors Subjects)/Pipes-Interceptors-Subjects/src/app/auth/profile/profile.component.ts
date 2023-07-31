@@ -16,18 +16,18 @@ export class ProfileComponent {
   @ViewChild('profileForm') profileForm!: NgForm;
   showEdit = false;
 
-  constructor(){}
-  toggle():void {
-    this.showEdit =!this.showEdit;
+  constructor() { }
+  toggle(): void {
+    this.showEdit = !this.showEdit;
   }
-  onSubmit(profileForm: NgForm):void {
-    if(profileForm.invalid){
+  onSubmit(profileForm: NgForm): void {
+    if (profileForm.invalid) {
       return;
     }
     this.userData.username = profileForm.value.username;
     this.userData.email = profileForm.value.email;
     this.userData.phone = profileForm.value.tel;
-    
+
     profileForm.reset();
     this.toggle()
   }
