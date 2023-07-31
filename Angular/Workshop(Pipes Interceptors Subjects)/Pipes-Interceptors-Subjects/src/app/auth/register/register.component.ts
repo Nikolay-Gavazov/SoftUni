@@ -11,15 +11,15 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
   emailDomains = DEFAULT_EMAIL_DOMAINS;
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  register(form: NgForm){
-    if(form.invalid){
+  register(form: NgForm) {
+    if (form.invalid) {
       return;
     }
-    const {username, email, password, rePassword, tel} = form.value;
+    const { username, email, password, rePassword, tel } = form.value;
 
-    this.authService.register(username, email, password, rePassword, tel).subscribe(() =>{
+    this.authService.register(username, email, password, rePassword, tel).subscribe(() => {
       form.reset();
       this.router.navigate(['/']);
     })
