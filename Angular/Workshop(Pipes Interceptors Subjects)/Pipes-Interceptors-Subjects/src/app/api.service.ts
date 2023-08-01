@@ -4,15 +4,15 @@ import { environment } from 'src/environments/environment';
 import { Theme } from './types/theme';
 import { Post } from './types/post';
 
-const {appUrl} = environment
+const { appUrl } = environment
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  
+
   constructor(private http: HttpClient) { }
-  
+
   getPosts(limit?: number) {
     const limitFilter = limit ? `limit=${limit}` : '';
     return this.http.get<Post[]>(`${appUrl}/posts?${limitFilter}`)
@@ -26,8 +26,8 @@ export class ApiService {
     return this.http.get<Theme[]>(`${appUrl}/themes`)
   }
   createTheme(themeName: string, postText: string) {
-    const headers = new HttpHeaders({'myHeader': 'nikeca'});
-    return this.http.post(`${appUrl}/themes`, {themeName, postText}, 
-    {headers: headers});
+    const headers = new HttpHeaders({ 'myHeader': 'nikeca' });
+    return this.http.post(`${appUrl}/themes`, { themeName, postText },
+      { headers: headers });
   }
 }
