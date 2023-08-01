@@ -17,7 +17,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     CommonModule,
     RouterModule
   ],
-  exports:[
+  exports: [
     HeaderComponent,
     FooterComponent,
     NotFoundComponent
