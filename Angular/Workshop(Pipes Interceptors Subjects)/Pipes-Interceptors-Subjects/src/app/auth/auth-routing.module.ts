@@ -6,11 +6,11 @@ import { ProfileComponent } from "./profile/profile.component";
 import { AuthActivate } from "../core/guards/auth.activate";
 
 const routes: Routes = [
-    { path: 'auth/login', component: LoginComponent, /* canActivate:[AuthActivate] */},
-    { path: 'auth/register', component: RegisterComponent, /* canActivate:[AuthActivate] */},
-    { path: 'auth/logout', component: LogoutComponent},
-    { path: 'auth/profile', component: ProfileComponent, /* canActivate:[AuthActivate] */},
-    
+    { path: 'auth/login', component: LoginComponent, /* canActivate:[AuthActivate] */ },
+    { path: 'auth/register', component: RegisterComponent, /* canActivate:[AuthActivate] */ },
+    { path: 'auth/logout', component: LogoutComponent },
+    { path: 'auth/profile', component: ProfileComponent, /* canActivate:[AuthActivate] */ },
+
 ]
 
 export const AuthRoutingModule = RouterModule.forChild(routes);
