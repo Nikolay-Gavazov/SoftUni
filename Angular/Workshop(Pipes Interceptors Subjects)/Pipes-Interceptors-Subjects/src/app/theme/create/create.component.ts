@@ -8,19 +8,19 @@ import { ApiService } from 'src/app/api.service';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
-export class CreateComponent implements OnInit , AfterViewInit{
+export class CreateComponent implements OnInit, AfterViewInit {
 
-@ViewChild('themeForm') themeForm!: NgForm
+  @ViewChild('themeForm') themeForm!: NgForm
 
-constructor(private apiService: ApiService, private router: Router){}
+  constructor(private apiService: ApiService, private router: Router) { }
   ngOnInit(): void {
-    
+
   }
   ngAfterViewInit(): void {
   }
 
-  onSubmit(): void{
-    if(this.themeForm.invalid){
+  onSubmit(): void {
+    if (this.themeForm.invalid) {
       return;
     }
     const name = this.themeForm.value.themeName;
