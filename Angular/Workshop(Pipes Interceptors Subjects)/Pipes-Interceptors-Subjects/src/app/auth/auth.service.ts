@@ -7,9 +7,9 @@ import { BehaviorSubject, Subscription, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements OnDestroy{
+export class AuthService implements OnDestroy {
 
-  private user$$ = new BehaviorSubject<User| undefined>(undefined);
+  private user$$ = new BehaviorSubject<User | undefined>(undefined);
   user$ = this.user$$.asObservable();
 
   user: User | undefined;
@@ -22,13 +22,13 @@ export class AuthService implements OnDestroy{
     })
   }
 
-  login(email: string, password:string){
-   return this.http.post<User>('/api/login', {email,password}).pipe(tap(user => this.user$$.next(user)));
+  login(email: string, password: string) {
+    return this.http.post<User>('/api/login', { email, password }).pipe(tap(user => this.user$$.next(user)));
   }
-  register(username: string, email: string, password:string, rePassword:string, tel:string,){
-    return this.http.post<User>('/api/register', {username, email, password, rePassword, tel}).pipe(tap(user => this.user$$.next(user)));
-   }
-  logout(){
+  register(username: string, email: string, password: string, rePassword: string, tel: string,) {
+    return this.http.post<User>('/api/register', { username, email, password, rePassword, tel }).pipe(tap(user => this.user$$.next(user)));
+  }
+  logout() {
     return this.http.post<User>('/api/logout', {}).pipe(tap(() => this.user$$.next(undefined)));
   }
   get isLoggedIn() {
