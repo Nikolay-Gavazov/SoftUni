@@ -10,7 +10,7 @@ import { Theme } from 'src/app/types/theme';
 })
 export class DetailsComponent implements OnInit {
 
-  theme: Theme | undefined ;
+  theme: Theme | undefined;
 
   isLoading: boolean = true;
   constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute) { }
@@ -19,12 +19,12 @@ export class DetailsComponent implements OnInit {
     this.getData()
   }
 
-  getData(){
+  getData() {
     const id = this.activatedRoute.snapshot.params['id'] || '';
-    
+
     this.apiService.getTheme(id).subscribe((theme) => {
-        this.isLoading = false;
-        this.theme = theme;;
-  });
+      this.isLoading = false;
+      this.theme = theme;;
+    });
   }
 }
