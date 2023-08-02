@@ -16,14 +16,14 @@ export class ThemesListComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getThemes().subscribe({
-      next:(themes) => {
+      next: (themes) => {
         this.isLoading = false;
         this.themesList = themes;
       },
-      error:(error) =>{
+      error: (error) => {
         this.isLoading = false;
         console.log(error);
       }
-  });
+    });
   }
 }
