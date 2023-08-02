@@ -21,7 +21,7 @@ const routes: Routes = [
         component: CreateComponent,
         /* canActivate:[AuthActivate] */
     },
-    
+
 ]
 
 export const ThemeRoutingModule = RouterModule.forChild(routes);
