@@ -16,8 +16,8 @@ import { PostsListComponent } from './posts-list/posts-list.component';
     ThemeRoutingModule
   ],
   exports: [
-      ThemesListComponent,
-      PostsListComponent
-    ]
+    ThemesListComponent,
+    PostsListComponent
+  ]
 })
 export class ThemeModule { }
