@@ -17,4 +17,4 @@ function timeToWalk(steps, length, speed) {
 
     console.log(`${resHours}:${resMins}:${resSeconds}`);
 }
-timeToWalk(2564,0.70, 5.5)
+timeToWalk(2564, 0.70, 5.5)
