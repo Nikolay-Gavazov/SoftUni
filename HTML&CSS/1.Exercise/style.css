@@ -1,0 +1,14 @@
+main{
+    background-color: #f7f381;
+    width: 500px;
+    padding: 8px 24px;
+    font-size: 30px;
+    border: 1px solid #f7f381;
+    box-shadow: 0 0 10px 2px #333333;
+}
+ol{
+    margin: 12px;
+}
+p{
+    text-align: center;
+}
