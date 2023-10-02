@@ -1,0 +1,17 @@
+body{
+    width: 480px;
+    background-color: #f9f7cf;
+    margin: 0;
+    padding: 0;
+}
+div{
+    padding: 15px;
+}
+header, footer{
+    padding: 15px 5px 15px;
+    background-color: #f2dcbb;
+}
+
+h1,h2, footer>p{
+    margin-left: 10px;
+}
