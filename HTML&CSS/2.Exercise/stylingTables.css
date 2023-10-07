@@ -1,0 +1,27 @@
+@import 'https://fonts.googleapis.com/css?family=Montserrat';
+
+body{
+    padding: 1em;
+    font-family: "Montserrat", sans-serif;
+}
+
+th{
+    background-color: lightblue;
+}
+caption{
+    width: 27.8em;
+    height: 2.5em;
+    border: 1px solid #ccc;
+    background-color: lightblue;
+    font-weight: 600;
+    margin: 0 auto;
+}
+caption p{
+    margin: 0.7em auto
+}
+th,td{
+    width: 9em;
+    height: 2em;
+    border: 1px solid #ccc;
+    text-align: center;
+}
