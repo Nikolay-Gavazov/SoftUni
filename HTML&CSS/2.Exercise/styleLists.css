@@ -1,0 +1,17 @@
+body{
+
+    font: 18px/1.5 "Helvetica",sans-serif;
+    background-color: #EDEDED;
+}
+h2{
+    padding: 1em;
+    margin: 0.45em 0.225em 0.45em 0.225em;
+    letter-spacing: 0.12em;
+    text-decoration: underline;
+    background-color: #3B516B;
+    border-radius: 0.5em;
+    color: floralwhite;
+}
+li{
+    margin-left: 1.5em;
+}
