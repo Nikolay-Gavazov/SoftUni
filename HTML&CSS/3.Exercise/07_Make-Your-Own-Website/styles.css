@@ -1,0 +1,19 @@
+body{
+    box-sizing: border-box;
+}
+div{
+    width: 30.45%;
+    display: inline-block;
+    padding: 1em 1em 1em 2em;
+    background-color: #0A2C48;
+    color: #fff;
+    border-radius: 4px;
+}
+div:hover{
+    background-color: #2a4c68;
+}
+
+p{
+    color: #c9d6ff;
+    font-size: 18px;
+}
