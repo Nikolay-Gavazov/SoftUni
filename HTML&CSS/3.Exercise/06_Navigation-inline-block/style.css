@@ -1,0 +1,39 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    font-family: Helvetica, sans-serif;
+    padding: 2em;
+    box-sizing: border-box;
+}
+div{
+    border-bottom: 4px solid #ccc;
+}
+
+nav p{
+    font-size: 36px;
+    font-weight: 800;
+    max-width: 250px;
+    position: relative;
+    top: 10px;
+}
+ul{
+    max-width: 300px;
+    position: relative;
+    left: 30%;
+    top: -18px;
+}
+nav li{
+    display: inline-block;
+    margin-right: 1.5em;
+}
+
+nav li a{
+    text-decoration: none;
+    color: greenyellow;
+}
+
+main >*{
+    margin-top: 1em;
+}
