@@ -1,0 +1,45 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+div{
+    height: 100vh;
+    position: relative;
+}
+.first{
+    background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,58,189,1) 35%, rgba(0,212,255,1) 100%);
+}
+.second{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(197,0,142,1) 0%, rgba(255,185,0,1) 100%);
+}
+section{
+    width: 20em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.shadow{
+    display: block;
+    position: absolute;
+    background: rgb(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 1;
+    box-shadow: 0 0 1em 0.5em rgb(0, 0, 0, 0.2) inset;
+    transition: opacity 0.3s ease-in;
+}
+.shadow:hover{
+    opacity: 0;
+}
