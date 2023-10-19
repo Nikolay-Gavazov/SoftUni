@@ -1,0 +1,24 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: rgb(218, 218, 218);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    flex: 0 0 21em;
+    padding: 0.5em 0 1.5em 0.5em;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 0.3em;
+    box-shadow: 0 0 1em 0.5em rgb(0, 0, 0, 0.2);
+}
+.card h3{
+    padding-bottom: 0.3em;
+}
