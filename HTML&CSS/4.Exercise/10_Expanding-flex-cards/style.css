@@ -1,0 +1,47 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background: rgb(11,203,212);
+    background: linear-gradient(90deg, rgba(11,203,212,1) 0%, rgba(2,29,207,1) 45%, rgba(189,0,255,1) 94%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+}
+
+.container ul{
+    display: flex;
+    gap: 1em;
+}
+
+.container li{
+    display: block;
+    width: 10em;
+    height: 25em;
+    overflow: hidden;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em 0.5em rgba(0, 0, 0, 0.2);
+    transition: width 0.3s ease-in-out;
+}
+
+.container img{
+    display: block;
+    width: auto;
+    height: 100%;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.container li:hover{
+    width: 35em;
+}
+.container li:hover img{
+    transform: translateX(0);
+}
