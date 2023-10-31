@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+html {
+    font: 12px/1.5 PT Sans, sans-serif;
+}
+
+@media (min-width: 600px) {
+    html { font-size: 13px; }
+}
+
+@media (min-width: 900px) {
+    html { font-size: 14px; }
+}
+
+@media (min-width: 1200px) {
+    html { font-size: 15px; }
+}
+
+@media (min-width: 1400px) {
+    html { font-size: 16px; }
+}
+
+body, table, input, button {
+    font: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'PT Serif', serif;
+    font-size: 1em;
+    margin-bottom: 0.5em;
+    margin-top: 1em;
+    font-weight: normal;
+}
+
+h1 { font-size: 3.1em; }
+h2 { font-size: 2.7em; }
+h3 { font-size: 1.8em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; font-weight: bold; }
+h6 { font-size: 1em; font-weight: bold; }
+
+p, * + ul, * + ol {
+    padding-bottom: 1.5em;
+}
+
+ul, ol, blockquote {
+    padding-left: 1.5em;
+}
+
+ul, ol {
+    list-style-position: inside;
+}
+
+blockquote {
+    border-left: 4px solid #CCC;
+    margin-bottom: 1.5em;
+    font-style: italic;
+    color: #666;
+}
+
+blockquote p:first-child:before,
+blockquote:has(.author) p:nth-last-child(2):not(.author):after,
+blockquote p:nth-last-child(1):not(.author):after {
+    display: inline-block;
+    content: '"';
+}
+
+blockquote p:last-child {
+    padding-bottom: 0;
+}
+
+blockquote p.author {
+    text-align: right;
+    color: #111;
+}
+
+blockquote p.author:before {
+    display: inline-block;
+    content: '— ';
+    padding-right: 0.5em;
+}
+
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
