@@ -4,6 +4,7 @@ import Topbar from './components/TopBar'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Carousel from './components/Carousel'
+import Fact from './components/Fact'
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Topbar/>
       <Navbar/>
       <Carousel/>
+      <Fact/>
       <Footer/>
     </>
   )
