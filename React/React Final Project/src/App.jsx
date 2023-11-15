@@ -5,7 +5,6 @@ import Topbar from './components/pages/layout/Topbar'
 import Navbar from './components/pages/layout/Navbar'
 import Footer from './components/pages/layout/Footer'
 
-
 function App() {
 
   return (
