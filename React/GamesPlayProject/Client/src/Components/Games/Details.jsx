@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as gameService from "../../services/gameService";
+import * as commentService from "../../services/commentService";
 
 const Details = () => {
   const navigate = useNavigate();
@@ -21,6 +22,25 @@ const Details = () => {
       navigate('/')
     }
   }
+
+  const addCommentHandler = async (e) =>{
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      const newComment = await commentService.create(
+        id,
+        formData.get('username'),
+        formData.get('comment'),
+      )
+
+      console.log(newComment);
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
     return(
       <section id="game-details">
       <h1>Game Details</h1>
@@ -59,15 +79,16 @@ const Details = () => {
           </a>
         </div>
       </div>
-      {/* Bonus */}
+
       {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
-      {/* <article className="create-comment">
+      <article className="create-comment">
         <label>Add new comment:</label>
-        <form className="form">
+        <form className="form" onSubmit={addCommentHandler}>
+          <input type="text" name="username"  placeholder="username"/>
           <textarea name="comment" placeholder="Comment......" defaultValue={""} />
           <input className="btn submit" type="submit" defaultValue="Add Comment" />
         </form>
-      </article> */}
+      </article>
     </section>
     );
 };
