@@ -1,46 +1,59 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as gameService from "../../services/gameService";
+import useForm from "../../hooks/useForm";
 const Edit = () => {
-  const navigate = useNavigate();
-  const [game, setGame] = useState([]);
   const {id} = useParams();
-  useEffect(() =>{
-    gameService.getById(id).then(result => setGame(result));
-  },[id]);
-
-  const editGameHandler = async (e) =>{
-    e.preventDefault();
-    const gameData = Object.fromEntries(new FormData(e.currentTarget));
-    
-    try {
-      await gameService.update(gameData, id);
-      navigate(`/gameList/${id}`);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const initValue = {};
+  /* useEffect(() =>{
+    gameService.getById(id).then(result => Object.assign(initValue, result));
+  },[id]); */
+  
+  const {formValue,onGameSubmitHandler, onChangeHandler } = useForm({}, gameService.update, id, gameService.getById);
+  
     return(
       <section id="edit-page" className="auth">
-      <form id="edit" onSubmit={editGameHandler}>
+      <form id="edit" onSubmit={onGameSubmitHandler}>
         <div className="container">
           <h1>Edit Game</h1>
-          <label htmlFor="leg-title">Legendary title:</label>
-          <input type="text" id="title" name="title" defaultValue={game.title} />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formValue.title}
+            onChange={onChangeHandler}
+            placeholder="Enter game title..."
+          />
           <label htmlFor="category">Category:</label>
-          <input type="text" id="category" name="category" defaultValue={game.category} />
+          <input
+            type="text"
+            id="category"
+            name="category"
+            value={formValue.category}
+            onChange={onChangeHandler}
+            placeholder="Enter game category..."
+          />
           <label htmlFor="levels">MaxLevel:</label>
           <input
             type="number"
             id="maxLevel"
             name="maxLevel"
+            value={formValue.maxLevel}
+            onChange={onChangeHandler}
             min={1}
-            defaultValue={game.maxLevel}
+            placeholder={1}
           />
           <label htmlFor="game-img">Image:</label>
-          <input type="text" id="imageUrl" name="imageUrl" defaultValue={game.imageUrl} />
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            value={formValue.imageUrl}
+            onChange={onChangeHandler}
+            placeholder="Upload a photo..."
+          />
           <label htmlFor="summary">Summary:</label>
-          <textarea name="summary" id="summary" defaultValue={game.summary} />
+          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChangeHandler} />
           <input className="btn submit" type="submit" defaultValue="Edit Game" />
         </div>
       </form>

@@ -5,12 +5,21 @@ import * as gameService from "../../services/gameService";
 import * as commentService from "../../services/commentService";
 
 const Details = () => {
-  const navigate = useNavigate();
   const [game, setGame] = useState([]);
+  const [comments, setComments] = useState([]);
+  const navigate = useNavigate();
   const {id} = useParams();
+
+
   useEffect(() =>{
-    gameService.getById(id).then(setGame);
+    gameService.getById(id)
+    .then(setGame);
+
+    commentService.getAll(id)
+    .then(setComments);
+
   },[id]);
+
   const deleteHandler = (e) =>{
     e.preventDefault();
     let confirmation = false;
@@ -34,8 +43,8 @@ const Details = () => {
         formData.get('username'),
         formData.get('comment'),
       )
-
-      console.log(newComment);
+      setComments(state=> [...state , newComment]);
+      console.log(formData.values);
     } catch (error) {
       console.log(error);
     }
@@ -58,15 +67,15 @@ const Details = () => {
           <h2>Comments:</h2>
           <ul>
             {/* list all comments for current game (If any) */}
-            <li className="comment">
-              <p>Content: I rate this one quite highly.</p>
+            {comments.map(({username, text, _id}) => (
+              <li className="comment" key={_id}>
+              <p>{username}: {text}</p>
             </li>
-            <li className="comment">
-              <p>Content: The best game.</p>
-            </li>
+            ))}
           </ul>
-          {/* Display paragraph: If there are no games in the database */}
-          <p className="no-comment">No comments.</p>
+          {comments.length === 0 &&(
+            <p className="no-comment">No comments.</p>
+          )}
         </div>
 
         {/* Edit/Delete buttons ( Only for creator of this game )  */}

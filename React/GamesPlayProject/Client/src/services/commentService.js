@@ -10,3 +10,9 @@ export const create = async (gameId, username, text) => {
     });
     return newComment;
 }
+
+export const getAll = async(id) =>{
+    const result = await requester.get(baseUrl);
+
+    return Object.values(result).filter(comment => comment.gameId === id);
+}
