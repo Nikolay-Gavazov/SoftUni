@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import About from "./components/pages/About"
 import Contacts from "./components/pages/Contacts"
-import Create from "./components/pages/Create"
+import Create from "./components/pages/photos/Create"
 import NotFound from "./components/pages/NotFound"
 import Home from "./components/pages/home/Home"
 import Footer from "./components/pages/layout/Footer"
