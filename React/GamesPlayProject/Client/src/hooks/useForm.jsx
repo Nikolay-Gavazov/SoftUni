@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const useForm = (initValue, gameService, id = '', getById) => {
+const useForm = (initValue, gameService, id = null, getById) => {
+const navigate = useNavigate();
+const [formValue, setFormValue] = useState({});
 
-    const [formValue, setFormValue] = useState({});
     if(id){
         useEffect(() => {
         getById(id).then(result => setFormValue(result));  
         },[])
     }
-        const navigate = useNavigate();
     const onChangeHandler = (e) =>{
         setFormValue(state => ({...state, [e.target.name]: e.target.value}));
     }

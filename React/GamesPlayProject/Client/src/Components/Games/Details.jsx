@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import * as gameService from "../../services/gameService";
 import * as commentService from "../../services/commentService";
 
+
 const Details = () => {
   const [game, setGame] = useState([]);
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const {id} = useParams();
-
 
   useEffect(() =>{
     gameService.getById(id)
