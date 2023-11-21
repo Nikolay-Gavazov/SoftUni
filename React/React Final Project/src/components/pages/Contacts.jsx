@@ -1,122 +1,119 @@
-const Contacts = () =>{
-    return(
-        <div className="container-xxl py-5">
-  <div className="container">
-    <div className="text-center wow fadeInUp" data-wow-delay="0.1s">
-      <h6 className="text-primary text-uppercase">// Contact Us //</h6>
-      <h1 className="mb-5">Contact For Any Query</h1>
-    </div>
-    <div className="row g-4">
-      <div className="col-12">
-        <div className="row gy-4">
-          <div className="col-md-4">
-            <div className="bg-light d-flex flex-column justify-content-center p-4">
-              <h5 className="text-uppercase">// Booking //</h5>
-              <p className="m-0">
-                <i className="fa fa-envelope-open text-primary me-2" />
-                book@example.com
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light d-flex flex-column justify-content-center p-4">
-              <h5 className="text-uppercase">// General //</h5>
-              <p className="m-0">
-                <i className="fa fa-envelope-open text-primary me-2" />
-                info@example.com
-              </p>
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="bg-light d-flex flex-column justify-content-center p-4">
-              <h5 className="text-uppercase">// Technical //</h5>
-              <p className="m-0">
-                <i className="fa fa-envelope-open text-primary me-2" />
-                tech@example.com
-              </p>
-            </div>
-          </div>
+const Contacts = () => {
+  return (
+    <div className="container-fluid tm-mt-60">
+  <div className="row tm-mb-50">
+    <div className="col-lg-4 col-12 mb-5">
+      <h2 className="tm-text-primary mb-5">Contact Page</h2>
+      <form
+        id="contact-form"
+        action=""
+        method="POST"
+        className="tm-contact-form mx-auto"
+      >
+        <div className="form-group">
+          <input
+            type="text"
+            name="name"
+            className="form-control rounded-0"
+            placeholder="Name"
+            required=""
+          />
         </div>
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            className="form-control rounded-0"
+            placeholder="Email"
+            required=""
+          />
+        </div>
+        <div className="form-group">
+          <select className="form-control" id="contact-select" name="inquiry">
+            <option value="-">Subject</option>
+            <option value="sales">Sales &amp; Marketing</option>
+            <option value="creative">Creative Design</option>
+            <option value="uiux">UI / UX</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <textarea
+            rows={8}
+            name="message"
+            className="form-control rounded-0"
+            placeholder="Message"
+            required=""
+            defaultValue={""}
+          />
+        </div>
+        <div className="form-group tm-text-right">
+          <button type="submit" className="btn btn-primary">
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+    <div className="col-lg-4 col-12 mb-5">
+      <div className="tm-address-col">
+        <h2 className="tm-text-primary mb-5">Our Address</h2>
+        <p className="tm-mb-50">
+          Quisque eleifend mi et nisi eleifend pretium. Duis porttitor accumsan
+          arcu id rhoncus. Praesent fermentum venenatis ipsum, eget vestibulum
+          purus.{" "}
+        </p>
+        <p className="tm-mb-50">
+          Nulla ut scelerisque elit, in fermentum ante. Aliquam congue mattis
+          erat, eget iaculis enim posuere nec. Quisque risus turpis, tempus in
+          iaculis.
+        </p>
+        <address className="tm-text-gray tm-mb-50">
+          120-240 Fusce eleifend varius tempus
+          <br />
+          Duis consectetur at ligula 10660
+        </address>
+        <ul className="tm-contacts">
+          <li>
+            <a href="#" className="tm-text-gray">
+              <i className="fas fa-envelope" />
+              Email: info@company.com
+            </a>
+          </li>
+          <li>
+            <a href="#" className="tm-text-gray">
+              <i className="fas fa-phone" />
+              Tel: 010-020-0340
+            </a>
+          </li>
+          <li>
+            <a href="#" className="tm-text-gray">
+              <i className="fas fa-globe" />
+              URL: www.company.com
+            </a>
+          </li>
+        </ul>
       </div>
-      <div className="col-md-6 wow fadeIn" data-wow-delay="0.1s">
-        <iframe
-          className="position-relative rounded w-100 h-100"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-          frameBorder={0}
-          style={{ minHeight: 350, border: 0 }}
-          allowFullScreen=""
-          aria-hidden="false"
-          tabIndex={0}
-        />
-      </div>
-      <div className="col-md-6">
-        <div className="wow fadeInUp" data-wow-delay="0.2s">
-          <p className="mb-4">
-            The contact form is currently inactive. Get a functional and working
-            contact form with Ajax &amp; PHP in a few minutes. Just copy and
-            paste the files, add a little code and you're done.{" "}
-            <a href="https://htmlcodex.com/contact-form">Download Now</a>.
-          </p>
-          <form>
-            <div className="row g-3">
-              <div className="col-md-6">
-                <div className="form-floating">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="name"
-                    placeholder="Your Name"
-                  />
-                  <label htmlFor="name">Your Name</label>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-floating">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Your Email"
-                  />
-                  <label htmlFor="email">Your Email</label>
-                </div>
-              </div>
-              <div className="col-12">
-                <div className="form-floating">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="subject"
-                    placeholder="Subject"
-                  />
-                  <label htmlFor="subject">Subject</label>
-                </div>
-              </div>
-              <div className="col-12">
-                <div className="form-floating">
-                  <textarea
-                    className="form-control"
-                    placeholder="Leave a message here"
-                    id="message"
-                    style={{ height: 100 }}
-                    defaultValue={""}
-                  />
-                  <label htmlFor="message">Message</label>
-                </div>
-              </div>
-              <div className="col-12">
-                <button className="btn btn-primary w-100 py-3" type="submit">
-                  Send Message
-                </button>
-              </div>
-            </div>
-          </form>
+    </div>
+    <div className="col-lg-4 col-12">
+      <h2 className="tm-text-primary mb-5">Our Location</h2>
+      {/* Map */}
+      <div className="mapouter mb-4">
+        <div className="gmap-canvas">
+          <iframe
+            width="100%"
+            height={520}
+            id="gmap-canvas"
+            src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+            frameBorder={0}
+            scrolling="no"
+            marginHeight={0}
+            marginWidth={0}
+          />
         </div>
       </div>
     </div>
   </div>
 </div>
-    );
+  );
 };
 
 export default Contacts;
