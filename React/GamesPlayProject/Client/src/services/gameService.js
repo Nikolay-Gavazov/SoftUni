@@ -1,13 +1,13 @@
 import * as requester from "../lib/requester";
 
-const baseUrl = 'http://localhost:3030/jsonstore/games';
+const baseUrl = 'http://localhost:3030/data/games';
 
 
 export const getAll = async () => {
     
     const result = await requester.get(baseUrl);
 
-    return Object.values(result);
+    return result;
 };
 
 export const getById = async (id) => {
