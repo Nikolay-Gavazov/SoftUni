@@ -1,19 +1,14 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as gameService from "../../services/gameService";
 import useForm from "../../hooks/useForm";
 const Edit = () => {
   const {id} = useParams();
-  const initValue = {};
-  /* useEffect(() =>{
-    gameService.getById(id).then(result => Object.assign(initValue, result));
-  },[id]); */
   
-  const {formValue,onGameSubmitHandler, onChangeHandler } = useForm({}, gameService.update, id, gameService.getById);
+  const {formValue,onSubmit, onChange } = useForm({}, gameService.update, id, gameService.getById);
   
     return(
       <section id="edit-page" className="auth">
-      <form id="edit" onSubmit={onGameSubmitHandler}>
+      <form id="edit" onSubmit={onSubmit}>
         <div className="container">
           <h1>Edit Game</h1>
           <input
@@ -21,7 +16,7 @@ const Edit = () => {
             id="title"
             name="title"
             value={formValue.title}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Enter game title..."
           />
           <label htmlFor="category">Category:</label>
@@ -30,7 +25,7 @@ const Edit = () => {
             id="category"
             name="category"
             value={formValue.category}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Enter game category..."
           />
           <label htmlFor="levels">MaxLevel:</label>
@@ -39,7 +34,7 @@ const Edit = () => {
             id="maxLevel"
             name="maxLevel"
             value={formValue.maxLevel}
-            onChange={onChangeHandler}
+            onChange={onChange}
             min={1}
             placeholder={1}
           />
@@ -49,11 +44,11 @@ const Edit = () => {
             id="imageUrl"
             name="imageUrl"
             value={formValue.imageUrl}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Upload a photo..."
           />
           <label htmlFor="summary">Summary:</label>
-          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChangeHandler} />
+          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChange} />
           <input className="btn submit" type="submit" defaultValue="Edit Game" />
         </div>
       </form>
