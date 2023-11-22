@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-const useForm = (initValue, gameService, id = null, getById) => {
+const useForm = (initValue, service, id = null, getById) => {
 const navigate = useNavigate();
-const [formValue, setFormValue] = useState({});
+const [formValue, setFormValue] = useState(initValue);
 
     if(id){
         useEffect(() => {
         getById(id).then(result => setFormValue(result));  
         },[])
     }
-    const onChangeHandler = (e) =>{
+    const onChange = (e) =>{
         setFormValue(state => ({...state, [e.target.name]: e.target.value}));
     }
 
-    const onGameSubmitHandler = async (e) =>{
+    const onSubmit = async (e) =>{
         e.preventDefault();
     
-        if(gameService){
+        if(service){
             try {
                 if(id){
-                    await gameService(formValue, id);
+                    await service(formValue, id);
                     console.log(formValue);
                     navigate(`/gameList/${id}`);
                     return;
                 }
-                await gameService(formValue);
+                await service(formValue);
                 setFormValue(initValue);
                 navigate('/gameList');
               } catch (error) {
@@ -35,8 +35,8 @@ const [formValue, setFormValue] = useState({});
 
     return{
         formValue,
-        onChangeHandler,
-        onGameSubmitHandler
+        onChange,
+        onSubmit
     }
 };
 
