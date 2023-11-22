@@ -3,20 +3,35 @@ const requester = async (method, url, data) => {
     const responce = await fetch(url, {
         ...buildOptions(data),
         method,
-    })
+    });
+
+    if(responce.status == 204){
+        return {};
+    }
     const result = await responce.json();
 
+    if(!responce.ok){
+        throw result;
+    }
     return result;
 };
 
 const buildOptions = (data)  => {
     const options = {};
     if (data){
-        options.headers = {
-            "content-type": "application/json"
-        },
+        options.headers = {"content-type": "application/json"};
         options.body = JSON.stringify(data);
     }
+
+    const token = localStorage.getItem('accessToken');
+
+    if(token){
+        options.headers = {
+            ...options.headers,
+            'X-Authorization': token
+        }
+    }
+
     return options;
 };
 
