@@ -3,11 +3,11 @@ import useForm from "../../hooks/useForm";
 
 const Create = () => {
   
-  const {formValue,onGameSubmitHandler, onChangeHandler } = useForm({title:'',category:'',maxLevel:1, imageUrl:'',summary:''}, gameService.create);
+  const {formValue, onSubmit, onChange } = useForm({title:'',category:'',maxLevel:'', imageUrl:'',summary:''}, gameService.create);
 
   return (
     <section id="create-page" className="auth">
-      <form id="create" onSubmit={onGameSubmitHandler}>
+      <form id="create" onSubmit={onSubmit}>
         <div className="container">
           <h1>Create Game</h1>
           <label htmlFor="leg-title">Legendary title:</label>
@@ -16,7 +16,7 @@ const Create = () => {
             id="title"
             name="title"
             value={formValue.title}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Enter game title..."
           />
           <label htmlFor="category">Category:</label>
@@ -25,7 +25,7 @@ const Create = () => {
             id="category"
             name="category"
             value={formValue.category}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Enter game category..."
           />
           <label htmlFor="levels">MaxLevel:</label>
@@ -34,7 +34,7 @@ const Create = () => {
             id="maxLevel"
             name="maxLevel"
             value={formValue.maxLevel}
-            onChange={onChangeHandler}
+            onChange={onChange}
             min={1}
             placeholder={1}
           />
@@ -44,11 +44,11 @@ const Create = () => {
             id="imageUrl"
             name="imageUrl"
             value={formValue.imageUrl}
-            onChange={onChangeHandler}
+            onChange={onChange}
             placeholder="Upload a photo..."
           />
           <label htmlFor="summary">Summary:</label>
-          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChangeHandler} />
+          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChange} />
           <input
             className="btn submit"
             type="submit"
