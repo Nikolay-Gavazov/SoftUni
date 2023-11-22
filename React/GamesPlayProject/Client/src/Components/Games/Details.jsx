@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as gameService from "../../services/gameService";
 import * as commentService from "../../services/commentService";
+import AuthContext from "../../context/authContext";
 
 
 const Details = () => {
@@ -10,7 +11,7 @@ const Details = () => {
   const [comments, setComments] = useState([]);
   const navigate = useNavigate();
   const {id} = useParams();
-
+  const {userId, isAuthenticated, username} = useContext(AuthContext);
   useEffect(() =>{
     gameService.getById(id)
     .then(setGame);
@@ -50,6 +51,7 @@ const Details = () => {
     }
     
   };
+  const isOwner = game._ownerId == userId;
     return(
       <section id="game-details">
       <h1>Game Details</h1>
@@ -66,7 +68,6 @@ const Details = () => {
         <div className="details-comments">
           <h2>Comments:</h2>
           <ul>
-            {/* list all comments for current game (If any) */}
             {comments.map(({username, text, _id}) => (
               <li className="comment" key={_id}>
               <p>{username}: {text}</p>
@@ -78,8 +79,10 @@ const Details = () => {
           )}
         </div>
 
-        {/* Edit/Delete buttons ( Only for creator of this game )  */}
-        <div className="buttons">
+        {isAuthenticated ? 
+        <>
+        {isOwner ? (
+          <div className="buttons">
           <Link to={`/gamelist/${id}/edit`} className="button">
             Edit
           </Link>
@@ -87,17 +90,19 @@ const Details = () => {
             Delete
           </a>
         </div>
-      </div>
-
-      {/* Add Comment ( Only for logged-in users, which is not creators of the current game ) */}
-      <article className="create-comment">
+      
+        ) : (<article className="create-comment">
         <label>Add new comment:</label>
         <form className="form" onSubmit={addCommentHandler}>
-          <input type="text" name="username"  placeholder="username"/>
+          <input type="text" name="username"  placeholder="username" defaultValue={username}/>
           <textarea name="comment" placeholder="Comment......" defaultValue={""} />
           <input className="btn submit" type="submit" defaultValue="Add Comment" />
         </form>
-      </article>
+      </article> )}
+        </> : '' }
+        
+        </div>
+      
     </section>
     );
 };
