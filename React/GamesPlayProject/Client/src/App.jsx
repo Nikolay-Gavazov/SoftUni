@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Header from "./Components/header/Header";
@@ -10,42 +9,14 @@ import Register from "./Components/user/Register";
 import Logout from "./Components/user/Logout";
 import Details from "./Components/Games/Details";
 import Edit from "./Components/Games/Edit";
-import AuthContext from "./context/authContext";
-import { login, register } from "./services/userService";
+import {AuthProvider} from "./context/authContext";
+
 
 function App() {
-  const [auth, setAuth] = useState(() =>{
-    localStorage.removeItem('accessToken');
-    return {};
-  });
-
-  const loginSubmitHandler = async (data) => {
-    const result = await login( data.email, data.password );
-    setAuth(result);
-    localStorage.setItem('accessToken', result.accessToken);
-  };
-
-  const registerSubmitHandler = async (data) => {
-    const result = await register( data.email, data.username, data.password );
-    setAuth(result);
-    localStorage.setItem('accessToken', result.accessToken);
-  };
-  const logoutHandler = () => {
-    setAuth({});
-    localStorage.removeItem('accessToken');
-  };
-
-  const values = {
-    loginSubmitHandler,
-    registerSubmitHandler,
-    logoutHandler,
-    username: auth.username,
-    userId: auth._id,
-    isAuthenticated: !!auth.accessToken
-  }
+  
 
   return (
-    <AuthContext.Provider value={values}>
+    <AuthProvider>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -57,7 +28,7 @@ function App() {
         <Route path="/gameList/:id" element={<Details />} />
         <Route path="/gameList/:id/edit" element={<Edit />} />
       </Routes>
-    </AuthContext.Provider>
+    </AuthProvider>
   );
 }
 
