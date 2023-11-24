@@ -1,9 +1,24 @@
 import * as gameService from "../../services/gameService";
+import { useNavigate } from "react-router-dom";
+
 import useForm from "../../hooks/useForm";
+import { useMemo } from "react";
 
 const Create = () => {
+  const navigate = useNavigate();
   
-  const {formValue, onSubmit, onChange } = useForm({title:'',category:'',maxLevel:'', imageUrl:'',summary:''}, gameService.create);
+  const createGameHandler = async (values) => {
+    try {
+      await gameService.create(values);
+      navigate('/gameList');
+      formValue = {title:'',category:'',maxLevel:'', imageUrl:'',summary:''};
+    } catch (error) {
+      return error;
+    }
+  }
+  const initValues = useMemo(() => ({title:'',category:'',maxLevel:'',imageUrl:'',summary:''}),[]);
+
+  const {formValue, onSubmit, onChange } = useForm(initValues, createGameHandler);
 
   return (
     <section id="create-page" className="auth">
