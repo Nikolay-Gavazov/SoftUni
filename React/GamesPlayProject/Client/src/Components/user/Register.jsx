@@ -1,15 +1,15 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../context/authContext";
 import { Link } from "react-router-dom";
 
 const Register = () => {
     const { registerSubmitHandler } = useContext(AuthContext);
+    const initValue = useMemo(() =>({ email: "", username: "", password: "", rePass: ""}));
 
-    const { formValue, onSubmit, onChange } = useForm(
-      { email: "", username: "", password: "", rePass: ""},
-      registerSubmitHandler
-    );
+    const { formValue, onSubmit, onChange } = useForm(initValue,registerSubmitHandler);
+
+    
 
     return(
       <section id="register-page" className="content auth">
