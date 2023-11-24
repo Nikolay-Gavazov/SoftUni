@@ -1,13 +1,39 @@
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import * as gameService from "../../services/gameService";
 import useForm from "../../hooks/useForm";
+
 const Edit = () => {
-  const {id} = useParams();
-  
-  const {formValue,onSubmit, onChange } = useForm({}, gameService.update, id, gameService.getById);
-  
-    return(
-      <section id="edit-page" className="auth">
+  const { id } = useParams();
+  const [game, setGame] = useState({
+    title: "",
+    category: "",
+    maxLevel: "",
+    imageUrl: "",
+    summary: "",
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    gameService.getById(id).then((result) => setGame(result));
+  }, []);
+
+  const editGameHandler = async (values) => {
+    try {
+      const result = await gameService.update(values, id);
+      setGame(result);
+      navigate(`/gameList/${id}`);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const { formValue, onSubmit, onChange } = useForm(game, editGameHandler);
+
+  return (
+    <section id="edit-page" className="auth">
       <form id="edit" onSubmit={onSubmit}>
         <div className="container">
           <h1>Edit Game</h1>
@@ -48,12 +74,21 @@ const Edit = () => {
             placeholder="Upload a photo..."
           />
           <label htmlFor="summary">Summary:</label>
-          <textarea name="summary" id="summary" value={formValue.summary} onChange={onChange} />
-          <input className="btn submit" type="submit" defaultValue="Edit Game" />
+          <textarea
+            name="summary"
+            id="summary"
+            value={formValue.summary}
+            onChange={onChange}
+          />
+          <input
+            className="btn submit"
+            type="submit"
+            defaultValue="Edit Game"
+          />
         </div>
       </form>
     </section>
-    );
+  );
 };
 
 export default Edit;
