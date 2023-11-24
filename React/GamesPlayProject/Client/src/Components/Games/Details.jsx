@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import * as gameService from "../../services/gameService";
 import * as commentService from "../../services/commentService";
 import AuthContext from "../../context/authContext";
+import useForm from "../../hooks/useForm";
 
 
 const Details = () => {
@@ -12,6 +13,7 @@ const Details = () => {
   const navigate = useNavigate();
   const {id} = useParams();
   const {userId, isAuthenticated, username} = useContext(AuthContext);
+
   useEffect(() =>{
     gameService.getById(id)
     .then(setGame);
@@ -29,29 +31,32 @@ const Details = () => {
 
     if(confirmation){
       gameService.del(id);
-      navigate('/')
+      navigate('/gameList')
     }
   }
 
-  const addCommentHandler = async (e) =>{
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
+  const addCommentHandler = async (values) =>{
     
     try {
       const newComment = await commentService.create(
         id,
-        formData.get('username'),
-        formData.get('comment'),
+        username,
+        values.comment,
       )
-      setComments(state=> [...state , newComment]);
-      console.log(formData.values);
+      
+      setComments(state => [...state , newComment]);
+      formValue.comment= '';
     } catch (error) {
       console.log(error);
     }
     
   };
-  const isOwner = game._ownerId == userId;
+  const initValues = useMemo(() => ({
+    comment: '',
+  }), [])
+
+  const {formValue, onSubmit, onChange } = useForm(initValues, addCommentHandler);
+
     return(
       <section id="game-details">
       <h1>Game Details</h1>
@@ -63,7 +68,6 @@ const Details = () => {
           <p className="type">{game.category}</p>
         </div>
         <p className="text">{game.summary}</p>
-        {/* Bonus ( for Guests and Users ) */}
         
         <div className="details-comments">
           <h2>Comments:</h2>
@@ -81,7 +85,7 @@ const Details = () => {
 
         {isAuthenticated ? 
         <>
-        {isOwner ? (
+        {game._ownerId == userId ? (
           <div className="buttons">
           <Link to={`/gamelist/${id}/edit`} className="button">
             Edit
@@ -93,9 +97,8 @@ const Details = () => {
       
         ) : (<article className="create-comment">
         <label>Add new comment:</label>
-        <form className="form" onSubmit={addCommentHandler}>
-          <input type="text" name="username"  placeholder="username" defaultValue={username}/>
-          <textarea name="comment" placeholder="Comment......" defaultValue={""} />
+        <form className="form" onSubmit={onSubmit}>
+          <textarea name="comment" placeholder="Comment......" value={formValue.comment} onChange={onChange}/>
           <input className="btn submit" type="submit" defaultValue="Add Comment" />
         </form>
       </article> )}
