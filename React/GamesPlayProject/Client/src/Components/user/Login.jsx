@@ -1,14 +1,12 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import useForm from "../../hooks/useForm";
 import AuthContext from "../../context/authContext";
 import { Link } from "react-router-dom";
 
 const Login = () => {
   const { loginSubmitHandler } = useContext(AuthContext);
-  const { formValue, onSubmit, onChange } = useForm(
-    { email: "", password: "" },
-    loginSubmitHandler
-  );
+  const initValue = useMemo(() => ({email:"", password:""}),[])
+  const { formValue, onSubmit, onChange } = useForm(initValue,loginSubmitHandler);
 
   return (
     <section id="login-page" className="auth">
