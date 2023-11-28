@@ -149,7 +149,7 @@ a {
     transition: all 0.3s ease; 
 }
 a:hover { color:#009999; }
-.container-fluid { max-width: 1770px; }
+.container-fluid { max-width: 1280px; }
 .tm-container-small { max-width: 1050px; }
 .btn { border-radius: 0; }
 .btn-primary {
