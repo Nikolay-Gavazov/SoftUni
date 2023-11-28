@@ -1,12 +1,8 @@
 const Footer = () => {
   return (
-    <footer className="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+    <footer className="tm-bg-gray tm-text-gray tm-footer">
   <div className="container-fluid tm-container-small">
-    <div className="row">
-      <div className="col-lg-8 col-md-7 col-12 px-5 mb-3">
-        <p>Copyright 2023 Free Photos Company. All rights reserved.</p>
-      </div>
-    </div>
+        <p style={{textAlign:"center", margin: 0, padding: "1em"}}>Copyright 2023 Free Photos Company. All rights reserved.</p>
   </div>
 </footer>
   )
