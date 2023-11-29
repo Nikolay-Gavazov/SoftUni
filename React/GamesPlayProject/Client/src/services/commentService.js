@@ -14,6 +14,7 @@ export const create = async (gameId, username, text) => {
 export const getAll = async(id) =>{
     const query = new URLSearchParams({
         where: `gameId="${id}"`,
+        load: `owner=_ownerId:users`
     });
     const result = await requester.get(`${baseUrl}?${query}`);
 
