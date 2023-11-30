@@ -1,40 +1,49 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from "react-router-dom";
 
-import About from "./components/pages/About"
-import Contacts from "./components/pages/Contacts"
-import Create from "./components/pages/photos/Create"
-import NotFound from "./components/pages/NotFound"
-import Home from "./components/pages/home/Home"
-import Footer from "./components/pages/layout/Footer"
-import Navbar from "./components/pages/layout/Navbar"
-import Topbar from "./components/pages/layout/Topbar"
-import Login from "./components/pages/user/Login"
-import Logout from "./components/pages/user/Logout"
-import Register from "./components/pages/user/Register"
-import PageLoader from './components/shared/PageLoader'
-import { AuthProvider } from './context/authContext'
-import Gallery from './components/pages/photos/Gallery'
+import About from "./components/About/About";
+import Contacts from "./components/Contacts/Contacts";
+import Create from "./components/Photos/Create";
+import NotFound from "./components/NotFound/NotFound";
+import Home from "./components/Home/Home";
+import PageLoader from "./components/Shared/PageLoader";
+import { AuthProvider } from "./context/authContext";
+import Gallery from "./components/Photos/Gallery";
+import AuthGuard from "./guards/Authguard";
+import Navbar from "./components/layout/Navbar";
+import Topbar from "./components/layout/Topbar";
+import Footer from "./components/layout/Footer";
+import Login from "./components/User/Login/Login";
+import Register from "./components/User/Register/Register";
+import Logout from "./components/User/Logout/Logout";
+import Details from "./components/Photos/Details";
+import Edit from "./components/Photos/Edit";
 
 function App() {
   return (
     <AuthProvider>
-      <PageLoader/>
-        <Navbar/>
-        <Topbar/>
-            <Routes>
-                <Route path='/' element={<Home/>}/>
-                <Route path='/gallery' element={<Gallery/>}/>
-                <Route path='/login' element={<Login/>}/>
-                <Route path='/register' element={<Register/>}/>
-                <Route path='/logout' element={<Logout/>}/>
-                <Route path='/about' element={<About/>}/>
-                <Route path='/create' element={<Create/>}/>
-                <Route path='/contact' element={<Contacts/>}/>
-                <Route path='*' element={<NotFound/>}/>
-            </Routes>
-        <Footer/>
+      <PageLoader />
+      <Navbar />
+      {<Topbar />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/gallery" element={<Gallery />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contacts />} />
+        <Route path="/gallery/:id" element={<Details/>}/>
+        <Route path="/gallery/:id/edit" element={<Edit/>}/>
+
+        <Route element={<AuthGuard />}>
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/create" element={<Create />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
