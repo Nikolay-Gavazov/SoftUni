@@ -159,7 +159,9 @@ a:hover { color:#009999; }
     padding: 12px 50px 14px;
     font-size: 1.2rem;
 }
-
+.btn.btn-primary.nav-bar-btn{
+    display: none;
+}
 .btn-primary:hover,
 .btn-primary:focus {
     background-color:#086969;
@@ -575,8 +577,11 @@ select:not([multiple]) {
 }
 
 @media (max-width: 991px) {
+    .btn.btn-primary.nav-bar-btn{
+        display: block;
+    }
     .navbar-collapse {
-        position: fixed;
+        position: absolute;
         top: 50px;
         right: 0px;
         background: white;
@@ -597,7 +602,10 @@ select:not([multiple]) {
 }
 
 @media (max-width: 575px) {
-    .tm-container-content { max-width: 420px; }
+    .details-comments ._comment_3ztx9_39{
+        flex:1 1 48%;
+    }
+    .tm-container-content { max-width: 350px; }
 
     .tm-search-form {
         padding-left: 15px;
