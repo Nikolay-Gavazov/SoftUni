@@ -2,10 +2,7 @@ import { Route, Routes } from "react-router-dom";
 
 import About from "./components/About/About";
 import Contacts from "./components/Contacts/Contacts";
-import Create from "./components/Photos/Create";
 import NotFound from "./components/NotFound/NotFound";
-import Home from "./components/Home/Home";
-import PageLoader from "./components/Shared/PageLoader";
 import { AuthProvider } from "./context/authContext";
 import Gallery from "./components/Photos/Gallery";
 import AuthGuard from "./guards/Authguard";
@@ -17,11 +14,14 @@ import Register from "./components/User/Register/Register";
 import Logout from "./components/User/Logout/Logout";
 import Details from "./components/Photos/Details";
 import Edit from "./components/Photos/Edit";
+import Home from "./components/home/Home";
+import Create from "./components/photos/Create";
+import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 
 function App() {
   return (
+    <ErrorBoundary>
     <AuthProvider>
-      <PageLoader />
       <Navbar />
       {<Topbar />}
       <Routes>
@@ -43,6 +43,7 @@ function App() {
       </Routes>
       <Footer />
     </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
