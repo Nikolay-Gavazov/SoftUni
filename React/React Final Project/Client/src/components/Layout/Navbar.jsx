@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/authContext";
 
 const Navbar = () => {
   const { isAuthenticated } = useContext(AuthContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function toggleHandler(){
+    setIsOpen(!isOpen);
+  }
 
   return (
     <nav className="navbar navbar-expand-lg">
@@ -20,10 +25,11 @@ const Navbar = () => {
           aria-controls="navbarSupportedContent"
           aria-expanded="false"
           aria-label="Toggle navigation"
+          onClick={toggleHandler}
         >
           <i className="fas fa-bars" />
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent" style={isOpen ? {display:"block"} : {display:"none"}} >
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink
@@ -73,6 +79,7 @@ const Navbar = () => {
                     Logout
                   </NavLink>
                 </li>
+                <button className="btn btn-primary nav-bar-btn" onClick={toggleHandler} style={{width:"60px", height:"30px", textAlign:"center", padding: 0}}>Close</button>
               </>
             )}
           </ul>
