@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styles from "../../style/Form.module.css";
 import useForm from "../../hooks/useForm";
 import * as photoService from "../../services/PhotoService";
+import PageLoader from "../Shared/PageLoader";
 
 const Edit = () =>{
-    const [error, setError] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
+  const [error, setError] = useState('');
+  const [formError, setFormError] = useState({});
     const navigate = useNavigate();
     const {id} = useParams();
     const [photo, setPhoto] = useState({
@@ -13,52 +16,145 @@ const Edit = () =>{
     });
 
     useEffect(() =>{
+        setIsloading(true);
         photoService.getById(id)
-        .then(setPhoto);
+        .then(setPhoto)
+        .catch(error => {
+          if(error.code === 404){
+            navigate('*')
+          }else{
+            setError(error.message);
+          }
+        })
+        .finally(() => setIsloading(false));
     },[]);
 
 
     
     const editPhotoHandler = async (values) =>{
+      setIsloading(true);
         try {
             const result = await photoService.update(values, id);
             setPhoto(result);
             navigate(`/gallery/${id}`);
+            setIsloading(false);
         } catch (error) {
-            setError(error);
+            setError(error.message);
         }
         
     };
     
+    const titleValidator = () => {
+      if (formValue.title.length < 3) {
+        setFormError(state => ({
+          ...state,
+          title: 'Title must be at least 3 characters',
+        }));
+      } else {
+        if (formError.title) {
+          setFormError(state => ({ ...state, title: '' }));
+        }
+      }
+    };
+
+    const urlValidator = () => {
+      const urlRegex = /^(https?|ftp):\/\/[^\s\$.?#].[^\s]*$/gm;
+      if (!urlRegex.test(formValue.imageUrl)) {
+        setFormError(state => ({
+          ...state,
+          imageUrl: 'This is not a valid Image URL. Please enter a valid Image URL',
+        }));
+      } else {
+        if (formError.imageUrl) {
+          setFormError(state => ({ ...state, imageUrl: '' }));
+        }
+      }
+    };
+
+    const resolutionValidator = () => {
+      if (formValue.resolution.length < 1) {
+        setFormError(state => ({
+          ...state,
+          resolution: 'Resolution is Required',
+        }));
+      } else {
+        if (formError.resolution) {
+          setFormError(state => ({ ...state, resolution: '' }));
+        }
+      }
+    };
+    const formatValidator = () => {
+      if (formValue.format.length < 1) {
+        setFormError(state => ({
+          ...state,
+          format: 'Format is Required',
+        }));
+      } else {
+        if (formError.format) {
+          setFormError(state => ({ ...state, format: '' }));
+        }
+      }
+    };
+    
+    const licenseValidator = () => {
+      if (formValue.license.length < 1) {
+        setFormError(state => ({
+          ...state,
+          license: 'License is Required',
+        }));
+      } else {
+        if (formError.license) {
+          setFormError(state => ({ ...state, license: '' }));
+        }
+      }
+    };
+
     const {formValue, onSubmit, onChange} = useForm(photo, editPhotoHandler);
     return(
         <div className={styles.form}>
         <div className="col-lg-4 col-12 mb-5">
+        {isLoading && (<PageLoader/>)}
           <h2 className="tm-text-primary mb-5" style={{textAlign: "center"}}>Edit Photo</h2>
           <form id="contact-form"className="tm-contact-form mx-auto"onSubmit={onSubmit}>
             <div className="form-group">
-              <input type="text"name="title"value={formValue.title}onChange={onChange}className="form-control rounded-0"placeholder="Title"/>
+              <input type="text"name="title"value={formValue.title}onChange={onChange}onBlur={titleValidator}className="form-control rounded-0"placeholder="Title"/>
             </div>
+            {formError.title && (
+                    <p className={styles.errorMessage}>{formError.title}</p>
+                  )}
             <div className="form-group">
-              <input type="text"name="imageUrl"value={formValue.imageUrl}onChange={onChange}className="form-control rounded-0"placeholder="https://..."/>
+              <input type="text"name="imageUrl"value={formValue.imageUrl}onChange={onChange}onBlur={urlValidator}className="form-control rounded-0"placeholder="https://..."/>
             </div>
+            {formError.imageUrl && (
+                    <p className={styles.errorMessage}>{formError.imageUrl}</p>
+                  )}
             <div className="form-group">
-              <input type="text"name="resolution"value={formValue.resolution}onChange={onChange}className="form-control rounded-0"placeholder="1920x1080"/>
+              <input type="text"name="resolution"value={formValue.resolution}onChange={onChange} onBlur={resolutionValidator} className="form-control rounded-0"placeholder="1920x1080"/>
             </div>
+            {formError.resolution && (
+                    <p className={styles.errorMessage}>{formError.resolution}</p>
+                  )}
             <div className="form-group">
-              <input type="text"name="format"value={formValue.format}onChange={onChange}className="form-control rounded-0"placeholder="JPG,PNG"/>
+              <input type="text"name="format"value={formValue.format}onChange={onChange} onBlur={formatValidator} className="form-control rounded-0"placeholder="JPG,PNG"/>
             </div>
+            {formError.format && (
+                    <p className={styles.errorMessage}>{formError.format}</p>
+                  )}
             <div className="form-group">
-              <input type="text"name="license"value={formValue.license}onChange={onChange}className="form-control rounded-0"placeholder="License"/>
+              <input type="text"name="license"value={formValue.license}onChange={onChange} onBlur={licenseValidator} className="form-control rounded-0"placeholder="License"/>
             </div>
-            <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center"}}>
+            {formError.license && (
+                    <p className={styles.errorMessage}>{formError.license}</p>
+                  )}
+            <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center", gap:"1em"}}>
               <button type="submit" className="btn btn-primary">
                 Edit
               </button>
-              {error && (
-                <p>{error}</p>
-              )}
+              <NavLink to={`/gallery/${id}`} className="btn btn-primary">Cancel</NavLink>
             </div>
+            {error && (
+                <p className={styles.errorMessage}>{error}</p>
+              )}
           </form>
         </div>
       </div>
