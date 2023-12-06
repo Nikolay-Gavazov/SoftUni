@@ -8,11 +8,8 @@ const Logout = () =>{
     const {logoutHandler} = useContext(AuthContext);
 
     useEffect(() => {
-        logout()
-        .then(() =>{
             logoutHandler()
             navigate('/')})
-        .catch(() => navigate('/'));
-        },[]);
+
 };
 export default Logout;
