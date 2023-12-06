@@ -1,12 +1,10 @@
+import style from './Loader.module.css';
+import { PulseLoader } from 'react-spinners';
 const PageLoader = () => {
     return (
-        <div id="loader-wrapper">
-            <div id="loader"></div>
-
-            <div className="loader-section section-left"></div>
-            <div className="loader-section section-right"></div>
-
-        </div>
+        <div className={style.spinner}>
+      <PulseLoader color="#3498db" loading={true} size={50} margin={"2px"} />
+    </div>
     )
 }
 
