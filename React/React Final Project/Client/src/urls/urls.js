@@ -1,3 +1,7 @@
-export const userUrl = 'http://localhost:3030/users';
-export const photosUrl = 'http://localhost:3030/data/photos';
-export const commentsUrl = 'http://localhost:3030/data/comments';
+export const userUrl = 'https://photoserver-z1dl.onrender.com/api'
+/* export const userUrl = 'https://localhost:3000/api'; */
+
+export const photosUrl = 'https://photoserver-z1dl.onrender.com/api/photos';
+//export const photosUrl = 'https://localhost:3000/api/photos';
+
+export const commentsUrl = 'https://photoserver-z1dl.onrender.com/api/comments';
