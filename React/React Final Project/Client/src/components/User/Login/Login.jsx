@@ -75,7 +75,8 @@ const Login = () => {
                     <p className={styles.errorMessage}>{errors.password}</p>
                   )}
           <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center"}}>
-            <button type="submit" className="btn btn-primary" >
+            <button type="submit" className="btn btn-primary"disabled={(Object.values(errors).some(x => x)
+                      || (Object.values(formValue).some(x => x == '')))} >
               Login
             </button>
           </div>
