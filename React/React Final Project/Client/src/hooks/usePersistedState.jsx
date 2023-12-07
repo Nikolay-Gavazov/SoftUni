@@ -22,7 +22,7 @@ export default function usePersistedState(key, defaultValue) {
             result = JSON.stringify(value);
         }
 
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, result);
     }
     return[
         state,
