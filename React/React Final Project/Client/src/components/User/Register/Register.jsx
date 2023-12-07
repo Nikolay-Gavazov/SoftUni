@@ -106,7 +106,8 @@ const Register = () => {
                     <p className={styles.errorMessage}>{errors.rePass}</p>
                   )}
           <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center"}}>
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" disabled={(Object.values(errors).some(x => x)
+                      || (Object.values(formValue).some(x => x == '')))}>
               Register
             </button>
           </div>
