@@ -23,3 +23,8 @@
 .link:hover{
     color: rgba(245, 245, 245, 0.433);
 }
+
+.errorMessage{
+    color: red;
+    text-align: center;
+}
