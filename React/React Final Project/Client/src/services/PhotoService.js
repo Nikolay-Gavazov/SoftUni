@@ -13,6 +13,12 @@ export const getById = async (id) => {
   return result;
 };
 
+export const getLatest = async () => {
+  const result = await request.get(`${photosUrl}/sorted`);
+
+  return result;
+};
+
 export const create = async (data) => {
   const result = await request.post(photosUrl, data);
 
@@ -20,13 +26,13 @@ export const create = async (data) => {
 };
 
 export const update = async (data, id) => {
-  const result = await request.put(`${photosUrl}/${id}`, data);
+  const result = await request.put(`${photosUrl}/edit/${id}`, data);
 
   return result;
 };
 
-export const deleteBookings = async (id) => {
-  const result = await request.del(`${photosUrl}/${id}`);
+export const del = async (id) => {
+  const result = await request.del(`${photosUrl}/delete/${id}`);
 
   return result;
 };
