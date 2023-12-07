@@ -28,10 +28,10 @@ const Create = () =>{
     };
 
     const titleValidator = () => {
-      if (formValue.title.length < 3) {
+      if (formValue.title.length < 3 || formValue.title.length > 20) {
         setFormError(state => ({
           ...state,
-          title: 'Title must be at least 3 characters',
+          title: 'Title must be between 3 and 20 characters.',
         }));
       } else {
         if (formError.title) {
@@ -55,19 +55,21 @@ const Create = () =>{
     };
 
     const resolutionValidator = () => {
-      if (formValue.resolution.length < 1) {
+      const resulutionRegex = /^[0-9]{3,}[a-z][0-9]{3,}$/gm;
+      if(!resulutionRegex.test(formValue.resolution)){
         setFormError(state => ({
           ...state,
-          resolution: 'Resolution is Required',
+          resolution: 'Resolution must be at least 800x800 pixels',
         }));
-      } else {
+      }
+       else {
         if (formError.resolution) {
           setFormError(state => ({ ...state, resolution: '' }));
         }
       }
     };
     const formatValidator = () => {
-      if (formValue.format.length < 1) {
+      if (formValue.format.length < 3) {
         setFormError(state => ({
           ...state,
           format: 'Format is Required',
@@ -80,7 +82,7 @@ const Create = () =>{
     };
     
     const licenseValidator = () => {
-      if (formValue.license.length < 1) {
+      if (formValue.license.length < 4) {
         setFormError(state => ({
           ...state,
           license: 'License is Required',
@@ -130,7 +132,8 @@ const Create = () =>{
                     <p className={styles.errorMessage}>{formError.license}</p>
                   )}
             <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center"}}>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" disabled={(Object.values(formError).some(x => x)
+                      || (Object.values(formValue).some(x => x == '')))}>
                 Create
               </button>
             </div>
