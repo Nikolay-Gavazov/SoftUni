@@ -1,20 +1,18 @@
 import * as request from "../lib/request";
-import { commentsUrl } from "../urls/urls";
+import { commentsUrl, photosUrl } from "../urls/urls";
 
 export const getAll = async(id) => {
-    const query = new URLSearchParams({
-        where: `gameId="${id}"`,
-    });
-    const result = await request.get(`${commentsUrl}?${query}`);
+    const result = await request.get(`${commentsUrl}/${id}`);
 
     return result;
 };
 
-export const create = async(gameId, email, text) => {
-    const newComment = await request.post(commentsUrl, {
-        gameId,
+export const create = async(photoId,email, text, userId) => {
+    const newComment = await request.post(`${photosUrl}/comments/${photoId}`, {
+        photoId,
         email,
-        text
+        text,
+        userId
     });
     return newComment;
 };
