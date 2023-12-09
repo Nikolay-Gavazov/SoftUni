@@ -33,7 +33,7 @@ const Edit = () =>{
       setIsloading(true);
       try {
           await photoService.update(values, id);
-          navigate(`${gallery}/${id}`);
+          navigate(`gallery/${id}`);
           setIsloading(false);
       } catch (error) {
           setError(error.message);
