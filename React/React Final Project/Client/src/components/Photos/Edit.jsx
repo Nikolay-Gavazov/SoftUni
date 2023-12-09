@@ -29,7 +29,17 @@ const Edit = () =>{
         .finally(() => setIsloading(false));
     },[]);
 
-
+    const editPhotoHandler = async (values) =>{
+      setIsloading(true);
+      try {
+          await photoService.update(values, id);
+          navigate(`/gallery/${id}`);
+          setIsloading(false);
+      } catch (error) {
+          setError(error.message);
+      }
+      
+  };
     
     const titleValidator = () => {
       if (formValue.title.length < 3 || formValue.title.length > 20) {
@@ -136,8 +146,7 @@ const Edit = () =>{
                     <p className={styles.errorMessage}>{formError.license}</p>
                   )}
             <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center", gap:"1em"}}>
-              <button type="submit" className="btn btn-primary" disabled={(Object.values(formError).some(x => x)
-                      || (Object.values(formValue).some(x => x == '')))}>
+              <button type="submit" className="btn btn-primary">
                 Edit
               </button>
               <NavLink to={`/gallery/${id}`} className="btn btn-primary">Cancel</NavLink>
