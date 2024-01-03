@@ -7,46 +7,53 @@ import PageLoader from "../../Shared/PageLoader";
 
 const Register = () => {
   const [errors, setErrors] = useState({});
-  const {registerSubmitHandler, serverError, isLoading} = useContext(AuthContext);
-  const initValue = useMemo(() => ({email: "", password:"", rePass: ""}), []);
-  const {formValue, onSubmit, onChange} = useForm(initValue, registerSubmitHandler);
-  
+  const { registerSubmitHandler, serverError, isLoading } =
+    useContext(AuthContext);
+  const initValue = useMemo(
+    () => ({ email: "", password: "", rePass: "" }),
+    []
+  );
+  const { formValue, onSubmit, onChange } = useForm(
+    initValue,
+    registerSubmitHandler
+  );
+
   const emailValidator = () => {
     const emailRegex = /^[a-zA-Z\.-]{2,}[0-9]*@[a-z]+\.[a-z]{2,}$/gm;
     if (!emailRegex.test(formValue.email)) {
-      setErrors(state => ({
+      setErrors((state) => ({
         ...state,
-        email: 'Email is not valid. Please enter a valid email address',
+        email: "Email is not valid. Please enter a valid email address",
       }));
     } else {
       if (errors.email) {
-        setErrors(state => ({ ...state, email: '' }));
+        setErrors((state) => ({ ...state, email: "" }));
       }
     }
   };
 
   const passwordValidator = () => {
     if (formValue.password.length < 6) {
-      setErrors(state => ({
+      setErrors((state) => ({
         ...state,
-        password: 'Password must be at least 6 characters',
+        password: "Password must be at least 6 characters",
       }));
-    }else {
+    } else {
       if (errors.password) {
-        setErrors(state => ({ ...state, password: '' }));
+        setErrors((state) => ({ ...state, password: "" }));
       }
     }
   };
 
-  const repPassValidator =() => {
-    if(formValue.password != formValue.rePass){
-      setErrors(state => ({
+  const repPassValidator = () => {
+    if (formValue.password != formValue.rePass) {
+      setErrors((state) => ({
         ...state,
-        rePass: 'Password does not match with the Repeated Password',
+        rePass: "Password does not match with the Repeated Password",
       }));
-    }else {
+    } else {
       if (errors.rePass) {
-        setErrors(state => ({ ...state, rePass: '' }));
+        setErrors((state) => ({ ...state, rePass: "" }));
       }
     }
   };
@@ -54,8 +61,10 @@ const Register = () => {
   return (
     <div className={styles.form}>
       <div className="col-lg-4 col-12 mb-5">
-      {isLoading && (<PageLoader/>)}
-        <h2 className="tm-text-primary mb-5" style={{textAlign: "center"}}>Register Page</h2>
+        {isLoading && <PageLoader />}
+        <h2 className="tm-text-primary mb-5" style={{ textAlign: "center" }}>
+          Register Page
+        </h2>
         <form
           id="contact-form"
           className="tm-contact-form mx-auto"
@@ -73,8 +82,8 @@ const Register = () => {
             />
           </div>
           {errors.email && (
-                    <p className={styles.errorMessage}>{errors.email}</p>
-                  )}
+            <p className={styles.errorMessage}>{errors.email}</p>
+          )}
           <div className="form-group">
             <input
               type="password"
@@ -88,8 +97,8 @@ const Register = () => {
             />
           </div>
           {errors.password && (
-                    <p className={styles.errorMessage}>{errors.password}</p>
-                  )}
+            <p className={styles.errorMessage}>{errors.password}</p>
+          )}
           <div className="form-group">
             <input
               type="password"
@@ -103,20 +112,30 @@ const Register = () => {
             />
           </div>
           {errors.rePass && (
-                    <p className={styles.errorMessage}>{errors.rePass}</p>
-                  )}
-          <div className="form-group tm-text-right" style={{display: "flex", justifyContent: "center"}}>
-            <button type="submit" className="btn btn-primary" disabled={(Object.values(errors).some(x => x)
-                      || (Object.values(formValue).some(x => x == '')))}>
+            <p className={styles.errorMessage}>{errors.rePass}</p>
+          )}
+          <div
+            className="form-group tm-text-right"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={
+                Object.values(errors).some((x) => x) ||
+                Object.values(formValue).some((x) => x == "")
+              }
+            >
               Register
             </button>
           </div>
-          {serverError && (
-                    <p className={styles.errorMessage}>{serverError}</p>
-                  )}
+          {serverError && <p className={styles.errorMessage}>{serverError}</p>}
           <p className={styles.paragraph}>
             <span className={styles.field}>
-              You don't have profile? Click <Link to="/login" className={styles.link}>Login</Link>
+              You don't have profile? Click{" "}
+              <Link to="/login" className={styles.link}>
+                Login
+              </Link>
             </span>
           </p>
         </form>
