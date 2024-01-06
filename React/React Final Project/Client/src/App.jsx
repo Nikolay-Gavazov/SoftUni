@@ -21,28 +21,28 @@ import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 function App() {
   return (
     <ErrorBoundary>
-    <AuthProvider>
-      <Navbar />
-      {<Topbar />}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/gallery" element={<Gallery />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contacts />} />
-        <Route path="/gallery/:id" element={<Details/>}/>
-        <Route path="/gallery/:id/edit" element={<Edit/>}/>
+      <AuthProvider>
+        <Navbar />
+        {<Topbar />}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contacts />} />
+          <Route path="/gallery/:id" element={<Details />} />
+          <Route path="/gallery/:id/edit" element={<Edit />} />
 
-        <Route element={<AuthGuard />}>
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/create" element={<Create />} />
-        </Route>
+          <Route element={<AuthGuard />}>
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/create" element={<Create />} />
+          </Route>
 
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </AuthProvider>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
     </ErrorBoundary>
   );
 }
