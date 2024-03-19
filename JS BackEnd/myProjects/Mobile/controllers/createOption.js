@@ -1,6 +1,9 @@
 module.exports = {
    async get(req, res) {
         const user = await req.user.checkUser(req);
+        if(!user){
+            return res.redirect("404")
+        }
         res.render('createOption', { title: 'Create option', user });
     },
     async post(req, res) {
