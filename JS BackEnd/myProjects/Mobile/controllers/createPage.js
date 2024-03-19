@@ -1,6 +1,10 @@
 module.exports = {
     async get(req, res) {
         const user = await req.user.checkUser(req);
+        if(!user){
+            return res.redirect("/404")
+        }
+        
         res.render('create', { title: 'Publish your car' , user});
     },
     async post(req, res) {
