@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
-const connectionStr = 'mongodb://127.0.0.1:27017/FriendlyWorld';
+/* pBUx3DKZ18h2OB7N qF59AAlxKgUEWWoY nikeca1991 */
+const connectionStr = 'mongodb+srv://nikeca1991:qF59AAlxKgUEWWoY@cluster0.2rhjdfn.mongodb.net/';
 
 const Animal = require('../models/Animal');
 const User = require('../models/User');
