@@ -34,32 +34,6 @@ async function editUser(id, data) {
     await User.findByIdAndUpdate(id, data);
 }
 
-// async function addAd(id, adId) {
-//     const user = await User.findById(id);
-//     user.myPublications.push(adId);
-//     await user.save();
-// }
-
-// async function share(id, publicationId) {
-//     const data = await User.findById(id);
-//     data.shares.push(publicationId)
-//     await data.save();
-// };
-
-// async function getWishes(id, bookId){
-//     const user = await User.findById(id).lean();
-//     if(user && user.wishingList.length > 0){
-//         return user.wishingList.some(el => el._id.toString() == bookId?.toString());
-//     };
-//     return undefined;
-// }
-
-// async function addTrip(id, tripId){
-//     const user = await User.findById(id);
-//     user.tripsHistory.push(tripId);
-//     await user.save();
-// }
-
 module.exports = () => (req, res, next) => {
     req.userStorage = {
         getById,
@@ -67,8 +41,6 @@ module.exports = () => (req, res, next) => {
         createData,
         checkUser,
         editUser,
-        // addAd,
-        // share
     };
     next();
 }
