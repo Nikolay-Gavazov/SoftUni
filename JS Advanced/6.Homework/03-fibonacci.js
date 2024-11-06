@@ -1,12 +1,12 @@
-function getFibonator(){
-    let num = 1;
-    let previous = 0;
-   return function fib(){
-        let fibNum = num + previous;
-        num = previous;
-        previous = fibNum;
-        return fibNum
-    }
+function getFibonator() {
+  let num = 1;
+  let previous = 0;
+  return function fib() {
+    let fibNum = num + previous;
+    num = previous;
+    previous = fibNum;
+    return fibNum;
+  };
 }
 let fib = getFibonator();
 
