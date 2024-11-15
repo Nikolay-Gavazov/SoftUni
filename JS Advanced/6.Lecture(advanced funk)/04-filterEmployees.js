@@ -1,26 +1,25 @@
 function filterEmployees(input, criteria) {
+  const inputArr = JSON.parse(input);
+  const [key, value] = criteria.split("-");
 
-    const inputArr = JSON.parse(input);
-    const [key, value] = criteria.split('-');
-
-    let counter = 0;
-    inputArr.forEach(el => {
-
-        for (let keys in el) {
-            if(criteria == 'all'){
-                let person = `${counter}. ${el['first_name']} ${el['last_name']} - ${el.email}`;
-                counter++;
-                console.log(person);
-                return
-            }else if (keys == key && el[keys] == value) {
-                let person = `${counter}. ${el['first_name']} ${el['last_name']} - ${el.email}`;
-                counter++;
-                console.log(person);
-            }
-        }
-    });
+  let counter = 0;
+  inputArr.forEach((el) => {
+    for (let keys in el) {
+      if (criteria == "all") {
+        let person = `${counter}. ${el["first_name"]} ${el["last_name"]} - ${el.email}`;
+        counter++;
+        console.log(person);
+        return;
+      } else if (keys == key && el[keys] == value) {
+        let person = `${counter}. ${el["first_name"]} ${el["last_name"]} - ${el.email}`;
+        counter++;
+        console.log(person);
+      }
+    }
+  });
 }
-filterEmployees(`[{
+filterEmployees(
+  `[{
 
     "id": "1",
     
@@ -59,5 +58,6 @@ filterEmployees(`[{
     "gender": "Male"
     
     }]`,
-    
-    'all')
+
+  "all"
+);
