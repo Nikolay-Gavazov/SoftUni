@@ -1,21 +1,22 @@
-function createPerson(firstName, lastName){
-    const result = {
-        firstName,
-        lastName
-    }
+function createPerson(firstName, lastName) {
+  const result = {
+    firstName,
+    lastName,
+  };
 
-    Object.defineProperty(result, 'fullName',{
-        get(){return fullName = `${result.firstName} ${result.lastName}`},
-        set(value){
-            const valueArr = value.split(' ');
-            if(valueArr.length ==2){
-                [result.firstName,result.lastName] = value.split(' ')
-            }
-        }
-    });
-    return result
+  Object.defineProperty(result, "fullName", {
+    get() {
+      return (fullName = `${result.firstName} ${result.lastName}`);
+    },
+    set(value) {
+      const valueArr = value.split(" ");
+      if (valueArr.length == 2) {
+        [result.firstName, result.lastName] = value.split(" ");
+      }
+    },
+  });
+  return result;
 }
-
 
 let person = createPerson("Peter", "Ivanov");
 
