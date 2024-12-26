@@ -1,18 +1,18 @@
 window.addEventListener("load", solve);
 
 function solve() {
-  const make = document.getElementById('make');
-  const model = document.getElementById('model');
-  const year = document.getElementById('year');
-  const fuelType = document.getElementById('fuel');
-  const orgCost = document.getElementById('original-cost');
-  const sellPrice = document.getElementById('selling-price');
-  const publishBtn = document.getElementById('publish');
-  publishBtn.addEventListener('click', publish);
+  const make = document.getElementById("make");
+  const model = document.getElementById("model");
+  const year = document.getElementById("year");
+  const fuelType = document.getElementById("fuel");
+  const orgCost = document.getElementById("original-cost");
+  const sellPrice = document.getElementById("selling-price");
+  const publishBtn = document.getElementById("publish");
+  publishBtn.addEventListener("click", publish);
 
-  const tbody = document.getElementById('table-body');
-  const soldCars = document.getElementById('cars-list');
-  const profit = document.getElementById('profit');
+  const tbody = document.getElementById("table-body");
+  const soldCars = document.getElementById("cars-list");
+  const profit = document.getElementById("profit");
 
   function publish(e) {
     e.preventDefault();
@@ -23,12 +23,19 @@ function solve() {
     const price = Number(orgCost.value);
     const sellPriceInp = Number(sellPrice.value);
 
-    if (!makeInp || !modelInp || !prodYear || !fuelInp
-      || !price || !sellPriceInp || price > sellPriceInp) {
-      return
+    if (
+      !makeInp ||
+      !modelInp ||
+      !prodYear ||
+      !fuelInp ||
+      !price ||
+      !sellPriceInp ||
+      price > sellPriceInp
+    ) {
+      return;
     }
-    const tr = document.createElement('tr');
-    tr.className = 'row';
+    const tr = document.createElement("tr");
+    tr.className = "row";
     tr.innerHTML = `
   <td>${makeInp}</td>
   <td>${modelInp}</td>
@@ -41,18 +48,16 @@ function solve() {
   <button id = 'sell' class = 'action-btn sell'>Sell</button>
   </td>
   `;
-    tr.querySelector('#edit').addEventListener('click', edit);
-    tr.querySelector('#sell').addEventListener('click', sell);
+    tr.querySelector("#edit").addEventListener("click", edit);
+    tr.querySelector("#sell").addEventListener("click", sell);
     tbody.appendChild(tr);
 
-
-    make.value = '';
-    model.value = '';
-    year.value = '';
-    fuelType.value = '';
-    orgCost.value = '';
-    sellPrice.value = '';
-
+    make.value = "";
+    model.value = "";
+    year.value = "";
+    fuelType.value = "";
+    orgCost.value = "";
+    sellPrice.value = "";
 
     function edit() {
       tr.remove();
@@ -66,18 +71,15 @@ function solve() {
     function sell() {
       tr.remove();
       const diff = sellPriceInp - price;
-      const li = document.createElement('li');
-      li.className = 'each-list';
+      const li = document.createElement("li");
+      li.className = "each-list";
       li.innerHTML = `
     <span>${makeInp} ${modelInp}</span>
     <span>${prodYear}</span>
     <span>${diff}</span>
-    `
+    `;
       soldCars.appendChild(li);
       profit.textContent = (Number(profit.textContent) + diff).toFixed(2);
     }
   }
-
-
-
 }
