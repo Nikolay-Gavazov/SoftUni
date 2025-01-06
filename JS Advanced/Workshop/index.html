@@ -1,75 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solitaire</title>
-    <link rel="stylesheet" href="stype.css">
+    <link rel="stylesheet" href="stype.css" />
     <script src="./game.js" type="module"></script>
-</head>
-<body>
+  </head>
+  <body>
     <section id="controls">
-        <button id="new-game">New Game</button>
+      <button id="new-game">New Game</button>
     </section>
 
     <section id="board">
-
-        <div class = 'clearfix'>
-            <div id="stock">
-            <article class="deck">
-                <div class="card top">
-                    <span class="back"></span>
-                </div>
-            </article>
-
-            <article class="deck">
-                <div class="card black top">&spades;7</div>
-            </article>
+      <div class="clearfix">
+        <div id="stock">
+          <article class="deck">
+            <div class="card top">
+              <span class="back"></span>
             </div>
-    
-            <div id="foundations">
-                <article class="deck">
+          </article>
 
-                </article>
-                <article class="deck">
-
-                </article>
-                <article class="deck">
-
-                </article>
-                <article class="deck">
-
-                </article>
-            </div> 
+          <article class="deck">
+            <div class="card black top">&spades;7</div>
+          </article>
         </div>
 
-        <div id="piles">
-            <article class="deck">
-                <div class="card red">&diams;J</div>
-                <div class="card black top">&clubs;7</div>
-            </article>
-            <article class="deck">
-                
-            </article>
-            <article class="deck">
-
-            </article>
-            <article class="deck">
-
-            </article>
-            <article class="deck">
-
-            </article>
-            <article class="deck">
-
-            </article>
-            <article class="deck">
-
-            </article>
+        <div id="foundations">
+          <article class="deck"></article>
+          <article class="deck"></article>
+          <article class="deck"></article>
+          <article class="deck"></article>
         </div>
+      </div>
 
-
+      <div id="piles">
+        <article class="deck">
+          <div class="card red">&diams;J</div>
+          <div class="card black top">&clubs;7</div>
+        </article>
+        <article class="deck"></article>
+        <article class="deck"></article>
+        <article class="deck"></article>
+        <article class="deck"></article>
+        <article class="deck"></article>
+        <article class="deck"></article>
+      </div>
     </section>
-</body>
+  </body>
 </html>
